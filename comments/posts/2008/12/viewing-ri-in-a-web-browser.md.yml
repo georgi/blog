@@ -1,0 +1,6 @@
+--- 
+- !ruby/object:Shinmun::Comment 
+  name: Meister
+  text: Hello
+  time: 2009-01-06 19:31:11.205457 +01:00
+  website: ""
