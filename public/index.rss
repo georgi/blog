@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"> 
+  <channel>
+    <title>Matthias Georgi</title>
+    <link>http://www.matthias-georgi.de</link>
+    <description>Webdev, Gamedev, Interaction Design</description>
+    <language>en</language>
+    <copyright>Matthias Georgi</copyright>
+    <pubDate>Sat, 06 Sep 2008 13:58:13 +0200</pubDate>
+    
+      <item>
+	<title>Shinmun, a small and beautiful blog engine</title>
+	<description>
+#### Directory layout</description>
+	<link>http://www.matthias-georgi.de/2008/9/shinmun-a-small-and-beautiful-blog-engine.html</link>
+	<author>Matthias Georgi</author>
+	<guid>7ad04f10-5dd6-012b-b53c-001a92975b89</guid>
+	<pubDate>Fri, 05 Sep 2008 00:00:00 +0000</pubDate>
+      </item>
+    
+      <item>
+	<title>Emacs Completions</title>
+	<description><div id="emacs-completion" class="swfobject"></div></description>
+	<link>http://www.matthias-georgi.de/2008/9/emacs-completions.html</link>
+	<author>Matthias Georgi</author>
+	<guid>ffb31770-5dc1-012b-b53b-001a92975b89</guid>
+	<pubDate>Thu, 04 Sep 2008 00:00:00 +0000</pubDate>
+      </item>
+    
+      <item>
+	<title>Google-like Search Results Helper</title>
+	<description>    def highlight_text(text, words)
+      tokens = strip_tags(text).split
+      sections = []
+      words.each do |word|
+        word = word.downcase
+        tokens.each_with_index do |token, i|
+          if token.downcase.include? word
+            section = tokens[i-10, 20].join(' ')
+            words.each do |word|
+              section = highlight section, word
+            end
+            sections << section + ' ... '
+            break if sections.size > 3          
+          end
+        end
+      end
+      sections.join
+    end</description>
+	<link>http://www.matthias-georgi.de/2007/5/google-like-search-results-helper.html</link>
+	<author>Matthias Georgi</author>
+	<guid>9db9e370-5d6c-012b-b53a-001a92975b89</guid>
+	<pubDate>Thu, 10 May 2007 00:00:00 +0000</pubDate>
+      </item>
+    
+      <item>
+	<title>DRY Up Your Url Helpers</title>
+	<description>One of the concepts of _REST_ is: each resource has its own unique
+_URI_. We will enhance the `url_for` helper to generate this unique URI
+for an arbitrary record.</description>
+	<link>http://www.matthias-georgi.de/2007/4/dry-up-your-url-helpers.html</link>
+	<author>Matthias Georgi</author>
+	<guid>9dba2130-5d6c-012b-b53a-001a92975b89</guid>
+	<pubDate>Wed, 18 Apr 2007 00:00:00 +0000</pubDate>
+      </item>
+    
+      <item>
+	<title>Pretty RESTful URLs in Rails</title>
+	<description>Assuming that you already have an user model, we add following line to
+our `config/routes.rb`:</description>
+	<link>http://www.matthias-georgi.de/2007/4/pretty-restful-urls-in-rails.html</link>
+	<author>Matthias Georgi</author>
+	<guid>9dba3ad0-5d6c-012b-b53a-001a92975b89</guid>
+	<pubDate>Tue, 10 Apr 2007 00:00:00 +0000</pubDate>
+      </item>
+    
+      <item>
+	<title>Building a del.ico.us and flickr sidebar in 5 minutes</title>
+	<description>Download the files [delicous.rb][2] and [flickr.rb][3] and drop them
+into your rails lib folder.</description>
+	<link>http://www.matthias-georgi.de/2007/4/building-delicous-and-flickr-sidebar-in-5-minutes.html</link>
+	<author>Matthias Georgi</author>
+	<guid>9dba5160-5d6c-012b-b53a-001a92975b89</guid>
+	<pubDate>Sun, 08 Apr 2007 00:00:00 +0000</pubDate>
+      </item>
+    
+      <item>
+	<title>Fast Auto-completion with Rails, Scriptaculous and JSON</title>
+	<description>Rails already has an `auto_complete_field`, which sends an AJAX
+request for each keystroke. This approach is quite slow, but works in
+most cases, especially for large datasets `auto_complete_field` is the
+better choice. Our idea, stolen from the Rails Recipes book is to
+fetch the array of possible completions only once. Each keystroke will
+trigger only a local lookup and need no further server interaction.</description>
+	<link>http://www.matthias-georgi.de/2007/4/fast-autocompletion-with-rails.html</link>
+	<author>Matthias Georgi</author>
+	<guid>9dba67e0-5d6c-012b-b53a-001a92975b89</guid>
+	<pubDate>Wed, 04 Apr 2007 00:00:00 +0000</pubDate>
+      </item>
+    
+      <item>
+	<title>Rendering markaby in your helpers</title>
+	<description>    def options_for_select(container, selected = nil)
+     container = container.to_a if Hash === container
+     
+     options_for_select = container.inject([]) do |options, element|
+        if !element.is_a?(String) and element.respond_to?(:first) and element.respond_to?(:last)
+         is_selected = ( (selected.respond_to?(:include?) && !selected.is_a?(String) ? selected.include?(element.last) : element.last == selected) )
+          if is_selected
+           options << "<option value=\"#{html_escape(element.last.to_s)}\" selected=\"selected\">#{html_escape(element.first.to_s)}</option>"
+         else
+           options << "<option value=\"#{html_escape(element.last.to_s)}\">#{html_escape(element.first.to_s)}</option>"
+         end
+       else
+         is_selected = ( (selected.respond_to?(:include?) && !selected.is_a?(String) ? selected.include?(element) : element == selected) )
+         options << ((is_selected) ? "<option value=\"#{html_escape(element.to_s)}\" selected=\"selected\">#{html_escape(element.to_s)}</option>" : "<option value=\"#{html_escape(element.to_s)}\">#{html_escape(element.to_s)}</option>")
+       end
+      end
+     
+     options_for_select.join("\n")
+    end</description>
+	<link>http://www.matthias-georgi.de/2007/4/rendering-markaby-in-your-helpers.html</link>
+	<author>Matthias Georgi</author>
+	<guid>9dba8080-5d6c-012b-b53a-001a92975b89</guid>
+	<pubDate>Mon, 02 Apr 2007 00:00:00 +0000</pubDate>
+      </item>
+    
+  </channel> 
+</rss>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"> 
+  <channel>
+    <title>Matthias Georgi - Ruby</title>
+    <link>http://www.matthias-georgi.de</link>
+    <description>Category Ruby</description>
+    <language>en</language>
+    <copyright>Matthias Georgi</copyright>
+    <pubDate>Sat, 06 Sep 2008 13:58:13 +0200</pubDate>
+    
+      <item>
+	<title>Shinmun, a small and beautiful blog engine</title>
+	<description>
+#### Directory layout</description>
+	<link>http://www.matthias-georgi.de/2008/9/shinmun-a-small-and-beautiful-blog-engine.html</link>
+	<author>Matthias Georgi</author>
+	<guid>7ad04f10-5dd6-012b-b53c-001a92975b89</guid>
+	<pubDate>Fri, 05 Sep 2008 00:00:00 +0000</pubDate>
+      </item>
+    
+      <item>
+	<title>Google-like Search Results Helper</title>
+	<description>    def highlight_text(text, words)
+      tokens = strip_tags(text).split
+      sections = []
+      words.each do |word|
+        word = word.downcase
+        tokens.each_with_index do |token, i|
+          if token.downcase.include? word
+            section = tokens[i-10, 20].join(' ')
+            words.each do |word|
+              section = highlight section, word
+            end
+            sections << section + ' ... '
+            break if sections.size > 3          
+          end
+        end
+      end
+      sections.join
+    end</description>
+	<link>http://www.matthias-georgi.de/2007/5/google-like-search-results-helper.html</link>
+	<author>Matthias Georgi</author>
+	<guid>9db9e370-5d6c-012b-b53a-001a92975b89</guid>
+	<pubDate>Thu, 10 May 2007 00:00:00 +0000</pubDate>
+      </item>
+    
+  </channel> 
+</rss>

@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Matthias Georgi - Fast Auto-completion with Rails, Scriptaculous and JSON</title>
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../ruby.rss" />
+    <link rel="stylesheet" media="screen" href="../../stylesheets/reset.css"></link>
+<link rel="stylesheet" media="screen" href="../../stylesheets/grid.css"></link>
+<link rel="stylesheet" media="screen" href="../../stylesheets/typography.css"></link>
+<link rel="stylesheet" media="screen" href="../../stylesheets/style.css"></link>
+<link rel="stylesheet" media="screen" href="../../stylesheets/highlight/default.css"></link>
+    <script type="text/javascript" src="../../javascripts/Core.js"></script>
+<script type="text/javascript" src="../../javascripts/functional.js"></script>
+<script type="text/javascript" src="../../javascripts/to-function.js"></script>
+<script type="text/javascript" src="../../javascripts/jquery.js"></script>
+<script type="text/javascript" src="../../javascripts/jquery-form.js"></script>
+<script type="text/javascript" src="../../javascripts/template.js"></script>
+<script type="text/javascript" src="../../javascripts/prettyDate.js"></script>
+<script type="text/javascript" src="../../javascripts/swfobject.js"></script>
+<script type="text/javascript" src="../../javascripts/default.js"></script>
+    <script>var Blog = { root: '../../', guid: '9dba67e0-5d6c-012b-b53a-001a92975b89' };</script>
+  </head>
+  <body>
+    <div class="container">
+
+      <div id="header" class="column span-20 last">
+	<h1><a href="../../index.html">Matthias Georgi</a></h1>
+	<h2>Webdev, Gamedev, Interaction Design</h2>
+      </div>
+
+      <div id="navi"  class="column span-20 last">
+	<a class="" href="../../index.html">Home</a>
+	
+	  <a class="active" href="../../categories/ruby.html">Ruby</a>
+	
+	  <a class="" href="../../categories/emacs.html">Emacs</a>
+	
+	<a class="" href="../../about.html">About</a>
+      </div>
+
+      
+	<div id="header-text" class="column span-20 last">
+	  <h1>Ruby</h1>
+	</div>
+      
+
+      <div class="content column span-15"> 
+	<div class="article">
+  <div class="date">
+    April 4, 2007
+  </div>
+  <h2>Fast Auto-completion with Rails, Scriptaculous and JSON</h2>  
+  <p>Inspired by the excellent <a href="http://www.pragmaticprogrammer.com/titles/fr_rr/">Rails Recipes</a> book , I created an
+improved Auto-completion helper, which uses <em>JSON</em> and <em>AJAX</em> instead
+of a script tag for loading the completions. What we want to achieve
+is a search field, which pops up immediately, showing us a list of
+possible completions for our search word. Look at <a href="http://labs.google.com/suggest/">Google Suggest</a>
+to get an idea.</p>
+
+<p>Rails already has an <code>auto_complete_field</code>, which sends an AJAX
+request for each keystroke. This approach is quite slow, but works in
+most cases, especially for large datasets <code>auto_complete_field</code> is the
+better choice. Our idea, stolen from the Rails Recipes book is to
+fetch the array of possible completions only once. Each keystroke will
+trigger only a local lookup and need no further server interaction.</p>
+
+<p>Scriptaculous already has the right tool for this job:
+<a href="http://wiki.script.aculo.us/scriptaculous/show/Autocompleter.Local">Autocompleter.Local</a>.  We will just pass a javascript array of
+possible completions to the constructor and we're done.</p>
+
+<p>OK, let's start. First we need the CSS used by <code>Autocompleter.Local</code>,
+which styles the choices box:</p>
+
+<pre><code>div.auto_complete {
+  width: 350px;
+  background: #fff;
+}
+
+div.auto_complete ul {
+  border:1px solid #888;
+  margin:0;
+  padding:0;
+  width:100%;
+  list-style-type:none;
+}
+
+div.auto_complete ul li {
+  margin:0;
+  padding:3px;
+}
+
+div.auto_complete ul li.selected {
+  background-color: #ffb;
+}
+
+div.auto_complete ul strong.highlight {
+  color: #800;
+  margin:0;
+  padding:0;
+}
+</code></pre>
+
+<p>Rails already has an controller macro for generating a auto completion
+action. We will create a similar macro, which will generate an action,
+which in turn generates the <em>JSON</em> response. Sounds complex, but the
+implementation is quite easy. Just add to your ApplicationController:</p>
+
+<pre><code>def self.fast_auto_complete_for(object, method, options = {})
+ define_method("auto_complete_for_#{object}_#{method}") do
+   render :json =&gt; object.to_s.camelize.constantize.find(:all).map(&amp;method).to_json
+  end
+end
+</code></pre>
+
+<p>The response of the generated action will now contain a list of all
+values for the desired attribute. You can use it like in your
+controllers: <code>fast_auto_complete_for :sport, :name</code></p>
+
+<p>Now let us get into the tricky part: the javascript macro helper. How
+will we get the completion list? <em>Prototype</em> includes the <code>Ajax.Request</code>
+class, which sends an Ajax Request to our generated action and fetches
+the array encoded as <em>JSON</em>. Furthermore we have to generate a div which
+will hold the popup list for our completion entries. Without going
+into detail, I'll just show you the code, which you add to your
+<code>ApplicationHelper</code>:</p>
+
+<pre><code>def fast_auto_complete_field(field_id, options={})
+  div_id = "#{field_id}_auto_complete"
+  url = options.delete(:url) or raise "url required"
+  options = options.merge(:tokens =&gt; ',', :frequency =&gt; 0 )
+  script = javascript_tag &lt;&lt;-end
+    new Ajax.Request('#{url}', {
+      method: 'get',
+      onSuccess: function(transport) {
+        new Autocompleter.Local('#{field_id}', '#{div_id}', eval(transport.responseText), #{options.to_json});
+      }
+    });
+  end
+  content_tag 'div', script, :class =&gt; 'auto_complete', :id =&gt; div_id
+end
+</code></pre>
+
+<p>Our helper needs the id for the text field we want to enhance. Based
+on this id the helper generates the div for presenting the completion
+entries. It is also required to pass the url of the json action, which
+is in our case <code>/sports/auto_complete_for_sport_name</code>. Usage example:</p>
+
+<pre><code>&lt;form&gt;
+  &lt;input type="text" name="name" id="sport_name"/&gt;
+  &lt;input type="submit" value="Search"/&gt;
+&lt;/form&gt;
+
+&lt;%= fast_auto_complete_field :sport_name, :url =&gt; '/sports/auto_complete_for_sport_name' %&gt;
+</code></pre>
+
+<p>Well, that's it. Now you may enjoy snappy auto-completion and feel
+good about using bleeding edge technology like <code>AJAX</code> and <code>JSON</code>.</p>
+
+  <h3>Comments</h3>
+
+  <div class="comments-loading" style="display:none">
+    <img src="../../images/loading.gif"></img>
+    Loading Comments...
+  </div>
+
+  <div class="comments">  
+    <div id="comments-template">
+      <div class="comment">
+	<div class="_ top">
+	  <a class="_" href="{website}">{name}</a> said
+	  <a class="_" title="{time}"></a>:
+	</div>
+	<div class="text"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr/>  
+
+  <div class="comment-form-loading" style="display:none">
+    <img src="../../images/loading.gif"></img>
+    Posting Comment...
+  </div>
+
+  <div class="comment-form">
+    <h4>Leave a comment</h4>
+    <form>
+      <input type="hidden" name="guid" value="9dba67e0-5d6c-012b-b53a-001a92975b89"/>
+      <p>
+	<label>Name</label><br/>
+	<input type="text" name="name" size="40"/>
+      </p>
+      <p>
+	<label>Website</label><br/>
+	<input type="text" name="website"  size="40"/>
+      </p>
+      <p>
+	<label>Comment</label><br/>
+	<textarea name="text" cols="60" rows="10"></textarea>
+      </p>
+      <p>
+	<input type="submit" value="Post comment"/>
+      </p>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript" src="../../javascripts/comments.js"></script>
+
+
+
+      </div>
+
+      <div class="right column span-5 last"> 
+	<h4>Subscribe</h4>
+	<h4>About</h4>
+	<div class="about">
+	  <strong>Matthias Georgi</strong> lives in
+	  <em>Darmstadt, Germany</em> and works as a freelance
+	  software developer.
+	  <a href="../../about.html">read more</a>
+	</div>
+	<h4>Archives</h4>
+	<ul>
+	  
+	    <li><a href="../../2007/4/index.html">April 2007</a></li> 
+	  
+	    <li><a href="../../2007/5/index.html">May 2007</a></li> 
+	  
+	    <li><a href="../../2008/9/index.html">September 2008</a></li> 
+	  
+	</ul>
+	<h4>My Projects</h4>
+	<ul>
+	  <li>
+	    <a href="http://github.com/georgi/shinmun/tree/master">
+	      Shinmun, a small blog engine
+	    </a>
+	  </li>
+	</ul>
+	<h4>My Music</h4>
+	<ul>
+	  <li>
+	    <a href="http://www.p-ersag.com">
+	      Planet Ersag
+	    </a>
+	  </li>
+	</ul>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="../../javascripts/highlight.js"></script>
+
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad('ruby', 'html', 'css', 'php', 'javascript', 'sql', 'lisp', 'xml', 'java');
+    </script>
+
+  </body>
+</html>

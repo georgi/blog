@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"> 
+  <channel>
+    <title>Matthias Georgi - Emacs</title>
+    <link>http://www.matthias-georgi.de</link>
+    <description>Category Emacs</description>
+    <language>en</language>
+    <copyright>Matthias Georgi</copyright>
+    <pubDate>Sat, 06 Sep 2008 13:58:13 +0200</pubDate>
+    
+      <item>
+	<title>Emacs Completions</title>
+	<description><div id="emacs-completion" class="swfobject"></div></description>
+	<link>http://www.matthias-georgi.de/2008/9/emacs-completions.html</link>
+	<author>Matthias Georgi</author>
+	<guid>ffb31770-5dc1-012b-b53b-001a92975b89</guid>
+	<pubDate>Thu, 04 Sep 2008 00:00:00 +0000</pubDate>
+      </item>
+    
+  </channel> 
+</rss>
