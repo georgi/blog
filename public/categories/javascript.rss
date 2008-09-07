@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"> 
+  <channel>
+    <title>Matthias Georgi - Javascript</title>
+    <link>http://www.matthias-georgi.de</link>
+    <description>Category Javascript</description>
+    <language>en</language>
+    <copyright>Matthias Georgi</copyright>
+    <pubDate>Sun, 07 Sep 2008 23:40:10 +0200</pubDate>
+    
+      <item>
+	<title>Commenting system with lightweight JSON store</title>
+	<description>As I wrote this [blog engine][1], the need for a commenting system
+arose and I reflected about a small and simple commenting system with
+just a flat file JSON store. This is my solution, which can be used on
+any static page on a server with PHP support.</description>
+	<link>http://www.matthias-georgi.de/2008/9/commenting-system-with-lightweight-json-store.html</link>
+	<author>Matthias Georgi</author>
+	<guid>4ed200b0-5efa-012b-f5dc-001a92975b89</guid>
+	<pubDate>Sun, 07 Sep 2008 00:00:00 +0000</pubDate>
+      </item>
+    
+  </channel> 
+</rss>
