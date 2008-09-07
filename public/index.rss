@@ -6,12 +6,30 @@
     <description>Webdev, Gamedev, Interaction Design</description>
     <language>en</language>
     <copyright>Matthias Georgi</copyright>
-    <pubDate>Sat, 06 Sep 2008 13:58:13 +0200</pubDate>
+    <pubDate>Sun, 07 Sep 2008 23:40:10 +0200</pubDate>
+    
+      <item>
+	<title>Commenting system with lightweight JSON store</title>
+	<description>As I wrote this [blog engine][1], the need for a commenting system
+arose and I reflected about a small and simple commenting system with
+just a flat file JSON store. This is my solution, which can be used on
+any static page on a server with PHP support.</description>
+	<link>http://www.matthias-georgi.de/2008/9/commenting-system-with-lightweight-json-store.html</link>
+	<author>Matthias Georgi</author>
+	<guid>4ed200b0-5efa-012b-f5dc-001a92975b89</guid>
+	<pubDate>Sun, 07 Sep 2008 00:00:00 +0000</pubDate>
+      </item>
     
       <item>
 	<title>Shinmun, a small and beautiful blog engine</title>
-	<description>
-#### Directory layout</description>
+	<description>Small is beautiful. This is especially true for software, as you can
+tailor the code exactly to your needs. I tried several times to build
+a blog engine, but was always dissatisfied by the
+complexity. Deploying is a problem too. I don't want to run a fat
+rails process for a small blog like this. The solution was a finally a
+tiny script, which renders text files to static web pages. The biggest
+advantage is, that I can edit my articles and templates in Emacs and
+easily extend the software in Ruby.</description>
 	<link>http://www.matthias-georgi.de/2008/9/shinmun-a-small-and-beautiful-blog-engine.html</link>
 	<author>Matthias Georgi</author>
 	<guid>7ad04f10-5dd6-012b-b53c-001a92975b89</guid>
@@ -20,7 +38,10 @@
     
       <item>
 	<title>Emacs Completions</title>
-	<description><div id="emacs-completion" class="swfobject"></div></description>
+	<description>One of the most important features of a text editor is the completing
+of text inside a buffer. There a lots of packages for Emacs, which
+provide this feature in many different ways. I will show you, what I
+use to improve my life as coder.</description>
 	<link>http://www.matthias-georgi.de/2008/9/emacs-completions.html</link>
 	<author>Matthias Georgi</author>
 	<guid>ffb31770-5dc1-012b-b53b-001a92975b89</guid>
@@ -29,24 +50,11 @@
     
       <item>
 	<title>Google-like Search Results Helper</title>
-	<description>    def highlight_text(text, words)
-      tokens = strip_tags(text).split
-      sections = []
-      words.each do |word|
-        word = word.downcase
-        tokens.each_with_index do |token, i|
-          if token.downcase.include? word
-            section = tokens[i-10, 20].join(' ')
-            words.each do |word|
-              section = highlight section, word
-            end
-            sections << section + ' ... '
-            break if sections.size > 3          
-          end
-        end
-      end
-      sections.join
-    end</description>
+	<description>Representing your search results in a user-friendly way is a common
+task among web developers. Google's approach is dead simple but really
+effective. The matching text is highlighted and shown with its
+context. This can be implemented in less than 20 lines of code which
+you can include into you helper:</description>
 	<link>http://www.matthias-georgi.de/2007/5/google-like-search-results-helper.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9db9e370-5d6c-012b-b53a-001a92975b89</guid>
@@ -55,9 +63,10 @@
     
       <item>
 	<title>DRY Up Your Url Helpers</title>
-	<description>One of the concepts of _REST_ is: each resource has its own unique
-_URI_. We will enhance the `url_for` helper to generate this unique URI
-for an arbitrary record.</description>
+	<description>This tutorial shows you how to simplify url generation in combination
+with _RESTful_ resources by extending the `url_for` helper. This approach
+will also work with nested routes and other helpers like `form_tag` and
+`link_to`.</description>
 	<link>http://www.matthias-georgi.de/2007/4/dry-up-your-url-helpers.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9dba2130-5d6c-012b-b53a-001a92975b89</guid>
@@ -66,8 +75,11 @@ for an arbitrary record.</description>
     
       <item>
 	<title>Pretty RESTful URLs in Rails</title>
-	<description>Assuming that you already have an user model, we add following line to
-our `config/routes.rb`:</description>
+	<description>Since Release 1.2 Rails knows to generate _RESTful_ routes. Each
+resource is identified by an _URI_, which looks like `/users/123` . It
+would be nice to have more readable URLs, which include the name of
+the user: `/users/matthias-georgi`. This is a short tutorial on making
+your urls pretty while retaining the REST approach.</description>
 	<link>http://www.matthias-georgi.de/2007/4/pretty-restful-urls-in-rails.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9dba3ad0-5d6c-012b-b53a-001a92975b89</guid>
@@ -76,8 +88,9 @@ our `config/routes.rb`:</description>
     
       <item>
 	<title>Building a del.ico.us and flickr sidebar in 5 minutes</title>
-	<description>Download the files [delicous.rb][2] and [flickr.rb][3] and drop them
-into your rails lib folder.</description>
+	<description>You need a del.icio.us sidebar which shows recent bookmarks or one of
+these nice flickr badges? This is really is easy as the [Typo Weblog
+Engine][1] already includes an flickr and del.icio.us aggregator.</description>
 	<link>http://www.matthias-georgi.de/2007/4/building-delicous-and-flickr-sidebar-in-5-minutes.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9dba5160-5d6c-012b-b53a-001a92975b89</guid>
@@ -86,12 +99,12 @@ into your rails lib folder.</description>
     
       <item>
 	<title>Fast Auto-completion with Rails, Scriptaculous and JSON</title>
-	<description>Rails already has an `auto_complete_field`, which sends an AJAX
-request for each keystroke. This approach is quite slow, but works in
-most cases, especially for large datasets `auto_complete_field` is the
-better choice. Our idea, stolen from the Rails Recipes book is to
-fetch the array of possible completions only once. Each keystroke will
-trigger only a local lookup and need no further server interaction.</description>
+	<description>Inspired by the excellent [Rails Recipes][1] book , I created an
+improved Auto-completion helper, which uses _JSON_ and _AJAX_ instead
+of a script tag for loading the completions. What we want to achieve
+is a search field, which pops up immediately, showing us a list of
+possible completions for our search word. Look at [Google Suggest][2]
+to get an idea.</description>
 	<link>http://www.matthias-georgi.de/2007/4/fast-autocompletion-with-rails.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9dba67e0-5d6c-012b-b53a-001a92975b89</guid>
@@ -100,25 +113,11 @@ trigger only a local lookup and need no further server interaction.</description
     
       <item>
 	<title>Rendering markaby in your helpers</title>
-	<description>    def options_for_select(container, selected = nil)
-     container = container.to_a if Hash === container
-     
-     options_for_select = container.inject([]) do |options, element|
-        if !element.is_a?(String) and element.respond_to?(:first) and element.respond_to?(:last)
-         is_selected = ( (selected.respond_to?(:include?) && !selected.is_a?(String) ? selected.include?(element.last) : element.last == selected) )
-          if is_selected
-           options << "<option value=\"#{html_escape(element.last.to_s)}\" selected=\"selected\">#{html_escape(element.first.to_s)}</option>"
-         else
-           options << "<option value=\"#{html_escape(element.last.to_s)}\">#{html_escape(element.first.to_s)}</option>"
-         end
-       else
-         is_selected = ( (selected.respond_to?(:include?) && !selected.is_a?(String) ? selected.include?(element) : element == selected) )
-         options << ((is_selected) ? "<option value=\"#{html_escape(element.to_s)}\" selected=\"selected\">#{html_escape(element.to_s)}</option>" : "<option value=\"#{html_escape(element.to_s)}\">#{html_escape(element.to_s)}</option>")
-       end
-      end
-     
-     options_for_select.join("\n")
-    end</description>
+	<description>Generating markup in your rails helpers is a general practice in rails
+and is used throughout all rails helpers. Normally you use `content_tag`
+to generate markup. But often you will encounter situations, where
+nested tags force you to write ugly helper code like the following
+helper method from the rails library:</description>
 	<link>http://www.matthias-georgi.de/2007/4/rendering-markaby-in-your-helpers.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9dba8080-5d6c-012b-b53a-001a92975b89</guid>

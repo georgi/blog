@@ -4,9 +4,8 @@
     <title><%= @blog_title %> - <%= @title %></title>
     <meta http-equiv="Content-Language" content="English" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="<%= @root + (@category || 'index').downcase %>.rss" />
-    <%= stylesheet_link_tag :reset, :grid, :typography, :style, 'highlight/default' %>
-    <%= javascript_tag 'Core', 'functional', 'to-function', 'jquery', 'jquery-form', 'template', 'prettyDate', 'swfobject', 'default' %>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/matthias-georgi" />
+    <%= stylesheet_link_tag 'all', 'style' %>
     <script>var Blog = { root: '<%= @root %>', guid: '<%= @guid %>' };</script>
   </head>
   <body>
@@ -18,11 +17,13 @@
       </div>
 
       <div id="navi"  class="column span-20 last">
-	<%= navi_link 'Home', 'index' %>
-	<% for category in @categories %>
-	  <%= navi_link category, 'categories/' + category.downcase %>
-	<% end %>
-	<%= navi_link 'About', 'about' %>
+	<ul>
+	  <li><%= navi_link 'Home', 'index' %></li>
+	  <% for category in @categories %>
+	    <li><%= navi_link category, 'categories/' + category.downcase %></li>
+	  <% end %>
+	  <li><%= navi_link 'About', 'about' %></li>
+	</ul>
       </div>
 
       <% if @header %>
@@ -37,6 +38,22 @@
 
       <div class="right column span-5 last"> 
 	<h4>Subscribe</h4>
+	<p>
+	  <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
+	    <img src="http://www.feedburner.com/fb/images/pub/feed-icon16x16.png" alt="" style="vertical-align:middle;border:0"/>
+	  </a>&nbsp;
+	  <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
+	    Subscribe in a reader
+	  </a>
+	  <form action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=2408112', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+	    <p>Enter your email address:</p>
+	    <p><input type="text" style="width:140px" name="email"/></p>
+	    <input type="hidden" value="http://feeds.feedburner.com/~e?ffid=2408112" name="url"/>
+	    <input type="hidden" value="Matthias Georgi" name="title"/>
+	    <input type="hidden" name="loc" value="en_US"/>
+	    <input type="submit" value="Subscribe by email" />
+	  </form>
+	</p>
 	<h4>About</h4>
 	<div class="about">
 	  <strong>Matthias Georgi</strong> lives in
@@ -48,6 +65,12 @@
 	<ul>
 	  <% for year, month in @months %>
 	    <li><%= month_link year, month %></li> 
+	  <% end %>
+	</ul>
+	<h4>Recent posts</h4>
+	<ul>
+	  <% for post in @posts[0, 5] %>
+	    <li><%= post_link post %></li> 
 	  <% end %>
 	</ul>
 	<h4>My Projects</h4>
@@ -69,10 +92,20 @@
       </div>
     </div>
 
-    <%= javascript_tag 'highlight' %>
+    <%= javascript_tag 'all', 'highlight', 'showdown', 'template', 'default', 'comments', 'wmd' %>
 
     <script type="text/javascript">
       hljs.initHighlightingOnLoad('ruby', 'html', 'css', 'php', 'javascript', 'sql', 'lisp', 'xml', 'java');
+    </script>
+
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+    <script type="text/javascript">
+      var pageTracker = _gat._getTracker("UA-927203-10");
+      pageTracker._trackPageview();
     </script>
 
   </body>

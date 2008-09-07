@@ -4,21 +4,9 @@
     <title>Matthias Georgi - Fast Auto-completion with Rails, Scriptaculous and JSON</title>
     <meta http-equiv="Content-Language" content="English" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../ruby.rss" />
-    <link rel="stylesheet" media="screen" href="../../stylesheets/reset.css"></link>
-<link rel="stylesheet" media="screen" href="../../stylesheets/grid.css"></link>
-<link rel="stylesheet" media="screen" href="../../stylesheets/typography.css"></link>
-<link rel="stylesheet" media="screen" href="../../stylesheets/style.css"></link>
-<link rel="stylesheet" media="screen" href="../../stylesheets/highlight/default.css"></link>
-    <script type="text/javascript" src="../../javascripts/Core.js"></script>
-<script type="text/javascript" src="../../javascripts/functional.js"></script>
-<script type="text/javascript" src="../../javascripts/to-function.js"></script>
-<script type="text/javascript" src="../../javascripts/jquery.js"></script>
-<script type="text/javascript" src="../../javascripts/jquery-form.js"></script>
-<script type="text/javascript" src="../../javascripts/template.js"></script>
-<script type="text/javascript" src="../../javascripts/prettyDate.js"></script>
-<script type="text/javascript" src="../../javascripts/swfobject.js"></script>
-<script type="text/javascript" src="../../javascripts/default.js"></script>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/matthias-georgi" />
+    <link href="../../stylesheets/all.css?1220823609" media="screen" rel="stylesheet"></link>
+<link href="../../stylesheets/style.css?1220823092" media="screen" rel="stylesheet"></link>
     <script>var Blog = { root: '../../', guid: '9dba67e0-5d6c-012b-b53a-001a92975b89' };</script>
   </head>
   <body>
@@ -30,13 +18,17 @@
       </div>
 
       <div id="navi"  class="column span-20 last">
-	<a class="" href="../../index.html">Home</a>
-	
-	  <a class="active" href="../../categories/ruby.html">Ruby</a>
-	
-	  <a class="" href="../../categories/emacs.html">Emacs</a>
-	
-	<a class="" href="../../about.html">About</a>
+	<ul>
+	  <li><a class="" href="../../index.html">Home</a></li>
+	  
+	    <li><a class="active" href="../../categories/ruby.html">Ruby</a></li>
+	  
+	    <li><a class="" href="../../categories/javascript.html">Javascript</a></li>
+	  
+	    <li><a class="" href="../../categories/emacs.html">Emacs</a></li>
+	  
+	  <li><a class="" href="../../about.html">About</a></li>
+	</ul>
       </div>
 
       
@@ -47,10 +39,13 @@
 
       <div class="content column span-15"> 
 	<div class="article">
+
   <div class="date">
     April 4, 2007
   </div>
+
   <h2>Fast Auto-completion with Rails, Scriptaculous and JSON</h2>  
+
   <p>Inspired by the excellent <a href="http://www.pragmaticprogrammer.com/titles/fr_rr/">Rails Recipes</a> book , I created an
 improved Auto-completion helper, which uses <em>JSON</em> and <em>AJAX</em> instead
 of a script tag for loading the completions. What we want to achieve
@@ -67,9 +62,9 @@ trigger only a local lookup and need no further server interaction.</p>
 
 <p>Scriptaculous already has the right tool for this job:
 <a href="http://wiki.script.aculo.us/scriptaculous/show/Autocompleter.Local">Autocompleter.Local</a>.  We will just pass a javascript array of
-possible completions to the constructor and we're done.</p>
+possible completions to the constructor and we&#8217;re done.</p>
 
-<p>OK, let's start. First we need the CSS used by <code>Autocompleter.Local</code>,
+<p>OK, let&#8217;s start. First we need the CSS used by <code>Autocompleter.Local</code>,
 which styles the choices box:</p>
 
 <pre><code>div.auto_complete {
@@ -122,7 +117,7 @@ will we get the completion list? <em>Prototype</em> includes the <code>Ajax.Requ
 class, which sends an Ajax Request to our generated action and fetches
 the array encoded as <em>JSON</em>. Furthermore we have to generate a div which
 will hold the popup list for our completion entries. Without going
-into detail, I'll just show you the code, which you add to your
+into detail, I&#8217;ll just show you the code, which you add to your
 <code>ApplicationHelper</code>:</p>
 
 <pre><code>def fast_auto_complete_field(field_id, options={})
@@ -154,7 +149,7 @@ is in our case <code>/sports/auto_complete_for_sport_name</code>. Usage example:
 &lt;%= fast_auto_complete_field :sport_name, :url =&gt; '/sports/auto_complete_for_sport_name' %&gt;
 </code></pre>
 
-<p>Well, that's it. Now you may enjoy snappy auto-completion and feel
+<p>Well, that&#8217;s it. Now you may enjoy snappy auto-completion and feel
 good about using bleeding edge technology like <code>AJAX</code> and <code>JSON</code>.</p>
 
   <h3>Comments</h3>
@@ -196,7 +191,7 @@ good about using bleeding edge technology like <code>AJAX</code> and <code>JSON<
 	<input type="text" name="website"  size="40"/>
       </p>
       <p>
-	<label>Comment</label><br/>
+	<label>Comment (Use markdown for formatting)</label><br/>
 	<textarea name="text" cols="60" rows="10"></textarea>
       </p>
       <p>
@@ -206,14 +201,28 @@ good about using bleeding edge technology like <code>AJAX</code> and <code>JSON<
   </div>
 </div>
 
-<script type="text/javascript" src="../../javascripts/comments.js"></script>
-
 
 
       </div>
 
       <div class="right column span-5 last"> 
 	<h4>Subscribe</h4>
+	<p>
+	  <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
+	    <img src="http://www.feedburner.com/fb/images/pub/feed-icon16x16.png" alt="" style="vertical-align:middle;border:0"/>
+	  </a>&nbsp;
+	  <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
+	    Subscribe in a reader
+	  </a>
+	  <form action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=2408112', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+	    <p>Enter your email address:</p>
+	    <p><input type="text" style="width:140px" name="email"/></p>
+	    <input type="hidden" value="http://feeds.feedburner.com/~e?ffid=2408112" name="url"/>
+	    <input type="hidden" value="Matthias Georgi" name="title"/>
+	    <input type="hidden" name="loc" value="en_US"/>
+	    <input type="submit" value="Subscribe by email" />
+	  </form>
+	</p>
 	<h4>About</h4>
 	<div class="about">
 	  <strong>Matthias Georgi</strong> lives in
@@ -229,6 +238,20 @@ good about using bleeding edge technology like <code>AJAX</code> and <code>JSON<
 	    <li><a href="../../2007/5/index.html">May 2007</a></li> 
 	  
 	    <li><a href="../../2008/9/index.html">September 2008</a></li> 
+	  
+	</ul>
+	<h4>Recent posts</h4>
+	<ul>
+	  
+	    <li><a href="../../2008/9/commenting-system-with-lightweight-json-store.html">Commenting system with lightweight JSON store</a></li> 
+	  
+	    <li><a href="../../2008/9/shinmun-a-small-and-beautiful-blog-engine.html">Shinmun, a small and beautiful blog engine</a></li> 
+	  
+	    <li><a href="../../2008/9/emacs-completions.html">Emacs Completions</a></li> 
+	  
+	    <li><a href="../../2007/5/google-like-search-results-helper.html">Google-like Search Results Helper</a></li> 
+	  
+	    <li><a href="../../2007/4/dry-up-your-url-helpers.html">DRY Up Your Url Helpers</a></li> 
 	  
 	</ul>
 	<h4>My Projects</h4>
@@ -250,10 +273,26 @@ good about using bleeding edge technology like <code>AJAX</code> and <code>JSON<
       </div>
     </div>
 
-    <script type="text/javascript" src="../../javascripts/highlight.js"></script>
+    <script type="text/javascript" src="../../javascripts/all.js?1220823609"></script>
+<script type="text/javascript" src="../../javascripts/highlight.js?1216329729"></script>
+<script type="text/javascript" src="../../javascripts/showdown.js?1205881696"></script>
+<script type="text/javascript" src="../../javascripts/template.js?1220744554"></script>
+<script type="text/javascript" src="../../javascripts/default.js?1220656864"></script>
+<script type="text/javascript" src="../../javascripts/comments.js?1220809707"></script>
+<script type="text/javascript" src="../../javascripts/wmd.js?1205881696"></script>
 
     <script type="text/javascript">
       hljs.initHighlightingOnLoad('ruby', 'html', 'css', 'php', 'javascript', 'sql', 'lisp', 'xml', 'java');
+    </script>
+
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+    <script type="text/javascript">
+      var pageTracker = _gat._getTracker("UA-927203-10");
+      pageTracker._trackPageview();
     </script>
 
   </body>

@@ -4,21 +4,9 @@
     <title>Matthias Georgi - Emacs Completions</title>
     <meta http-equiv="Content-Language" content="English" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../emacs.rss" />
-    <link rel="stylesheet" media="screen" href="../../stylesheets/reset.css"></link>
-<link rel="stylesheet" media="screen" href="../../stylesheets/grid.css"></link>
-<link rel="stylesheet" media="screen" href="../../stylesheets/typography.css"></link>
-<link rel="stylesheet" media="screen" href="../../stylesheets/style.css"></link>
-<link rel="stylesheet" media="screen" href="../../stylesheets/highlight/default.css"></link>
-    <script type="text/javascript" src="../../javascripts/Core.js"></script>
-<script type="text/javascript" src="../../javascripts/functional.js"></script>
-<script type="text/javascript" src="../../javascripts/to-function.js"></script>
-<script type="text/javascript" src="../../javascripts/jquery.js"></script>
-<script type="text/javascript" src="../../javascripts/jquery-form.js"></script>
-<script type="text/javascript" src="../../javascripts/template.js"></script>
-<script type="text/javascript" src="../../javascripts/prettyDate.js"></script>
-<script type="text/javascript" src="../../javascripts/swfobject.js"></script>
-<script type="text/javascript" src="../../javascripts/default.js"></script>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/matthias-georgi" />
+    <link href="../../stylesheets/all.css?1220823609" media="screen" rel="stylesheet"></link>
+<link href="../../stylesheets/style.css?1220823092" media="screen" rel="stylesheet"></link>
     <script>var Blog = { root: '../../', guid: 'ffb31770-5dc1-012b-b53b-001a92975b89' };</script>
   </head>
   <body>
@@ -30,13 +18,17 @@
       </div>
 
       <div id="navi"  class="column span-20 last">
-	<a class="" href="../../index.html">Home</a>
-	
-	  <a class="" href="../../categories/ruby.html">Ruby</a>
-	
-	  <a class="active" href="../../categories/emacs.html">Emacs</a>
-	
-	<a class="" href="../../about.html">About</a>
+	<ul>
+	  <li><a class="" href="../../index.html">Home</a></li>
+	  
+	    <li><a class="" href="../../categories/ruby.html">Ruby</a></li>
+	  
+	    <li><a class="" href="../../categories/javascript.html">Javascript</a></li>
+	  
+	    <li><a class="active" href="../../categories/emacs.html">Emacs</a></li>
+	  
+	  <li><a class="" href="../../about.html">About</a></li>
+	</ul>
       </div>
 
       
@@ -47,10 +39,13 @@
 
       <div class="content column span-15"> 
 	<div class="article">
+
   <div class="date">
     September 4, 2008
   </div>
+
   <h2>Emacs Completions</h2>  
+
   <p>One of the most important features of a text editor is the completing
 of text inside a buffer. There a lots of packages for Emacs, which
 provide this feature in many different ways. I will show you, what I
@@ -78,7 +73,7 @@ tries to figure out, what is the right thing to do in each situation.</p>
    ((and (boundp 'snippet) snippet)
     (snippet-next-field))
 
-   ((looking-at "\_&gt;")
+   ((looking-at "\\_&gt;")
     (hippie-expand nil))
 
    ((indent-for-tab-command))))
@@ -102,13 +97,13 @@ which will try to expand the word before the cursor in a configurable
 way. <code>hippie-expand-try-functions-list</code> is a variable, which defines a
 list of functions, which should be called for completion.</p>
 
-<p>Let's have a look at my <code>html-mode</code> initialization function. It will configure
+<p>Let&#8217;s have a look at my <code>html-mode</code> initialization function. It will configure
 the completion behaviour of hippie-expand an bind the tab key to <code>indent-and-complete</code>.</p>
 
 <pre><code>;; ********************************************************************************
 ;; HTML Mode
 ;;
-(add-to-list 'auto-mode-alist '("\.html\'" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
 
 (defun html-mode-on-init ()
   (set (make-local-variable 'hippie-expand-try-functions-list)
@@ -217,7 +212,7 @@ time, like customizations for other language modes like <em>Ruby</em> and
 	<input type="text" name="website"  size="40"/>
       </p>
       <p>
-	<label>Comment</label><br/>
+	<label>Comment (Use markdown for formatting)</label><br/>
 	<textarea name="text" cols="60" rows="10"></textarea>
       </p>
       <p>
@@ -227,14 +222,28 @@ time, like customizations for other language modes like <em>Ruby</em> and
   </div>
 </div>
 
-<script type="text/javascript" src="../../javascripts/comments.js"></script>
-
 
 
       </div>
 
       <div class="right column span-5 last"> 
 	<h4>Subscribe</h4>
+	<p>
+	  <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
+	    <img src="http://www.feedburner.com/fb/images/pub/feed-icon16x16.png" alt="" style="vertical-align:middle;border:0"/>
+	  </a>&nbsp;
+	  <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
+	    Subscribe in a reader
+	  </a>
+	  <form action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=2408112', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+	    <p>Enter your email address:</p>
+	    <p><input type="text" style="width:140px" name="email"/></p>
+	    <input type="hidden" value="http://feeds.feedburner.com/~e?ffid=2408112" name="url"/>
+	    <input type="hidden" value="Matthias Georgi" name="title"/>
+	    <input type="hidden" name="loc" value="en_US"/>
+	    <input type="submit" value="Subscribe by email" />
+	  </form>
+	</p>
 	<h4>About</h4>
 	<div class="about">
 	  <strong>Matthias Georgi</strong> lives in
@@ -250,6 +259,20 @@ time, like customizations for other language modes like <em>Ruby</em> and
 	    <li><a href="../../2007/5/index.html">May 2007</a></li> 
 	  
 	    <li><a href="../../2008/9/index.html">September 2008</a></li> 
+	  
+	</ul>
+	<h4>Recent posts</h4>
+	<ul>
+	  
+	    <li><a href="../../2008/9/commenting-system-with-lightweight-json-store.html">Commenting system with lightweight JSON store</a></li> 
+	  
+	    <li><a href="../../2008/9/shinmun-a-small-and-beautiful-blog-engine.html">Shinmun, a small and beautiful blog engine</a></li> 
+	  
+	    <li><a href="../../2008/9/emacs-completions.html">Emacs Completions</a></li> 
+	  
+	    <li><a href="../../2007/5/google-like-search-results-helper.html">Google-like Search Results Helper</a></li> 
+	  
+	    <li><a href="../../2007/4/dry-up-your-url-helpers.html">DRY Up Your Url Helpers</a></li> 
 	  
 	</ul>
 	<h4>My Projects</h4>
@@ -271,10 +294,26 @@ time, like customizations for other language modes like <em>Ruby</em> and
       </div>
     </div>
 
-    <script type="text/javascript" src="../../javascripts/highlight.js"></script>
+    <script type="text/javascript" src="../../javascripts/all.js?1220823609"></script>
+<script type="text/javascript" src="../../javascripts/highlight.js?1216329729"></script>
+<script type="text/javascript" src="../../javascripts/showdown.js?1205881696"></script>
+<script type="text/javascript" src="../../javascripts/template.js?1220744554"></script>
+<script type="text/javascript" src="../../javascripts/default.js?1220656864"></script>
+<script type="text/javascript" src="../../javascripts/comments.js?1220809707"></script>
+<script type="text/javascript" src="../../javascripts/wmd.js?1205881696"></script>
 
     <script type="text/javascript">
       hljs.initHighlightingOnLoad('ruby', 'html', 'css', 'php', 'javascript', 'sql', 'lisp', 'xml', 'java');
+    </script>
+
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+    <script type="text/javascript">
+      var pageTracker = _gat._getTracker("UA-927203-10");
+      pageTracker._trackPageview();
     </script>
 
   </body>

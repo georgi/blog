@@ -4,21 +4,9 @@
     <title>Matthias Georgi - </title>
     <meta http-equiv="Content-Language" content="English" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="index.rss" />
-    <link rel="stylesheet" media="screen" href="stylesheets/reset.css"></link>
-<link rel="stylesheet" media="screen" href="stylesheets/grid.css"></link>
-<link rel="stylesheet" media="screen" href="stylesheets/typography.css"></link>
-<link rel="stylesheet" media="screen" href="stylesheets/style.css"></link>
-<link rel="stylesheet" media="screen" href="stylesheets/highlight/default.css"></link>
-    <script type="text/javascript" src="javascripts/Core.js"></script>
-<script type="text/javascript" src="javascripts/functional.js"></script>
-<script type="text/javascript" src="javascripts/to-function.js"></script>
-<script type="text/javascript" src="javascripts/jquery.js"></script>
-<script type="text/javascript" src="javascripts/jquery-form.js"></script>
-<script type="text/javascript" src="javascripts/template.js"></script>
-<script type="text/javascript" src="javascripts/prettyDate.js"></script>
-<script type="text/javascript" src="javascripts/swfobject.js"></script>
-<script type="text/javascript" src="javascripts/default.js"></script>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/matthias-georgi" />
+    <link href="stylesheets/all.css?1220823609" media="screen" rel="stylesheet"></link>
+<link href="stylesheets/style.css?1220823092" media="screen" rel="stylesheet"></link>
     <script>var Blog = { root: '', guid: '' };</script>
   </head>
   <body>
@@ -30,13 +18,17 @@
       </div>
 
       <div id="navi"  class="column span-20 last">
-	<a class="active" href="index.html">Home</a>
-	
-	  <a class="" href="categories/ruby.html">Ruby</a>
-	
-	  <a class="" href="categories/emacs.html">Emacs</a>
-	
-	<a class="" href="about.html">About</a>
+	<ul>
+	  <li><a class="active" href="index.html">Home</a></li>
+	  
+	    <li><a class="" href="categories/ruby.html">Ruby</a></li>
+	  
+	    <li><a class="" href="categories/javascript.html">Javascript</a></li>
+	  
+	    <li><a class="" href="categories/emacs.html">Emacs</a></li>
+	  
+	  <li><a class="" href="about.html">About</a></li>
+	</ul>
       </div>
 
       
@@ -49,12 +41,22 @@
 	<div class="articles">
   
     <div class="article">
+      <div class="date">September 7, 2008</div>
+      <h2><a href="2008/9/commenting-system-with-lightweight-json-store.html">Commenting system with lightweight JSON store</a></h2>
+      <p>As I wrote this <a href="shinmun-a-small-and-beautiful-blog-engine.html">blog engine</a>, the need for a commenting system
+arose and I reflected about a small and simple commenting system with
+just a flat file JSON store. This is my solution, which can be used on
+any static page on a server with PHP support.</p>
+    </div>
+    <hr/>
+  
+    <div class="article">
       <div class="date">September 5, 2008</div>
       <h2><a href="2008/9/shinmun-a-small-and-beautiful-blog-engine.html">Shinmun, a small and beautiful blog engine</a></h2>
       <p>Small is beautiful. This is especially true for software, as you can
 tailor the code exactly to your needs. I tried several times to build
 a blog engine, but was always dissatisfied by the
-complexity. Deploying is a problem too. I don't want to run a fat
+complexity. Deploying is a problem too. I don&#8217;t want to run a fat
 rails process for a small blog like this. The solution was a finally a
 tiny script, which renders text files to static web pages. The biggest
 advantage is, that I can edit my articles and templates in Emacs and
@@ -76,7 +78,7 @@ use to improve my life as coder.</p>
       <div class="date">May 10, 2007</div>
       <h2><a href="2007/5/google-like-search-results-helper.html">Google-like Search Results Helper</a></h2>
       <p>Representing your search results in a user-friendly way is a common
-task among web developers. Google's approach is dead simple but really
+task among web developers. Google&#8217;s approach is dead simple but really
 effective. The matching text is highlighted and shown with its
 context. This can be implemented in less than 20 lines of code which
 you can include into you helper:</p>
@@ -142,6 +144,22 @@ helper method from the rails library:</p>
 
       <div class="right column span-5 last"> 
 	<h4>Subscribe</h4>
+	<p>
+	  <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
+	    <img src="http://www.feedburner.com/fb/images/pub/feed-icon16x16.png" alt="" style="vertical-align:middle;border:0"/>
+	  </a>&nbsp;
+	  <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
+	    Subscribe in a reader
+	  </a>
+	  <form action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=2408112', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+	    <p>Enter your email address:</p>
+	    <p><input type="text" style="width:140px" name="email"/></p>
+	    <input type="hidden" value="http://feeds.feedburner.com/~e?ffid=2408112" name="url"/>
+	    <input type="hidden" value="Matthias Georgi" name="title"/>
+	    <input type="hidden" name="loc" value="en_US"/>
+	    <input type="submit" value="Subscribe by email" />
+	  </form>
+	</p>
 	<h4>About</h4>
 	<div class="about">
 	  <strong>Matthias Georgi</strong> lives in
@@ -157,6 +175,20 @@ helper method from the rails library:</p>
 	    <li><a href="2007/5/index.html">May 2007</a></li> 
 	  
 	    <li><a href="2008/9/index.html">September 2008</a></li> 
+	  
+	</ul>
+	<h4>Recent posts</h4>
+	<ul>
+	  
+	    <li><a href="2008/9/commenting-system-with-lightweight-json-store.html">Commenting system with lightweight JSON store</a></li> 
+	  
+	    <li><a href="2008/9/shinmun-a-small-and-beautiful-blog-engine.html">Shinmun, a small and beautiful blog engine</a></li> 
+	  
+	    <li><a href="2008/9/emacs-completions.html">Emacs Completions</a></li> 
+	  
+	    <li><a href="2007/5/google-like-search-results-helper.html">Google-like Search Results Helper</a></li> 
+	  
+	    <li><a href="2007/4/dry-up-your-url-helpers.html">DRY Up Your Url Helpers</a></li> 
 	  
 	</ul>
 	<h4>My Projects</h4>
@@ -178,10 +210,26 @@ helper method from the rails library:</p>
       </div>
     </div>
 
-    <script type="text/javascript" src="javascripts/highlight.js"></script>
+    <script type="text/javascript" src="javascripts/all.js?1220823609"></script>
+<script type="text/javascript" src="javascripts/highlight.js?1216329729"></script>
+<script type="text/javascript" src="javascripts/showdown.js?1205881696"></script>
+<script type="text/javascript" src="javascripts/template.js?1220744554"></script>
+<script type="text/javascript" src="javascripts/default.js?1220656864"></script>
+<script type="text/javascript" src="javascripts/comments.js?1220809707"></script>
+<script type="text/javascript" src="javascripts/wmd.js?1205881696"></script>
 
     <script type="text/javascript">
       hljs.initHighlightingOnLoad('ruby', 'html', 'css', 'php', 'javascript', 'sql', 'lisp', 'xml', 'java');
+    </script>
+
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+    <script type="text/javascript">
+      var pageTracker = _gat._getTracker("UA-927203-10");
+      pageTracker._trackPageview();
     </script>
 
   </body>

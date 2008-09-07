@@ -10,8 +10,9 @@ and much more.
     Matthias Georgi
     Wilhelm-Leuschner-Str. 39
     64293 Darmstadt
-     
-    mail: matti.georgi@gmail.com
+         
+![matti dot georgi at gmail dot com][1]
 
+[1]: images/email.png
 
 

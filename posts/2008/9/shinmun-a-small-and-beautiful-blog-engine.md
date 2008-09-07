@@ -68,52 +68,30 @@ they can execute arbitrary ruby code and call helper methods.
 
 There are also some helper methods, which have the same interface like
 rails helpers. The template class just needs a few methods to be useful:
+    
+    # Render stylesheet link tags with fixed url.
+    def stylesheet_link_tag(*names)
+      names.map { |name|
+        tag :link, :href => "#{root}stylesheets/#{name}.css", :rel => 'stylesheet', :media => 'screen'
+      }.join("\n")
+    end
 
+    # Render javascript tags with fixed url.
+    def javascript_tag(*names)
+      names.map { |name|
+        tag :script, :src => "#{root}javascripts/#{name}.js", :type => 'text/javascript'
+      }.join("\n")
+    end
 
-    # This class renders an ERB template for a set of attributes, which
-    # are accessible as instance variables.
-    class Template
-    
-      attr_reader :root
-    
-      # Initialize this template with an ERB instance.
-      def initialize(erb)
-        @erb = erb
-      end
-    
-      # Set instance variable for this template.
-      def set_variables(vars)
-        for name, value in vars
-          instance_variable_set("@#{name}", value)
-        end
-      end
-    
-      # Render this template.
-      def render
-        @erb.result(binding)
-      end
-    
-      # Render a hash as attributes for a HTML tag. 
-      def attributes(attributes)
-        attributes.map { |k, v| %Q{#{k}="#{v}"} }.join(' ')
-      end
-    
-      # Render a HTML tag with given name. 
-      # The last argument specifies the attributes of the tag.
-      # The second argument may be the content of the tag.
-      def tag(name, *args)
-        text, attributes = args.first.is_a?(Hash) ? [nil, args.first] : args
-        "<#{name} #{attributes(attributes)}>#{text}</#{name}>"
-      end    
-    
-      # Render stylesheet link tags with fixed url.
-      def stylesheet_link_tag(*names)
-        names.map { |name|
-          tag :link, :href => "#{root}stylesheets/#{name}.css", :rel => 'stylesheet', :media => 'screen'
-        }.join("\n")
-      end
-    
-    end    
+    # Render an image tag with fixed url.
+    def image_tag(src, options = {})
+      tag :img, options.merge(:src => root + 'images/' + src)
+    end
+
+    # Render a link with fixed url.
+    def link_to(text, path, options = {})
+      tag :a, text, options.merge(:href => root + path + '.html')
+    end
 
 
 #### Meta data
@@ -182,3 +160,14 @@ PHP is not the most elegant language (in fact not even close), but has
 the tremendous advantage to be ubiquitous. Next time I will write
 something about nifty comment forms in javascript (powered by jQuery)
 and a simple JSON store.
+
+**I posted a short description of my commenting system.** [Check it
+  out][2].
+
+
+#### Download
+
+Download the package at my [github repository][1]
+
+[1]: http://github.com/georgi/shinmun/tree/master
+[2]: commenting-system-with-lightweight-json-store.html

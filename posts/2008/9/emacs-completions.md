@@ -32,7 +32,7 @@ So I copied the indent-and-complete from the [emacs-rails package][1]:
        ((and (boundp 'snippet) snippet)
         (snippet-next-field))
     
-       ((looking-at "\\_>")
+       ((looking-at "\\\\_>")
         (hippie-expand nil))
     
        ((indent-for-tab-command))))
@@ -60,7 +60,7 @@ the completion behaviour of hippie-expand an bind the tab key to `indent-and-com
     ;; ********************************************************************************
     ;; HTML Mode
     ;;
-    (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
+    (add-to-list 'auto-mode-alist '("\\\\.html\\\\'" . html-mode))
     
     (defun html-mode-on-init ()
       (set (make-local-variable 'hippie-expand-try-functions-list)
