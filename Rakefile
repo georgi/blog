@@ -27,7 +27,7 @@ task :pack do
 end
 
 task :render => [:pack] do
-  sh "../shinmun/bin/shinmun"
+  sh "shinmun"
 end
 
 task :clean do
@@ -38,7 +38,7 @@ task :clean do
 end
 
 task :push => [:render, :clean] do
-  sh "rsync -avz public/ root@www.sportubes.com:/var/www/matthias-georgi.de/"
+  sh "rsync -avz public/ root@213.239.215.244:/var/www/matthias-georgi.de/"
 end
 
 task :default => :render

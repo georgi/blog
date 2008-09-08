@@ -64,7 +64,7 @@ nothing special here, the input will be validated to have at least a
 name and comment text. After a successful comment post, the comments
 should be rendered, but this is another story.
 
-## PHP Backend
+### PHP Backend
 
 The backend is extremely [YAGNI][3]. Comments for one post, will be
 saved in one JSON file like `comments/guid-of-the-post`. The 4 fields
@@ -138,7 +138,7 @@ For each line, we have one JSON array. This way, the *PHP* script
 doesn't need to read the whole JSON thing into memory. It just appends
 on every *POST* one line.
 
-## Escaping
+### Escaping
 
 Some blog comments showed strange escaping behviour, so I investigated
 further. PHP has a foolproof feature called [Magic Quotes][4]. It
@@ -151,7 +151,7 @@ To revert the escaping behaviour I have to call `stripslashes`. Also I
 have to care about stripping HTML tags from input. So to protect from
 malicious HTML, I filter all input through `strip_tags`.
 
-## Concurrency
+### Concurrency
 
 As a commenter pointed out, concurrent access can be a headache. I
 hoped, that `file_put_contents` is an atomic function, but it is
@@ -160,14 +160,14 @@ enough. One caveat remains: in a multithreading environment this will
 not work reliably. But I think, most PHP installations run as CGI, so
 this will be ok.
 
-## Security
+### Security
 
 Seems that I had a serious security flaw in my first version. I didn't
 check the guid parameter, so that you could pass a path like 
 `../../../../../../etc/group`. Now the guid is matched against a regular
 expression, so the script is now safe.
 
-## Conclusion
+### Conclusion
 
 With a few lines you can hook up a simple commenting system for static
 pages powered by *AJAX* and *PHP*. Note, that rendering of comments is

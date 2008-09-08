@@ -12,7 +12,7 @@ use to improve my life as coder.
 
 <div id="emacs-completion" class="swfobject"></div>
 
-#### Multifunctional tab key
+### Multifunctional tab key
 
 Most of the time the tab key in Emacs is bound to the indentation
 command, which will indent the current line. So if you want to use the
@@ -44,7 +44,7 @@ The function `indent-and-complete` does one of the following actions:
 * otherwise it indents the current line
 
 
-#### HTML mode initialization
+### HTML mode initialization
 
 Well, this function alone will not change your editor behaviour. For
 activating our tab function, we need to bind the tab key.
@@ -83,7 +83,7 @@ There a two functions, which will be asked to complete the current word:
   give you different completions, as you may know from the unix shell.
 
 
-#### Defining your snippets
+### Defining your snippets
 
 Now if you want to use snippets for your `html-mode`, you have to
 define a abbrev-table with your desired snippets. 

@@ -15,7 +15,7 @@ advantage is, that I can edit my articles and templates in Emacs and
 easily extend the software in Ruby.
 
 
-#### Directory layout
+### Directory layout
 
 The layout is as following:
 
@@ -60,7 +60,7 @@ Following is an example folder tree:
       + javascripts
     
 
-#### Layout and Templates
+### Layout and Templates
 
 Layout and templates are rendered by good old ERB. This is the
 probably the simplest solution, but ERB templates are still powerful,
@@ -94,7 +94,7 @@ rails helpers. The template class just needs a few methods to be useful:
     end
 
 
-#### Meta data
+### Meta data
 
 Each document has a header section and a body section, which are
 separated by a newline. The header section is just a YAML document and
@@ -119,7 +119,7 @@ be rendered. This GUID should never change, as it will be you used for
 identifying posts for comments.
 
 
-#### RSS Feeds
+### RSS Feeds
 
 A blog without feeds is worthless. But a feed is nothing more than an
 ERB template file. Some of the variables used here, have been read
@@ -148,7 +148,7 @@ from the meta file:
     </rss>
 
 
-#### JSON store in PHP
+### JSON store in PHP
 
 As I am not willing to build up a whole Rails stack for a single blog,
 I was looking for a simple storage for comments. I really like the
@@ -165,7 +165,7 @@ and a simple JSON store.
   out][2].
 
 
-#### Download
+### Download
 
 Download the package at my [github repository][1]
 

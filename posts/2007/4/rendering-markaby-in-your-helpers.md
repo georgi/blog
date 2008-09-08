@@ -31,6 +31,9 @@ helper method from the rails library:
      options_for_select.join("\n")
     end
 
+
+### Markaby Helper
+
 We will now rewrite this code with inline markaby. We need therefore the following helper method:
 
     def markaby(&proc)
@@ -45,6 +48,8 @@ We need to collect the instance variables of the current template and
 pass a hash of instance variable names along with their values to the
 markaby builder. As second parameter we pass the current template, so
 that the builder can access other helper methods. 
+
+### Usage
 
 Ok, let's rewrite the `options_for_select` helper. The method takes an
 array of values which should be displayed as options. Alternatively
@@ -89,6 +94,9 @@ the text of the option.
       end
     end
 
+
+### Reusable helpers
+
 Our defined markaby method is even more useful, we can accept a block
 for our helper method and use it inside the markaby code:
 
@@ -125,14 +133,10 @@ So, you can see, there is also a task helper, which is defined as follows:
 If the link text is a symbol, we are going to infer the url from the
 action name which is the first parameter and the recource, which is
 the second parameter in this case. Otherwise we generate a list
-element and delegate the arguments to the `link_to helper`. By using
-this simple abstraction, we have hidden the details of task links,
-which is really DRY. Instead of repeating the same pattern over and
-over again, we have a common place to decide, how the tasks should
-look like. Markaby makes it really easy to generate nested structures,
-as it takes advantage of ruby's block syntax. In a future post I will
-discuss an advanced form builder, like the one already implemented in
-Rails, but this time implemented with the help of Markaby. It is even
-possible to separate form generation and form layouting by using a
-separate form renderer. So step by, if you want to delve into further
-Markaby Magic.
+element and delegate the arguments to the `link_to helper`. 
+
+By using this simple abstraction, we have hidden the details of task
+links. Instead of repeating the same pattern over and over again, we
+have a common place to decide, how the tasks should look like. Markaby
+makes it really easy to generate nested structures, as it takes
+advantage of ruby's block syntax.

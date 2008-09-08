@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Language" content="English" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/matthias-georgi" />
-    <link href="../../stylesheets/all.css?1220869365" media="screen" rel="stylesheet"></link>
-<link href="../../stylesheets/style.css?1220823092" media="screen" rel="stylesheet"></link>
+    <link href="../../stylesheets/all.css?1220917233" media="screen" rel="stylesheet"></link>
+<link href="../../stylesheets/style.css?1220869897" media="screen" rel="stylesheet"></link>
     <script>var Blog = { root: '../../', guid: '7ad04f10-5dd6-012b-b53c-001a92975b89' };</script>
   </head>
   <body>
@@ -55,7 +55,7 @@ tiny script, which renders text files to static web pages. The biggest
 advantage is, that I can edit my articles and templates in Emacs and
 easily extend the software in Ruby.</p>
 
-<h4>Directory layout</h4>
+<h3>Directory layout</h3>
 
 <p>The layout is as following:</p>
 
@@ -97,7 +97,7 @@ page will display recent entries for one category.</p></li>
   + javascripts
 </code></pre>
 
-<h4>Layout and Templates</h4>
+<h3>Layout and Templates</h3>
 
 <p>Layout and templates are rendered by good old ERB. This is the
 probably the simplest solution, but ERB templates are still powerful,
@@ -131,7 +131,7 @@ def link_to(text, path, options = {})
 end
 </code></pre>
 
-<h4>Meta data</h4>
+<h3>Meta data</h3>
 
 <p>Each document has a header section and a body section, which are
 separated by a newline. The header section is just a YAML document and
@@ -155,7 +155,7 @@ article. The summary shows up in category listings or the index listing.
 be rendered. This GUID should never change, as it will be you used for
 identifying posts for comments.</p>
 
-<h4>RSS Feeds</h4>
+<h3>RSS Feeds</h3>
 
 <p>A blog without feeds is worthless. But a feed is nothing more than an
 ERB template file. Some of the variables used here, have been read
@@ -184,7 +184,7 @@ from the meta file:</p>
 &lt;/rss&gt;
 </code></pre>
 
-<h4>JSON store in PHP</h4>
+<h3>JSON store in PHP</h3>
 
 <p>As I am not willing to build up a whole Rails stack for a single blog,
 I was looking for a simple storage for comments. I really like the
@@ -200,7 +200,7 @@ and a simple JSON store.</p>
 <p><strong>I posted a short description of my commenting system.</strong> <a href="commenting-system-with-lightweight-json-store.html">Check it
   out</a>.</p>
 
-<h4>Download</h4>
+<h3>Download</h3>
 
 <p>Download the package at my <a href="http://github.com/georgi/shinmun/tree/master">github repository</a></p>
 
@@ -265,12 +265,17 @@ and a simple JSON store.</p>
 	  <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
 	    <img src="../../images/rss.png"></img>
 	    <img src="http://feeds.feedburner.com/~fc/matthias-georgi?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88"/>
+	  </a>
+	  <br/>
+	  <a href="http://www.feedburner.com/fb/a/emailverifySubmit?feedId=2408112&amp;loc=en_US">
+	    Subscribe by Email
+	  </a>
 	</p>
-
+	  
 	<h4>About</h4>
 
 	<div class="about">
-	  <strong>Matthias Georgi</strong> lives in
+	  Matthias Georgi lives in
 	  <em>Darmstadt, Germany</em> and works as a freelance
 	  software developer.
 	  <a href="../../about.html">read more</a>
@@ -327,12 +332,12 @@ and a simple JSON store.</p>
       </div>
     </div>
 
-    <script type="text/javascript" src="../../javascripts/all.js?1220869365"></script>
+    <script type="text/javascript" src="../../javascripts/all.js?1220917233"></script>
 <script type="text/javascript" src="../../javascripts/highlight.js?1216329729"></script>
 <script type="text/javascript" src="../../javascripts/showdown.js?1205881696"></script>
 <script type="text/javascript" src="../../javascripts/template.js?1220744554"></script>
 <script type="text/javascript" src="../../javascripts/default.js?1220656864"></script>
-<script type="text/javascript" src="../../javascripts/comments.js?1220809707"></script>
+<script type="text/javascript" src="../../javascripts/comments.js?1220887453"></script>
 <script type="text/javascript" src="../../javascripts/wmd.js?1205881696"></script>
 
     <script type="text/javascript">

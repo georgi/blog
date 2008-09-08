@@ -14,6 +14,8 @@ One of the concepts of _REST_ is: each resource has its own unique
 _URI_. We will enhance the `url_for` helper to generate this unique URI
 for an arbitrary record.
 
+### Example Models
+
 First we need a simple example. We have 2 models: `User` and
 `Article`. For our url generation to work we have to add following code
 to our models:
@@ -34,9 +36,13 @@ to our models:
       end
     end
 
+
 This is necessary for nested routes to play nicely with our url
 generation code. We are now able to find the parameters for each
 record to generate an unique URL.
+
+
+### Pretty URLs
 
 In a previous post I demonstrated the use of meaningful urls. We are
 going now the same way.
@@ -70,6 +76,8 @@ The traditional way to generate urls is to call the resource helpers:
 
 
 This is redundant, as the article already knows its user.
+
+### The Resource Helper
 
 Add following module into your lib folder and include the module in
 both your application controller and application helper. The most
@@ -145,6 +153,9 @@ the right url for your resource.
       end
      
     end
+
+
+### Usage
 
 So how can you use this stuff actually?
 
