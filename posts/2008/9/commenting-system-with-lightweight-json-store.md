@@ -74,8 +74,12 @@ send it back as response.
 
     <?php
     
+    $guid_pattern = "/^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$/";
     $req = $_REQUEST;
-    $guid = $req['guid'] or die('guid missing');
+    $guid = $req['guid'];
+     
+    preg_match($guid_pattern, $guid) or die("invalid guid");
+     
     $file = 'comments/' . $guid;
     
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {   
@@ -155,6 +159,13 @@ not. However, I use a simple file locking scheme, which is good
 enough. One caveat remains: in a multithreading environment this will
 not work reliably. But I think, most PHP installations run as CGI, so
 this will be ok.
+
+## Security
+
+Seems that I had a serious security flaw in my first version. I didn't
+check the guid parameter, so that you could pass a path like 
+`../../../../../../etc/group`. Now the guid is matched against a regular
+expression, so the script is now safe.
 
 ## Conclusion
 

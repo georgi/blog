@@ -30,14 +30,14 @@ task :render => [:pack] do
   sh "../shinmun/bin/shinmun"
 end
 
-task :cleanup do
+task :clean do
   for comment in Dir["public/controllers/comments/*"]
     puts "deleting #{comment}"
     File.unlink(comment)
   end
 end
 
-task :push => [:render, :cleanup] do
+task :push => [:render, :clean] do
   sh "rsync -avz public/ root@www.sportubes.com:/var/www/matthias-georgi.de/"
 end
 
