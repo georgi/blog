@@ -153,8 +153,8 @@ new resource if it has been changed.
 
 The attributes of a post are accessible as instance variables in a template:
 
-    <div class="article">
-     
+    <div class="article">    
+
       <div class="date">
         <%= date @date %>
       </div>
@@ -199,7 +199,7 @@ have been determined by the blog like `@posts` and `@category`.
     </rss>
 
 
-### JSON store in PHP
+### Commenting System
 
 As I am not willing to build up a whole Rails stack for a single blog,
 I was looking for a simple storage for comments. I really like the
