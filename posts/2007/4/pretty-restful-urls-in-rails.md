@@ -1,9 +1,11 @@
 --- 
 guid: 9dba3ad0-5d6c-012b-b53a-001a92975b89
-title: Pretty RESTful URLs in Rails
 category: Ruby
 tags: rails, rest, url
 date: 2007-04-10
+
+Pretty RESTful URLs in Rails
+============================
 
 Since Release 1.2 Rails knows to generate _RESTful_ routes. Each
 resource is identified by an _URI_, which looks like `/users/123` . It

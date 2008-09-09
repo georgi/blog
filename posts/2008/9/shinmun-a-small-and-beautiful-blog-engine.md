@@ -1,50 +1,99 @@
 --- 
 category: Ruby
 guid: 7ad04f10-5dd6-012b-b53c-001a92975b89
-title: Shinmun, a small and beautiful blog engine
 tags: ruby, blog
 date: 2008-09-05
 
-Small is beautiful. This is especially true for software, as you can
-tailor the code exactly to your needs. I tried several times to build
-a blog engine, but was always dissatisfied by the
-complexity. Deploying is a problem too. I don't want to run a fat
-rails process for a small blog like this. The solution was a finally a
-tiny script, which renders text files to static web pages. The biggest
-advantage is, that I can edit my articles and templates in Emacs and
-easily extend the software in Ruby.
+Shinmun, a small and beautiful blog engine
+==========================================
+
+Shinmun is a **minimalist blog engine**. You just write posts as text files,
+render them to static files and push your blog to your server.
+
+This allows you to write posts in your favorite editor like Emacs or
+VI and use a VCS like git.
+
+Your layout can be customized by set of *ERB templates*. These
+templates have access to `Post` objects and *helper methods* so that
+anybody who knows *Rails* should feel comfortable with it.
+
+Shinmun has some common features of blog engines like:
+
+* Index summary page
+* Category summary page
+* Archive pages for each month
+* RSS feeds for index and category pages
+* AJAX comment system with PHP JSON file storage
+* Integration of the WMD-Markdown Editor for comments
+
+### Blog Posts
+
+Each blog post is just a text file with an optional header section and
+a markup body, which are separated by a newline. 
+
+The **first line** of the header should start with 3 dashes as usual
+for a YAML document.
+
+The **first and the second line** of the body becomes the title of the
+post.
+
+The header may have following attributes:
+
+* `date`: post will show up in blog page and archive pages
+* `category`: post will show up in the defined category page
+* `guid`: will be set automatically by Shinmun
+
+Posts without a date are by definition static pages.
+
+Example post:
+
+
+    --- 
+    category: Ruby
+    date: 2008-09-05
+    guid: 7ad04f10-5dd6-012b-b53c-001a92975b89
+     
+    BlueCloth, a Markdown library
+    =============================
+
+    This is the summary, which is by definition the first paragraph of the
+    article. The summary shows up in category listings or the index listing.
+
+
+The guid should never change, as it will be you used for identifying
+posts for comments.
 
 
 ### Directory layout
 
-The layout is as following:
+* All your **posts** reside in the `posts` folder sorted by year/month.
 
-* The blog description, base url and the category list is in a file
-  called `blog.yml`
+* All the **output** will be rendered to the `public` folder.
 
-* Posts should be put into folders by date. `my-article.md` is in the
-  folder 9 (September) of the year 2008. Posts are distinguished from
-  pages by having a date attribute.
+* **Template** files are the `templates` folder.
 
-* Pages can be put anywhere, like `about.md`
+* The **blog description**, **base url** and the **category list** are
+  defined in `posts/blog.yml`
 
-* The output directory is called public. Static files should be put
-  into the directories `images`, `stylesheets`, `javascripts`.
+* **Static files** should be put into the directories `public/images`,
+  `public/stylesheets`, `public/javascripts`.
 
-* Category pages will be rendered into the `categories` folder. A category
-  page will display recent entries for one category.
+* Archive pages will be rendered to files like `public/2008/9/index.html`.
 
-* An index page will be generated for recent posts.
+* Category pages will be rendered to files like `public/categories/ruby.html`.
 
-Following is an example folder tree:
+* The *home page* of your blog will go to `public/index.html`.
 
-    + posts  
+An example tree:
+
+    + posts
       + blog.yml
       + about.md
       * 2007
         + 2008
           + 9
             + my-article.md
+
     + public
       + index.html
       + about.html
@@ -56,74 +105,76 @@ Following is an example folder tree:
         + 9
           + my-article.html
       + images
-      + stylesheest
+      + stylesheets
       + javascripts
+
+    + templates
+      + feed.rxml
+      + layout.rhtml
+      + page.rhtml  
+      + post.rhtml  
+      + posts.rhtml
+ 
+
+### Layout
+
+Layout and templates are rendered by good old *ERB*.  The layout will
+be defined by the `layout.rhtml` template. The content will be
+provided in the variable `@content`. A minimal example would be:
+
+    <html>
+      <head>
+        <title><%= @blog_title %></title>
+        <%= stylesheet_link_tag 'style' %>
+      </head>
+      <body>
+         <%= @content %>
+      </body>
+     </html>
+
+
+### Helpers
+
+There are also helper methods, which work the same way like the *Rails*
+helpers. The most important ones are these:
     
+* stylesheet_link_tag(*names):      
+* javascript_tag(*names)
+* image_tag(src, options = {})
+* link_to(text, path, options = {})
 
-### Layout and Templates
-
-Layout and templates are rendered by good old ERB. This is the
-probably the simplest solution, but ERB templates are still powerful,
-they can execute arbitrary ruby code and call helper methods.
-
-There are also some helper methods, which have the same interface like
-rails helpers. The template class just needs a few methods to be useful:
-    
-    # Render stylesheet link tags with fixed url.
-    def stylesheet_link_tag(*names)
-      names.map { |name|
-        tag :link, :href => "#{root}stylesheets/#{name}.css", :rel => 'stylesheet', :media => 'screen'
-      }.join("\n")
-    end
-
-    # Render javascript tags with fixed url.
-    def javascript_tag(*names)
-      names.map { |name|
-        tag :script, :src => "#{root}javascripts/#{name}.js", :type => 'text/javascript'
-      }.join("\n")
-    end
-
-    # Render an image tag with fixed url.
-    def image_tag(src, options = {})
-      tag :img, options.merge(:src => root + 'images/' + src)
-    end
-
-    # Render a link with fixed url.
-    def link_to(text, path, options = {})
-      tag :a, text, options.merge(:href => root + path + '.html')
-    end
+Stylesheets, javascripts and images should be included by using theses
+helpers. The helper methods will include a timestamp of the
+modification time as `querystring`, so that the browser will fetch the
+new resource if it has been changed.
 
 
-### Meta data
+### Post Template
 
-Each document has a header section and a body section, which are
-separated by a newline. The header section is just a YAML document and
-the body section consists of an markdown document. This is also
-extremly simple, but just works. An example is probably the best way
-to understand this:
+The attributes of a post are accessible as instance variables in a template:
 
-<pre>
---- 
-category: Ruby
-guid: 7ad04f10-5dd6-012b-b53c-001a92975b89
-title: BlueCloth, a Markdown library
-tags: ruby, bluecloth, markdown
-date: 2008-09-05
+    <div class="article">
+     
+      <div class="date">
+        <%= date @date %>
+      </div>
+     
+      <h2><%= @title %></h2>  
+     
+      <%= @body %>
+     
+      <h3>Comments</h3>
 
-This is the summary, which is by definition the first paragraph of the
-article. The summary shows up in category listings or the index listing.
-</pre>  
+      <!-- Here you may put my commenting system -->
+    </div>
 
-The blog engine will assign a GUID to the post, the first time it will
-be rendered. This GUID should never change, as it will be you used for
-identifying posts for comments.
 
 
 ### RSS Feeds
 
-A blog without feeds is worthless. But a feed is nothing more than an
-ERB template file. Some of the variables used here, have been read
-from the meta file:
+Feeds will be rendered by one *ERB template*. Some of the variables
+have been read from the `blog.yml`, like `@blog_title`, other variables
+have been determined by the blog like `@posts` and `@category`.
 
     <?xml version="1.0" encoding="utf-8"?>
     <rss version="2.0"> 
@@ -152,17 +203,10 @@ from the meta file:
 
 As I am not willing to build up a whole Rails stack for a single blog,
 I was looking for a simple storage for comments. I really like the
-JSON format. It works seamlessly with ExtJS, jQuery and other
-Javascript libraries and can be serialized and deserialized from
-almost any language.
+JSON format. It works seamlessly with Javascript libraries and can be
+serialized and deserialized from almost any language.
 
-PHP is not the most elegant language (in fact not even close), but has
-the tremendous advantage to be ubiquitous. Next time I will write
-something about nifty comment forms in javascript (powered by jQuery)
-and a simple JSON store.
-
-**I posted a short description of my commenting system.** [Check it
-  out][2].
+Read about my [lightweight commenting system][2].
 
 
 ### Download

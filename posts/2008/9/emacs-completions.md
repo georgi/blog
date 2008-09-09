@@ -1,9 +1,11 @@
 --- 
 category: Emacs
 guid: ffb31770-5dc1-012b-b53b-001a92975b89
-title: Emacs Completions
 date: 2008-09-04
 tags: emacs, completion
+
+Emacs Completions with Hippie-Expand and Snippets
+=================================================
 
 One of the most important features of a text editor is the completing
 of text inside a buffer. There a lots of packages for Emacs, which

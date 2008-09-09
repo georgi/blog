@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Language" content="English" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/matthias-georgi" />
-    <link href="../../stylesheets/all.css?1220917233" media="screen" rel="stylesheet"></link>
-<link href="../../stylesheets/style.css?1220869897" media="screen" rel="stylesheet"></link>
+    <link rel="stylesheet" href="../../stylesheets/all.css?1220922874" media="screen"></link>
+<link rel="stylesheet" href="../../stylesheets/style.css?1220869897" media="screen"></link>
     <script>var Blog = { root: '../../', guid: '7ad04f10-5dd6-012b-b53c-001a92975b89' };</script>
   </head>
   <body>
@@ -46,42 +46,90 @@
 
   <h2>Shinmun, a small and beautiful blog engine</h2>  
 
-  <p>Small is beautiful. This is especially true for software, as you can
-tailor the code exactly to your needs. I tried several times to build
-a blog engine, but was always dissatisfied by the
-complexity. Deploying is a problem too. I don&#8217;t want to run a fat
-rails process for a small blog like this. The solution was a finally a
-tiny script, which renders text files to static web pages. The biggest
-advantage is, that I can edit my articles and templates in Emacs and
-easily extend the software in Ruby.</p>
+  <p>Shinmun is a <strong>minimalist blog engine</strong>. You just write posts as text files,
+render them to static files and push your blog to your server.</p>
+
+<p>This allows you to write posts in your favorite editor like Emacs or
+VI and use a VCS like git.</p>
+
+<p>Your layout can be customized by set of <em>ERB templates</em>. These
+templates have access to <code>Post</code> objects and <em>helper methods</em> so that
+anybody who knows <em>Rails</em> should feel comfortable with it.</p>
+
+<p>Shinmun has some common features of blog engines like:</p>
+
+<ul>
+<li>Index summary page</li>
+<li>Category summary page</li>
+<li>Archive pages for each month</li>
+<li>RSS feeds for index and category pages</li>
+<li>AJAX comment system with PHP JSON file storage</li>
+<li>Integration of the WMD-Markdown Editor for comments</li>
+</ul>
+
+<h3>Blog Posts</h3>
+
+<p>Each blog post is just a text file with an optional header section and
+a markup body, which are separated by a newline. </p>
+
+<p>The <strong>first line</strong> of the header should start with 3 dashes as usual
+for a YAML document.</p>
+
+<p>The <strong>first and the second line</strong> of the body becomes the title of the
+post.</p>
+
+<p>The header may have following attributes:</p>
+
+<ul>
+<li><code>date</code>: post will show up in blog page and archive pages</li>
+<li><code>category</code>: post will show up in the defined category page</li>
+<li><code>guid</code>: will be set automatically by Shinmun</li>
+</ul>
+
+<p>Posts without a date are by definition static pages.</p>
+
+<p>Example post:</p>
+
+<pre><code>--- 
+category: Ruby
+date: 2008-09-05
+guid: 7ad04f10-5dd6-012b-b53c-001a92975b89
+
+BlueCloth, a Markdown library
+=============================
+
+This is the summary, which is by definition the first paragraph of the
+article. The summary shows up in category listings or the index listing.
+</code></pre>
+
+<p>The guid should never change, as it will be you used for identifying
+posts for comments.</p>
 
 <h3>Directory layout</h3>
 
-<p>The layout is as following:</p>
-
 <ul>
-<li><p>The blog description, base url and the category list is in a file
-called <code>blog.yml</code></p></li>
-<li><p>Posts should be put into folders by date. <code>my-article.md</code> is in the
-folder 9 (September) of the year 2008. Posts are distinguished from
-pages by having a date attribute.</p></li>
-<li><p>Pages can be put anywhere, like <code>about.md</code></p></li>
-<li><p>The output directory is called public. Static files should be put
-into the directories <code>images</code>, <code>stylesheets</code>, <code>javascripts</code>.</p></li>
-<li><p>Category pages will be rendered into the <code>categories</code> folder. A category
-page will display recent entries for one category.</p></li>
-<li><p>An index page will be generated for recent posts.</p></li>
+<li><p>All your <strong>posts</strong> reside in the <code>posts</code> folder sorted by year/month.</p></li>
+<li><p>All the <strong>output</strong> will be rendered to the <code>public</code> folder.</p></li>
+<li><p><strong>Template</strong> files are the <code>templates</code> folder.</p></li>
+<li><p>The <strong>blog description</strong>, <strong>base url</strong> and the <strong>category list</strong> are
+defined in <code>posts/blog.yml</code></p></li>
+<li><p><strong>Static files</strong> should be put into the directories <code>public/images</code>,
+<code>public/stylesheets</code>, <code>public/javascripts</code>.</p></li>
+<li><p>Archive pages will be rendered to files like <code>public/2008/9/index.html</code>.</p></li>
+<li><p>Category pages will be rendered to files like <code>public/categories/ruby.html</code>.</p></li>
+<li><p>The <em>home page</em> of your blog will go to <code>public/index.html</code>.</p></li>
 </ul>
 
-<p>Following is an example folder tree:</p>
+<p>An example tree:</p>
 
-<pre><code>+ posts  
+<pre><code>+ posts
   + blog.yml
   + about.md
   * 2007
     + 2008
       + 9
         + my-article.md
+
 + public
   + index.html
   + about.html
@@ -93,73 +141,76 @@ page will display recent entries for one category.</p></li>
     + 9
       + my-article.html
   + images
-  + stylesheest
+  + stylesheets
   + javascripts
+
++ templates
+  + feed.rxml
+  + layout.rhtml
+  + page.rhtml  
+  + post.rhtml  
+  + posts.rhtml
 </code></pre>
 
-<h3>Layout and Templates</h3>
+<h3>Layout</h3>
 
-<p>Layout and templates are rendered by good old ERB. This is the
-probably the simplest solution, but ERB templates are still powerful,
-they can execute arbitrary ruby code and call helper methods.</p>
+<p>Layout and templates are rendered by good old <em>ERB</em>.  The layout will
+be defined by the <code>layout.rhtml</code> template. The content will be
+provided in the variable <code>@content</code>. A minimal example would be:</p>
 
-<p>There are also some helper methods, which have the same interface like
-rails helpers. The template class just needs a few methods to be useful:</p>
-
-<pre><code># Render stylesheet link tags with fixed url.
-def stylesheet_link_tag(*names)
-  names.map { |name|
-    tag :link, :href =&gt; "#{root}stylesheets/#{name}.css", :rel =&gt; 'stylesheet', :media =&gt; 'screen'
-  }.join("\n")
-end
-
-# Render javascript tags with fixed url.
-def javascript_tag(*names)
-  names.map { |name|
-    tag :script, :src =&gt; "#{root}javascripts/#{name}.js", :type =&gt; 'text/javascript'
-  }.join("\n")
-end
-
-# Render an image tag with fixed url.
-def image_tag(src, options = {})
-  tag :img, options.merge(:src =&gt; root + 'images/' + src)
-end
-
-# Render a link with fixed url.
-def link_to(text, path, options = {})
-  tag :a, text, options.merge(:href =&gt; root + path + '.html')
-end
+<pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;&lt;%= @blog_title %&gt;&lt;/title&gt;
+    &lt;%= stylesheet_link_tag 'style' %&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+     &lt;%= @content %&gt;
+  &lt;/body&gt;
+ &lt;/html&gt;
 </code></pre>
 
-<h3>Meta data</h3>
+<h3>Helpers</h3>
 
-<p>Each document has a header section and a body section, which are
-separated by a newline. The header section is just a YAML document and
-the body section consists of an markdown document. This is also
-extremly simple, but just works. An example is probably the best way
-to understand this:</p>
+<p>There are also helper methods, which work the same way like the <em>Rails</em>
+helpers. The most important ones are these:</p>
 
-<pre>
---- 
-category: Ruby
-guid: 7ad04f10-5dd6-012b-b53c-001a92975b89
-title: BlueCloth, a Markdown library
-tags: ruby, bluecloth, markdown
-date: 2008-09-05
+<ul>
+<li>stylesheet<em>link</em>tag(*names):      </li>
+<li>javascript_tag(*names)</li>
+<li>image_tag(src, options = {})</li>
+<li>link_to(text, path, options = {})</li>
+</ul>
 
-This is the summary, which is by definition the first paragraph of the
-article. The summary shows up in category listings or the index listing.
-</pre>  
+<p>Stylesheets, javascripts and images should be included by using theses
+helpers. The helper methods will include a timestamp of the
+modification time as <code>querystring</code>, so that the browser will fetch the
+new resource if it has been changed.</p>
 
-<p>The blog engine will assign a GUID to the post, the first time it will
-be rendered. This GUID should never change, as it will be you used for
-identifying posts for comments.</p>
+<h3>Post Template</h3>
+
+<p>The attributes of a post are accessible as instance variables in a template:</p>
+
+<pre><code>&lt;div class="article"&gt;
+
+  &lt;div class="date"&gt;
+    &lt;%= date @date %&gt;
+  &lt;/div&gt;
+
+  &lt;h2&gt;&lt;%= @title %&gt;&lt;/h2&gt;  
+
+  &lt;%= @body %&gt;
+
+  &lt;h3&gt;Comments&lt;/h3&gt;
+
+  &lt;!-- Here you may put my commenting system --&gt;
+&lt;/div&gt;
+</code></pre>
 
 <h3>RSS Feeds</h3>
 
-<p>A blog without feeds is worthless. But a feed is nothing more than an
-ERB template file. Some of the variables used here, have been read
-from the meta file:</p>
+<p>Feeds will be rendered by one <em>ERB template</em>. Some of the variables
+have been read from the <code>blog.yml</code>, like <code>@blog_title</code>, other variables
+have been determined by the blog like <code>@posts</code> and <code>@category</code>.</p>
 
 <pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;rss version="2.0"&gt; 
@@ -188,17 +239,10 @@ from the meta file:</p>
 
 <p>As I am not willing to build up a whole Rails stack for a single blog,
 I was looking for a simple storage for comments. I really like the
-JSON format. It works seamlessly with ExtJS, jQuery and other
-Javascript libraries and can be serialized and deserialized from
-almost any language.</p>
+JSON format. It works seamlessly with Javascript libraries and can be
+serialized and deserialized from almost any language.</p>
 
-<p>PHP is not the most elegant language (in fact not even close), but has
-the tremendous advantage to be ubiquitous. Next time I will write
-something about nifty comment forms in javascript (powered by jQuery)
-and a simple JSON store.</p>
-
-<p><strong>I posted a short description of my commenting system.</strong> <a href="commenting-system-with-lightweight-json-store.html">Check it
-  out</a>.</p>
+<p>Read about my <a href="commenting-system-with-lightweight-json-store.html">lightweight commenting system</a>.</p>
 
 <h3>Download</h3>
 
@@ -301,7 +345,7 @@ and a simple JSON store.</p>
 	  
 	    <li><a href="../../2008/9/shinmun-a-small-and-beautiful-blog-engine.html">Shinmun, a small and beautiful blog engine</a></li> 
 	  
-	    <li><a href="../../2008/9/emacs-completions.html">Emacs Completions</a></li> 
+	    <li><a href="../../2008/9/emacs-completions.html">Emacs Completions with Hippie-Expand and Snippets</a></li> 
 	  
 	    <li><a href="../../2007/5/google-like-search-results-helper.html">Google-like Search Results Helper</a></li> 
 	  
@@ -332,7 +376,7 @@ and a simple JSON store.</p>
       </div>
     </div>
 
-    <script type="text/javascript" src="../../javascripts/all.js?1220917233"></script>
+    <script type="text/javascript" src="../../javascripts/all.js?1220922874"></script>
 <script type="text/javascript" src="../../javascripts/highlight.js?1216329729"></script>
 <script type="text/javascript" src="../../javascripts/showdown.js?1205881696"></script>
 <script type="text/javascript" src="../../javascripts/template.js?1220744554"></script>

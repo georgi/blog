@@ -1,9 +1,11 @@
 --- 
 guid: 9dba5160-5d6c-012b-b53a-001a92975b89
-title: Building a del.ico.us and flickr sidebar in 5 minutes
 category: Ruby
 tags: flickr, delicious, rails
 date: 2007-04-08
+
+Building a del.ico.us and flickr sidebar in 5 minutes
+=====================================================
 
 You need a del.icio.us sidebar which shows recent bookmarks or one of
 these nice flickr badges? This is really is easy as the [Typo Weblog

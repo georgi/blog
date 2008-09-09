@@ -1,3 +1,6 @@
+$:.unshift "../shinmun/lib"
+
+require 'shinmun'
 require 'packr'
 
 def compress(filename)
@@ -27,7 +30,7 @@ task :pack do
 end
 
 task :render => [:pack] do
-  sh "shinmun"
+  Shinmun::Blog.new.write_all
 end
 
 task :clean do

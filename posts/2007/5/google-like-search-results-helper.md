@@ -1,9 +1,11 @@
 --- 
 guid: 9db9e370-5d6c-012b-b53a-001a92975b89
-title: Google-like Search Results Helper
 category: Ruby
 tags: google, ruby, search, rails
 date: 2007-05-10
+
+Google-like Search Results Helper
+=================================
 
 Representing your search results in a user-friendly way is a common
 task among web developers. Google's approach is dead simple but really

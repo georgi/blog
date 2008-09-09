@@ -6,14 +6,14 @@
     <description>Webdev, Gamedev, Interaction Design</description>
     <language>en</language>
     <copyright>Matthias Georgi</copyright>
-    <pubDate>Tue, 09 Sep 2008 01:40:34 +0200</pubDate>
+    <pubDate>Tue, 09 Sep 2008 03:14:34 +0200</pubDate>
     
       <item>
 	<title>Commenting system with lightweight JSON store</title>
-	<description>As I wrote this [blog engine][1], the need for a commenting system
+	<description><p>As I wrote this <a href="shinmun-a-small-and-beautiful-blog-engine.html">blog engine</a>, the need for a commenting system
 arose and I reflected about a small and simple commenting system with
 just a flat file JSON store. This is my solution, which can be used on
-any static page on a server with PHP support.</description>
+any static page on a server with PHP support.</p></description>
 	<link>http://www.matthias-georgi.de/2008/9/commenting-system-with-lightweight-json-store.html</link>
 	<author>Matthias Georgi</author>
 	<guid>4ed200b0-5efa-012b-f5dc-001a92975b89</guid>
@@ -22,14 +22,8 @@ any static page on a server with PHP support.</description>
     
       <item>
 	<title>Shinmun, a small and beautiful blog engine</title>
-	<description>Small is beautiful. This is especially true for software, as you can
-tailor the code exactly to your needs. I tried several times to build
-a blog engine, but was always dissatisfied by the
-complexity. Deploying is a problem too. I don't want to run a fat
-rails process for a small blog like this. The solution was a finally a
-tiny script, which renders text files to static web pages. The biggest
-advantage is, that I can edit my articles and templates in Emacs and
-easily extend the software in Ruby.</description>
+	<description><p>Shinmun is a <strong>minimalist blog engine</strong>. You just write posts as text files,
+render them to static files and push your blog to your server.</p></description>
 	<link>http://www.matthias-georgi.de/2008/9/shinmun-a-small-and-beautiful-blog-engine.html</link>
 	<author>Matthias Georgi</author>
 	<guid>7ad04f10-5dd6-012b-b53c-001a92975b89</guid>
@@ -37,11 +31,11 @@ easily extend the software in Ruby.</description>
       </item>
     
       <item>
-	<title>Emacs Completions</title>
-	<description>One of the most important features of a text editor is the completing
+	<title>Emacs Completions with Hippie-Expand and Snippets</title>
+	<description><p>One of the most important features of a text editor is the completing
 of text inside a buffer. There a lots of packages for Emacs, which
 provide this feature in many different ways. I will show you, what I
-use to improve my life as coder.</description>
+use to improve my life as coder.</p></description>
 	<link>http://www.matthias-georgi.de/2008/9/emacs-completions.html</link>
 	<author>Matthias Georgi</author>
 	<guid>ffb31770-5dc1-012b-b53b-001a92975b89</guid>
@@ -50,11 +44,11 @@ use to improve my life as coder.</description>
     
       <item>
 	<title>Google-like Search Results Helper</title>
-	<description>Representing your search results in a user-friendly way is a common
-task among web developers. Google's approach is dead simple but really
+	<description><p>Representing your search results in a user-friendly way is a common
+task among web developers. Google&#8217;s approach is dead simple but really
 effective. The matching text is highlighted and shown with its
 context. This can be implemented in less than 20 lines of code which
-you can include into you helper:</description>
+you can include into you helper:</p></description>
 	<link>http://www.matthias-georgi.de/2007/5/google-like-search-results-helper.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9db9e370-5d6c-012b-b53a-001a92975b89</guid>
@@ -63,10 +57,10 @@ you can include into you helper:</description>
     
       <item>
 	<title>DRY Up Your Url Helpers</title>
-	<description>This tutorial shows you how to simplify url generation in combination
-with _RESTful_ resources by extending the `url_for` helper. This approach
-will also work with nested routes and other helpers like `form_tag` and
-`link_to`.</description>
+	<description><p>This tutorial shows you how to simplify url generation in combination
+with <em>RESTful</em> resources by extending the <code>url_for</code> helper. This approach
+will also work with nested routes and other helpers like <code>form_tag</code> and
+<code>link_to</code>.</p></description>
 	<link>http://www.matthias-georgi.de/2007/4/dry-up-your-url-helpers.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9dba2130-5d6c-012b-b53a-001a92975b89</guid>
@@ -75,11 +69,11 @@ will also work with nested routes and other helpers like `form_tag` and
     
       <item>
 	<title>Pretty RESTful URLs in Rails</title>
-	<description>Since Release 1.2 Rails knows to generate _RESTful_ routes. Each
-resource is identified by an _URI_, which looks like `/users/123` . It
+	<description><p>Since Release 1.2 Rails knows to generate <em>RESTful</em> routes. Each
+resource is identified by an <em>URI</em>, which looks like <code>/users/123</code> . It
 would be nice to have more readable URLs, which include the name of
-the user: `/users/matthias-georgi`. This is a short tutorial on making
-your urls pretty while retaining the REST approach.</description>
+the user: <code>/users/matthias-georgi</code>. This is a short tutorial on making
+your urls pretty while retaining the REST approach.</p></description>
 	<link>http://www.matthias-georgi.de/2007/4/pretty-restful-urls-in-rails.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9dba3ad0-5d6c-012b-b53a-001a92975b89</guid>
@@ -88,9 +82,9 @@ your urls pretty while retaining the REST approach.</description>
     
       <item>
 	<title>Building a del.ico.us and flickr sidebar in 5 minutes</title>
-	<description>You need a del.icio.us sidebar which shows recent bookmarks or one of
-these nice flickr badges? This is really is easy as the [Typo Weblog
-Engine][1] already includes an flickr and del.icio.us aggregator.</description>
+	<description><p>You need a del.icio.us sidebar which shows recent bookmarks or one of
+these nice flickr badges? This is really is easy as the <a href="http://trac.typosphere.org/">Typo Weblog
+Engine</a> already includes an flickr and del.icio.us aggregator.</p></description>
 	<link>http://www.matthias-georgi.de/2007/4/building-delicous-and-flickr-sidebar-in-5-minutes.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9dba5160-5d6c-012b-b53a-001a92975b89</guid>
@@ -99,12 +93,12 @@ Engine][1] already includes an flickr and del.icio.us aggregator.</description>
     
       <item>
 	<title>Fast Auto-completion with Rails, Scriptaculous and JSON</title>
-	<description>Inspired by the excellent [Rails Recipes][1] book , I created an
-improved Auto-completion helper, which uses _JSON_ and _AJAX_ instead
+	<description><p>Inspired by the excellent <a href="http://www.pragmaticprogrammer.com/titles/fr_rr/">Rails Recipes</a> book , I created an
+improved Auto-completion helper, which uses <em>JSON</em> and <em>AJAX</em> instead
 of a script tag for loading the completions. What we want to achieve
 is a search field, which pops up immediately, showing us a list of
-possible completions for our search word. Look at [Google Suggest][2]
-to get an idea.</description>
+possible completions for our search word. Look at <a href="http://labs.google.com/suggest/">Google Suggest</a>
+to get an idea.</p></description>
 	<link>http://www.matthias-georgi.de/2007/4/fast-autocompletion-with-rails.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9dba67e0-5d6c-012b-b53a-001a92975b89</guid>
@@ -113,11 +107,11 @@ to get an idea.</description>
     
       <item>
 	<title>Rendering markaby in your helpers</title>
-	<description>Generating markup in your rails helpers is a general practice in rails
-and is used throughout all rails helpers. Normally you use `content_tag`
+	<description><p>Generating markup in your rails helpers is a general practice in rails
+and is used throughout all rails helpers. Normally you use <code>content_tag</code>
 to generate markup. But often you will encounter situations, where
 nested tags force you to write ugly helper code like the following
-helper method from the rails library:</description>
+helper method from the rails library:</p></description>
 	<link>http://www.matthias-georgi.de/2007/4/rendering-markaby-in-your-helpers.html</link>
 	<author>Matthias Georgi</author>
 	<guid>9dba8080-5d6c-012b-b53a-001a92975b89</guid>

@@ -1,4 +1,5 @@
-title: About
+About
+=====
 
 This is the personal blog of Matthias Georgi.
 

@@ -1,9 +1,11 @@
 --- 
 guid: 9dba2130-5d6c-012b-b53a-001a92975b89
-title: DRY Up Your Url Helpers
 category: Ruby
 tags: rails, url, helpers
 date: 2007-04-18
+
+DRY Up Your Url Helpers
+=======================
 
 This tutorial shows you how to simplify url generation in combination
 with _RESTful_ resources by extending the `url_for` helper. This approach
