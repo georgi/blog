@@ -2,7 +2,8 @@
 category: Emacs
 guid: ffb31770-5dc1-012b-b53b-001a92975b89
 date: 2008-09-04
-tags: emacs, completion
+tags: [emacs, completion]
+languages: [lisp]
 
 Emacs Completions with Hippie-Expand and Snippets
 =================================================

@@ -1,5 +1,5 @@
-/* 
-Syntax highlighting with language autodetection.  
+/*
+Syntax highlighting with language autodetection.
 http://softwaremaniacs.org/soft/highlight/
 */
 
@@ -25,11 +25,11 @@ var hljs = new function() {
 
   var LANGUAGES = {}
   var selected_languages = {};
-  
+
   function escape(value) {
     return value.replace(/&/gm, '&amp;').replace(/</gm, '&lt;').replace(/>/gm, '&gt;');
   }
-  
+
   function contains(array, item) {
     if (!array)
       return false;
@@ -38,7 +38,7 @@ var hljs = new function() {
         return true;
     return false;
   }
-  
+
   function highlight(language_name, value) {
     function compileSubModes(mode, language) {
       mode.sub_modes = [];
@@ -50,7 +50,7 @@ var hljs = new function() {
         }
       }
     }
-  
+
     function subMode(lexem, mode) {
       if (!mode.contains) {
         return null;
@@ -65,7 +65,7 @@ var hljs = new function() {
       }
       return null;
     }
-    
+
     function endOfMode(mode_index, lexem) {
       if (modes[mode_index].end && modes[mode_index].endRe.test(lexem))
         return 1;
@@ -75,27 +75,27 @@ var hljs = new function() {
       }
       return 0;
     }
-    
+
     function isIllegal(lexem, mode) {
       return mode.illegalRe && mode.illegalRe.test(lexem);
     }
-    
+
     function compileTerminators(mode, language) {
       var terminators = [];
-      
+
       function addTerminator(re) {
         if (!contains(terminators, re)) {
           terminators[terminators.length] = re;
         }
       }
-      
+
       if (mode.contains)
         for (var key in language.modes) {
           if (contains(mode.contains, language.modes[key].className)) {
             addTerminator(language.modes[key].begin);
           }
         }
-      
+
       var index = modes.length - 1;
       do {
         if (modes[index].end) {
@@ -103,11 +103,11 @@ var hljs = new function() {
         }
         index--;
       } while (modes[index + 1].endsWithParent);
-      
+
       if (mode.illegal) {
         addTerminator(mode.illegal);
       }
-      
+
       var terminator_re = '(' + terminators[0];
       for (var i = 0; i < terminators.length; i++)
         terminator_re += '|' + terminators[i];
@@ -122,14 +122,14 @@ var hljs = new function() {
       }
       value = value.substr(index);
       var match = mode.terminators.exec(value);
-      if (!match) 
+      if (!match)
         return [value, '', true];
       if (match.index == 0)
         return ['', match[0], false];
       else
         return [value.substr(0, match.index), match[0], false];
     }
-    
+
     function keywordMatch(mode, match) {
       var match_str = language.case_insensitive ? match[0].toLowerCase() : match[0]
       for (var className in mode.keywordGroups) {
@@ -139,7 +139,7 @@ var hljs = new function() {
       }
       return false;
     }
-    
+
     function processKeywords(buffer, mode) {
       if (!mode.keywords || !mode.lexems)
         return escape(buffer);
@@ -169,7 +169,7 @@ var hljs = new function() {
       result += escape(buffer.substr(last_index, buffer.length - last_index));
       return result;
     }
-    
+
     function processBuffer(buffer, mode) {
       if (mode.subLanguage && selected_languages[mode.subLanguage]) {
         var result = highlight(mode.subLanguage, buffer);
@@ -180,7 +180,7 @@ var hljs = new function() {
         return processKeywords(buffer, mode);
       }
     }
-    
+
     function startNewMode(mode, lexem) {
       if (mode.returnBegin) {
         result += '<span class="' + mode.className + '">';
@@ -194,14 +194,14 @@ var hljs = new function() {
       }
       modes[modes.length] = mode;
     }
-    
+
     function processModeInfo(buffer, lexem, end) {
       var current_mode = modes[modes.length - 1];
       if (end) {
         result += processBuffer(current_mode.buffer + buffer, current_mode);
         return false;
       }
-      
+
       var new_mode = subMode(lexem, current_mode);
       if (new_mode) {
         result += processBuffer(current_mode.buffer + buffer, current_mode);
@@ -209,7 +209,7 @@ var hljs = new function() {
         relevance += new_mode.relevance;
         return new_mode.returnBegin;
       }
-      
+
       var end_level = endOfMode(modes.length - 1, lexem);
       if (end_level) {
         if (current_mode.returnEnd) {
@@ -236,11 +236,11 @@ var hljs = new function() {
         }
         return current_mode.returnEnd;
       }
-      
+
       if (isIllegal(lexem, current_mode))
         throw 'Illegal';
     }
-    
+
     var language = LANGUAGES[language_name];
     var modes = [language.defaultMode];
     var relevance = 0;
@@ -256,7 +256,7 @@ var hljs = new function() {
         if (!return_lexem) {
           index += mode_info[1].length;
         }
-      } while (!mode_info[2]); 
+      } while (!mode_info[2]);
       if(modes.length > 1)
         throw 'Illegal';
       return {
@@ -276,7 +276,7 @@ var hljs = new function() {
       }
     }
   }
-  
+
   function blockText(block) {
     var result = '';
     for (var i = 0; i < block.childNodes.length; i++)
@@ -288,7 +288,7 @@ var hljs = new function() {
         throw 'No highlight';
     return result;
   }
-  
+
   function blockLanguage(block) {
     var classes = block.className.split(/\s+/);
     for (var i = 0; i < classes.length; i++) {
@@ -309,11 +309,11 @@ var hljs = new function() {
       if (e == 'No highlight')
         return;
     }
-    
+
     if (language) {
       var result = highlight(language, text).value;
     } else {
-      var max_relevance = 2;
+      var max_relevance = 0;
       var relevance = 0;
       for (var key in selected_languages) {
         var r = highlight(key, text);
@@ -325,7 +325,7 @@ var hljs = new function() {
         }
       }
     }
-    
+
     if (result) {
       var className = block.className;
       if (!className.match(language)) {
@@ -338,7 +338,7 @@ var hljs = new function() {
       environment.replaceChild(container.firstChild, block.parentNode);
     }
   }
-  
+
   function langRe(language, value, global) {
     var mode =  'm' + (language.case_insensitive ? 'i' : '') + (global ? 'g' : '');
     return new RegExp(value, mode);
@@ -375,7 +375,7 @@ var hljs = new function() {
         }
       }
     }
-    
+
     for (var i in LANGUAGES) {
       var language = LANGUAGES[i];
       compileModeKeywords(language.defaultMode);
@@ -384,7 +384,7 @@ var hljs = new function() {
       }
     }
   }
-  
+
   function findCode(pre) {
     for (var i = 0; i < pre.childNodes.length; i++) {
       node = pre.childNodes[i];
@@ -450,12 +450,12 @@ var hljs = new function() {
     else
       window.onload = handler;
   }
-  
+
   this.LANGUAGES = LANGUAGES;
   this.ALL_LANGUAGES = ALL_LANGUAGES;
   this.initHighlightingOnLoad = initHighlightingOnLoad;
   this.highlightBlock = highlightBlock;
-  
+
   // Common regexps
   this.IDENT_RE = '[a-zA-Z][a-zA-Z0-9_]*';
   this.UNDERSCORE_IDENT_RE = '[a-zA-Z_][a-zA-Z0-9_]*';

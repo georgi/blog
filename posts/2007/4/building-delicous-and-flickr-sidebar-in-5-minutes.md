@@ -1,7 +1,8 @@
 --- 
 guid: 9dba5160-5d6c-012b-b53a-001a92975b89
 category: Ruby
-tags: flickr, delicious, rails
+tags: [flickr, delicious, rails]
+languages: [ruby, html]
 date: 2007-04-08
 
 Building a del.ico.us and flickr sidebar in 5 minutes

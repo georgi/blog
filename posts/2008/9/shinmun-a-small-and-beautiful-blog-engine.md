@@ -1,8 +1,9 @@
 --- 
-category: Ruby
-guid: 7ad04f10-5dd6-012b-b53c-001a92975b89
-tags: ruby, blog
 date: 2008-09-05
+category: Ruby
+tags: [blogging, engine]
+languages: [ruby, html, xml]
+guid: 7ad04f10-5dd6-012b-b53c-001a92975b89
 
 Shinmun, a small and beautiful blog engine
 ==========================================
@@ -47,6 +48,7 @@ Posts without a date are by definition static pages.
 
 Example post:
 
+<pre>
 
     --- 
     category: Ruby
@@ -59,6 +61,7 @@ Example post:
     This is the summary, which is by definition the first paragraph of the
     article. The summary shows up in category listings or the index listing.
 
+</pre>
 
 The guid should never change, as it will be you used for identifying
 posts for comments.
@@ -197,7 +200,6 @@ have been determined by the blog like `@posts` and `@category`.
         <% end %>
       </channel> 
     </rss>
-
 
 ### Commenting System
 

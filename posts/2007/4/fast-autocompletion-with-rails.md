@@ -1,7 +1,8 @@
 --- 
 guid: 9dba67e0-5d6c-012b-b53a-001a92975b89
 category: Ruby
-tags: ajax, rails, scriptaculous, json, javascript
+tags: [ajax, rails, scriptaculous, json]
+languages: [ruby, html, css]
 date: 2007-04-04
 
 Fast Auto-completion with Rails, Scriptaculous and JSON

@@ -131,7 +131,7 @@
     padding: 3px 5px;
 }
 
-blockquote{
+blockquote {
     border-top: 3px double #69c;
     border-bottom: 3px double #69c;
     padding: 5px;
@@ -139,3 +139,11 @@ blockquote{
     margin-left: 5%;
     margin-right: 5%;
 }
+
+pre {
+    background: #f0f0f0;
+    padding: 1em;
+    border: 1px solid #ccc;
+}
+
+

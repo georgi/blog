@@ -354,9 +354,6 @@ h6 { font-size: 1em; font-weight: bold; }
 
 pre code {
     display: block;
-    background: #F0F0F0;    
-    padding: 1em;
-    border: 1px solid #ccc;
 }
 
 pre code,

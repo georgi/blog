@@ -1,7 +1,8 @@
 --- 
 guid: 9dba8080-5d6c-012b-b53a-001a92975b89
 category: Ruby
-tags: rails, markaby
+tags: [rails, markaby]
+languages: [ruby]
 date: 2007-04-02
 
 Rendering markaby in your helpers

@@ -104,11 +104,14 @@
       </div>
     </div>
 
-    <%= javascript_tag 'all', 'highlight', 'showdown', 'template', 'default', 'comments', 'wmd' %>
+    <%= javascript_tag 'all', 'showdown', 'template', 'default', 'comments', 'wmd' %>
 
-    <script type="text/javascript">
-      hljs.initHighlightingOnLoad('ruby', 'html', 'css', 'php', 'javascript', 'sql', 'lisp', 'xml', 'java');
-    </script>
+    <% if @languages %>
+      <%= javascript_tag 'highlight' %>
+      <script type="text/javascript">
+	hljs.initHighlightingOnLoad(<%= @languages.map {|l| "'#{l}'" }.join(',')  %>);
+      </script>
+    <% end %>
 
     <script type="text/javascript">
       var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -118,7 +121,7 @@
     <script type="text/javascript">
       var pageTracker = _gat._getTracker("UA-927203-10");
       pageTracker._trackPageview();
-    </script>
+    </script> 
 
   </body>
 </html>
