@@ -8,7 +8,17 @@
 
   <%= @body %>
 
-  <h3>Comments</h3>
+  <hr/>
+
+  <div style="padding-bottom:40px">
+    <script type="text/javascript">
+      if (typeof window.Delicious == "undefined") window.Delicious = {};
+      Delicious.BLOGBADGE_DEFAULT_CLASS = 'delicious-blogbadge-line';
+    </script>
+    <script src="http://static.delicious.com/js/blogbadge.js"></script>
+  </div>
+
+  <h2>Comments</h2>
 
   <div class="comments-loading" style="display:none">
     <%= image_tag 'loading.gif' %>

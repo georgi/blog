@@ -6,14 +6,14 @@
     <description>Category Javascript</description>
     <language>en</language>
     <copyright>Matthias Georgi</copyright>
-    <pubDate>Tue, 09 Sep 2008 03:27:40 +0200</pubDate>
+    <pubDate>Tue, 09 Sep 2008 11:32:53 +0200</pubDate>
     
       <item>
 	<title>Commenting system with lightweight JSON store</title>
-	<description><p>As I wrote this <a href="shinmun-a-small-and-beautiful-blog-engine.html">blog engine</a>, the need for a commenting system
+	<description>As I wrote this blog engine, the need for a commenting system
 arose and I reflected about a small and simple commenting system with
 just a flat file JSON store. This is my solution, which can be used on
-any static page on a server with PHP support.</p></description>
+any static page on a server with PHP support.</description>
 	<link>http://www.matthias-georgi.de/2008/9/commenting-system-with-lightweight-json-store.html</link>
 	<author>Matthias Georgi</author>
 	<guid>4ed200b0-5efa-012b-f5dc-001a92975b89</guid>
