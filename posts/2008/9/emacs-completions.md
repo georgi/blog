@@ -60,6 +60,10 @@ list of functions, which should be called for completion.
 Let's have a look at my `html-mode` initialization function. It will configure
 the completion behaviour of hippie-expand an bind the tab key to `indent-and-complete`.
 
+    ;; We need a simple wrapper for expand-abbrev
+    (defun try-expand-abbrev (old)
+      (expand-abbrev))
+
     ;; ********************************************************************************
     ;; HTML Mode
     ;;

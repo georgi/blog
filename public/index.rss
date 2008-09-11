@@ -6,7 +6,17 @@
     <description>Webdev, Gamedev, Interaction Design</description>
     <language>en</language>
     <copyright>Matthias Georgi</copyright>
-    <pubDate>Tue, 09 Sep 2008 15:43:14 +0200</pubDate>
+    <pubDate>Thu, 11 Sep 2008 13:38:33 +0200</pubDate>
+    
+      <item>
+	<title>Shinmun-0.1 Gem Released</title>
+	<description>Shinmun is a minimalist blog engine. You just write posts as text files,
+render them to static files and push your blog to your server.</description>
+	<link>http://www.matthias-georgi.de/2008/9/shinmun-01-gem-released.html</link>
+	<author>Matthias Georgi</author>
+	<guid>http://www.matthias-georgi.de/2008/9/shinmun-01-gem-released.html</guid>
+	<pubDate>Thu, 11 Sep 2008 00:00:00 +0000</pubDate>
+      </item>
     
       <item>
 	<title>Patroon - a Javascript Template Engine</title>
@@ -17,7 +27,7 @@ use traditional string interpolation inside attribute values and text
 nodes.</description>
 	<link>http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html</link>
 	<author>Matthias Georgi</author>
-	<guid>dbbec5c0-6094-012b-f5dd-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html</guid>
 	<pubDate>Tue, 09 Sep 2008 00:00:00 +0000</pubDate>
       </item>
     
@@ -29,7 +39,7 @@ just a flat file JSON store. This is my solution, which can be used on
 any static page on a server with PHP support.</description>
 	<link>http://www.matthias-georgi.de/2008/9/commenting-system-with-lightweight-json-store.html</link>
 	<author>Matthias Georgi</author>
-	<guid>4ed200b0-5efa-012b-f5dc-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2008/9/commenting-system-with-lightweight-json-store.html</guid>
 	<pubDate>Sun, 07 Sep 2008 00:00:00 +0000</pubDate>
       </item>
     
@@ -39,7 +49,7 @@ any static page on a server with PHP support.</description>
 render them to static files and push your blog to your server.</description>
 	<link>http://www.matthias-georgi.de/2008/9/shinmun-a-small-and-beautiful-blog-engine.html</link>
 	<author>Matthias Georgi</author>
-	<guid>7ad04f10-5dd6-012b-b53c-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2008/9/shinmun-a-small-and-beautiful-blog-engine.html</guid>
 	<pubDate>Fri, 05 Sep 2008 00:00:00 +0000</pubDate>
       </item>
     
@@ -51,7 +61,7 @@ provide this feature in many different ways. I will show you, what I
 use to improve my life as coder.</description>
 	<link>http://www.matthias-georgi.de/2008/9/emacs-completions.html</link>
 	<author>Matthias Georgi</author>
-	<guid>ffb31770-5dc1-012b-b53b-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2008/9/emacs-completions.html</guid>
 	<pubDate>Thu, 04 Sep 2008 00:00:00 +0000</pubDate>
       </item>
     
@@ -64,7 +74,7 @@ context. This can be implemented in less than 20 lines of code which
 you can include into you helper:</description>
 	<link>http://www.matthias-georgi.de/2007/5/google-like-search-results-helper.html</link>
 	<author>Matthias Georgi</author>
-	<guid>9db9e370-5d6c-012b-b53a-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2007/5/google-like-search-results-helper.html</guid>
 	<pubDate>Thu, 10 May 2007 00:00:00 +0000</pubDate>
       </item>
     
@@ -76,7 +86,7 @@ will also work with nested routes and other helpers like form_tag and
 link_to.</description>
 	<link>http://www.matthias-georgi.de/2007/4/dry-up-your-url-helpers.html</link>
 	<author>Matthias Georgi</author>
-	<guid>9dba2130-5d6c-012b-b53a-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2007/4/dry-up-your-url-helpers.html</guid>
 	<pubDate>Wed, 18 Apr 2007 00:00:00 +0000</pubDate>
       </item>
     
@@ -89,7 +99,7 @@ the user: /users/matthias-georgi. This is a short tutorial on making
 your urls pretty while retaining the REST approach.</description>
 	<link>http://www.matthias-georgi.de/2007/4/pretty-restful-urls-in-rails.html</link>
 	<author>Matthias Georgi</author>
-	<guid>9dba3ad0-5d6c-012b-b53a-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2007/4/pretty-restful-urls-in-rails.html</guid>
 	<pubDate>Tue, 10 Apr 2007 00:00:00 +0000</pubDate>
       </item>
     
@@ -100,7 +110,7 @@ these nice flickr badges? This is really is easy as the Typo Weblog
 Engine already includes an flickr and del.icio.us aggregator.</description>
 	<link>http://www.matthias-georgi.de/2007/4/building-delicous-and-flickr-sidebar-in-5-minutes.html</link>
 	<author>Matthias Georgi</author>
-	<guid>9dba5160-5d6c-012b-b53a-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2007/4/building-delicous-and-flickr-sidebar-in-5-minutes.html</guid>
 	<pubDate>Sun, 08 Apr 2007 00:00:00 +0000</pubDate>
       </item>
     
@@ -114,21 +124,8 @@ possible completions for our search word. Look at Google Suggest
 to get an idea.</description>
 	<link>http://www.matthias-georgi.de/2007/4/fast-autocompletion-with-rails.html</link>
 	<author>Matthias Georgi</author>
-	<guid>9dba67e0-5d6c-012b-b53a-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2007/4/fast-autocompletion-with-rails.html</guid>
 	<pubDate>Wed, 04 Apr 2007 00:00:00 +0000</pubDate>
-      </item>
-    
-      <item>
-	<title>Rendering markaby in your helpers</title>
-	<description>Generating markup in your rails helpers is a general practice in rails
-and is used throughout all rails helpers. Normally you use content_tag
-to generate markup. But often you will encounter situations, where
-nested tags force you to write ugly helper code like the following
-helper method from the rails library:</description>
-	<link>http://www.matthias-georgi.de/2007/4/rendering-markaby-in-your-helpers.html</link>
-	<author>Matthias Georgi</author>
-	<guid>9dba8080-5d6c-012b-b53a-001a92975b89</guid>
-	<pubDate>Mon, 02 Apr 2007 00:00:00 +0000</pubDate>
       </item>
     
   </channel> 

@@ -174,10 +174,10 @@ expression, so the script is now safe.
 
 With a few lines you can hook up a simple commenting system for static
 pages powered by *AJAX* and *PHP*. Note, that rendering of comments is
-not discussed here and happens on *Javascript* side. I will write
-about my *Javascript template engine* later in a seperate post.
+not discussed here and happens on *Javascript* side. 
 
-
+Read about my [Javascript template engine][6] which is used to render
+the comments.
 
 
 [1]: shinmun-a-small-and-beautiful-blog-engine.html
@@ -185,3 +185,4 @@ about my *Javascript template engine* later in a seperate post.
 [3]: http://en.wikipedia.org/wiki/You_Ain%27t_Gonna_Need_It
 [4]: http://de.php.net/manual/en/security.magicquotes.php
 [5]: http://en.wikipedia.org/wiki/SQL_injection
+[6]: patroon-a-javascript-template-engine.html

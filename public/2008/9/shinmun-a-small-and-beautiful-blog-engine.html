@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Language" content="English" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/matthias-georgi" />
-    <link rel="stylesheet" href="../../stylesheets/all.css?1220967794" media="screen"></link>
+    <link rel="stylesheet" href="../../stylesheets/all.css?1221133113" media="screen"></link>
 <link rel="stylesheet" href="../../stylesheets/style.css?1220965122" media="screen"></link>
     <script>var Blog = { root: '../../', guid: '7ad04f10-5dd6-012b-b53c-001a92975b89' };</script>
   </head>
@@ -67,7 +67,34 @@ anybody who knows <em>Rails</em> should feel comfortable with it.</p>
 <li>Integration of the WMD-Markdown Editor for comments</li>
 </ul>
 
-<h3>Blog Posts</h3>
+<h3>Quickstart</h3>
+
+<p>Install the gem by typing:
+    gem install shinmun</p>
+
+<p>Issue the following commands and the output will go to the public
+folder:</p>
+
+<pre><code>cd example
+../bin/shinmun
+</code></pre>
+
+<h3>Writing Posts</h3>
+
+<p>Posts can be created by using the <code>shinmun</code> command inside your blog folder:</p>
+
+<pre><code>shinmun new 'The title of the post'
+</code></pre>
+
+<p>Shinmun will then create a post file in the right place, for example
+in <code>posts/2008/9/the-title-of-the-post.md</code>. After creating you will
+probably open the file, set the category and start writing your new
+article.</p>
+
+<p>After finishing your post, you may just run <code>shinmun</code> without arguments
+and the output will be rendered to the <em>public</em> folder.</p>
+
+<h3>Post Format</h3>
 
 <p>Each blog post is just a text file with an optional header section and
 a markup body, which are separated by a newline. </p>
@@ -113,9 +140,8 @@ posts for comments.</p>
 <ul>
 <li><p>All your <strong>posts</strong> reside in the <code>posts</code> folder sorted by year/month.</p></li>
 <li><p>All the <strong>output</strong> will be rendered to the <code>public</code> folder.</p></li>
-<li><p><strong>Template</strong> files are the <code>templates</code> folder.</p></li>
-<li><p>The <strong>blog description</strong>, <strong>base url</strong> and the <strong>category list</strong> are
-defined in <code>posts/blog.yml</code></p></li>
+<li><p><strong>Template</strong> files are in the <code>templates</code> folder.</p></li>
+<li><p>The <strong>properties of your blog</strong> defined in <code>posts/blog.yml</code></p></li>
 <li><p><strong>Static files</strong> should be put into the directories <code>public/images</code>,
 <code>public/stylesheets</code>, <code>public/javascripts</code>.</p></li>
 <li><p>Archive pages will be rendered to files like <code>public/2008/9/index.html</code>.</p></li>
@@ -128,10 +154,10 @@ defined in <code>posts/blog.yml</code></p></li>
 <pre><code>+ posts
   + blog.yml
   + about.md
-  * 2007
-    + 2008
-      + 9
-        + my-article.md
+  + 2007
+  + 2008
+    + 9
+      + my-article.md
 
 + public
   + index.html
@@ -157,9 +183,9 @@ defined in <code>posts/blog.yml</code></p></li>
 
 <h3>Layout</h3>
 
-<p>Layout and templates are rendered by good old <em>ERB</em>.  The layout will
-be defined by the <code>layout.rhtml</code> template. The content will be
-provided in the variable <code>@content</code>. A minimal example would be:</p>
+<p>Layout and templates are rendered by <em>ERB</em>.  The layout is defined in
+<code>layout.rhtml</code>. The content will be provided in the variable
+<code>@content</code>. A minimal example:</p>
 
 <pre><code>&lt;html&gt;
   &lt;head&gt;
@@ -178,10 +204,10 @@ provided in the variable <code>@content</code>. A minimal example would be:</p>
 helpers. The most important ones are these:</p>
 
 <ul>
-<li>stylesheet<em>link</em>tag(*names):      </li>
-<li>javascript_tag(*names)</li>
-<li>image_tag(src, options = {})</li>
-<li>link_to(text, path, options = {})</li>
+<li><p><code>stylesheet_link_tag(*names)</code> links a stylesheet with a timestamp</p></li>
+<li><p><code>javascript_tag(*names)</code> includes a javascript with a timestamp</p></li>
+<li><p><code>image_tag(src, options = {})</code> renders an image tag</p></li>
+<li><p><code>link_to(text, path, options = {})</code> renders a link</p></li>
 </ul>
 
 <p>Stylesheets, javascripts and images should be included by using theses
@@ -213,7 +239,7 @@ new resource if it has been changed.</p>
 
 <p>Feeds will be rendered by one <em>ERB template</em>. Some of the variables
 have been read from the <code>blog.yml</code>, like <code>@blog_title</code>, other variables
-have been determined by the blog like <code>@posts</code> and <code>@category</code>.</p>
+have been determined by the engine like <code>@posts</code> and <code>@category</code>.</p>
 
 <pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;rss version="2.0"&gt; 
@@ -249,7 +275,12 @@ serialized and deserialized from almost any language.</p>
 
 <h3>Download</h3>
 
-<p>Download the package at my <a href="http://github.com/georgi/shinmun/tree/master">github repository</a></p>
+<p>Simply install the gem:</p>
+
+<pre><code>gem install shinmun
+</code></pre>
+
+<p>Download or fork the package at my <a href="http://github.com/georgi/shinmun/tree/master">github repository</a></p>
 
   <hr/>
 
@@ -354,6 +385,8 @@ serialized and deserialized from almost any language.</p>
 
 	<ul>
 	  
+	    <li><a href="../../2008/9/shinmun-01-gem-released.html">Shinmun-0.1 Gem Released</a></li> 
+	  
 	    <li><a href="../../2008/9/patroon-a-javascript-template-engine.html">Patroon - a Javascript Template Engine</a></li> 
 	  
 	    <li><a href="../../2008/9/commenting-system-with-lightweight-json-store.html">Commenting system with lightweight JSON store</a></li> 
@@ -371,8 +404,6 @@ serialized and deserialized from almost any language.</p>
 	    <li><a href="../../2007/4/building-delicous-and-flickr-sidebar-in-5-minutes.html">Building a del.ico.us and flickr sidebar in 5 minutes</a></li> 
 	  
 	    <li><a href="../../2007/4/fast-autocompletion-with-rails.html">Fast Auto-completion with Rails, Scriptaculous and JSON</a></li> 
-	  
-	    <li><a href="../../2007/4/rendering-markaby-in-your-helpers.html">Rendering markaby in your helpers</a></li> 
 	  
 	</ul>
 
@@ -407,6 +438,11 @@ serialized and deserialized from almost any language.</p>
 	  <li>
 	    <a href="http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html">
 	      Patroon - template engine
+	    </a>
+	  </li>
+	  <li>
+	    <a href="http://www.sportubes.com">
+	      Sportubes
 	    </a>
 	  </li>
 	</ul>
@@ -465,7 +501,7 @@ serialized and deserialized from almost any language.</p>
       </div>
     </div>
 
-    <script type="text/javascript" src="../../javascripts/all.js?1220967794"></script>
+    <script type="text/javascript" src="../../javascripts/all.js?1221133113"></script>
 <script type="text/javascript" src="../../javascripts/showdown.js?1205881696"></script>
 <script type="text/javascript" src="../../javascripts/template.js?1220960964"></script>
 <script type="text/javascript" src="../../javascripts/default.js?1220656864"></script>

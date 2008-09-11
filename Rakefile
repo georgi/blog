@@ -1,4 +1,4 @@
-$:.unshift "../shinmun/lib"
+$:.unshift "~/workspace/shinmun/lib"
 
 require 'shinmun'
 require 'packr'

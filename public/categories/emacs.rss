@@ -6,7 +6,7 @@
     <description>Category Emacs</description>
     <language>en</language>
     <copyright>Matthias Georgi</copyright>
-    <pubDate>Tue, 09 Sep 2008 15:43:14 +0200</pubDate>
+    <pubDate>Thu, 11 Sep 2008 13:38:33 +0200</pubDate>
     
       <item>
 	<title>Emacs Completions with Hippie-Expand and Snippets</title>
@@ -16,7 +16,7 @@ provide this feature in many different ways. I will show you, what I
 use to improve my life as coder.</description>
 	<link>http://www.matthias-georgi.de/2008/9/emacs-completions.html</link>
 	<author>Matthias Georgi</author>
-	<guid>ffb31770-5dc1-012b-b53b-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2008/9/emacs-completions.html</guid>
 	<pubDate>Thu, 04 Sep 2008 00:00:00 +0000</pubDate>
       </item>
     

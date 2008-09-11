@@ -6,7 +6,7 @@
     <description>Category Javascript</description>
     <language>en</language>
     <copyright>Matthias Georgi</copyright>
-    <pubDate>Tue, 09 Sep 2008 15:43:14 +0200</pubDate>
+    <pubDate>Thu, 11 Sep 2008 13:38:33 +0200</pubDate>
     
       <item>
 	<title>Patroon - a Javascript Template Engine</title>
@@ -17,7 +17,7 @@ use traditional string interpolation inside attribute values and text
 nodes.</description>
 	<link>http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html</link>
 	<author>Matthias Georgi</author>
-	<guid>dbbec5c0-6094-012b-f5dd-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html</guid>
 	<pubDate>Tue, 09 Sep 2008 00:00:00 +0000</pubDate>
       </item>
     
@@ -29,7 +29,7 @@ just a flat file JSON store. This is my solution, which can be used on
 any static page on a server with PHP support.</description>
 	<link>http://www.matthias-georgi.de/2008/9/commenting-system-with-lightweight-json-store.html</link>
 	<author>Matthias Georgi</author>
-	<guid>4ed200b0-5efa-012b-f5dc-001a92975b89</guid>
+	<guid>http://www.matthias-georgi.de/2008/9/commenting-system-with-lightweight-json-store.html</guid>
 	<pubDate>Sun, 07 Sep 2008 00:00:00 +0000</pubDate>
       </item>
     
