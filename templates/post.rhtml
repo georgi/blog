@@ -25,14 +25,16 @@
     Loading Comments...
   </div>
 
-  <div class="comments">  
+  <div class="comments">
     <div id="comments-template">
-      <div class="comment">
-	<div class="_ top">
-	  <a class="_" href="{website}">{name}</a> said
-	  <a class="_" title="{time}"></a>:
+      <div context="comment" class="comment">
+	<div class="top">
+	  {website.length > 0 ? linkTo(name, website) : name} said
+	  <a title="{time}"></a>:
 	</div>
-	<div class="text"></div>
+	<div class="text">
+	  {text}
+	</div>
       </div>
     </div>
   </div>

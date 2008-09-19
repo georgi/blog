@@ -14,6 +14,9 @@ expand a data object according to simple rules. Additionally you may
 use traditional string interpolation inside attribute values and text
 nodes.
 
+**Patroon has changed a bit, please read the [update][3]**.
+
+
 ### Example
 
 Comments in this blog are stored as a list of JSON objects, I wrote about it [here][1]. So think about a data object like this:
@@ -116,3 +119,4 @@ Download the script at my [github repository][2].
 
  [1]: commenting-system-with-lightweight-json-store.html
  [2]: http://github.com/georgi/patroon/tree/master
+ [3]: patroon-a-javascript-template-engine-part-2.html

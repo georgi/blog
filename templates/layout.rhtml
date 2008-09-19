@@ -7,167 +7,167 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/matthias-georgi" />
     <%= stylesheet_link_tag 'all', 'style' %>
     <script>var Blog = { root: '<%= @root %>', guid: '<%= @guid %>' };</script>
-  </head>
-  <body>
-    <div class="container">
+      </head>
+      <body>
+	<div class="container">
 
-      <div id="header" class="column span-20 last">
-	<h1><a href="<%= @root %>index.html"><%= @blog_title %></a></h1>
-	<h2><%= @blog_description %></h2>
-      </div>
+	  <div id="header" class="column span-13 last">
+	    <h1><a href="<%= @root %>index.html"><%= @blog_title %></a></h1>
+	    <h2><%= @blog_description %></h2>
+	  </div>
 
-      <div id="navi"  class="column span-20 last">
-	<ul>
-	  <li><%= navi_link 'Home', 'index' %></li>
-	  <% for category in @categories %>
-	    <li><%= navi_link category, 'categories/' + category.downcase %></li>
+	  <div id="navi"  class="column span-13 last">
+	    <ul>
+	      <li><%= navi_link 'Home', 'index' %></li>
+	      <% for category in @categories %>
+		<li><%= navi_link category, 'categories/' + category.downcase %></li>
+	      <% end %>
+	      <li><%= navi_link 'About', 'about' %></li>
+	    </ul>
+	  </div>
+
+	  <% if @header %>
+	    <div id="header-text" class="column span-13 last">
+	      <h1><%= @header %></h1>
+	    </div>
 	  <% end %>
-	  <li><%= navi_link 'About', 'about' %></li>
-	</ul>
-      </div>
 
-      <% if @header %>
-	<div id="header-text" class="column span-20 last">
-	  <h1><%= @header %></h1>
-	</div>
-      <% end %>
+	  <div class="content column span-9">
+	    <div class="box">
+	      <%= @content %>
+	    </div>
+	  </div>
 
-      <div class="content column span-15"> 
-	<%= @content %>
-      </div>
+	  <div class="right column span-4 last"> 
+	    <div class="box">
 
-      <div class="right column span-5 last"> 
+	      <h4>Subscribe</h4>
 
-	<h4>Subscribe</h4>
+	      <p>
+		<a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
+		  <%= image_tag 'rss.png' %>
+		  <img src="http://feeds.feedburner.com/~fc/matthias-georgi?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88"/>
+		</a>
+	      </p>
+	      
+	      <h4>About</h4>
 
-	<p>
-	  <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
-	    <%= image_tag 'rss.png' %>
-	    <img src="http://feeds.feedburner.com/~fc/matthias-georgi?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88"/>
-	  </a>
-	  <br/>
-	  <a href="http://www.feedburner.com/fb/a/emailverifySubmit?feedId=2408112&amp;loc=en_US">
-	    or subscribe by email
-	  </a>
-	</p>
-	  
-	<h4>About</h4>
+	      <div class="about">
+		Matthias Georgi lives in
+		<em>Darmstadt, Germany</em> and works as a freelance
+		software developer.
+		<%= link_to 'read more', 'about' %>
+	      </div>
 
-	<div class="about">
-	  Matthias Georgi lives in
-	  <em>Darmstadt, Germany</em> and works as a freelance
-	  software developer.
-	  <%= link_to 'read more', 'about' %>
-	</div>
+	      <h4>Archives</h4>
 
-	<h4>Archives</h4>
+	      <ul>
+		<% for year, month in @months %>
+		  <li><%= month_link year, month %></li> 
+		<% end %>
+	      </ul>
 
-	<ul>
-	  <% for year, month in @months %>
-	    <li><%= month_link year, month %></li> 
-	  <% end %>
-	</ul>
+	      <h4>Recent posts</h4>
 
-	<h4>Recent posts</h4>
+	      <ul>
+		<% for post in @posts[0, 10] %>
+		  <li><%= post_link post %></li> 
+		<% end %>
+	      </ul>
 
-	<ul>
-	  <% for post in @posts[0, 10] %>
-	    <li><%= post_link post %></li> 
-	  <% end %>
-	</ul>
+	      <h4>Github</h4>
 
-	<h4>Github</h4>
+	      <ul>
+		<li>
+		  <a href="http://github.com/georgi">
+		    My profile
+		  </a>
+		</li>
+		<li>
+		  <a href="http://github.com/georgi/shinmun/tree/master">
+		    Shinmun - blog engine
+		  </a>
+		</li>
+		<li>
+		  <a href="http://github.com/georgi/patroon/tree/master">
+		    Patroon - template engine
+		  </a>
+		</li>
+	      </ul>
 
-	<ul>
-	  <li>
-	    <a href="http://github.com/georgi">
-	      My profile
-	    </a>
-	  </li>
-	  <li>
-	    <a href="http://github.com/georgi/shinmun/tree/master">
-	      Shinmun - blog engine
-	    </a>
-	  </li>
-	  <li>
-	    <a href="http://github.com/georgi/patroon/tree/master">
-	      Patroon - template engine
-	    </a>
-	  </li>
-	</ul>
+	      <h4>My Projects</h4>
 
-	<h4>My Projects</h4>
+	      <ul>
+		<li>
+		  <a href="http://www.matthias-georgi.de/2008/9/shinmun-a-small-and-beautiful-blog-engine.html">
+		    Shinmun - blog engine
+		  </a>
+		</li>
+		<li>
+		  <a href="http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html">
+		    Patroon - template engine
+		  </a>
+		</li>
+		<li>
+		  <a href="http://www.sportubes.com">
+		    Sportubes
+		  </a>
+		</li>
+	      </ul>
 
-	<ul>
-	  <li>
-	    <a href="http://www.matthias-georgi.de/2008/9/shinmun-a-small-and-beautiful-blog-engine.html">
-	      Shinmun - blog engine
-	    </a>
-	  </li>
-	  <li>
-	    <a href="http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html">
-	      Patroon - template engine
-	    </a>
-	  </li>
-	  <li>
-	    <a href="http://www.sportubes.com">
-	      Sportubes
-	    </a>
-	  </li>
-	</ul>
+	      <h4>My Music</h4>
 
-	<h4>My Music</h4>
+	      <ul>
+		<li>
+		  <a href="http://www.p-ersag.com">
+		    Planet Ersag
+		  </a>
+		</li>
+		<li>
+		  <a href="http://www.myspace.com/planetersag">
+		    Planet Ersag @ Myspace
+		  </a>
+		</li>
+		<li>
+		  <a href="http://www.last.fm/music/Planet+Ersag">
+		    Planet Ersag @ Last.fm
+		  </a>
+		</li>
+	      </ul>
 
-	<ul>
-	  <li>
-	    <a href="http://www.p-ersag.com">
-	      Planet Ersag
-	    </a>
-	  </li>
-	  <li>
-	    <a href="http://www.myspace.com/planetersag">
-	      Planet Ersag @ Myspace
-	    </a>
-	  </li>
-	  <li>
-	    <a href="http://www.last.fm/music/Planet+Ersag">
-	      Planet Ersag @ Last.fm
-	    </a>
-	  </li>
-	</ul>
+	      <h4>My Friends</h4>
 
-	<h4>My Friends</h4>
+	      <ul>
+		<li>
+		  <a href="http://www.lisafreieck.com">
+		    Lisa Freieck
+		  </a>
+		</li>	  
+		<li>
+		  <a href="http://www.myspace.com/janvondracek">
+		    Jan Vondráček
+		  </a>
+		</li>
+		<li>
+		  <a href="http://www.myspace.com/soultier">
+		    Soultier
+		  </a>
+		</li>
+		<li>
+		  <a href="http://www.myspace.com/nukularium">
+		    Nukular
+		  </a>
+		</li>
+		<li>
+		  <a href="http://www.myspace.com/bitchkanaktechno">
+		    BKT
+		  </a>
+		</li>
 
-	<ul>
-	  <li>
-	    <a href="http://www.lisafreieck.com">
-	      Lisa Freieck
-	    </a>
-	  </li>	  
-	  <li>
-	    <a href="http://www.myspace.com/janvondracek">
-	      Jan Vondráček
-	    </a>
-	  </li>
-	  <li>
-	    <a href="http://www.myspace.com/soultier">
-	      Soultier
-	    </a>
-	  </li>
-	  <li>
-	    <a href="http://www.myspace.com/nukularium">
-	      Nukular
-	    </a>
-	  </li>
-	  <li>
-	    <a href="http://www.myspace.com/bitchkanaktechno">
-	      BKT
-	    </a>
-	  </li>
+	      </ul>
 
-	</ul>
-
-      </div>
+	    </div>
+	  </div>
     </div>
 
     <%= javascript_tag 'all', 'showdown', 'template', 'default', 'comments', 'wmd' %>

@@ -86,15 +86,7 @@
     text-decoration: none;
 }
 
-.about { 
-    color: #666;
-}
-
-.article { 
-    padding: 1em;
-}
-
-.article h2 { 
+h2 { 
     margin-top:0px;
 }
 
@@ -144,6 +136,8 @@ pre {
     background: #f0f0f0;
     padding: 1em;
     border: 1px solid #ccc;
+    font-size: 1em;
+    color: #222;
+    font-family: Courier, serif;
+    overflow: auto;
 }
-
-

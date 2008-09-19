@@ -36,8 +36,8 @@ repository:
 Now you can push your application code from your local machine to your
 repository:
 
-    $ cd ~/myproject
-    $ git remote add origin ssh://myserver.com/var/git/myproject
+    $ cd ~/myapp
+    $ git remote add origin ssh://myserver.com/var/git/myapp
     $ git push origin master
 
 
