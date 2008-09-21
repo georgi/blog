@@ -118,7 +118,7 @@ h2 {
     text-decoration: none;
 }
 
-.comments .comment .text {
+.comments .comment .body {
     background: #F8F8F8;    
     padding: 3px 5px;
 }

@@ -12,7 +12,7 @@ This post is an update to my [initial post][3]. Patroon has been
 improved and is now easier to use and uses a better algorithm
 internally.
 
-Patroon is a template engine written in Javascript in about 100 lines
+Patroon is a template engine written in Javascript in about 130 lines
 of code. It takes existing DOM nodes annotated with class names and
 expand a data object according to simple rules. Additionally you may
 use traditional string interpolation inside attribute values and text
@@ -139,12 +139,22 @@ a Helper object. If you want to extend it, just add your functions to
 
 Download the script at my [github repository][2].
 
- [1]: commenting-system-with-lightweight-json-store.html
- [2]: http://github.com/georgi/patroon/tree/master
- [3]: http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html
+
+### Related Work
+
+There are some other libraries for javascript templating, which are
+related to **Patroon**:
+
+* [PURE][4]
+* [jsRepeater][5]
+* [TrimPath][6]
+* [EmbeddedJS][7]
+
+Patroon is probably the smallest templating solution around and
+consists only of 130 lines of code.
 
 
-### Without jQuery
+### Appendix
 
 Without jQuery template expansion is a bit verbose:
 
@@ -159,4 +169,11 @@ Without jQuery template expansion is a bit verbose:
     container.appendChild(result);
 
 
+[1]: commenting-system-with-lightweight-json-store.html
+[2]: http://github.com/georgi/patroon/tree/master
+[3]: http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html
+[4]: http://beebole.com/pure/
+[5]: http://jsrepeater.devprog.com/
+[6]: http://code.google.com/p/trimpath/wiki/JavaScriptTemplates
+[7]: http://embeddedjs.com/
 
