@@ -135,6 +135,12 @@ a Helper object. If you want to extend it, just add your functions to
     };
 
 
+### Examples
+
+ * [a Delicious Sidebar][8], which renders a *JSON* feed with the help
+   of Patroon.
+
+
 ### Download
 
 Download the script at my [github repository][2].
@@ -169,11 +175,11 @@ Without jQuery template expansion is a bit verbose:
     container.appendChild(result);
 
 
-[1]: commenting-system-with-lightweight-json-store.html
+[1]: http://www.matthias-georgi.de/2008/9/commenting-system-with-lightweight-json-store.html
 [2]: http://github.com/georgi/patroon/tree/master
 [3]: http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html
 [4]: http://beebole.com/pure/
 [5]: http://jsrepeater.devprog.com/
 [6]: http://code.google.com/p/trimpath/wiki/JavaScriptTemplates
 [7]: http://embeddedjs.com/
-
+[8]: http://www.matthias-georgi.de/2008/9/using-javascript-templates-for-a-delicious-sidebar.html

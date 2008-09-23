@@ -69,13 +69,13 @@
 
 	  <h4>Recent posts</h4>
 
-	  <ul>
+	  <ul class="spaced">
 	    <% for post in @posts[0, 10] %>
 	      <li><%= post_link post %></li> 
 	    <% end %>
 	  </ul>
 
-	  <h4>Github</h4>
+	  <h4>My Github</h4>
 
 	  <ul>
 	    <li>
@@ -169,7 +169,7 @@
 	  <h4>My Bookmarks</h4>
 
 	  <div class="bookmarks">
-	    <ul id="bookmarks-template">
+	    <ul id="bookmarks-template" class="spaced">
 	      <li class="bookmark">
 		<a href="{u}">{d}</a>
 	      </li>

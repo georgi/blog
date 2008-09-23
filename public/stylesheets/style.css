@@ -77,6 +77,10 @@
     padding:0pt 2em;
 }
 
+.right ul.spaced li {
+    margin-bottom: 10px;
+}
+
 .right h4 {
     color: #369;
     margin-bottom: 1em;
