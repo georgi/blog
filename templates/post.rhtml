@@ -10,6 +10,18 @@
 
   <hr/>
 
+  <h4>Similar Posts</h4>
+  
+  <ul>
+
+  <% for post in @blog.posts_with_tags(@tags) %>
+     <li><%= post_link post %></li>
+  <% end %>
+
+  </ul>
+
+  <hr/>
+
   <div style="padding-bottom:40px">
     <script type="text/javascript">
       if (typeof window.Delicious == "undefined") window.Delicious = {};
