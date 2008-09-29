@@ -23,7 +23,9 @@
   <ul>
 
   <% for post in @blog.posts_with_tags(@tags) %>
-     <li><%= post_link post %></li>
+     <% if post.path != @path %>
+       <li><%= post_link post %></li>
+     <% end %>
   <% end %>
 
   </ul>
