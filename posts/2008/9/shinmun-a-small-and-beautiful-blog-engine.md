@@ -1,8 +1,8 @@
 --- 
 date: 2008-09-05
 category: Ruby
-tags: [blogging, engine]
-languages: [ruby, html, xml]
+tags: blogging, engine
+languages: ruby, html, xml
 guid: 7ad04f10-5dd6-012b-b53c-001a92975b89
 
 Shinmun, a small and beautiful blog engine
@@ -14,29 +14,38 @@ render them to static files and push your blog to your server.
 This allows you to write posts in your favorite editor like Emacs or
 VI and use a VCS like git.
 
-Your layout can be customized by set of *ERB templates*. These
+Your layout can be customized by a set of *ERB templates*. These
 templates have access to `Post` objects and *helper methods* so that
 anybody who knows *Rails* should feel comfortable with it.
 
-Shinmun has some common features of blog engines like:
 
-* Index summary page
-* Category summary page
-* Archive pages for each month
+### Shinmun Features
+
+* Index listing
+* Category listing
+* Archive listings for each month
 * RSS feeds for index and category pages
+* Builtin webserver for realtime rendering
+* Compression of javascript files with PackR
+* Included syntax highlighting through `highlight.js`
 * AJAX comment system with PHP JSON file storage
-* Integration of the WMD-Markdown Editor for comments
+* Integration of WMD-Markdown Editor for commenting
+
 
 ### Quickstart
 
-Install the gem by typing:
+Install the gem:
+
     gem install shinmun
 
-Issue the following commands and the output will go to the public
-folder:
+Download and extract the example blog from my [github repository][3].
 
-    cd example
-    ../bin/shinmun
+Issue the following commands and you will see the blog on
+`http://localhost:3000`:
+
+    cd shinmun-example
+    shinmun server
+
 
 ### Writing Posts
 
@@ -49,22 +58,38 @@ in `posts/2008/9/the-title-of-the-post.md`. After creating you will
 probably open the file, set the category and start writing your new
 article.
 
-After finishing your post, you may just run `shinmun` without arguments
-and the output will be rendered to the *public* folder.
+Now you want to look at your rendered post. Just run:
+
+    shinmun server
+
+Go to `http://localhost:3000` and you will see your blog served in
+realtime. Just change and save any of your posts and you will see the
+new output in your browser.
+
+After finishing your post, you may run `shinmun render` and the output
+will be rendered to the *public* folder.
+
+By issuing the `shinmun push` command your blog will be pushed to your
+server using rsync. This works only, if you define the blog_repository
+variable inside blog.yml. It should contain something like
+`user@myhost.com:/var/www/my-site/`.
 
 
 ### Post Format
 
 Each blog post is just a text file with an optional header section and
-a markup body, which are separated by a newline. 
+a markup body, which are separated by a newline. Normally you don't
+have to worry about the post format, if you create posts with the
+`shinmun new` command.
 
 The **first line** of the header should start with 3 dashes as usual
 for a YAML document.
 
-The **first and the second line** of the body becomes the title of the
-post.
+The title of your post will be parsed from your first heading
+according to the document type. Shinmun will try to figure out the
+title for Markdown, Textile and HTML files.
 
-The header may have following attributes:
+The yaml header may have following attributes:
 
 * `date`: post will show up in blog page and archive pages
 * `category`: post will show up in the defined category page
@@ -95,32 +120,50 @@ posts for comments.
 
 ### Directory layout
 
-* All your **posts** reside in the `posts` folder sorted by year/month.
+* Your **assets** are in the `assets` folder, which gets copied to the
+  public folder in the render step.
 
-* All the **output** will be rendered to the `public` folder.
+* The **settings of your blog** are defined in `config/blog.yml`
+
+* Your **posts** reside in the `posts` folder sorted by year/month.
+
+* Your **pages** are located in the `pages` folder.
 
 * **Template** files are in the `templates` folder.
 
-* The **properties of your blog** defined in `posts/blog.yml`
+* The **index page** of your blog is defined in `pages/index.rhtml` and
+  may be customized.
 
-* **Static files** should be put into the directories `public/images`,
-  `public/stylesheets`, `public/javascripts`.
+* **Archive pages** will be rendered to files like `public/2008/9/index.html`.
 
-* Archive pages will be rendered to files like `public/2008/9/index.html`.
+* **Category pages** will be rendered to files like `public/categories/ruby.html`.
 
-* Category pages will be rendered to files like `public/categories/ruby.html`.
-
-* The *home page* of your blog will go to `public/index.html`.
 
 An example tree:
 
-    + posts
+    + assets
+      + images
+      + stylesheets
+      + javascripts      
+    + config
       + blog.yml
+    + pages
       + about.md
+      + index.rhtml
+    + posts
       + 2007
       + 2008
         + 9
           + my-article.md
+    + templates
+      + feed.rxml
+      + layout.rhtml
+      + page.rhtml  
+      + post.rhtml  
+      + posts.rhtml
+
+
+The output will look like this:
 
     + public
       + index.html
@@ -136,13 +179,37 @@ An example tree:
       + stylesheets
       + javascripts
 
-    + templates
-      + feed.rxml
-      + layout.rhtml
-      + page.rhtml  
-      + post.rhtml  
-      + posts.rhtml
- 
+
+### Config file
+
+The configuration of the blog system consists of some variables
+encoded as yaml file:
+
+* blog_title: the title of your blog, used for rss
+
+* blog_description: used for rss
+
+* blog_language: used for rss
+
+* blog_author: used for rss, acts also as fallback for the blog.author variable
+
+* blog_url: used for rss
+
+* blog_repository: path for rsync, used for `shinmun push` command
+
+* base_path: if your blog should not be rendered to your site
+  root, you can define a sub path here (like `blog`)
+
+* images_path: used for templates helper, defaults to `images`
+
+* javascripts_path: used for templates helper, defaults to `javascripts`
+
+* stylesheets_path: used for templates helper, defaults to `stylesheets`
+
+* pack_javascripts: a list of scripts to be compressed
+
+* pack_stylesheets: a list of stylesheets to be concatenated
+
 
 ### Layout
 
@@ -179,6 +246,10 @@ helpers. The helper methods will include a timestamp of the
 modification time as `querystring`, so that the browser will fetch the
 new resource if it has been changed.
 
+If you want to define your own helpers, just define a file named
+`templates/helpers.rb` with a module named `Shinmun::Helpers`. This
+module will be included into the `Shinmun::Template` class.
+
 
 ### Post Template
 
@@ -200,34 +271,29 @@ The attributes of a post are accessible as instance variables in a template:
     </div>
 
 
-
 ### RSS Feeds
 
-Feeds will be rendered by one *ERB template*. Some of the variables
-have been read from the `blog.yml`, like `@blog_title`, other variables
-have been determined by the engine like `@posts` and `@category`.
+Feeds will be rendered by the *ERB template*
+`templates/feed.rxml`. Some of the variables have been read from the
+`blog.yml`, like `@blog_title`, other variables have been determined
+by the engine like `@posts` or `@category`.
 
-    <?xml version="1.0" encoding="utf-8"?>
-    <rss version="2.0"> 
-      <channel>
-        <title><%= @category ? @blog_title + ' - ' + @category : @blog_title %></title>
-        <link><%= @blog_url %></link>
-        <description><%= @category ? 'Category ' + @category : @blog_description %></description>
-        <language><%= @blog_language %></language>
-        <copyright><%= @blog_author %></copyright>
-        <pubDate><%= rfc822 Time.now %></pubDate>
-        <% for post in @posts %>
-          <item>
-            <title><%= post.title %></title>
-            <description><%= post.text_summary %></description>
-            <link><%= post.link %></link>
-            <author><%= @blog_author %></author>
-            <guid><%= post.guid %></guid>
-            <pubDate><%= rfc822 post.date %></pubDate>
-          </item>
-        <% end %>
-      </channel> 
-    </rss>
+
+### Packr Support
+
+If you set the variables `pack_javascripts` or `pack_stylesheets`,
+Shinmun will create the files `all.js` or `all.css` automatically
+on rendering (even on each request of the webserver).
+
+The Javascript will be compressed with Packr and for performance
+reasons, minified versions for each of your javascripts will be
+created automatically in `assets/javascripts`.
+
+The stylesheets will be just concatenated to one file named `all.css`.
+
+Note that you define a yaml array of filenames without file
+extensions, so it should like `[jquery, jquery-form]`.
+
 
 ### Commenting System
 
@@ -252,3 +318,4 @@ Download or fork the package at my [github repository][1]
 
 [1]: http://github.com/georgi/shinmun/tree/master
 [2]: commenting-system-with-lightweight-json-store.html
+[3]: http://github.com/georgi/shinmun-example/tree/master

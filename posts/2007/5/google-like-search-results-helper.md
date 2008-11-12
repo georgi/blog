@@ -1,8 +1,8 @@
 --- 
 guid: 9db9e370-5d6c-012b-b53a-001a92975b89
 category: Ruby
-tags: [google, search, rails]
-languages: [ruby]
+tags: google, search, rails
+languages: ruby
 date: 2007-05-10
 
 Google-like Search Results Helper

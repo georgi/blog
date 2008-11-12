@@ -2,8 +2,8 @@
 category: Javascript
 guid: 4ed200b0-5efa-012b-f5dc-001a92975b89
 date: 2008-09-07
-tags: [database, json]
-languages: [php, javascript]
+tags: database, json
+languages: php, javascript
 
 Commenting system with lightweight JSON store
 =============================================

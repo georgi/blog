@@ -1,15 +1,8 @@
 --- 
 category: Ruby
 guid: 069ebca0-63a7-012b-f5ef-001a92975b89
-tags: 
-- ruby
-- passenger
-- apache
-- rails
-- git
-- phusion
-- guides
-
+date: 2008-09-13
+tags: ruby, passenger, apache, rails, git, phusion, guides
 
 Quick Guide for Passenger on Ubuntu Hardy
 =========================================

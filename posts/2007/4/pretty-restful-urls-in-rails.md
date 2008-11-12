@@ -1,8 +1,8 @@
 --- 
 guid: 9dba3ad0-5d6c-012b-b53a-001a92975b89
 category: Ruby
-tags: [rails, rest, url]
-languages: [ruby]
+tags: rails, rest, url
+languages: ruby
 date: 2007-04-10
 
 Pretty RESTful URLs in Rails

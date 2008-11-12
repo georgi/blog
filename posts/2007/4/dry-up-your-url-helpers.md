@@ -1,8 +1,8 @@
 --- 
 guid: 9dba2130-5d6c-012b-b53a-001a92975b89
 category: Ruby
-tags: [rails, url, helpers]
-languages: [ruby]
+tags: rails, url, helpers
+languages: ruby
 date: 2007-04-18
 
 DRY Up Your Url Helpers

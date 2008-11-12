@@ -1,8 +1,8 @@
 --- 
 date: 2008-09-09
 category: Javascript
-tags: [template, engine, json]
-languages: [javascript, html]
+tags: template, engine, json
+languages: javascript, html
 guid: dbbec5c0-6094-012b-f5dd-001a92975b89
 
 Patroon - a Javascript Template Engine

@@ -1,6 +1,7 @@
 --- 
 category: Javascript
-languages: [javascript, html]
+tags: javascript, templates, delicious, bookmarks
+languages: javascript, html
 guid: ae331390-69ff-012b-f620-001a92975b89
 date: 2008-09-21
 
