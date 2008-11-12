@@ -1,12 +1,6 @@
-blog_title: Matthias Georgi
-blog_description: Webdev, Gamedev, Interaction Design
-blog_language: en
-blog_author: Matthias Georgi
-blog_url: http://www.matthias-georgi.de
-categories:
-  - Ruby
-  - Javascript
-  - Emacs
-  - Actionscript
-
-
+title: Matthias Georgi
+description: Webdev, Gamedev, Interaction Design
+language: en
+author: Matthias Georgi
+url: http://www.matthias-georgi.de
+repository: root@213.239.215.244:/var/www/matthias-georgi.de/

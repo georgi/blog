@@ -1,0 +1,28 @@
+javascripts_path: javascripts
+stylesheets_path: stylesheets
+images_path: images
+javascript_files:
+  - jquery
+  - jquery-form
+  - prettyDate
+  - swfobject
+  - showdown
+  - wmd-base
+  - wmd-plus
+  - template
+  - shockwaves
+  - comments
+  - wmd
+  - highlight
+  - languages/bash
+  - languages/dynamic
+  - languages/javascript
+  - languages/lisp
+  - languages/sql
+  - languages/www
+stylesheet_files:
+  - reset
+  - grid
+  - typography
+  - highlight
+  - style
