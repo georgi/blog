@@ -1,28 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title><%= @blog_title %> - <%= @title %></title>
+    <title><%= @blog.title %> - <%= @title %></title>
     <meta http-equiv="Content-Language" content="English" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/matthias-georgi" />
-    <%= stylesheet_link_tag 'all', 'style' %>
-    <script> var Blog = { root: '<%= @root %>', guid: '<%= @guid %>' }; </script>
+    <%= stylesheet_link_tag 'all' %>
   </head>
   <body>
     <div class="container">
 
       <div id="header" class="column span-13 last">
-	<h1><a href="<%= @root %>index.html"><%= @blog_title %></a></h1>
-	<h2><%= @blog_description %></h2>
+	<h1><a href="/"><%= @blog.title %></a></h1>
+	<h2><%= @blog.description %></h2>
       </div>
 
-      <div id="navi"  class="column span-13 last">
+      <div id="navi" class="column span-13 last">
 	<ul>
-	  <li><%= navi_link 'Home', 'index' %></li>
-	  <% for category in @categories %>
-	    <li><%= navi_link category, 'categories/' + category.downcase %></li>
+	  <li><%= navi_link 'Home', '/' %></li>
+	  <% for category in @blog.categories %>
+	    <li><%= navi_link category['name'], "/categories/#{urlify category['name']}.html" %></li>
 	  <% end %>
-	  <li><%= navi_link 'About', 'about' %></li>
+	  <li><%= navi_link 'About', '/about.html' %></li>
 	</ul>
       </div>
 
@@ -53,6 +52,7 @@
 	  <h4>About</h4>
 
 	  <div class="about">
+	    <img src="/images/portrait.jpg" style="float:left; margin-right:10px" />
 	    Matthias Georgi lives in
 	    <em>Darmstadt, Germany</em> and works as a freelance
 	    software developer.
@@ -62,18 +62,41 @@
 	  <h4>Archives</h4>
 
 	  <ul>
-	    <% for year, month in @months %>
-	      <li><%= month_link year, month %></li> 
+	    <% for year, month in @blog.months %>
+	      <li><%= archive_link year, month %></li> 
 	    <% end %>
 	  </ul>
 
 	  <h4>Recent posts</h4>
 
 	  <ul class="spaced">
-	    <% for post in @posts[0, 10] %>
+	    <% for post in @blog.posts.first(10) %>
 	      <li><%= post_link post %></li> 
 	    <% end %>
 	  </ul>
+
+
+	  <h4>My Flickr</h4>
+
+	  <div class="flickr">
+	    <% for pic in @blog.aggregations[:flickr].pics %>
+	      <a href="<%= pic.link %>">
+		<img alt="<%= pic.title %>" src="<%= pic.thumbnail %>" width="45" height="45" />
+	      </a>
+	    <% end %>
+	  </div>
+
+	  <h4>My 43things</h4>
+
+	  <div>
+	    <ul>
+	      <% for thing in @blog.aggregations[:fortythree].things %>
+		<li>
+		  <%= link_to thing.title, thing.link %>
+ 		</li>
+	      <% end %>
+	    </ul>
+	  </div>
 
 	  <h4>My Github</h4>
 
@@ -115,7 +138,7 @@
 	    </li>
 	  </ul>
 
-	  <h4>My Music</h4>
+	  <h4>My Band</h4>
 
 	  <ul>
 	    <li>
@@ -166,13 +189,15 @@
 
 	  </ul>
 
-	  <h4>My Bookmarks</h4>
+	  <h4>My Delicious</h4>
 
 	  <div class="bookmarks">
-	    <ul id="bookmarks-template" class="spaced">
-	      <li class="bookmark">
-		<a href="{u}">{d}</a>
-	      </li>
+	    <ul>
+	      <% for item in @blog.aggregations[:delicious].items %>
+		<li class="bookmark">
+		  <%= link_to item.title, item.link %>
+ 		</li>
+	      <% end %>
 	    </ul>
 	  </div>
 
@@ -180,12 +205,11 @@
       </div>
     </div>
 
-    <%= javascript_tag 'all', 'showdown', 'template', 'default', 'comments', 'wmd', 'delicious' %>
+    <%= javascript_tag 'all' %>
 
     <% if @languages %>
-      <%= javascript_tag 'highlight' %>
       <script type="text/javascript">
-	hljs.initHighlightingOnLoad(<%= @languages.map {|l| "'#{l}'" }.join(',')  %>);
+	hljs.initHighlighting(<%= @languages.to_s.split(',').map {|l| "'#{l}'" }.join(',')  %>);
       </script>
     <% end %>
 
@@ -198,6 +222,11 @@
       var pageTracker = _gat._getTracker("UA-927203-10");
       pageTracker._trackPageview();
     </script> 
+
+    <script type="text/javascript">
+      Attacklab.wmdBase();
+      Attacklab.Util.startEditor();
+    </script>
 
   </body>
 </html>

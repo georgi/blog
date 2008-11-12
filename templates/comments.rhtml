@@ -1,0 +1,11 @@
+<% for comment in @comments %>
+  <div class="comment">
+    <div class="top">
+      <%= comment.website.empty? ? link_to(comment.name, comment.website) : comment.name %> said
+      <%= distance_of_time_in_words(Time.parse(comment.time), Time.now, true) %> ago:
+    </div>
+    <div class="body">
+      <%= markdown(strip_tags(comment.text)) %>
+    </div>
+  </div>
+<% end %>

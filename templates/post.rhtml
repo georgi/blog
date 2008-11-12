@@ -10,15 +10,12 @@
 
   <hr/>
 
-  <div style="padding-bottom:40px">
-    <script type="text/javascript">
-      if (typeof window.Delicious == "undefined") window.Delicious = {};
-      Delicious.BLOGBADGE_DEFAULT_CLASS = 'delicious-blogbadge-line';
-    </script>
-    <script src="http://static.delicious.com/js/blogbadge.js"></script>
+  <div style="margin:1em 0em 1em 0em; color:#666">
+    Posted in category <%= link_to @category, "/categories/#{urlify @category}.html" %> by <%= @blog.author %>.
+    Tagged with <%= @tags %>.
   </div>
 
-  <h2>Similar Posts</h2>
+  <h6>Similar Posts</h6>
   
   <ul>
 
@@ -30,30 +27,23 @@
 
   </ul>
 
-  <hr/>
-
-  <h2>Comments</h2>
-
-  <div class="comments-loading" style="display:none">
-    <%= image_tag 'loading.gif' %>
-    Loading Comments...
-  </div>
-
-  <div class="comments">
-    <div id="comments-template">
-      <div class="comment">
-	<div class="top">
-	  {website.length > 0 ? linkTo(name, website) : name} said
-	  <a title="{time}"></a>:
-	</div>
-	<div class="body">
-	  {text}
-	</div>
-      </div>
-    </div>
+  <div style="padding:1em 0em 1em 0em">
+    <script type="text/javascript">
+      if (typeof window.Delicious == "undefined") window.Delicious = {};
+      Delicious.BLOGBADGE_DEFAULT_CLASS = 'delicious-blogbadge-line';
+    </script>
+    <script src="http://static.delicious.com/js/blogbadge.js"></script>
   </div>
 
   <hr/>  
+
+  <h2>Comments</h2>
+
+  <script> window.guid = '<%= @guid %>'; </script>
+
+  <div class="comments">
+    <%= blog.render_comments(Comment.read(@guid)) %>
+  </div>
 
   <div class="comment-form-loading" style="display:none">
     <%= image_tag 'loading.gif' %>
