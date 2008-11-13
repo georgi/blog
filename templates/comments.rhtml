@@ -5,7 +5,7 @@
       <%= distance_of_time_in_words(comment.time, Time.now, true) %> ago:
     </div>
     <div class="body">
-      <%= markdown(strip_tags(comment.text)) %>
+      <%= markdown(comment.text) %>
     </div>
   </div>
 <% end %>
