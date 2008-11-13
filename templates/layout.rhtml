@@ -75,22 +75,33 @@
 	    <% end %>
 	  </ul>
 
-
 	  <h4>My Flickr</h4>
 
 	  <div class="flickr">
-	    <% for pic in @blog.aggregations[:flickr].pics %>
+	    <% for pic in @blog.aggregations['flickr'].pics %>
 	      <a href="<%= pic.link %>">
 		<img alt="<%= pic.title %>" src="<%= pic.thumbnail %>" width="45" height="45" />
 	      </a>
 	    <% end %>
 	  </div>
 
+	  <h4>My Delicious</h4>
+
+	  <div class="bookmarks">
+	    <ul>
+	      <% for item in @blog.aggregations['delicious'].items %>
+		<li class="bookmark">
+		  <%= link_to item.title, item.link %>
+ 		</li>
+	      <% end %>
+	    </ul>
+	  </div>
+
 	  <h4>My 43things</h4>
 
 	  <div>
 	    <ul>
-	      <% for thing in @blog.aggregations[:fortythree].things %>
+	      <% for thing in @blog.aggregations['fortythree'].things %>
 		<li>
 		  <%= link_to thing.title, thing.link %>
  		</li>
@@ -186,20 +197,7 @@
 		BKT
 	      </a>
 	    </li>
-
 	  </ul>
-
-	  <h4>My Delicious</h4>
-
-	  <div class="bookmarks">
-	    <ul>
-	      <% for item in @blog.aggregations[:delicious].items %>
-		<li class="bookmark">
-		  <%= link_to item.title, item.link %>
- 		</li>
-	      <% end %>
-	    </ul>
-	  </div>
 
 	</div>
       </div>
