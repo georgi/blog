@@ -2,6 +2,8 @@ require 'shinmun'
 require 'shinmun/controller'
 require 'shinmun/admin_controller'
 
+Dir.chdir(File.dirname(__FILE__))
+
 blog = Shinmun::Blog.new
 
 # use Rack::Reloader
@@ -15,7 +17,6 @@ map '/admin' do
 end
 
 map "/admin_controller" do
-  use Rack::CommonLogger
   run Shinmun::AdminController.new(blog)
 end
 

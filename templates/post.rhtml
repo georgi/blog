@@ -39,10 +39,8 @@
 
   <h2>Comments</h2>
 
-  <script> window.guid = '<%= @guid %>'; </script>
-
   <div class="comments">
-    <%= blog.render_comments(Comment.read(@guid)) %>
+    <%= blog.render_comments(Comment.read(@path)) %>
   </div>
 
   <div class="comment-form-loading" style="display:none">
@@ -53,7 +51,7 @@
   <div class="comment-form">
     <h4>Leave a comment</h4>
     <form>
-      <input type="hidden" name="guid" value="<%= @guid %>"/>
+      <input type="hidden" name="path" value="<%= @path %>"/>
       <p>
 	<label>Name</label><br/>
 	<input type="text" name="name" size="40"/>
