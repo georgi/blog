@@ -5,24 +5,6 @@
 
 var hljs = new function() {
 
-    var DEFAULT_LANGUAGES = ['python', 'ruby', 'perl', 'php', 'css', 'xml', 'html', 'django', 'javascript', 'java', 'cpp', 'sql', 'ini', 'diff'];
-    var ALL_LANGUAGES = (DEFAULT_LANGUAGES.join(',') + ',' + ['1c', 'axapta', 'delphi', 'rib', 'rsl', 'vbscript', 'profile', 'dos', 'bash', 'lisp', 'smalltalk', 'mel'].join(',')).split(',');
-    var LANGUAGE_GROUPS = {
-	'xml': 'www',
-	'html': 'www',
-	'css': 'www',
-	'django': 'www',
-	'python': 'dynamic',
-	'perl': 'dynamic',
-	'php': 'dynamic',
-	'ruby': 'dynamic',
-	'cpp': 'static',
-	'java': 'static',
-	'delphi': 'static',
-	'rib': 'renderman',
-	'rsl': 'renderman'
-    };
-
     var LANGUAGES = {};
     var selected_languages = {};
 
@@ -417,44 +399,8 @@ var hljs = new function() {
 	}
     }
 
-    function injectScripts(languages) {
-	var scripts = document.getElementsByTagName('SCRIPT');
-	for (var i=0; i < scripts.length; i++) {
-	    if (scripts[i].src.match(/highlight\.js(\?.+)?$/)) {
-		var path = scripts[i].src.replace(/highlight\.js(\?.+)?$/, '');
-		break;
-	    }
-	}
-	if (languages.length == 0) {
-	    languages = DEFAULT_LANGUAGES;
-	}
-	var injected = {};
-	for (var i=0; i < languages.length; i++) {
-	    var filename = LANGUAGE_GROUPS[languages[i]] ? LANGUAGE_GROUPS[languages[i]] : languages[i];
-	    if (!injected[filename]) {
-		document.write('<script type="text/javascript" src="' + path + 'languages/' + filename + '.js"></script>');
-		injected[filename] = true;
-	    }
-	}
-    }
-
-    function initHighlightingOnLoad() {
-	var original_arguments = arguments;
-	injectScripts(arguments);
-	var handler = function(){initHighlighting.apply(null, original_arguments)};
-	if (window.addEventListener) {
-	    window.addEventListener('DOMContentLoaded', handler, false);
-	    window.addEventListener('load', handler, false);
-	} else if (window.attachEvent)
-	window.attachEvent('onload', handler);
-	else
-	    window.onload = handler;
-    }
-
     this.LANGUAGES = LANGUAGES;
-    this.ALL_LANGUAGES = ALL_LANGUAGES;
     this.initHighlighting = initHighlighting;
-    this.initHighlightingOnLoad = initHighlightingOnLoad;
     this.highlightBlock = highlightBlock;
 
     // Common regexps
@@ -502,5 +448,3 @@ var hljs = new function() {
 	relevance: 0
     };
 }();
-
-var initHighlightingOnLoad = hljs.initHighlightingOnLoad;
