@@ -43,13 +43,20 @@
     <%= blog.render_comments(Comment.read(@path)) %>
   </div>
 
-  <div class="comment-form-loading" style="display:none">
-    <%= image_tag 'loading.gif' %>
-    Posting Comment...
-  </div>
+  <h2>Leave a comment</h2>
 
   <div class="comment-form">
-    <h4>Leave a comment</h4>
+
+    <div class="loading" style="display:none">
+      <%= image_tag 'loading.gif' %>
+      Posting Comment...
+    </div>
+
+    <h4 class="preview-header" style="display:none">Comment Preview</h4>
+
+    <div class="preview">
+    </div>
+
     <form>
       <input type="hidden" name="path" value="<%= @path %>"/>
       <p>
@@ -61,11 +68,12 @@
 	<input type="text" name="website"  size="40"/>
       </p>
       <p>
-	<label>Comment (Use markdown for formatting)</label><br/>
+	<label>Comment (Use Markdown for formatting)</label><br/>
 	<textarea name="text" cols="60" rows="10"></textarea>
       </p>
       <p>
 	<input type="submit" value="Post comment"/>
+	<input type="button" value="Preview comment" class="preview-button"/>
       </p>
     </form>
   </div>

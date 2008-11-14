@@ -85,30 +85,6 @@
 	    <% end %>
 	  </div>
 
-	  <h4>My Delicious</h4>
-
-	  <div class="bookmarks">
-	    <ul>
-	      <% for item in @blog.aggregations['delicious'].items %>
-		<li class="bookmark">
-		  <%= link_to item.title, item.link %>
- 		</li>
-	      <% end %>
-	    </ul>
-	  </div>
-
-	  <h4>My 43things</h4>
-
-	  <div>
-	    <ul>
-	      <% for thing in @blog.aggregations['fortythree'].things %>
-		<li>
-		  <%= link_to thing.title, thing.link %>
- 		</li>
-	      <% end %>
-	    </ul>
-	  </div>
-
 	  <h4>My Github</h4>
 
 	  <ul>
@@ -199,17 +175,25 @@
 	    </li>
 	  </ul>
 
+
+	  <h4>My Delicious</h4>
+
+	  <div class="bookmarks">
+	    <ul>
+	      <% for item in @blog.aggregations['delicious'].items %>
+		<li class="bookmark">
+		  <%= link_to item.title, item.link %>
+ 		</li>
+	      <% end %>
+	    </ul>
+	  </div>
+
 	</div>
+
       </div>
     </div>
 
     <%= javascript_tag 'all' %>
-
-    <% if @languages %>
-      <script type="text/javascript">
-	hljs.initHighlighting(<%= @languages.to_s.split(',').map {|l| "'#{l}'" }.join(',')  %>);
-      </script>
-    <% end %>
 
     <script type="text/javascript">
       var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -221,10 +205,11 @@
       pageTracker._trackPageview();
     </script> 
 
-    <script type="text/javascript">
-      Attacklab.wmdBase();
-      Attacklab.Util.startEditor();
-    </script>
+    <% if @languages %>
+      <script type="text/javascript">
+	hljs.initHighlighting(<%= @languages.to_s.split(',').map {|l| "'#{l}'" }.join(',')  %>);
+      </script>
+    <% end %>
 
   </body>
 </html>

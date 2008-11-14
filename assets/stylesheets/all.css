@@ -510,22 +510,18 @@ h2 {
     margin-bottom: 2em;
 }
 
-.comments .comment {
+.comments .comment, .preview .comment {
     margin-top: 2em;
     border: 1px solid #ccc;
 }
 
-.comments .comment .top {
+.comments .comment .top, .preview .comment .top  {
     background: #F0F0F0;
     color: #333;
     padding: 3px 5px;
 }
 
-.comments .comment .top a { 
-    text-decoration: none;
-}
-
-.comments .comment .body {
+.comments .comment .body, .preview .comment .body {
     background: #F8F8F8;    
     padding: 3px 5px;
 }
