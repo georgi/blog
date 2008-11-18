@@ -62,7 +62,6 @@
 
 #header-text { 
     background: #369;
-    margin-bottom: 10px;
 }
 
 #header-text h1 { 
@@ -130,14 +129,4 @@ blockquote {
     font-style: oblique;
     margin-left: 5%;
     margin-right: 5%;
-}
-
-pre {
-    background: #f0f0f0;
-    padding: 1em;
-    border: 1px solid #ccc;
-    font-size: 1em;
-    color: #222;
-    font-family: Courier, serif;
-    overflow: auto;
 }
