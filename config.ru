@@ -1,3 +1,5 @@
+$:.unshift 'lib'
+
 require 'shinmun'
 require 'shinmun/controller'
 require 'shinmun/admin_controller'
@@ -6,7 +8,7 @@ Dir.chdir(File.dirname(__FILE__))
 
 blog = Shinmun::Blog.new
 
-# use Rack::Reloader
+use Rack::Reloader
 
 map "/#{blog.base_path}" do
   run Shinmun::RackAdapter.new(blog)

@@ -2,5 +2,5 @@
 categories:
   - { name: Ruby }
   - { name: Javascript }
-  - { name: Emacs }
   - { name: Actionscript }
+  - { name: Emacs }
