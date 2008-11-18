@@ -1,9 +1,8 @@
 --- 
-guid: 9dba2130-5d6c-012b-b53a-001a92975b89
+date: 2007-04-18
 category: Ruby
 tags: rails, url, helpers
 languages: ruby
-date: 2007-04-18
 
 DRY Up Your Url Helpers
 =======================
@@ -22,6 +21,8 @@ for an arbitrary record.
 First we need a simple example. We have 2 models: `User` and
 `Article`. For our url generation to work we have to add following code
 to our models:
+
+    @@ruby
 
     class User
       has_many :articles
@@ -66,14 +67,17 @@ Editing an existing article would end up on this URL:
 
     /users/matthias-georgi/articles/my-first-post;edit
 
-
 For nested resources to get working you define in config/routes.rb:
+
+    @@ruby
 
     map.resources :users do |user|
       user.resources :articles
     end
 
 The traditional way to generate urls is to call the resource helpers:
+
+    @@ruby
 
     article_url(article.user, article)
 
@@ -86,6 +90,8 @@ Add following module into your lib folder and include the module in
 both your application controller and application helper. The most
 important bit is the url_for method. It will automatically generate
 the right url for your resource.
+
+    @@ruby
 
     module ResourceHelper
      
@@ -171,6 +177,8 @@ resources you have to pass additionally the record, the collection is
 belonging to.
 
 Some examples:
+
+    @@ruby
 
     new_path_for(:users)          # => '/users/new'
     path_for(user)                # => '/users/harald'

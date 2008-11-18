@@ -1,9 +1,8 @@
 --- 
-category: "Javascript"
 date: 2008-09-16
+category: Javascript
 tags: template, engine, json
 languages: javascript, html
-guid: 1d83e2f0-6614-012b-f60f-001a92975b89
 
 Patroon - a Javascript Template Engine (Part 2)
 ===============================================
@@ -18,10 +17,15 @@ expand a data object according to simple rules. Additionally you may
 use traditional string interpolation inside attribute values and text
 nodes.
 
+**Patroon has its own page now, please go the [Patroon project page][9]**.
+
+
 ### The Data
 
 Comments in this blog are stored as a list of JSON objects, I wrote
 about it [here][1]. So think about a data object like this:
+
+    @@javascript
 
     var data = { 
       comment: [{
@@ -42,24 +46,28 @@ about it [here][1]. So think about a data object like this:
 
 This data will be expanded with help of following template:
 
-        <div class="comments">  
-          <div id="comments-template">
-            <div class="comment">
-              <div class="top">
-                {website.length > 0 ? linkTo(name, website) : name} said
-                <a title="{time}"></a>:
-              </div>
-              <div class="text">
-                {text}
-              </div>
-            </div>   
+    @@html
+
+    <div class="comments">  
+      <div id="comments-template">
+        <div class="comment">
+          <div class="top">
+            {website.length > 0 ? linkTo(name, website) : name} said
+            <a title="{time}"></a>:
           </div>
-        </div>
+          <div class="text">
+            {text}
+          </div>
+        </div>   
+      </div>
+    </div>
 
 
 ### Usage
 
 The javascript to actually execute this template looks like this:
+
+    @@javascript
 
     // The comments template will be removed from the DOM!
     var template = new Template('comments-template');
@@ -75,28 +83,30 @@ If you don't want to use jQuery, please look at the end of this article.
 
 The given example renders following output:
 
-        <div class="comments">  
-          <div id="comments-template">
-            <div class="comment">
-              <div class="top">
-                <a href="http://backham.com">David Beckham</a> said
-                <a title="2008-09-07 12:28:33">2 hours ago</a>
-              </div>
-              <div class="text">
-                I watched the euro finals on tv...
-              </div>
-            </div>   
-            <div class="comment">
-              <div class="top">
-                Tuncay said
-                <a title="2008-09-07 14:28:33">1 minute ago</a>
-              </div>
-              <div class="text">
-                Me too
-              </div>
-            </div>   
+    @@html
+
+    <div class="comments">  
+      <div id="comments-template">
+        <div class="comment">
+          <div class="top">
+            <a href="http://backham.com">David Beckham</a> said
+            <a title="2008-09-07 12:28:33">2 hours ago</a>
           </div>
-        </div>
+          <div class="text">
+            I watched the euro finals on tv...
+          </div>
+        </div>   
+        <div class="comment">
+          <div class="top">
+            Tuncay said
+            <a title="2008-09-07 14:28:33">1 minute ago</a>
+          </div>
+          <div class="text">
+            Me too
+          </div>
+        </div>   
+      </div>
+    </div>
     
     
 
@@ -122,6 +132,8 @@ There are 3 basic rules regarding the evaluation:
 Code snippets inside the template will be executed within the scope of
 a Helper object. If you want to extend it, just add your functions to
 `Template.Helper`. At the moment it defines only one function:
+
+    @@javascript
 
     Template.Helper = {
      
@@ -164,6 +176,8 @@ consists only of 130 lines of code.
 
 Without jQuery template expansion is a bit verbose:
 
+    @@javascript
+
     // The comments template will be removed from the DOM!
     var template = new Template('comments-template');
     
@@ -183,3 +197,4 @@ Without jQuery template expansion is a bit verbose:
 [6]: http://code.google.com/p/trimpath/wiki/JavaScriptTemplates
 [7]: http://embeddedjs.com/
 [8]: http://www.matthias-georgi.de/2008/9/using-javascript-templates-for-a-delicious-sidebar.html
+[9]: http://www.matthias-georgi.de/patroon.html

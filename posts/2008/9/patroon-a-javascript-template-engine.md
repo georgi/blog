@@ -3,7 +3,6 @@ date: 2008-09-09
 category: Javascript
 tags: template, engine, json
 languages: javascript, html
-guid: dbbec5c0-6094-012b-f5dd-001a92975b89
 
 Patroon - a Javascript Template Engine
 ======================================
@@ -14,12 +13,14 @@ expand a data object according to simple rules. Additionally you may
 use traditional string interpolation inside attribute values and text
 nodes.
 
-**Patroon has changed a bit, please read the [update][3]**.
+**Patroon has changed a bit, please go the [Patroon project page][3]**.
 
 
 ### Example
 
 Comments in this blog are stored as a list of JSON objects, I wrote about it [here][1]. So think about a data object like this:
+
+    @@javascript
 
     var data = { 
       comment: [{
@@ -38,19 +39,23 @@ Comments in this blog are stored as a list of JSON objects, I wrote about it [he
 
 This data will be expanded with help of following template:
 
-        <div class="comments">  
-          <div id="comments-template">
-            <div class="comment">
-              <div class="_ top">
-                <a class="_" href="{website}">{name}</a> said
-                <a class="_" title="{time}"></a>:
-              </div>
-              <div class="text"></div>
-            </div>   
+    @@html
+
+    <div class="comments">  
+      <div id="comments-template">
+        <div class="comment">
+          <div class="_ top">
+            <a class="_" href="{website}">{name}</a> said
+            <a class="_" title="{time}"></a>:
           </div>
-        </div>
+          <div class="text"></div>
+        </div>   
+      </div>
+    </div>
 
 The javascript to actually execute this template looks like this:
+
+    @@javascript
 
     // The comments template will be removed from the DOM!
     var template = new Template('comments-template');
@@ -64,6 +69,8 @@ The javascript to actually execute this template looks like this:
 
 
 Using jQuery the code gets a bit cleaner:
+
+    @@javascript
 
     // The comments template will be removed from the DOM!
     var template = new Template('comments-template');
@@ -117,6 +124,6 @@ Note that we are dealing with two scopes here: the global scope and the comment 
 
 Download the script at my [github repository][2].
 
- [1]: commenting-system-with-lightweight-json-store.html
+ [1]: http://www.matthias-georgi.de/commenting-system-with-lightweight-json-store.html
  [2]: http://github.com/georgi/patroon/tree/master
- [3]: patroon-a-javascript-template-engine-part-2.html
+ [3]: http://www.matthias-georgi.de/patroon.html

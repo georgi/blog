@@ -1,9 +1,8 @@
 --- 
-guid: 9db9e370-5d6c-012b-b53a-001a92975b89
+date: 2007-05-10
 category: Ruby
 tags: google, search, rails
 languages: ruby
-date: 2007-05-10
 
 Google-like Search Results Helper
 =================================
@@ -13,6 +12,8 @@ task among web developers. Google's approach is dead simple but really
 effective. The matching text is highlighted and shown with its
 context. This can be implemented in less than 20 lines of code which
 you can include into you helper:
+
+    @@ruby
 
     def highlight_text(text, words)
       tokens = strip_tags(text).split

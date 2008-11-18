@@ -1,7 +1,7 @@
 --- 
-category: Actionscript
-guid: cb5421c0-654c-012b-f5f5-001a92975b89
 date: 2008-09-15
+category: Actionscript
+tags: emacs, schema, xml, relax-ng, actionscript, grammar
 
 Relax NG Schema for Adobe Flex 3
 ================================
@@ -102,5 +102,5 @@ Watch or fork the [Project on Github][4]
 
 [1]: http://code.google.com/p/xsd4mxml/
 [2]: http://flexiglas.blogspot.com/
-[3]: ../../download/flex3.rnc
+[3]: http://www.matthias-georgi.de/download/flex3.rnc
 [4]: http://github.com/georgi/mxml-rnc/tree/master

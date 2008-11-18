@@ -1,9 +1,8 @@
 --- 
-guid: 9dba5160-5d6c-012b-b53a-001a92975b89
+date: 2007-04-08
 category: Ruby
 tags: flickr, delicious, rails
 languages: ruby, html
-date: 2007-04-08
 
 Building a del.ico.us and flickr sidebar in 5 minutes
 =====================================================
@@ -16,6 +15,8 @@ Download the files [delicous.rb][2] and [flickr.rb][3] and drop them
 into your rails lib folder.
 
 Now add these two little helpers to your application_helper.rb:
+
+    @@ruby
 
     require 'delicious'
     require 'flickr'
@@ -35,6 +36,8 @@ method call. Next step is to render a list of links for our
 sidebar. So for rendering the del.icio.us sidebar, you need something
 like this:
 
+    @@rhtml
+
     <ul>
       <% for item in delicious(:ruby).items[0, 10] %>
         <li>
@@ -46,6 +49,8 @@ like this:
 This is pretty self-explanatory. We take the first ten items of the
 del.icio.us feed and for each item we output a list element containing
 a link to the item. The view for the flickr badge is similar:
+
+    @@rhtml
 
     <ul>
       <% for item in flickr(:ruby).pics[0, 10] %>

@@ -21,6 +21,8 @@
 	  <% for category in @blog.categories %>
 	    <li><%= navi_link category['name'], "/categories/#{urlify category['name']}.html" %></li>
 	  <% end %>
+	  <li><%= navi_link 'Shinmun', '/shinmun.html' %></li>
+	  <li><%= navi_link 'Patroon', '/patroon.html' %></li>
 	  <li><%= navi_link 'About', '/about.html' %></li>
 	</ul>
       </div>
@@ -75,6 +77,21 @@
 	    <% end %>
 	  </ul>
 
+	  <h4>My Projects</h4>
+
+	  <ul>
+	    <li>
+	      <a href="/shinmun.html">
+		Shinmun - blog engine
+	      </a>
+	    </li>
+	    <li>
+	      <a href="/patroon.html">
+		Patroon - template engine
+	      </a>
+	    </li>
+	  </ul>
+
 	  <h4>My Flickr</h4>
 
 	  <div class="flickr">
@@ -85,45 +102,6 @@
 	    <% end %>
 	  </div>
 
-	  <h4>My Github</h4>
-
-	  <ul>
-	    <li>
-	      <a href="http://github.com/georgi">
-		My profile
-	      </a>
-	    </li>
-	    <li>
-	      <a href="http://github.com/georgi/shinmun/tree/master">
-		Shinmun - blog engine
-	      </a>
-	    </li>
-	    <li>
-	      <a href="http://github.com/georgi/patroon/tree/master">
-		Patroon - template engine
-	      </a>
-	    </li>
-	  </ul>
-
-	  <h4>My Projects</h4>
-
-	  <ul>
-	    <li>
-	      <a href="http://www.matthias-georgi.de/2008/9/shinmun-a-small-and-beautiful-blog-engine.html">
-		Shinmun - blog engine
-	      </a>
-	    </li>
-	    <li>
-	      <a href="http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html">
-		Patroon - template engine
-	      </a>
-	    </li>
-	    <li>
-	      <a href="http://www.sportubes.com">
-		Sportubes
-	      </a>
-	    </li>
-	  </ul>
 
 	  <h4>My Band</h4>
 
@@ -178,15 +156,13 @@
 
 	  <h4>My Delicious</h4>
 
-	  <div class="bookmarks">
-	    <ul>
-	      <% for item in @blog.aggregations['delicious'].items %>
-		<li class="bookmark">
-		  <%= link_to item.title, item.link %>
- 		</li>
-	      <% end %>
-	    </ul>
-	  </div>
+	  <ul>
+	    <% for item in @blog.aggregations['delicious'].items %>
+	      <li>
+		<%= link_to item.title, item.link %>
+ 	      </li>
+	    <% end %>
+	  </ul>
 
 	</div>
 
@@ -205,11 +181,11 @@
       pageTracker._trackPageview();
     </script> 
 
-    <% if @languages %>
-      <script type="text/javascript">
-	hljs.initHighlighting(<%= @languages.to_s.split(',').map {|l| "'#{l}'" }.join(',')  %>);
-      </script>
-    <% end %>
+    <!-- <% if @languages %> -->
+    <!--   <script type="text/javascript"> -->
+    <!-- 	hljs.initHighlighting(<%= @languages.to_s.split(',').map {|l| "'#{l}'" }.join(',')  %>); -->
+    <!--   </script> -->
+    <!-- <% end %> -->
 
   </body>
 </html>

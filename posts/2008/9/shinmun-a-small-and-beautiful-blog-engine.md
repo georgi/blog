@@ -1,15 +1,16 @@
 --- 
 date: 2008-09-05
 category: Ruby
-tags: blogging, engine
+tags: blogging, engine, ruby, shinmun
 languages: ruby, html, xml
-guid: 7ad04f10-5dd6-012b-b53c-001a92975b89
 
 Shinmun, a small and beautiful blog engine
 ==========================================
 
 Shinmun is a **minimalist blog engine**. You just write posts as text files,
 render them to static files and push your blog to your server.
+
+**Notice : Shinmun has changed since then and has now [its own page][4]**.
 
 This allows you to write posts in your favorite editor like Emacs or
 VI and use a VCS like git.
@@ -99,8 +100,6 @@ Posts without a date are by definition static pages.
 
 Example post:
 
-<pre>
-
     --- 
     category: Ruby
     date: 2008-09-05
@@ -111,8 +110,6 @@ Example post:
 
     This is the summary, which is by definition the first paragraph of the
     article. The summary shows up in category listings or the index listing.
-
-</pre>
 
 The guid should never change, as it will be you used for identifying
 posts for comments.
@@ -217,6 +214,8 @@ Layout and templates are rendered by *ERB*.  The layout is defined in
 `layout.rhtml`. The content will be provided in the variable
 `@content`. A minimal example:
 
+    @@html
+
     <html>
       <head>
         <title><%= @blog_title %></title>
@@ -254,6 +253,8 @@ module will be included into the `Shinmun::Template` class.
 ### Post Template
 
 The attributes of a post are accessible as instance variables in a template:
+
+    @@html
 
     <div class="article">    
 
@@ -315,7 +316,7 @@ Simply install the gem:
 Download or fork the package at my [github repository][1]
 
 
-
 [1]: http://github.com/georgi/shinmun/tree/master
-[2]: commenting-system-with-lightweight-json-store.html
+[2]: http://www.matthias-georgi.de/commenting-system-with-lightweight-json-store.html
 [3]: http://github.com/georgi/shinmun-example/tree/master
+[4]: http://www.matthias-georgi.de/shinmun

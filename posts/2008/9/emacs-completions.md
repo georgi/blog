@@ -1,7 +1,6 @@
 --- 
-category: Emacs
-guid: ffb31770-5dc1-012b-b53b-001a92975b89
 date: 2008-09-04
+category: Emacs
 tags: emacs, completion
 languages: lisp
 
@@ -24,6 +23,8 @@ tries to figure out, what is the right thing to do in each situation.
 
 So I copied the indent-and-complete from the [emacs-rails package][1]:
 
+    @@scheme
+   
     (require 'hippie-exp)
     (require 'snippet)
     
@@ -60,6 +61,8 @@ list of functions, which should be called for completion.
 Let's have a look at my `html-mode` initialization function. It will configure
 the completion behaviour of hippie-expand an bind the tab key to `indent-and-complete`.
 
+    @@scheme
+
     ;; We need a simple wrapper for expand-abbrev
     (defun try-expand-abbrev (old)
       (expand-abbrev))
@@ -94,6 +97,8 @@ There a two functions, which will be asked to complete the current word:
 
 Now if you want to use snippets for your `html-mode`, you have to
 define a abbrev-table with your desired snippets. 
+
+    @@scheme
 
     (define-abbrev-table 'html-mode-abbrev-table ())
     

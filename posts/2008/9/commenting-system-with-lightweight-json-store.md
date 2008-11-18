@@ -1,7 +1,6 @@
 --- 
-category: Javascript
-guid: 4ed200b0-5efa-012b-f5dc-001a92975b89
 date: 2008-09-07
+category: Javascript
 tags: database, json
 languages: php, javascript
 
@@ -19,6 +18,8 @@ First of all we need a form, which will post the data to the *PHP*
 script. The comment rendering is done by my own *Javascript*
 templating system, which I will explain in a seperate post. For now we
 focus on the task of posting a form and saving it to our *JSON* store.
+
+    @@ruby
 
     <div class="comment-form">
         <form>
@@ -43,6 +44,8 @@ focus on the task of posting a form and saving it to our *JSON* store.
 
 My blog engine generates a guid for each post, so this will be posted
 by the form as well. Ok, let's have a look at the Javascript code:
+
+    @@javascript
 
     $('.comment-form form').ajaxForm({
         url: Blog.root + 'controllers/comments.php',
@@ -74,6 +77,8 @@ saved in one JSON file like `comments/guid-of-the-post`. The 4 fields
 will be encoded as json array and appended to the file. This happens
 only, if the request was a *POST*. Finally we read the whole file and
 send it back as response.
+
+    @@php
 
     <?php
     
@@ -133,6 +138,8 @@ send it back as response.
 One important thing to note is, that the comment file is not one big
 JSON array. It looks like this:
 
+    @@json
+
     ["2008-09-07 12:28:33","Hans","","**strong text**\n*emphasized text*"]
     ["2008-09-07 12:29:33","Hans","","**strong text**\n\n\n*emphasized text*"]
     ["2008-09-07 12:29:56","Hans","","**strong text**\n\n\n*emphasized text*"]
@@ -180,9 +187,9 @@ Read about my [Javascript template engine][6] which is used to render
 the comments.
 
 
-[1]: shinmun-a-small-and-beautiful-blog-engine.html
+[1]: http://www.matthias-georgi.de/shinmun.html
 [2]: http://malsup.com/jquery/form/
 [3]: http://en.wikipedia.org/wiki/You_Ain%27t_Gonna_Need_It
 [4]: http://de.php.net/manual/en/security.magicquotes.php
 [5]: http://en.wikipedia.org/wiki/SQL_injection
-[6]: patroon-a-javascript-template-engine.html
+[6]: http://www.matthias-georgi.de/patroon.html
