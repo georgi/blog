@@ -1,29 +1,7 @@
- 
 
-pre {
-    background: #f9f9f9;
-    border:1px solid #ddd;
-    padding: 1px 0px;
-    margin: 1em 0;
-    color: #110000;
-    font-family: monospace;
-    font-size: 1.2em;
-    line-height: 1.2em;
-    overflow: auto;
-}
-
-pre .line_numbers, pre .no {
-    background-color: #def;
-    color: gray;
-    text-align: right;
-}
-
-pre .line_numbers tt { 
-    font-weight: bold 
-}
-
-pre .no {
-    padding: 0px 4px;
+pre.highlight ol {
+    margin: 0;
+    color: #333;
 }
 
 .af { color:#00C }

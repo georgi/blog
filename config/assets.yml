@@ -10,7 +10,13 @@ javascript_files:
   - comments
 stylesheet_files:
   - reset
+  - typo
+  - table
+  - form
+  - list
   - grid
-  - typography
-  - style
+  - header
+  - sidebar
+  - article
+  - comments
   - coderay
