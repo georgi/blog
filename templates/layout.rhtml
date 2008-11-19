@@ -92,16 +92,19 @@
 	    </li>
 	  </ul>
 
-	  <h4>My Flickr</h4>
+	  <% if @blog.aggregations['flickr'] %>
 
-	  <div class="flickr">
-	    <% for pic in @blog.aggregations['flickr'].pics %>
-	      <a href="<%= pic.link %>">
-		<img alt="<%= pic.title %>" src="<%= pic.thumbnail %>" width="45" height="45" />
-	      </a>
-	    <% end %>
-	  </div>
+	    <h4>My Flickr</h4>
 
+	    <div class="flickr">
+	      <% for pic in @blog.aggregations['flickr'].pics %>
+		<a href="<%= pic.link %>">
+		  <img alt="<%= pic.title %>" src="<%= pic.thumbnail %>" width="45" height="45" />
+		</a>
+	      <% end %>
+	    </div>
+
+	  <% end %>
 
 	  <h4>My Band</h4>
 
@@ -154,15 +157,19 @@
 	  </ul>
 
 
-	  <h4>My Delicious</h4>
+	  <% if @blog.aggregations['delicious'] %>
 
-	  <ul>
-	    <% for item in @blog.aggregations['delicious'].items %>
-	      <li>
-		<%= link_to item.title, item.link %>
- 	      </li>
-	    <% end %>
-	  </ul>
+	    <h4>My Delicious</h4>
+
+	    <ul>
+	      <% for item in @blog.aggregations['delicious'].items %>
+		<li>
+		  <%= link_to item.title, item.link %>
+ 		</li>
+	      <% end %>
+	    </ul>
+
+	  <% end %>
 
 	</div>
 
@@ -180,12 +187,6 @@
       var pageTracker = _gat._getTracker("UA-927203-10");
       pageTracker._trackPageview();
     </script> 
-
-    <!-- <% if @languages %> -->
-    <!--   <script type="text/javascript"> -->
-    <!-- 	hljs.initHighlighting(<%= @languages.to_s.split(',').map {|l| "'#{l}'" }.join(',')  %>); -->
-    <!--   </script> -->
-    <!-- <% end %> -->
 
   </body>
 </html>
