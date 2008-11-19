@@ -29,6 +29,10 @@ Shinmun::Blog.new.route(self) do
     blog.render_month(params['year'].to_i, params['month'].to_i)
   end
 
+  get '/index.rss' do
+    blog.render_index_feed
+  end
+
   get '' do 
     if path_info == '/'
       blog.render_index_page
