@@ -18,7 +18,7 @@
 		    convertToTextarea(this);
 		});
 	    });
-	}, 100);
+	}, 1000);
     }
 
 
