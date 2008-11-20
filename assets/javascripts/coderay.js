@@ -22,7 +22,7 @@
     }
 
 
-    $('pre').click(function() {
+    $('pre.highlight').click(function() {
 	convertToTextarea(this);
     });
 
