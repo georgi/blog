@@ -39,7 +39,7 @@
 	</div>
       </div>
 
-      <div class="right column span-4 last"> 
+      <div class="sidebar column span-4 last">
 	<div class="box">
 
 	  <h4>Subscribe</h4>
@@ -50,7 +50,7 @@
 	      <img src="http://feeds.feedburner.com/~fc/matthias-georgi?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88"/>
 	    </a>
 	  </p>
-	  
+	
 	  <h4>About</h4>
 
 	  <div class="about">
@@ -65,7 +65,7 @@
 
 	  <ul>
 	    <% for year, month in @blog.months %>
-	      <li><%= archive_link year, month %></li> 
+	      <li><%= archive_link year, month %></li>
 	    <% end %>
 	  </ul>
 
@@ -73,7 +73,7 @@
 
 	  <ul class="spaced">
 	    <% for post in @blog.posts.first(10) %>
-	      <li><%= post_link post %></li> 
+	      <li><%= post_link post %></li>
 	    <% end %>
 	  </ul>
 
@@ -133,7 +133,7 @@
 	      <a href="http://www.lisafreieck.com">
 		Lisa Freieck
 	      </a>
-	    </li>	  
+	    </li>	
 	    <li>
 	      <a href="http://www.myspace.com/janvondracek">
 		Jan Vondráček
@@ -186,7 +186,7 @@
     <script type="text/javascript">
       var pageTracker = _gat._getTracker("UA-927203-10");
       pageTracker._trackPageview();
-    </script> 
+    </script>
 
   </body>
 </html>

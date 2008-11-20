@@ -211,6 +211,8 @@ stylesheets to `all.css` automatically.
 You have to list your categories in `config/categories.yml`. This will
 look like:
 
+    @@yaml
+
     ---
     categories:
       - { name: Ruby }
@@ -226,6 +228,8 @@ description and use it inside the `templates/category.rhtml`.
 Layout and templates are rendered by *ERB*.  The layout is defined in
 `templates/layout.rhtml`. The content will be provided in the variable
 `@content`. A minimal but functional example:
+
+    @@rhtml
 
     <html>
       <head>
@@ -264,6 +268,8 @@ module will be included into the `Shinmun::Template` class.
 ### Post Template
 
 The attributes of a post are accessible as instance variables in a template:
+
+    @@rhtml
 
     <div class="article">    
 

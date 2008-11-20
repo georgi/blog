@@ -8,11 +8,11 @@ javascript_files:
   - swfobject
   - shockwaves
   - comments
+  - coderay
 stylesheet_files:
   - reset
   - typo
   - table
-  - form
   - list
   - grid
   - header
