@@ -7,7 +7,7 @@
     <language><%= @blog.language %></language>
     <copyright><%= @blog.author %></copyright>
     <pubDate><%= rfc822 Time.now %></pubDate>
-    <% for post in @posts[0, 20] %>
+    <% for post in @blog.recent_posts %>
       <item>
 	<title><%= post.title %></title>
 	<category><%= post.category %></category>
