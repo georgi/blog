@@ -1,3 +1,22 @@
+.code-area {
+    width:100%;
+}
+
+.code-link {
+    padding-left:1em;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.code-link a {
+    text-decoration: none;
+    font-size: 0.8em;
+}
+
+pre.highlight {
+    margin: 0;
+}
 
 pre.highlight ol {
     margin: 0;

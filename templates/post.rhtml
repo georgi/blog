@@ -1,26 +1,28 @@
+<% @header = @post.category %>
+
 <div class="article">
 
   <div class="date">
-    <%= date @date %>
+    <%= human_date @post.date %>
   </div>
 
-  <h2><%= @title %></h2>  
+  <h2><%= @post.title %></h2>  
 
-  <%= @body %>
+  <%= @post.body_html %>
 
   <hr/>
 
   <div style="margin:1em 0em 1em 0em; color:#666">
-    Posted in category <%= link_to @category, "/categories/#{urlify @category}.html" %> by <%= @blog.author %>.
-    Tagged with <%= @tags %>.
+    Posted in category <%= link_to @post.category, "/categories/#{urlify @post.category}" %> by <%= @post.author || @blog.author %>.
+    Tagged with <%= @post.tags %>.
   </div>
 
   <h6>Similar Posts</h6>
   
   <ul>
 
-  <% for post in @blog.posts_with_tags(@tags) %>
-     <% if post.path != @path %>
+  <% for post in @blog.posts_with_tags(@post.tags) %>
+     <% if post.path != @post.path %>
        <li><%= post_link post %></li>
      <% end %>
   <% end %>

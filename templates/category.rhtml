@@ -1,9 +1,9 @@
-<% @header = name %>
+<% @header = @name %>
 
 <div class="articles">
   <% for post in @posts[0, 20] %>
     <div class="article">
-      <div class="date"><%= date post.date %></div>
+      <div class="date"><%= human_date post.date %></div>
       <h2><%= post_link post %></h2>
       <%= post.summary %>
     </div>
