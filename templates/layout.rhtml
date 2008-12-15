@@ -13,8 +13,8 @@
     <div class="container">
 
       <div id="header" class="column span-13 last">
-	<h1><a href="/"><%= @blog.title %></a></h1>
-	<h2><%= @blog.description %></h2>
+	<div id="title"><a href="/"><%= @blog.title %></a></div>
+	<div id="description"><%= @blog.description %></div>
       </div>
 
       <div id="navi" class="column span-13 last">
@@ -30,16 +30,8 @@
 	</ul>
       </div>
 
-      <% if @header %>
-	<div id="header-text" class="column span-13 last">
-	  <h1><%= @header %></h1>
-	</div>
-      <% end %>
-
       <div class="content column span-9">
-	<div class="box">
-	  <%= @content %>
-	</div>
+	<%= @content %>
       </div>
 
       <div class="sidebar column span-4 last">

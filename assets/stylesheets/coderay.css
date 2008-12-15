@@ -16,6 +16,7 @@
 
 pre.highlight {
     margin: 0;
+    margin-bottom:1em;
 }
 
 pre.highlight ol {

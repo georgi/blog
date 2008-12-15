@@ -1,26 +1,22 @@
 
-#header { 
-    height: 40px;
-}
-
-#header h1 {
+#header #title {
     font-size: 20px;
     font-weight: bold;
     padding: 20px 20px 5px 0;
     display: inline;
 }
 
-#header h1 a {
+#header #title a {
     color: #069;
     text-decoration: none;
 }
 
-#header h1 a:hover {
+#header #title a:hover {
     color: #222;
     text-decoration: none;
 }
 
-#header h2 {
+#header #description {
     color: #69c;
     font-size: 16px;
     font-weight: bold;
@@ -28,6 +24,9 @@
     display: inline;
 }
 
+#navi {
+    background: #69c;
+}
 
 #navi ul {
     clear: both;
@@ -42,7 +41,6 @@
 }
 
 #navi a { 
-    background: #69c;
     color: #fff;
     font-size: 12px;
     font-weight: normal;
@@ -54,14 +52,3 @@
     font-weight: bold;
     background: #369;
 }
-
-#header-text { 
-    background: #369;
-}
-
-#header-text h1 { 
-    color: #fff;
-    padding: 5px 0px 0px 60px;
-    border-bottom: 1px solid #69c;
-}
-
