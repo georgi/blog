@@ -20,12 +20,13 @@
       <div id="navi" class="column span-13 last">
 	<ul>
 	  <li><%= navi_link 'Home', '/' %></li>
-	  <% for category in @blog.categories %>
-	    <li><%= navi_link category['name'], "/categories/#{urlify category['name']}.html" %></li>
-	  <% end %>
-	  <li><%= navi_link 'Shinmun', '/shinmun.html' %></li>
-	  <li><%= navi_link 'Patroon', '/patroon.html' %></li>
-	  <li><%= navi_link 'About', '/about.html' %></li>
+	  <li><%= navi_link 'Ruby', '/categories/ruby' %></li>
+	  <li><%= navi_link 'Javascript', '/categories/javascript' %></li>
+	  <li><%= navi_link 'Actionscript', '/categories/actionscript' %></li>
+	  <li><%= navi_link 'Emacs', '/categories/emacs' %></li>
+	  <li><%= navi_link 'Shinmun', '/shinmun' %></li>
+	  <li><%= navi_link 'Patroon', '/patroon' %></li>
+	  <li><%= navi_link 'About', '/about' %></li>
 	</ul>
       </div>
 

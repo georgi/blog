@@ -5,3 +5,4 @@ language: en
 author: Matthias Georgi
 url: http://www.matthias-georgi.de
 repository: root@213.239.215.244:/var/www/matthias-georgi.de/
+categories: [Ruby, Javascript, Actionscript, Emacs]

@@ -1,4 +1,5 @@
 require 'shinmun'
+require 'helpers'
 
 Dir.chdir(File.dirname(__FILE__))
 
