@@ -19,7 +19,7 @@ script. The comment rendering is done by my own *Javascript*
 templating system, which I will explain in a seperate post. For now we
 focus on the task of posting a form and saving it to our *JSON* store.
 
-    @@ruby
+    @@html
 
     <div class="comment-form">
         <form>
