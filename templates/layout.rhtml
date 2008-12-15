@@ -49,7 +49,7 @@
 
 	  <p>
 	    <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
-	      <%= image_tag 'rss.png' %>
+	      <img src="/assets/images/rss.png" />
 	      <img src="http://feeds.feedburner.com/~fc/matthias-georgi?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88"/>
 	    </a>
 	  </p>
@@ -67,7 +67,7 @@
 	  <h4>Archives</h4>
 
 	  <ul>
-	    <% for year, month in @blog.months %>
+	    <% for year, month in @blog.archives %>
 	      <li><%= archive_link year, month %></li>
 	    <% end %>
 	  </ul>
@@ -75,7 +75,7 @@
 	  <h4>Recent posts</h4>
 
 	  <ul class="spaced">
-	    <% for post in @blog.posts.first(10) %>
+	    <% for post in @blog.recent_posts %>
 	      <li><%= post_link post %></li>
 	    <% end %>
 	  </ul>
