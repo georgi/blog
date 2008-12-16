@@ -1,7 +1,7 @@
 --- 
-date: 2008-09-21
 category: Javascript
 tags: javascript, templates, delicious, bookmarks
+date: 2008-09-21
 languages: javascript, html
 
 Using Javascript Templates for a Delicious Sidebar

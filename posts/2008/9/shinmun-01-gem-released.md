@@ -1,7 +1,7 @@
----
-date: 2008-09-11
+--- 
 category: Ruby
 tags: ruby, shinmun, gem, release
+date: 2008-09-11
 
 Shinmun-0.1 Gem Released
 ========================
@@ -18,4 +18,3 @@ If there are any problems with a gem installation, please email me:
 ![matti dot georgi at gmail dot com][1]
 
 [1]: http://www.matthias-georgi.de/images/email.png
-

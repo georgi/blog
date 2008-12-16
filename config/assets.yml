@@ -1,22 +1,22 @@
----
-javascripts_path: javascripts
-stylesheets_path: stylesheets
+--- 
 images_path: images
-javascript_files:
-  - jquery.min
-  - jquery-form.min
-  - swfobject
-  - shockwaves
-  - comments
-  - coderay
-stylesheet_files:
-  - reset
-  - typo
-  - table
-  - list
-  - grid
-  - header
-  - sidebar
-  - article
-  - comments
-  - coderay
+javascripts_path: javascripts
+stylesheet_files: 
+- reset
+- typo
+- table
+- list
+- grid
+- header
+- sidebar
+- article
+- comments
+- coderay
+javascript_files: 
+- jquery.min
+- jquery-form.min
+- swfobject
+- shockwaves
+- comments
+- coderay
+stylesheets_path: stylesheets
