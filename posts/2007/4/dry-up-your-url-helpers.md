@@ -1,7 +1,7 @@
 --- 
-date: 2007-04-18
 category: Ruby
 tags: rails, url, helpers
+date: 2007-04-18
 languages: ruby
 
 DRY Up Your Url Helpers

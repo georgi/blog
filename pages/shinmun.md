@@ -1,4 +1,4 @@
----
+--- 
 header: Shinmun
 
 Shinmun, a small and beautiful blog engine
