@@ -4,3 +4,8 @@
   text: Just a test, if comments get pushed to github origin...
   time: 2008-12-19 16:02:16.572155 +01:00
   website: www.matthias-georgi.de
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: And another test
+  time: 2008-12-19 16:10:54.878276 +01:00
+  website: www.matthias-georgi.de

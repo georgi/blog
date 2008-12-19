@@ -1,7 +1,7 @@
 --- 
 category: Ruby
-date: 2007-04-10
 tags: rails, rest, url
+date: 2007-04-10
 languages: ruby
 
 Pretty RESTful URLs in Rails
