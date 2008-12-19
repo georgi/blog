@@ -14,3 +14,8 @@
   text: One more comment!
   time: 2008-12-19 16:28:07.588856 +01:00
   website: www.matthias-georgi.de
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: just keep commening
+  time: 2008-12-19 17:03:55.967113 +01:00
+  website: www.matthias-georgi.de

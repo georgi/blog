@@ -1,7 +1,6 @@
 --- 
 category: Javascript
 date: 2008-09-09
-tags: template, engine, json
 languages: javascript, html
 tags: template, engine, json
 

@@ -1,7 +1,6 @@
 --- 
 category: Ruby
 date: 2007-05-10
-tags: google, search, rails
 languages: ruby
 tags: google, search, rails
 

@@ -1,7 +1,6 @@
 --- 
 category: Ruby
 date: 2007-04-04
-tags: ajax, rails, scriptaculous, json
 languages: ruby, html, css
 tags: ajax, rails, scriptaculous, json
 

@@ -1,7 +1,6 @@
 --- 
 category: Emacs
 date: 2008-09-04
-tags: emacs, completion
 languages: lisp
 tags: emacs, completion
 
