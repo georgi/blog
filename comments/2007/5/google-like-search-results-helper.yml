@@ -19,3 +19,8 @@
   text: just keep commening
   time: 2008-12-19 17:03:55.967113 +01:00
   website: www.matthias-georgi.de
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: again
+  time: 2008-12-19 17:05:56.804886 +01:00
+  website: www.matthias-georgi.de
