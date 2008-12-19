@@ -1,6 +1,0 @@
---- 
-- !ruby/object:Shinmun::Comment 
-  name: Test
-  text: Hello
-  time: 2008-12-17 00:27:59.632405 +01:00
-  website: ""
