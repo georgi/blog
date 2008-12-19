@@ -1,7 +1,7 @@
 --- 
 category: Ruby
-date: 2008-09-11
 tags: ruby, shinmun, gem, release
+date: 2008-09-11
 
 Shinmun-0.1 Gem Released
 ========================
