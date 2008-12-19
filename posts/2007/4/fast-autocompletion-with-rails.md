@@ -4,6 +4,7 @@ date: 2007-04-04
 languages: ruby, html, css
 tags: ajax, rails, scriptaculous, json
 
+
 Fast Auto-completion with Rails, Scriptaculous and JSON
 =======================================================
 
