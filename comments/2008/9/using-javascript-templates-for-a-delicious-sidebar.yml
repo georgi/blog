@@ -1,12 +1,13 @@
---- !ruby/object:Shinmun::Comment 
-name: Frank
-text: "**Nice!**"
-time: 2008-09-22 11:59:19 +02:00
-website: ""
---- !ruby/object:Shinmun::Comment 
-name: Miguel Benevides
-text: |-
-  Nice and simple, congrats. 
-  Personally i think Chain.js is worth checking out.
-time: 2008-09-23 03:46:20 +02:00
-website: ""
+--- 
+- !ruby/object:Shinmun::Comment 
+  name: Frank
+  text: "**Nice!**"
+  time: 2008-09-22 11:59:19 +02:00
+  website: ""
+- !ruby/object:Shinmun::Comment 
+  name: Miguel Benevides
+  text: |-
+    Nice and simple, congrats. 
+    Personally i think Chain.js is worth checking out.
+  time: 2008-09-23 03:46:20 +02:00
+  website: ""

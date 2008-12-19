@@ -1,39 +1,40 @@
---- !ruby/object:Shinmun::Comment 
-name: Peperolo
-text: I like it. Thank you for share. It is very useful.
-time: 2008-09-11 18:25:27 +02:00
-website: ""
---- !ruby/object:Shinmun::Comment 
-name: Stephan Schmidt
-text: |-
-  Looks a little bit like the PURE JS templating library 
-  
-  Peace
-  -stephan
-time: 2008-09-15 15:45:35 +02:00
-website: http://stephan.reposita.org
---- !ruby/object:Shinmun::Comment 
-name: LarryK
-text: |-
-  Hi Matthias,
-  
-  Thanks! Any thoughts about expanding the template language to include if/then/else decisions? Even if the expression was limited to evaluating a single parameter (no expressions), it would still be very helpful. 
-  
-  For example, in your example above, you'd end up with an anchor link to the current page since the website field is empty for name=Tuncay
-  
-  Thanks,
-  
-  Larry
-time: 2008-09-16 05:29:43 +02:00
-website: ""
---- !ruby/object:Shinmun::Comment 
-name: Matthias Georgi
-text: |+
-  Conditionals are hard, since the template is not parsed as one piece of text. The string interpolation for example is done for each text node seperately.
-  
-  So maybe I should introduce some helper functions, which let you write things like: 
-  
-      {website ? link(name, website) : name}
-  
-time: 2008-09-16 10:37:12 +02:00
-website: ""
+--- 
+- !ruby/object:Shinmun::Comment 
+  name: Peperolo
+  text: I like it. Thank you for share. It is very useful.
+  time: 2008-09-11 18:25:27 +02:00
+  website: ""
+- !ruby/object:Shinmun::Comment 
+  name: Stephan Schmidt
+  text: |-
+    Looks a little bit like the PURE JS templating library 
+    
+    Peace
+    -stephan
+  time: 2008-09-15 15:45:35 +02:00
+  website: http://stephan.reposita.org
+- !ruby/object:Shinmun::Comment 
+  name: LarryK
+  text: |-
+    Hi Matthias,
+    
+    Thanks! Any thoughts about expanding the template language to include if/then/else decisions? Even if the expression was limited to evaluating a single parameter (no expressions), it would still be very helpful. 
+    
+    For example, in your example above, you'd end up with an anchor link to the current page since the website field is empty for name=Tuncay
+    
+    Thanks,
+    
+    Larry
+  time: 2008-09-16 05:29:43 +02:00
+  website: ""
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: |+
+    Conditionals are hard, since the template is not parsed as one piece of text. The string interpolation for example is done for each text node seperately.
+    
+    So maybe I should introduce some helper functions, which let you write things like: 
+    
+        {website ? link(name, website) : name}
+    
+  time: 2008-09-16 10:37:12 +02:00
+  website: ""
