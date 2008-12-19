@@ -1,0 +1,10 @@
+--- !ruby/object:Shinmun::Comment 
+name: KH
+text: Great post.  Thanks very much!  Any chance of updating this to include the installation of Ruby Enterprise Edition (REE)?
+time: 2008-09-16 16:22:40 +02:00
+website: ""
+--- !ruby/object:Shinmun::Comment 
+name: Matthias Georgi
+text: "KH: sounds like a **good idea**, I try to make the update soon!"
+time: 2008-09-19 16:36:13 +02:00
+website: ""
