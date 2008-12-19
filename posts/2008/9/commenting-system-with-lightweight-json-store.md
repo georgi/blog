@@ -1,8 +1,10 @@
 --- 
 category: Javascript
+tags: database, json
 date: 2008-09-07
 languages: php, javascript
-tags: database, jsonCommenting system with lightweight JSON store
+
+Commenting system with lightweight JSON store
 =============================================
 
 As I wrote this [blog engine][1], the need for a commenting system

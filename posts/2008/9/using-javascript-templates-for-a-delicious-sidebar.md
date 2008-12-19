@@ -1,8 +1,10 @@
 --- 
 category: Javascript
 date: 2008-09-21
+tags: javascript, templates, delicious, bookmarks
 languages: javascript, html
-tags: javascript, templates, delicious, bookmarksUsing Javascript Templates for a Delicious Sidebar
+
+Using Javascript Templates for a Delicious Sidebar
 ==================================================
 
 Processing JSON data from an external source with Javascript templates

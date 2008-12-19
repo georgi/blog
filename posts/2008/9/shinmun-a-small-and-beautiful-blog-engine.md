@@ -1,8 +1,10 @@
 --- 
 category: Ruby
+tags: blogging, engine, ruby, shinmun
 date: 2008-09-05
 languages: ruby, html, xml
-tags: blogging, engine, ruby, shinmunShinmun, a small and beautiful blog engine
+
+Shinmun, a small and beautiful blog engine
 ==========================================
 
 Shinmun is a **minimalist blog engine**. You just write posts as text files,

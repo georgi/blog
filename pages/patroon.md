@@ -1,5 +1,4 @@
---- 
-header: PatroonPatroon - a Javascript Template Engine
+Patroon - a Javascript Template Engine
 ======================================
 
 Patroon is a template engine written in Javascript in about 130 lines

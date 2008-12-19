@@ -1,5 +1,4 @@
---- 
-header: ShinmunShinmun, a small and beautiful blog engine
+Shinmun, a small and beautiful blog engine
 ==========================================
 
 Shinmun is a **minimalist blog engine**. You just write posts as text

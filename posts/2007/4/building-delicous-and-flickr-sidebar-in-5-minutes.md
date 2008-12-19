@@ -1,8 +1,10 @@
 --- 
 category: Ruby
+tags: flickr, delicious, rails
 date: 2007-04-08
 languages: ruby, html
-tags: flickr, delicious, railsBuilding a del.ico.us and flickr sidebar in 5 minutes
+
+Building a del.ico.us and flickr sidebar in 5 minutes
 =====================================================
 
 You need a del.icio.us sidebar which shows recent bookmarks or one of

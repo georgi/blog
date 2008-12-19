@@ -1,8 +1,10 @@
 --- 
 category: Ruby
+tags: ajax, rails, scriptaculous, json
 date: 2007-04-04
 languages: ruby, html, css
-tags: ajax, rails, scriptaculous, jsonFast Auto-completion with Rails, Scriptaculous and JSON
+
+Fast Auto-completion with Rails, Scriptaculous and JSON
 =======================================================
 
 Inspired by the excellent [Rails Recipes][1] book , I created an

@@ -1,8 +1,10 @@
 --- 
 category: Javascript
+tags: template, engine, json
 date: 2008-09-09
 languages: javascript, html
-tags: template, engine, jsonPatroon - a Javascript Template Engine
+
+Patroon - a Javascript Template Engine
 ======================================
 
 Patroon is a template engine written in Javascript in about 100 lines

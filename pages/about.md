@@ -1,5 +1,4 @@
---- 
-header: AboutAbout this blog
+About this blog
 ===============
 
 This is the personal blog of Matthias Georgi.
