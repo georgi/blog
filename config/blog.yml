@@ -1,7 +1,6 @@
 --- 
 language: en
 title: Matthias Georgi
-repository: root@213.239.215.244:/var/www/matthias-georgi.de/
 url: http://www.matthias-georgi.de
 author: Matthias Georgi
 description: Webdev, Gamedev, Interaction Design
