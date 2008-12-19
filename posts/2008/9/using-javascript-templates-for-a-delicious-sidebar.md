@@ -4,7 +4,6 @@ date: 2008-09-21
 languages: javascript, html
 tags: javascript, templates, delicious, bookmarks
 
-
 Using Javascript Templates for a Delicious Sidebar
 ==================================================
 

@@ -1,11 +1,4 @@
 --- 
-javascript_files: 
-- jquery.min
-- jquery-form.min
-- swfobject
-- shockwaves
-- comments
-- coderay
 javascripts_path: javascripts
 stylesheet_files: 
 - reset
@@ -16,5 +9,12 @@ stylesheet_files:
 - header
 - sidebar
 - article
+- comments
+- coderay
+javascript_files: 
+- jquery.min
+- jquery-form.min
+- swfobject
+- shockwaves
 - comments
 - coderay

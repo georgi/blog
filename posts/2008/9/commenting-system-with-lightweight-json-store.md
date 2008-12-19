@@ -4,7 +4,6 @@ date: 2008-09-07
 languages: php, javascript
 tags: database, json
 
-
 Commenting system with lightweight JSON store
 =============================================
 

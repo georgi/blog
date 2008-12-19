@@ -4,7 +4,6 @@ date: 2007-04-10
 languages: ruby
 tags: rails, rest, url
 
-
 Pretty RESTful URLs in Rails
 ============================
 
