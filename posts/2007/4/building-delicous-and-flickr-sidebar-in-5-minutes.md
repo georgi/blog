@@ -1,7 +1,7 @@
 --- 
 category: Ruby
-tags: flickr, delicious, rails
 date: 2007-04-08
+tags: flickr, delicious, rails
 languages: ruby, html
 
 Building a del.ico.us and flickr sidebar in 5 minutes

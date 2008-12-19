@@ -9,3 +9,8 @@
   text: And another test
   time: 2008-12-19 16:10:54.878276 +01:00
   website: www.matthias-georgi.de
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: Another last check!
+  time: 2008-12-19 16:13:16.856558 +01:00
+  website: www.matthias-georgi.de
