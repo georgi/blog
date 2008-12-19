@@ -1,6 +1,7 @@
 --- 
 category: Ruby
 date: 2008-09-05
+tags: blogging, engine, ruby, shinmun
 languages: ruby, html, xml
 tags: blogging, engine, ruby, shinmun
 

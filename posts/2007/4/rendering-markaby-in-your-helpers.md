@@ -1,6 +1,7 @@
 --- 
 category: Ruby
 date: 2007-04-02
+tags: rails, markaby
 languages: ruby
 tags: rails, markaby
 

@@ -1,6 +1,7 @@
 --- 
 category: Ruby
 date: 2007-04-10
+tags: rails, rest, url
 languages: ruby
 tags: rails, rest, url
 

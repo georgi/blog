@@ -1,6 +1,7 @@
 --- 
 category: Ruby
 date: 2007-04-18
+tags: rails, url, helpers
 languages: ruby
 tags: rails, url, helpers
 

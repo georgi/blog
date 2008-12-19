@@ -1,6 +1,7 @@
 --- 
 category: Ruby
 date: 2007-04-08
+tags: flickr, delicious, rails
 languages: ruby, html
 tags: flickr, delicious, rails
 

@@ -1,6 +1,7 @@
 --- 
 category: Javascript
 date: 2008-09-07
+tags: database, json
 languages: php, javascript
 tags: database, json
 
