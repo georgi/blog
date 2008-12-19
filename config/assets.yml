@@ -1,6 +1,6 @@
 --- 
+stylesheets_path: stylesheets
 images_path: images
-javascripts_path: javascripts
 stylesheet_files: 
 - reset
 - typo
@@ -19,4 +19,4 @@ javascript_files:
 - shockwaves
 - comments
 - coderay
-stylesheets_path: stylesheets
+javascripts_path: javascripts
