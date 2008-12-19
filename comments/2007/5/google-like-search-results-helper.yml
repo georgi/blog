@@ -19,3 +19,8 @@
   text: Another one to check mail address
   time: 2008-12-19 16:13:55.951542 +01:00
   website: www.matthias-georgi.de
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: Another comment on my local machine...
+  time: 2008-12-19 16:39:22.445223 +01:00
+  website: www.matthias-georgi.de

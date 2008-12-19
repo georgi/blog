@@ -1,9 +1,7 @@
 --- 
 category: Ruby
-tags: ruby, passenger, apache, rails, git, phusion, guides
 date: 2008-09-13
-
-Quick Guide for Passenger on Ubuntu Hardy
+tags: ruby, passenger, apache, rails, git, phusion, guidesQuick Guide for Passenger on Ubuntu Hardy
 =========================================
 
 This is a short guide for installing [Phusion Passenger][1] on Ubuntu

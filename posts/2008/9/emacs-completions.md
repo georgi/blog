@@ -1,10 +1,8 @@
 --- 
 category: Emacs
-tags: emacs, completion
 date: 2008-09-04
 languages: lisp
-
-Emacs Completions with Hippie-Expand and Snippets
+tags: emacs, completionEmacs Completions with Hippie-Expand and Snippets
 =================================================
 
 One of the most important features of a text editor is the completing

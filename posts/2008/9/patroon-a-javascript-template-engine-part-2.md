@@ -1,10 +1,8 @@
 --- 
 category: Javascript
-tags: template, engine, json
 date: 2008-09-16
 languages: javascript, html
-
-Patroon - a Javascript Template Engine (Part 2)
+tags: template, engine, jsonPatroon - a Javascript Template Engine (Part 2)
 ===============================================
 
 This post is an update to my [initial post][3]. Patroon has been

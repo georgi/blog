@@ -1,10 +1,8 @@
 --- 
 category: Ruby
-tags: google, search, rails
 date: 2007-05-10
 languages: ruby
-
-Google-like Search Results Helper
+tags: google, search, railsGoogle-like Search Results Helper
 =================================
 
 Representing your search results in a user-friendly way is a common

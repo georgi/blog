@@ -1,10 +1,8 @@
 --- 
 category: Ruby
-tags: rails, url, helpers
 date: 2007-04-18
 languages: ruby
-
-DRY Up Your Url Helpers
+tags: rails, url, helpersDRY Up Your Url Helpers
 =======================
 
 This tutorial shows you how to simplify url generation in combination

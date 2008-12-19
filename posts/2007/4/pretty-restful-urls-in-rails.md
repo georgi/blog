@@ -1,10 +1,8 @@
 --- 
 category: Ruby
-tags: rails, rest, url
 date: 2007-04-10
 languages: ruby
-
-Pretty RESTful URLs in Rails
+tags: rails, rest, urlPretty RESTful URLs in Rails
 ============================
 
 Since Release 1.2 Rails knows to generate _RESTful_ routes. Each

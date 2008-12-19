@@ -1,9 +1,7 @@
 --- 
 category: Ruby
-tags: ruby, shinmun, gem, release
 date: 2008-09-11
-
-Shinmun-0.1 Gem Released
+tags: ruby, shinmun, gem, releaseShinmun-0.1 Gem Released
 ========================
 
 Shinmun is a **minimalist blog engine**. You just write posts as text files,
