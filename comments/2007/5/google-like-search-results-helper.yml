@@ -29,3 +29,8 @@
   text: one more
   time: 2008-12-19 17:07:11.558239 +01:00
   website: www.matthias-georgi.de
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: Klaro
+  time: 2008-12-19 17:20:54.519273 +01:00
+  website: www.matthias-georgi.de
