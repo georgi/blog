@@ -3,6 +3,7 @@ category: Ruby
 date: 2007-04-02
 languages: ruby
 tags: rails, markaby
+
 Rendering markaby in your helpers
 =================================
 
