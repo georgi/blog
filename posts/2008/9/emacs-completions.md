@@ -1,9 +1,8 @@
 --- 
 category: Emacs
-tags: emacs, completion
 date: 2008-09-04
 languages: lisp
-
+tags: emacs, completion
 Emacs Completions with Hippie-Expand and Snippets
 =================================================
 

@@ -1,11 +1,11 @@
 --- 
-language: en
 title: Matthias Georgi
-url: http://www.matthias-georgi.de
+language: en
 author: Matthias Georgi
-description: Webdev, Gamedev, Interaction Design
+url: http://www.matthias-georgi.de
 categories: 
 - Ruby
 - Javascript
 - Actionscript
 - Emacs
+description: Webdev, Gamedev, Interaction Design
