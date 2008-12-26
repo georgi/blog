@@ -1,0 +1,6 @@
+--- 
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: This is just a test.
+  time: 2008-12-26 11:37:39.662860 +01:00
+  website: ""

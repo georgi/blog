@@ -1,7 +1,7 @@
 --- 
-- class: Delicious
-  name: delicious
+- name: delicious
+  class: Delicious
   url: http://feeds.delicious.com/rss/matthias_georgi
-- class: FlickrAggregation
-  name: flickr
+- name: flickr
+  class: FlickrAggregation
   url: http://api.flickr.com/services/feeds/photos_public.gne?id=31771251@N05&lang=en-us&format=rss_200
