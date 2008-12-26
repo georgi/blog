@@ -1,5 +1,6 @@
 --- 
 date: 2008-12-26
+category: Ruby
 
 Git Store - using Git as versioned data store in Ruby
 =====================================================
