@@ -1,6 +1,7 @@
 --- 
 date: 2008-12-26
 category: Ruby
+tags: git, ruby, database
 
 Git Store - using Git as versioned data store in Ruby
 =====================================================
@@ -41,6 +42,8 @@ Now you can instantiate a GitStore instance and store some data. The
 data will be serialized depending on the file extension. So for YAML
 storage you can use the 'yml' extension:
 
+    @@ruby
+
     class WikiPage < Struct.new(:author, :title, :body); end
     class User < Struct.new(:name); end
 
@@ -55,10 +58,14 @@ Note that directories will be created automatically.
 
 Another way to access a path is:
 
+    @@ruby
+
     store[config', 'wiki.yml'] = { 'name' => 'My Personal Wiki' }
 
 Finally you can access the git store as a Hash of Hashes, but in this
 case you have to create the Tree objects manually:
+
+    @@ruby
 
     store['users'] = GitStore::Tree.new
     store['users']['matthias.yml'] = User.new('Matthias')
@@ -80,6 +87,8 @@ iterate over trees and subtrees, so you can partition your data in a
 meaningful way. For example you may separate the config files and the
 pages of a wiki:
 
+    @@ruby
+
     store['pages/home.yml'] = WikiPage.new('matthias', 'Home', 'This is the home page...')
     store['pages/about.yml'] = WikiPage.new('matthias', About', 'About this site...')
     store['pages/links.yml'] = WikiPage.new('matthias', 'Links', 'Some useful links...')
@@ -93,6 +102,8 @@ pages of a wiki:
 
 Serialization is dependent on the filename extension. You can add more
 handlers if you like, the interface is like this:
+
+    @@ruby
 
     class YAMLHandler
       def read(id, name, data)
@@ -108,6 +119,8 @@ handlers if you like, the interface is like this:
 
 
 Shinmun uses its own handler for files with `md` extension:
+
+    @@ruby
 
     class PostHandler
       def read(name, data)
