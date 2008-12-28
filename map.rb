@@ -4,16 +4,16 @@ Kontrol.map do
   end
 
   get '/categories/(.*)' do |category|
-    render 'category.rhtml', find_category(category)
+    render 'category.rhtml', find_category(category.chomp('.html'))
   end
 
   get '/(\d+)/(\d+)/(.*)' do |year, month, name|
-    post = find_post(year.to_i, month.to_i, name)
+    post = find_post(year.to_i, month.to_i, name.chomp('.html'))
     render 'post.rhtml', :post => post, :comments => comments_for(post)
   end
 
   get '/(\d+)/(\d+)' do |year, month|
-    render 'archive.rhtml', :year => year.to_i, :month => month.to_i
+    render 'archive.rhtml', :year => year.to_i, :month => month.chomp('.html').to_i
   end
 
   get '/index\.rss' do
@@ -94,6 +94,6 @@ Kontrol.map do
   end
 
   get '/(.*)' do |path|
-    render 'page.rhtml', :post => find_page(path)
+    render 'page.rhtml', :post => find_page(path.chomp('.html'))
   end
 end

@@ -6,7 +6,6 @@ javascript_files:
 - shockwaves
 - comments
 - coderay
-javascripts_path: javascripts
 stylesheet_files: 
 - reset
 - typo
