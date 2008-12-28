@@ -22,6 +22,10 @@ p {
     margin-bottom: 1em;
 }
 
+code {
+    font-family: monospace;
+ }
+
 pre {
     margin: 1em 0;
     padding: 0.8em 1em;
