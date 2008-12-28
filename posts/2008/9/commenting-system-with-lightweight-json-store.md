@@ -1,7 +1,7 @@
 --- 
 category: Javascript
-date: 2008-09-07
 tags: php, javascript, database, json
+date: 2008-09-07
 
 Commenting system with lightweight JSON store
 =============================================

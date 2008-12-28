@@ -1,7 +1,7 @@
 --- 
 category: Emacs
-date: 2008-09-04
 tags: emacs, lisp, completion
+date: 2008-09-04
 
 Emacs Completions with Hippie-Expand and Snippets
 =================================================
