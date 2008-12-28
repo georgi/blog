@@ -1,7 +1,7 @@
 --- 
 category: Ruby
-tags: ruby, ajax, rails, scriptaculous, json
 date: 2007-04-04
+tags: ruby, ajax, rails, scriptaculous, json
 
 Fast Auto-completion with Rails, Scriptaculous and JSON
 =======================================================
