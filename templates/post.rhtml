@@ -19,7 +19,7 @@
   
   <ul>
 
-  <% for post in @blog.posts_with_tags(@post.tags) %>
+  <% for post in @blog.posts_with_tags(@post.tags).reverse %>
      <% if post.path != @post.path %>
        <li><%= post_link post %></li>
      <% end %>
