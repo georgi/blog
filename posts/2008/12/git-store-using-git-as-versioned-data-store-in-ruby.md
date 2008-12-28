@@ -2,9 +2,8 @@
 category: Ruby
 date: 2008-12-26
 tags: git, ruby, database
-
-Git Store - using Git as versioned data store in Ruby
-=====================================================
+title: Git Store - using Git as versioned data store in Ruby
+---
 
 GitStore is a small Ruby library, providing an easy interface to the
 version control system [Git][1]. It aims to use Git as a versioned
@@ -16,7 +15,7 @@ application may access the data in a convenient hash-like way. This
 library is based on [Grit][2], the main technology behind [GitHub][3].
 
 
-## Installation
+### Installation
 
 GitStore can be installed as gem easily, if you have RubyGems 1.2.0:
 
@@ -30,7 +29,7 @@ If you don't have RubyGems 1.2.0, you may download the package on the
     $ sudo gem install git_store
 
 
-## Usage Example
+### Usage Example
 
 First thing you should do, is to initialize a new git repository.
 
@@ -70,7 +69,7 @@ case you have to create the Tree objects manually:
     store['users'] = GitStore::Tree.new
     store['users']['matthias.yml'] = User.new('Matthias')
 
-## Where is my data?
+### Where is my data?
 
 When you call the `commit` method, your data is written back straight
 into the git repository. No intermediate file representation. So if
@@ -80,7 +79,7 @@ you want to look into your data, you can use some git browser like
     $ git checkout
 
 
-## Iteration
+### Iteration
 
 Iterating over the data objects is quite easy. Furthermore you can
 iterate over trees and subtrees, so you can partition your data in a
@@ -98,7 +97,7 @@ pages of a wiki:
     store['pages'].each { |page| ... } # yields only the pages
 
 
-## Serialization
+### Serialization
 
 Serialization is dependent on the filename extension. You can add more
 handlers if you like, the interface is like this:
@@ -135,7 +134,7 @@ Shinmun uses its own handler for files with `md` extension:
     GitStore::Handler[md'] = PostHandler.new
 
 
-## Related Work
+### Related Work
 
 John Wiegley already has done [something similar for Python][4]. His
 implementation has its own git interface, GitStore uses the wonderful

@@ -2,9 +2,8 @@
 category: Javascript
 date: 2008-09-07
 tags: php, javascript, database, json
-
-Commenting system with lightweight JSON store
-=============================================
+title: Commenting system with lightweight JSON store
+---
 
 As I wrote this [blog engine][1], the need for a commenting system
 arose and I reflected about a small and simple commenting system with

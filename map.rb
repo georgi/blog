@@ -40,55 +40,6 @@ Kontrol.map do
     end
   end
 
-  map '/admin' do
-    use Rack::Auth::Basic do |username, password|
-      File.read(File.join(File.dirname(__FILE__), "password")).chomp("\n") == password
-    end
-
-    get '/posts/(.*)' do |page|
-      session[:admin] = true
-      render 'admin/posts.rhtml', :posts => posts_by_date, :page => page.to_i, :page_size => 10
-    end
-
-    get '/pages' do
-      render 'admin/pages.rhtml'
-    end
-
-    get '/commits/(.*)' do |id|    
-      render 'admin/commit.rhtml', :commit => repo.commit(id)
-    end
-
-    get '/commits' do
-      render 'admin/commits.rhtml'
-    end
-
-    map '/edit/(.*)' do
-      get do |path|
-        render 'admin/edit.rhtml', :post => find_by_path(path)
-      end
-
-      post do |path|        
-        update_post(post = find_by_path(path), params['data'])
-        redirect(post.date ? '/admin/posts/' : '/admin/pages')
-      end
-    end
-
-    post '/delete/(.*)' do |path|
-      delete_post(post = find_by_path(path))
-      redirect(post.date ? '/admin/posts/' : '/admin/pages/')
-    end
-
-    post '/create' do
-      post = create_post(params)
-      redirect "/admin/edit/#{post.path}"
-    end
-
-    get '' do
-      redirect '/admin/posts/'
-    end
-
-  end
-
   get '/$' do
     render 'index.rhtml'
   end

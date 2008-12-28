@@ -2,9 +2,8 @@
 category: Ruby
 date: 2007-04-08
 tags: ruby, flickr, delicious, rails
-
-Building a del.ico.us and flickr sidebar in 5 minutes
-=====================================================
+title: Building a del.ico.us and flickr sidebar in 5 minutes
+---
 
 You need a del.icio.us sidebar which shows recent bookmarks or one of
 these nice flickr badges? This is really is easy as the [Typo Weblog

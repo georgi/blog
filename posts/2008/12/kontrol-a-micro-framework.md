@@ -2,9 +2,8 @@
 date: 2008-12-28
 category: Ruby
 tags: ruby, framework
-
-Kontrol - a micro framework
-===========================
+title: Kontrol - a micro framework
+---
 
 Kontrol is a small web framework written in Ruby, which runs directly
 on [Rack][5]. It provides a simple pattern matching algorithm for routing
@@ -13,7 +12,7 @@ and uses GitStore as data storage.
 All examples can be found in the [examples folder][3] of the kontrol
 project, which is hosted on [this github page][4].
 
-## Quick Start
+### Quick Start
 
 Create a file named `hello_world.ru`:
 
@@ -38,7 +37,7 @@ Now run:
 Browse to `http://localhost:9292` and you will see "Hello World".
 
 
-## Features
+### Features
 
 Kontrol is just a thin layer on top of Rack. It provides a routing
 algorithm, a simple template mechanism and some convenience stuff to
@@ -55,7 +54,7 @@ defined actions. You will probably use these methods:
 * redirect(path): renders a redirect response to specified path
 
 
-## Routing
+### Routing
 
 Routing is just as simple as using regular expressions with
 groups. Each group will be provided as argument to the block.
@@ -90,7 +89,7 @@ example if you browse to `localhost:9292/2008/12`, the app will
 display `Archive for 2008/12`.
 
 
-## Nested Routes
+### Nested Routes
 
 Routes can be nested. This way you can avoid repeating patterns and
 define handlers for a set of HTTP verbs. Each handler will be called
@@ -133,7 +132,7 @@ actions.
 So if you browse to `/something`, you will see a submit button. After
 submitting you will see the result of the second handler.
 
-## Templates
+### Templates
 
 Rendering templates is as simple as calling a template file with some
 parameters, which are accessible inside the template as instance
@@ -181,7 +180,7 @@ rendered template. Note that the title and body parameters have been
 passed to the `render` call.
 
 
-## Using GitStore
+### Using GitStore
 
 [GitStore][1] is another library, which allows you to store code and
 data in a convenient way in a git repository. The repository is

@@ -2,9 +2,8 @@
 category: Javascript
 date: 2008-09-21
 tags: javascript, templates, delicious, bookmarks
-
-Using Javascript Templates for a Delicious Sidebar
-==================================================
+title: Using Javascript Templates for a Delicious Sidebar
+---
 
 Processing JSON data from an external source with Javascript templates
 is a natural fit. Create a template inside your *HTML Document* by

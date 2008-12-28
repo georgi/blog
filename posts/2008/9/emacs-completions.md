@@ -2,9 +2,8 @@
 category: Emacs
 date: 2008-09-04
 tags: emacs, lisp, completion
-
-Emacs Completions with Hippie-Expand and Snippets
-=================================================
+title: Emacs Completions with Hippie-Expand and Snippets
+---
 
 One of the most important features of a text editor is the completing
 of text inside a buffer. There a lots of packages for Emacs, which

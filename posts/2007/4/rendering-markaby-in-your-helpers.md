@@ -1,10 +1,9 @@
---- 
+---
 category: Ruby
 date: 2007-04-02
 tags: ruby, rails, markaby
-
-Rendering markaby in your helpers
-=================================
+title: Rendering markaby in your helpers
+---
 
 Generating markup in your rails helpers is a general practice in rails
 and is used throughout all rails helpers. Normally you use `content_tag`

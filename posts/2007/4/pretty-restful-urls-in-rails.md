@@ -2,9 +2,8 @@
 category: Ruby
 date: 2007-04-10
 tags: ruby, rails, rest, url
-
-Pretty RESTful URLs in Rails
-============================
+title: Pretty RESTful URLs in Rails
+---
 
 Since Release 1.2 Rails knows to generate _RESTful_ routes. Each
 resource is identified by an _URI_, which looks like `/users/123` . It

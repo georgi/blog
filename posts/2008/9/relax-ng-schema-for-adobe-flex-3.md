@@ -2,9 +2,8 @@
 category: Actionscript
 date: 2008-09-15
 tags: emacs, schema, xml, relax-ng, actionscript, grammar
-
-Relax NG Schema for Adobe Flex 3
-================================
+title: Relax NG Schema for Adobe Flex 3
+---
 
 In the past Flex development on Emacs was not as it should be because
 of a missing Relax NG Schema, which is needed for nxml-mode to work

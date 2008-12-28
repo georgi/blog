@@ -2,9 +2,8 @@
 category: Ruby
 date: 2007-04-04
 tags: ruby, ajax, rails, scriptaculous, json
-
-Fast Auto-completion with Rails, Scriptaculous and JSON
-=======================================================
+title: Fast Auto-completion with Rails, Scriptaculous and JSON
+---
 
 Inspired by the excellent [Rails Recipes][1] book , I created an
 improved Auto-completion helper, which uses _JSON_ and _AJAX_ instead

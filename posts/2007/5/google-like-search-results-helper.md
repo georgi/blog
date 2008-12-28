@@ -2,9 +2,8 @@
 category: Ruby
 date: 2007-05-10
 tags: ruby, google, search, rails
-
-Google-like Search Results Helper
-=================================
+title: Google-like Search Results Helper
+---
 
 Representing your search results in a user-friendly way is a common
 task among web developers. Google's approach is dead simple but really

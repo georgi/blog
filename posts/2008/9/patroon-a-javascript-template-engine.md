@@ -2,9 +2,8 @@
 category: Javascript
 date: 2008-09-09
 tags: javascript, template, engine, json
-
-Patroon - a Javascript Template Engine
-======================================
+title: Patroon - a Javascript Template Engine
+---
 
 Patroon is a template engine written in Javascript in about 100 lines
 of code. It takes existing DOM nodes annotated with CSS classes and
