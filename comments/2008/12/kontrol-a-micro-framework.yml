@@ -1,0 +1,6 @@
+--- 
+- !ruby/object:Shinmun::Comment 
+  name: "Nicol\xC3\xA1s Sanguinetti"
+  text: This looks a lot like Sinatra. What's the differentiator?
+  time: 2008-12-29 00:06:22.498464 +01:00
+  website: http://nicolassanguinetti.info
