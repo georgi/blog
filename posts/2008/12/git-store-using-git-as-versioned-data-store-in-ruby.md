@@ -6,6 +6,7 @@ title: Git Store - using Git as versioned data store in Ruby
 ---
 
 
+
 GitStore is a small Ruby library, providing an easy interface to the
 version control system [Git][1]. It aims to use Git as a versioned
 data store much like the well known PStore. Basically GitStore checks
