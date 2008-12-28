@@ -1,7 +1,7 @@
 --- 
 category: Ruby
-tags: git, ruby, database
 date: 2008-12-26
+tags: git, ruby, database
 
 Git Store - using Git as versioned data store in Ruby
 =====================================================

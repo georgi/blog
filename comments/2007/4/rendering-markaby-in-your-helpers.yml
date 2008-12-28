@@ -4,3 +4,8 @@
   text: Just testing!
   time: 2008-12-28 14:49:15.518442 +01:00
   website: ""
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: Another one..
+  time: 2008-12-28 15:41:58.738364 +01:00
+  website: ""

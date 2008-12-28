@@ -1,7 +1,7 @@
 --- 
 category: Ruby
-tags: ruby, google, search, rails
 date: 2007-05-10
+tags: ruby, google, search, rails
 
 Google-like Search Results Helper
 =================================
