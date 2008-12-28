@@ -1,7 +1,7 @@
 --- 
 category: Ruby
-tags: ruby, rails, markaby
 date: 2007-04-02
+tags: ruby, rails, markaby
 
 Rendering markaby in your helpers
 =================================

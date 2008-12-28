@@ -1,7 +1,7 @@
 --- 
 category: Javascript
-tags: javascript, template, engine, json
 date: 2008-09-16
+tags: javascript, template, engine, json
 
 Patroon - a Javascript Template Engine (Part 2)
 ===============================================
