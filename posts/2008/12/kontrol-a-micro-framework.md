@@ -1,7 +1,7 @@
 --- 
 date: 2008-12-28
 category: Ruby
-tags: ruby, framework
+tags: framework, kontrol
 title: Kontrol - a micro framework
 ---
 

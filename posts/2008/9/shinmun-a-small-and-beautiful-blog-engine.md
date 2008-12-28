@@ -1,7 +1,7 @@
 --- 
 category: Ruby
 date: 2008-09-05
-tags: ruby, blogging, engine, ruby, shinmun
+tags: shinmun
 title: Shinmun, a small and beautiful blog engine
 ---
 

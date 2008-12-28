@@ -1,7 +1,7 @@
 --- 
 category: Javascript
 date: 2008-09-07
-tags: php, javascript, database, json
+tags: database, json
 title: Commenting system with lightweight JSON store
 ---
 
