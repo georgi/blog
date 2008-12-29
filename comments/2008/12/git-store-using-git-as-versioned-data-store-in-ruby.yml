@@ -19,13 +19,3 @@
         store[config', 'wiki.yml'] = { 'name' => 'My Personal Wiki' }
   time: 2008-12-29 14:07:14.324850 +01:00
   website: ""
-- !ruby/object:Shinmun::Comment 
-  name: Matt
-  text: |-
-    Another unbalanced quote:
-    
-        @@ruby
-    
-        store[config', 'wiki.yml'] = { 'name' => 'My Personal Wiki' }
-  time: 2008-12-29 14:07:21.194909 +01:00
-  website: ""
