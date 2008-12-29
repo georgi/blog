@@ -59,7 +59,7 @@ Another way to access a path is:
 
     @@ruby
 
-    store[config', 'wiki.yml'] = { 'name' => 'My Personal Wiki' }
+    store['config', 'wiki.yml'] = { 'name' => 'My Personal Wiki' }
 
 Finally you can access the git store as a Hash of Hashes, but in this
 case you have to create the Tree objects manually:
