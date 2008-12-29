@@ -1,2 +1,6 @@
---- []
-
+--- 
+- !ruby/object:Shinmun::Comment 
+  name: J D
+  text: Unbalanced quote, line 11 of your last example.
+  time: 2008-12-29 08:45:24.660612 +01:00
+  website: ""
