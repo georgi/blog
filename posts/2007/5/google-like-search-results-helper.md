@@ -6,6 +6,7 @@ title: Google-like Search Results Helper
 ---
 
 
+
 Representing your search results in a user-friendly way is a common
 task among web developers. Google's approach is dead simple but really
 effective. The matching text is highlighted and shown with its

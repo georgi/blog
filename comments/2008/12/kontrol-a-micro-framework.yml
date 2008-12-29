@@ -20,3 +20,10 @@
     As I said, Kontrol is very thin, it uses the infrastructure of Rack and adds some extra functionality. Sinatra on the other hand duplicates many things already present in Rack, like Request and Response classes.
   time: 2008-12-29 00:13:45.666664 +01:00
   website: ""
+- !ruby/object:Shinmun::Comment 
+  name: raggi
+  text: |
+    Is GitStore concurrency safe these days? (Threads / Async Reads)
+
+  time: 2008-12-29 21:54:47.862317 +01:00
+  website: http://ra66i.org/
