@@ -5,6 +5,8 @@ tags: helpers
 title: DRY Up Your Url Helpers
 ---
 
+
+
 This tutorial shows you how to simplify url generation in combination
 with _RESTful_ resources by extending the `url_for` helper. This approach
 will also work with nested routes and other helpers like `form_tag` and

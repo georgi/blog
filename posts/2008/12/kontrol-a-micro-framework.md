@@ -5,6 +5,8 @@ tags: framework, kontrol
 title: Kontrol - a micro framework
 ---
 
+
+
 Kontrol is a small web framework written in Ruby, which runs directly
 on [Rack][5]. It provides a simple pattern matching algorithm for routing
 and uses GitStore as data storage.
