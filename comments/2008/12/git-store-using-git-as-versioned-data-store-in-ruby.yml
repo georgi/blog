@@ -4,3 +4,8 @@
   text: Unbalanced quote, line 11 of your last example.
   time: 2008-12-29 08:45:24.660612 +01:00
   website: ""
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: Thank you, fixed it.
+  time: 2008-12-29 11:34:05.630675 +01:00
+  website: ""
