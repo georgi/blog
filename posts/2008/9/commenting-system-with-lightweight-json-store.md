@@ -5,10 +5,6 @@ tags: database, json
 title: Commenting system with lightweight JSON store
 ---
 
-
-
-
-
 As I wrote this [blog engine][1], the need for a commenting system
 arose and I reflected about a small and simple commenting system with
 just a flat file JSON store. This is my solution, which can be used on
