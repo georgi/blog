@@ -1,0 +1,22 @@
+--- 
+- !ruby/object:Shinmun::Comment 
+  name: "Nicol\xC3\xA1s Sanguinetti"
+  text: This looks a lot like Sinatra. What's the differentiator?
+  time: 2008-12-29 00:06:22.498464 +01:00
+  website: http://nicolassanguinetti.info
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: |-
+    This is a copy of my [response on reddit](http://www.reddit.com/r/ruby/comments/7m2xm/kontrol_a_micro_framework/5tmp).
+    
+    That's a good question and I try to give a short answer now and update the blog post later.
+    
+    First of all, Kontrol just happened to be some small piece of code, which proved to be useful for me. So I extracted it out of my blog engine Shinmun, made it available via github and rubygems and wrote a blog post about it.
+    
+    So for my blog engine, the one important point was the Git integration. It should just run on top of a git repository and a rackup file. All the config, posts, templates and assets should live in the repo and on a push from my local machine, the application should reload its state from the repo automatically. Kontrol just does this. Kontrol is in fact very thin, just a router, a template class, Git integration and some convenience stuff.
+    
+    Comparing to other ruby frameworks, Kontrol is a bit like Sinatra, but uses regular expressions for routing. Another difference to Sinatra is, that a Kontrol application is basically a class tied to a set of routes and Sinatra runs without an application class.
+    
+    As I said, Kontrol is very thin, it uses the infrastructure of Rack and adds some extra functionality. Sinatra on the other hand duplicates many things already present in Rack, like Request and Response classes.
+  time: 2008-12-29 00:13:45.666664 +01:00
+  website: ""
