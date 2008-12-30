@@ -8,6 +8,7 @@ title: Building a del.ico.us and flickr sidebar in 5 minutes
 
 
 
+
 You need a del.icio.us sidebar which shows recent bookmarks or one of
 these nice flickr badges? This is really is easy as the [Typo Weblog
 Engine][1] already includes an flickr and del.icio.us aggregator.

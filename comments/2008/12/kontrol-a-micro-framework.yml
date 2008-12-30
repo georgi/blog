@@ -32,3 +32,8 @@
   text: I've blogged about the way I wish plain-text-based blog engines would function just a couple of days ago (http://rassie.org/archives/203). The main difference is that in your approach a regexp defines which template will be used, while I'd like to define which data appears on a page based on a URL pattern. Dare to try something like this inside shinmun? ;)
   time: 2008-12-30 15:04:07.344961 +01:00
   website: http://rassie.org
+- !ruby/object:Shinmun::Comment 
+  name: Nikolai
+  text: I've [blogged](http://rassie.org/archives/203) about the way plain-text-based blog engines might do their routing just a couple of days ago. The main difference in my approach is that instead of definining which template should be used, I'd like to define the data to appears on a page based on a URL pattern. Feasible concept? Dare to try something like this inside shinmun? ;)
+  time: 2008-12-30 15:05:29.952755 +01:00
+  website: http://rassie.org
