@@ -45,12 +45,10 @@
     1. write all blobs and trees according to their SHA1 hash
     2. write the commit object
     3. write the new HEAD to refs/heads/master
-
     
-    1. and 2. cannot have any concurrency problems, because changed objects result in a new hash value, therefore a new git object is created
-
+    The first and second step cannot have any concurrency problems, because changed objects result in a new hash value, therefore a new git object is created
     
-    3. consists of a write of the SHA1 hash, which has a length of 40 bytes. The linux man page tells me, that writes for at least 512 bytes are atomic.
+    The third step consists of a write of the SHA1 hash, which has a length of 40 bytes. The linux man page tells me, that writes for at least 512 bytes are atomic.
     
     Last thing to consider is, that all three steps need not to be done atomically, because if other processes write at the same time, they have no chance to interfere because of the uniqe hash values.
     
