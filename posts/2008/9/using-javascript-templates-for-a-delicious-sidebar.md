@@ -12,6 +12,7 @@ title: Using Javascript Templates for a Delicious Sidebar
 
 
 
+
 Processing JSON data from an external source with Javascript templates
 is a natural fit. Create a template inside your *HTML Document* by
 adding class names and variables and write a few lines for fetching

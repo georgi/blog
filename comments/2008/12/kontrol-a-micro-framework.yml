@@ -65,3 +65,8 @@
     On problem remains and I think this should be considered, which is the missed update problem. If I have some new file, which was added by another process, I will not include it in my own commit.
   time: 2008-12-30 15:18:05.001459 +01:00
   website: ""
+- !ruby/object:Shinmun::Comment 
+  name: Matthias Georgi
+  text: Nikolai, thanks for pointing out. This will be fixed right away!
+  time: 2008-12-30 15:19:02.354709 +01:00
+  website: ""

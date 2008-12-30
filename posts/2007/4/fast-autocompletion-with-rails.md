@@ -12,6 +12,7 @@ title: Fast Auto-completion with Rails, Scriptaculous and JSON
 
 
 
+
 Inspired by the excellent [Rails Recipes][1] book , I created an
 improved Auto-completion helper, which uses _JSON_ and _AJAX_ instead
 of a script tag for loading the completions. What we want to achieve
