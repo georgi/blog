@@ -7,6 +7,7 @@ title: Viewing RI in a web browser
 
 
 
+
 I'm a big fan of the Firefox keyword search. For example I have
 keywords for [LEO][1], [Wikipedia][2] and [Man pages][3]. Sometimes I
 want to look up API documentation in Ruby and typing `ri camelize`

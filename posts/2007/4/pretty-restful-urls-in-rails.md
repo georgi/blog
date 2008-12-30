@@ -7,6 +7,7 @@ title: Pretty RESTful URLs in Rails
 
 
 
+
 Since Release 1.2 Rails knows to generate _RESTful_ routes. Each
 resource is identified by an _URI_, which looks like `/users/123` . It
 would be nice to have more readable URLs, which include the name of
