@@ -9,6 +9,7 @@ title: Patroon - a Javascript Template Engine (Part 2)
 
 
 
+
 This post is an update to my [initial post][3]. Patroon has been
 improved and is now easier to use and uses a better algorithm
 internally.
