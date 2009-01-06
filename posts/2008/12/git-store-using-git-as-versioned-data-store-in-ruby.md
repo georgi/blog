@@ -14,6 +14,11 @@ folder structure and can be checked out and examined, but the
 application may access the data in a convenient hash-like way. This
 library is based on [Grit][2], the main technology behind [GitHub][3].
 
+<strong>
+GitStore has its own [project page](/gitstore) now!
+Please look for current information there.
+</strong>
+
 
 ### Installation
 

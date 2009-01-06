@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title><%= @blog.title %> <%= @post and " - #{@post.title}" %></title>
+    <meta name="Description" content="<%= @blog.description %>" />
+    <meta name="Keywords" content="Matthias Georgi, Blog" />
     <meta http-equiv="Content-Language" content="English" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/matthias-georgi" />
@@ -24,8 +26,7 @@
 	  <li><%= navi_link 'Javascript', '/categories/javascript' %></li>
 	  <li><%= navi_link 'Actionscript', '/categories/actionscript' %></li>
 	  <li><%= navi_link 'Emacs', '/categories/emacs' %></li>
-	  <li><%= navi_link 'Shinmun', '/shinmun' %></li>
-	  <li><%= navi_link 'Patroon', '/patroon' %></li>
+	  <li><%= navi_link 'Projects', '/projects' %></li>
 	  <li><%= navi_link 'About', '/about' %></li>
 	</ul>
       </div>

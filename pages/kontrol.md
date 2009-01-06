@@ -1,24 +1,14 @@
---- 
-category: Ruby
-date: 2008-12-28
-tags: framework, kontrol
+---
 title: Kontrol - a micro framework
 ---
 
 Kontrol is a small web framework written in Ruby, which runs directly
-on [Rack][5]. It provides a simple pattern matching algorithm for routing
-and uses GitStore as data storage.
+on [Rack][5]. It uses regular expressions for routing.
 
 All examples can be found in the [examples folder][3] of the kontrol
 project, which is hosted on [this github page][4].
 
-<strong>
-Kontrol has its own [project page](/kontrol) now!
-Please look for current information there.
-</strong>
-
-
-### Quick Start
+## Quick Start
 
 Create a file named `hello_world.ru`:
 
@@ -43,7 +33,7 @@ Now run:
 Browse to `http://localhost:9292` and you will see "Hello World".
 
 
-### Features
+## Features
 
 Kontrol is just a thin layer on top of Rack. It provides a routing
 algorithm, a simple template mechanism and some convenience stuff to
@@ -60,7 +50,7 @@ defined actions. You will probably use these methods:
 * redirect(path): renders a redirect response to specified path
 
 
-### Routing
+## Routing
 
 Routing is just as simple as using regular expressions with
 groups. Each group will be provided as argument to the block.
@@ -87,7 +77,7 @@ Create a file named `routing.ru`:
     
 Now run this application:
 
-    rackup routing.ru
+    $ rackup routing.ru
 
 
 You will now see, how regex groups and parameters are related. For
@@ -95,7 +85,7 @@ example if you browse to `localhost:9292/2008/12`, the app will
 display `Archive for 2008/12`.
 
 
-### Nested Routes
+## Nested Routes
 
 Routes can be nested. This way you can avoid repeating patterns and
 define handlers for a set of HTTP verbs. Each handler will be called
@@ -129,7 +119,7 @@ with the same arguments.
 
 Now run this app like:
 
-    rackup nested.ru
+    $ rackup nested.ru
     
 The second route catches all paths except the `/blog` route. Inside
 the second route there are two different handlers for `GET` and `POST`
@@ -138,7 +128,8 @@ actions.
 So if you browse to `/something`, you will see a submit button. After
 submitting you will see the result of the second handler.
 
-### Templates
+
+## Templates
 
 Rendering templates is as simple as calling a template file with some
 parameters, which are accessible inside the template as instance
@@ -179,14 +170,14 @@ Create a templates.ru file:
 
 Now run this example:
 
-    rackup templates.ru
+    $ rackup templates.ru
 
 If you browse to any path on `localhost:9292`, you will see the
 rendered template. Note that the title and body parameters have been
 passed to the `render` call.
 
 
-### Using GitStore
+## Using GitStore
 
 [GitStore][1] is another library, which allows you to store code and
 data in a convenient way in a git repository. The repository is
@@ -207,8 +198,6 @@ We create a Markdown file name `pages/index.md`:
 
 We have now a simple page, which should be rendered as response. We
 create a simple app in a file `git_app.ru`:
-
-    @@ruby
 
     require 'kontrol'
     require 'bluecloth'
@@ -241,7 +230,7 @@ all files except the rackup file and the app will still serve the page
 from your repo.
 
 
-[1]: http://github.com/georgi/git_store
+[1]: http://www.matthias-georgi.de/gitstore
 [2]: http://github.com/mojombo/grit
 [3]: http://github.com/georgi/kontrol/tree/master/examples
 [4]: http://github.com/georgi/kontrol

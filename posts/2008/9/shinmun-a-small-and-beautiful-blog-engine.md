@@ -5,10 +5,8 @@ tags: shinmun
 title: Shinmun, a small and beautiful blog engine
 ---
 
-Shinmun is a **minimalist blog engine**. You just write posts as text files,
+Shinmun is a minimalist blog engine. You just write posts as text files,
 render them to static files and push your blog to your server.
-
-**Notice : Shinmun has changed since then and has now [its own page][4]**.
 
 This allows you to write posts in your favorite editor like Emacs or
 VI and use a VCS like git.
@@ -16,6 +14,11 @@ VI and use a VCS like git.
 Your layout can be customized by a set of *ERB templates*. These
 templates have access to `Post` objects and *helper methods* so that
 anybody who knows *Rails* should feel comfortable with it.
+
+<strong>
+Shinmun has its own [project page](/shinmun) now!
+Please look for current information there.
+</strong>
 
 
 ### Shinmun Features

@@ -11,7 +11,10 @@ expand a data object according to simple rules. Additionally you may
 use traditional string interpolation inside attribute values and text
 nodes.
 
-**Patroon has changed a bit, please go the [Patroon project page][3]**.
+<strong>
+Patroon has its own [project page](/patroon) now!
+Please look for current information there.
+</strong>
 
 
 ### Example

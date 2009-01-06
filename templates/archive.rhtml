@@ -1,4 +1,4 @@
-<% @header = "#{Date::MONTHNAMES[@month]} #{@year}" %>
+<h1><%= "#{Date::MONTHNAMES[@month]} #{@year}" %></h1>
 
 <div class="articles">
   <% for post in @blog.posts_for_month(@year, @month) %>
