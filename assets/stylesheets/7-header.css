@@ -31,9 +31,12 @@
 #navi ul {
     clear: both;
     list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 #navi ul li {
+    display:inline;
     float: left;
     border-right: 1px solid #fff;
     margin: 0;
