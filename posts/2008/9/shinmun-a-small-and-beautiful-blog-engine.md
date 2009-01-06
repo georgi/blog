@@ -5,14 +5,6 @@ tags: shinmun
 title: Shinmun, a small and beautiful blog engine
 ---
 
-
-
-
-
-
-
-
-
 Shinmun is a **minimalist blog engine**. You just write posts as text files,
 render them to static files and push your blog to your server.
 

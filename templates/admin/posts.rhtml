@@ -6,9 +6,7 @@
   <input type="submit" value="Create post"/>
 </form>
 
-<hr/>
-
-<table style="width:100%">
+<table style="margin-top:20px">
   <% for post in @posts[@page * @page_size, @page_size]  %>
     <tr>
       <td><%= post_link post %></td>
@@ -20,5 +18,3 @@
 </table>
 
 <%= render '_pagination.rhtml', :list => @posts, :page => @page, :page_size => @page_size, :path => '/admin/posts' %>
-
-<hr/>
