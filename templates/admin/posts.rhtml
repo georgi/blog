@@ -6,7 +6,7 @@
   <input type="submit" value="Create post"/>
 </form>
 
-<table>
+<table style="width:100%">
   <% for post in @posts[@page * @page_size, @page_size]  %>
     <tr>
       <td><%= post_link post %></td>
