@@ -1,9 +1,6 @@
 require 'shinmun'
-require 'helpers'
-
-Dir.chdir(File.dirname(__FILE__))
 
 use Rack::Session::Cookie
-use Rack::Reloader
+use Rack::Reloader unless ENV['RACK_ENV'] == 'production'
 
-run Shinmun::Blog.new
+run Shinmun::Blog.new(File.dirname(__FILE__))
