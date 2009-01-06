@@ -6,19 +6,15 @@ table {
 
 table {
   background: #fff;
-  border: 1px solid #aaa;
   margin-bottom: 10px;
   width: 100%;
 }
 
 thead th {
-  border-bottom: 2px solid #aaa;
-  border-left: 1px solid #aaa;
   padding: 2px 9px;
   text-align: left;
 }
 
 tbody td {
-  border-left: 1px solid #aaa;
   padding: 2px 9px;
 }
