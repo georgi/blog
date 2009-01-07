@@ -199,6 +199,8 @@ We create a Markdown file name `pages/index.md`:
 We have now a simple page, which should be rendered as response. We
 create a simple app in a file `git_app.ru`:
 
+    @@ruby
+
     require 'kontrol'
     require 'bluecloth'
     
@@ -214,9 +216,9 @@ create a simple app in a file `git_app.ru`:
 
 Add all these files to your repo:
 
-    git init
-    git add pages/index.md
-    git commit -m 'init'
+    $ git init
+    $ git add pages/index.md
+    $ git commit -m 'init'
 
 Run the app:
 
