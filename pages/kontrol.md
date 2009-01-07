@@ -8,7 +8,21 @@ on [Rack][5]. It uses regular expressions for routing.
 All examples can be found in the [examples folder][3] of the kontrol
 project, which is hosted on [this github page][4].
 
-## Quick Start
+### Install
+
+You will need the GitStore and Kontrol gems:
+
+    $ gem sources -a http://gems.github.com
+    $ sudo gem install georgi-git_store georgi-kontrol
+
+If you don't have RubyGems 1.2 installed, you can download the
+archives and build the gems yourself.
+
+* [GitStore on GitHub][2]
+* [Kontrol on GitHub][4]
+
+
+### Quick Start
 
 Create a file named `hello_world.ru`:
 
@@ -33,7 +47,7 @@ Now run:
 Browse to `http://localhost:9292` and you will see "Hello World".
 
 
-## Features
+### Features
 
 Kontrol is just a thin layer on top of Rack. It provides a routing
 algorithm, a simple template mechanism and some convenience stuff to
@@ -50,7 +64,7 @@ defined actions. You will probably use these methods:
 * redirect(path): renders a redirect response to specified path
 
 
-## Routing
+### Routing
 
 Routing is just as simple as using regular expressions with
 groups. Each group will be provided as argument to the block.
@@ -85,7 +99,7 @@ example if you browse to `localhost:9292/2008/12`, the app will
 display `Archive for 2008/12`.
 
 
-## Nested Routes
+### Nested Routes
 
 Routes can be nested. This way you can avoid repeating patterns and
 define handlers for a set of HTTP verbs. Each handler will be called
@@ -129,7 +143,7 @@ So if you browse to `/something`, you will see a submit button. After
 submitting you will see the result of the second handler.
 
 
-## Templates
+### Templates
 
 Rendering templates is as simple as calling a template file with some
 parameters, which are accessible inside the template as instance
@@ -177,17 +191,12 @@ rendered template. Note that the title and body parameters have been
 passed to the `render` call.
 
 
-## Using GitStore
+### Using GitStore
 
 [GitStore][1] is another library, which allows you to store code and
 data in a convenient way in a git repository. The repository is
 checked out into memory and any data may be saved back into the
 repository.
-
-Install [GitStore][1] and [Grit][2] by:
-
-    $ gem sources -a http://gems.github.com (you only have to do this once)
-    $ sudo gem install mojombo-grit georgi-git_store
 
 We create a Markdown file name `pages/index.md`:
 
@@ -233,7 +242,7 @@ from your repo.
 
 
 [1]: http://www.matthias-georgi.de/gitstore
-[2]: http://github.com/mojombo/grit
+[2]: http://github.com/georgi/git_store
 [3]: http://github.com/georgi/kontrol/tree/master/examples
 [4]: http://github.com/georgi/kontrol
 [5]: http://github.com/chneukirchen/rack
