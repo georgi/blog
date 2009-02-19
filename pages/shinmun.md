@@ -286,6 +286,29 @@ this particular commit.
 Download or fork the package at my [github repository][1]
 
 
+### Discussion
+
+<table border=0 style="background-color: #fff; padding: 5px;" cellspacing=0>
+  <tr><td>
+  <img src="http://groups.google.com/groups/img/3nb/groups_bar.gif"
+         height=26 width=132 alt="Google Groups">
+  </td></tr>
+  <tr><td style="padding-left: 5px">
+  <b>Subscribe to Shinmun</b>
+  </td></tr>
+  <form action="http://groups.google.com/group/shinmun/boxsubscribe">
+  <tr><td style="padding-left: 5px;">
+  Email: <input type=text name=email>
+  <input type=submit name="sub" value="Subscribe">
+  </td></tr>
+</form>
+<tr><td align=right>
+  <a href="http://groups.google.com/group/shinmun">Visit this group</a>
+</td></tr>
+</table>
+
+
+
 [1]: http://github.com/georgi/shinmun
 [2]: http://www.matthias-georgi.de/2008/9/quick-guide-for-passenger-on-ubuntu-hardy.html
 [3]: http://github.com/georgi/kontrol

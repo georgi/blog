@@ -11,8 +11,11 @@
   <hr/>
 
   <div style="margin:1em 0em 1em 0em; color:#666">
-    Posted in category <%= link_to @post.category, "/categories/#{urlify @post.category}" %> by <%= @post.author || @blog.author %>.
-    Tagged with <%= @post.tags %>.
+    <% if @post.category %>
+      Posted in category <%= link_to @post.category, "/categories/#{urlify @post.category}" %> by <%= @post.author || @blog.author %>.
+    <% end %>
+
+    Tagged with <%= @post.tag_list.map {|tag| link_to tag, "/tags/#{tag}" }.join(', ') %>.
   </div>
 
   <h6>Similar Posts</h6>
