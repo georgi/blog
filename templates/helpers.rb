@@ -6,4 +6,8 @@ module Shinmun::Helpers
     link_to text, path, :class => (request.path_info == path) ? 'active' : nil
   end
 
+  def html_escape(s)
+    s.to_s.gsub(/>/, '&gt;').gsub(/</n, '&lt;')
+  end
+
 end
