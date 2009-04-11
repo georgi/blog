@@ -93,7 +93,7 @@ to retrieve and change the resources:
 Note, that it is generally possible, that a resource object is
 instantiated for a not yet existing resource.
 
-For inspiration you should have a look at the [FileResource][3]
+For inspiration you should have a look at the FileResource
 implementation. Please let me now, if you are going to implement a new
 type of resource.
 
@@ -102,7 +102,5 @@ type of resource.
 
 Download or fork the project on its [Github page][2]
 
-
 [1]: http://github.com/chneukirchen/rack
 [2]: http://github.com/georgi/rack_dav
-[3]: http://github.com/georgi/rack_dav/lib/rack_dav/file_resource.rb
