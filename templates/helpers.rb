@@ -10,4 +10,8 @@ module Shinmun::Helpers
     s.to_s.gsub(/>/, '&gt;').gsub(/</n, '&lt;')
   end
 
+  def coderay_css
+    "<style type='text/css'>" + store['assets/stylesheets/5-coderay.css'] + "</style>"
+  end
+
 end
