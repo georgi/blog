@@ -11,7 +11,7 @@
       <item>
 	<title><%= post.title %></title>
 	<category><%= post.category %></category>
-	<description><%= html_escape(post.body_html) %></description>
+	<description>[CDATA[ <%= post.body_html %>]]</description>
 	<author><%= @author || @blog.author %></author>
 	<link><%= @blog.url %><%= post_path post %></link>
 	<pubDate><%= rfc822 post.date %></pubDate>
