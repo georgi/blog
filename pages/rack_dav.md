@@ -1,5 +1,6 @@
-RackDAV - Web Authoring for Rack
-================================
+---
+title: RackDAV - Web Authoring for Rack
+---
 
 RackDAV is Handler for [Rack][1], which allows content authoring over
 HTTP. RackDAV brings its own file backend, but other backends are
