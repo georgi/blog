@@ -3,9 +3,7 @@ title: Shinmun - a git-based blog engine
 ---
 
 Shinmun is a small git-based blog engine. Write posts in your favorite
-editor, git-push it and serve your blog straight from a
-repository.
-
+editor, git-push it and serve your blog straight from a repository.
 
 ### Features
 
@@ -17,7 +15,6 @@ repository.
 * Flickr and Delicious aggregations
 * Syntax highlighting provided by [CodeRay][4]
 * AJAX comment system with Markdown preview
-* Web frontend using [WMD Editor][12]
 
 
 ### Quickstart
@@ -265,48 +262,9 @@ domain:
     $ /etc/init.d/apache2 restart
 
 
-### Web Frontend
-
-The example blog has a builtin web frontend. Currently it only works
-on localhost:9292.
-
-The frontend allows you to create, edit, read or delete posts or
-pages. Editing a post shows up a form with the [wmd editor][12]. You
-have to look yourself for a correct YAML header, otherwise you will
-get incorrect results.
-
-One nice thing about the frontend is the *Commits* page, where you can
-look at a list of recent commits. Clicking on a commit brings you to a
-single commit overview, where you can inspect changes introduced by
-this particular commit.
-
-
 ### GitHub Project
 
 Download or fork the package at my [github repository][1]
-
-
-### Discussion
-
-<table border=0 style="background-color: #fff; padding: 5px;" cellspacing=0>
-  <tr><td>
-  <img src="http://groups.google.com/groups/img/3nb/groups_bar.gif"
-         height=26 width=132 alt="Google Groups">
-  </td></tr>
-  <tr><td style="padding-left: 5px">
-  <b>Subscribe to Shinmun</b>
-  </td></tr>
-  <form action="http://groups.google.com/group/shinmun/boxsubscribe">
-  <tr><td style="padding-left: 5px;">
-  Email: <input type=text name=email>
-  <input type=submit name="sub" value="Subscribe">
-  </td></tr>
-</form>
-<tr><td align=right>
-  <a href="http://groups.google.com/group/shinmun">Visit this group</a>
-</td></tr>
-</table>
-
 
 
 [1]: http://github.com/georgi/shinmun
@@ -320,6 +278,3 @@ Download or fork the package at my [github repository][1]
 [9]: http://textile.thresholdstate.com/
 [10]: http://en.wikipedia.org/wiki/Html
 [11]: http://www.kernel.org/pub/software/scm/git/docs/git-push.html
-[12]: http://wmd-editor.com/
-[13]: http://github.com/mojombo/jekyll
-[14]: http://github.com/blog/272-github-pages

@@ -1,7 +1,4 @@
 --- 
-category: Actionscript
-date: 2008-09-15
-tags: relax-ng, grammar
 title: Relax NG Schema for Adobe Flex 3
 ---
 
