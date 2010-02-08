@@ -16,4 +16,5 @@ blog.config = {
   :url => 'http://www.matthias-georgi.de'
 }
 
+
 run blog
