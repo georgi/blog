@@ -1,3 +1,4 @@
+$:.unshift '../kontrol/lib'
 $:.unshift '../shinmun/lib'
 
 require 'shinmun'
