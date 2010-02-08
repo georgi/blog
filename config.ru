@@ -1,10 +1,19 @@
-require 'shinmun'
+$:.unshift '../shinmun/lib'
 
-`git init`
-`git remote add origin git@github.com:georgi/blog.git`
-`git pull origin master`
+require 'shinmun'
 
 use Rack::Session::Cookie
 use Rack::Reloader unless ENV['RACK_ENV'] == 'production'
 
-run Shinmun::Blog.new(File.dirname(__FILE__))
+blog = Shinmun::Blog.new(File.dirname(__FILE__))
+
+blog.config = {
+  :author => 'Matthias Georgi',
+  :categories => ['Ruby', 'Javascript', 'Actionscript', 'Emacs'],
+  :description => 'a crystalline mind in a cloud of code',
+  :language => 'en',
+  :title => 'Matthias Georgi',
+  :url => 'http://www.matthias-georgi.de'
+}
+
+run blog

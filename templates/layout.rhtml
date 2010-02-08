@@ -8,162 +8,96 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds2.feedburner.com/matthias-georgi" />
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
-    <link rel="stylesheet" media="screen" type="text/css" href="/assets/stylesheets.css" />
-    <link rel="stylesheet" media="print" type="text/css" href="/assets/print.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/grid.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/coderay.css" />
+    <link rel="stylesheet" media="screen" type="text/css" href="/stylesheets/blog.css" />
+    <link rel="stylesheet" media="print" type="text/css" href="/stylesheets/print.css" />
   </head>
   <body>
     <div class="container">
 
       <div id="header" class="column span-13 last">
-	<div id="title"><a href="/"><%= @blog.title %></a></div>
-	<div id="description"><%= @blog.description %></div>
+        <div id="title"><a href="/"><%= @blog.title %></a></div>
+        <div id="description"><%= @blog.description %></div>
       </div>
 
       <div id="navi" class="column span-13 last">
-	<ul>
-	  <li><%= navi_link 'Home', '/' %></li>
-	  <li><%= navi_link 'Ruby', '/categories/ruby' %></li>
-	  <li><%= navi_link 'Javascript', '/categories/javascript' %></li>
-	  <li><%= navi_link 'Actionscript', '/categories/actionscript' %></li>
-	  <li><%= navi_link 'Emacs', '/categories/emacs' %></li>
-	  <li><%= navi_link 'Projects', '/projects' %></li>
-	  <li><%= navi_link 'About', '/about' %></li>
-	</ul>
+        <ul>
+          <li><%= navi_link 'Home', '/' %></li>
+          <li><%= navi_link 'Ruby', '/categories/ruby' %></li>
+          <li><%= navi_link 'Javascript', '/categories/javascript' %></li>
+          <li><%= navi_link 'Actionscript', '/categories/actionscript' %></li>
+          <li><%= navi_link 'Emacs', '/categories/emacs' %></li>
+          <li><%= navi_link 'Projects', '/projects' %></li>
+          <li><%= navi_link 'About', '/about' %></li>
+        </ul>
       </div>
 
       <div class="content column span-9">
-	<%= @content %>
+        <%= @content %>
       </div>
 
       <div class="sidebar column span-4 last">
-	<div class="box">
+        <div class="box">
 
-	  <h4>Subscribe</h4>
+          <h4>Subscribe</h4>
 
-	  <p>
-	    <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
-	      <img src="/assets/images/rss.png" />
-	      <img src="http://feeds.feedburner.com/~fc/matthias-georgi?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88"/>
-	    </a>
-	  </p>
-	  
-	  <h4>About</h4>
+          <p>
+            <a href="http://feeds.feedburner.com/matthias-georgi" rel="alternate" type="application/rss+xml">
+              <img src="/images/rss.png" />
+              <img src="http://feeds.feedburner.com/~fc/matthias-georgi?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88"/>
+            </a>
+          </p>
+          
+          <h4>About</h4>
 
-	  <div class="about">
-	    <img src="/assets/images/portrait.jpg" style="float:left; margin-right:10px" />
-	    <a href="/about">Matthias Georgi</a> is a freelance web programmer from
-	    <a href="http://en.wikipedia.org/wiki/Darmstadt">Darmstadt, Germany</a>.	    
-	  </div>
+          <div class="about">
+            <img src="/images/portrait.jpg" style="float:left; margin-right:10px" />
+            <a href="/about">Matthias Georgi</a> Berlin, Germany
+          </div>
 
-	  <h4>My Music</h4>
+          <h4>Archives</h4>
 
-	  <ul>
-	    <li>
-	      <a href="http://www.p-ersag.com">
-		Planet Ersag
-	      </a>
-	    </li>
-	    <li>
-	      <a href="http://www.myspace.com/ellivonrod">
-		Elli v. Ród
-	      </a>
-	    </li>
-	  </ul>
+          <ul>
+            <% for year, month in @blog.archives.reverse %>
+              <li><%= archive_link year, month %></li>
+            <% end %>
+          </ul>
 
-	  <h4>Archives</h4>
+          <h4>Recent posts</h4>
 
-	  <ul>
-	    <% for year, month in @blog.archives.reverse %>
-	      <li><%= archive_link year, month %></li>
-	    <% end %>
-	  </ul>
+          <ul class="spaced">
+            <% for post in @blog.posts[0, 20] %>
+              <li><%= post_link post %></li>
+            <% end %>
+          </ul>
 
-	  <h4>Recent posts</h4>
+          <h4>Blogroll</h4>
+          <ul>
+            <li><a href="http://blog.segment7.net">Segment7</a></li>
+            <li><a href="http://blog.zenspider.com/">Polishing Ruby</a></li>
+            <li><a href="http://brainspl.at/">Brainspl.at</a></li>
+            <li><a href="http://chneukirchen.org/blog">chris blogs</a></li>
+            <li><a href="http://codefluency.com/">Bruce Williams</a></li>
+            <li><a href="http://drnicwilliams.com">Dr Nic</a></li>
+            <li><a href="http://eigenclass.org">eigenclass</a></li>
+            <li><a href="http://hackety.org/">hackety org</a></li>
+            <li><a href="http://merbist.com">The Merbist</a></li>
+            <li><a href="http://tomayko.com/linkings/">Ryan Tomayko's Linkings</a></li>
+            <li><a href="http://weblog.jamisbuck.org/">the { buckblogs :here }</a></li>
+            <li><a href="http://www.avibryant.com/">HREF Considered Harmful</a></li>
+            <li><a href="http://lambda-the-ultimate.org">Lambda the Ultimate</a></li>
+            <li><a href="http://minima.soup.io/">Minima</a></li>
+          </ul>
 
-	  <ul class="spaced">
-	    <% for post in @blog.recent_posts %>
-	      <li><%= post_link post %></li>
-	    <% end %>
-	  </ul>
-
-	  <h4>Blogroll</h4>
-	  <ul>
-	    <li><a href="http://barelyenough.org">Peter Williams</a></li>
-	    <li><a href="http://blog.caboo.se/">~:caboose</a></li>
-	    <li><a href="http://blog.fallingsnow.net">evan.musing</a></li>
-	    <li><a href="http://blog.hasmanythrough.com">has_many :through</a></li>
-	    <li><a href="http://blog.leetsoft.com/">too-biased</a></li>
-	    <li><a href="http://blog.reverberate.org">Josh the Outspoken</a></li>
-	    <li><a href="http://blog.segment7.net">Segment7</a></li>
-	    <li><a href="http://blog.talbott.ws/">blog.talbott.ws</a></li>
-	    <li><a href="http://blog.zenspider.com/">Polishing Ruby</a></li>
-	    <li><a href="http://brainspl.at/">Brainspl.at</a></li>
-	    <li><a href="http://chneukirchen.org/blog">chris blogs</a></li>
-	    <li><a href="http://codefluency.com/">Bruce Williams</a></li>
-	    <li><a href="http://dablog.rubypal.com/">DABlog</a></li>
-	    <li><a href="http://drnicwilliams.com">Dr Nic</a></li>
-	    <li><a href="http://eigenclass.org">eigenclass</a></li>
-	    <li><a href="http://hackety.org/">hackety org</a></li>
-	    <li><a href="http://hamptoncatlin.com/">Hampton Catlin</a></li>
-	    <li><a href="http://m.onkey.org/">has_many :bugs</a></li>
-	    <li><a href="http://martinfowler.com/bliki">Martin Fowler's Bliki</a></li>
-	    <li><a href="http://merbist.com">The Merbist</a></li>
-	    <li><a href="http://nubyonrails.com">Nuby on Rails</a></li>
-	    <li><a href="http://on-ruby.blogspot.com/">On Ruby</a></li>
-	    <li><a href="http://onestepback.org/index.cgi">{ | one, step, back | }</a></li>
-	    <li><a href="http://railsexpress.de/blog">RailsExpress.blog</a></li>
-	    <li><a href="http://ruby.about.com/">About.com Ruby</a></li>
-	    <li><a href="http://therealadam.com">The Real Adam</a></li>
-	    <li><a href="http://tom.preston-werner.com/">Tom Preston-Werner</a></li>
-	    <li><a href="http://tomayko.com/linkings/">Ryan Tomayko's Linkings</a></li>
-	    <li><a href="http://weblog.jamisbuck.org/">the { buckblogs :here }</a></li>
-	    <li><a href="http://www.avibryant.com/">HREF Considered Harmful</a></li>
-	    <li><a href="http://www.chadfowler.com/">ChadFowler.com</a></li>
-	    <li><a href="http://www.cornetdesign.com/">Cory Foy</a></li>
-	    <li><a href="http://www.iunknown.com/">John Lam on Software</a></li>
-	    <li><a href="http://www.loudthinking.com/">Loud Thinking</a></li>
-	    <li><a href="http://www.nobugs.org/blog">Andrew Birkett's blog</a></li>
-	    <li><a href="http://www.onrails.org/">OnRails.org</a></li>
-	    <li><a href="http://www.oreillynet.com/ruby">O'Reilly Ruby</a></li>
-	    <li><a href="http://www.railsenvy.com/">Rails Envy</a></li>
-	    <li><a href="http://www.robbyonrails.com">Robby on Rails</a></li>
-	    <li><a href="http://www.rubyinside.com">Ruby Inside</a></li>
-	    <li><a href="http://www.slash7.com/">Slash7 with Amy Hoy</a></li>
-	    <li><a href="http://www.thechrisoshow.com/">The Chris O Show</a></li>
-	    <li><a href="http://lambda-the-ultimate.org">Lambda the Ultimate</a></li>
-	    <li><a href="http://minima.soup.io/">Minima</a></li>
-	    <li><a href="http://antoniocangiano.com/">Zen and the Art of Programming</a></li>
-	    <li><a href="http://www.danieldura.com">Daniel Dura</a></li>
-	    <li><a href="http://davidzuckerman.com/adobe">david zuckerman/adobe</a></li>
-	    <li><a href="http://www.ericfeminella.com/blog">Eric Feminella</a></li>
-	    <li><a href="http://blog.everythingflex.com">EverythingFlex</a></li>
-	    <li><a href="http://www.flashmagazine.com/site/rss0.92/">Flashmagazine</a></li>
-	    <li><a href="http://www.gskinner.com/blog/">gBlog</a></li>
-	    <li><a href="http://lab.polygonal.de">polygonal labs</a></li>
-	    <li><a href="http://www.quasimondo.com/">Quasimondo</a></li>
-	    <li><a href="http://www.theflexshow.com/blog/index.cfm">The Flex Show</a></li>
-	  </ul>
-
-	  <% if @blog.aggregations['delicious'] %>
-
-	    <h4>My Delicious</h4>
-
-	    <ul>
-	      <% for item in @blog.aggregations['delicious'].items %>
-		<li>
-		  <%= link_to item.title, item.link %>
- 		</li>
-	      <% end %>
-	    </ul>
-
-	  <% end %>
-
-	</div>
+        </div>
 
       </div>
     </div>
 
-    <script type="text/javascript" src="/assets/javascripts.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/swfobject.js"></script>
+    <script type="text/javascript" src="/javascripts/application.js"></script>
 
     <script type="text/javascript">
       var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

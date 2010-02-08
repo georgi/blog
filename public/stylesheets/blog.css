@@ -55,3 +55,31 @@
     font-weight: bold;
     background: #369;
 }
+
+.sidebar ul {
+    color:#336699;
+}
+
+.sidebar ul li {
+    list-style-type:square;
+    margin-bottom: 0.5em;
+}
+
+.sidebar h4 {
+    color: #369;
+    margin-bottom: 1em;
+}
+
+.sidebar a { 
+    text-decoration: none;
+}
+
+.article .date { 
+    color: #666;
+}
+
+.article .tags a {
+    color: #69c;
+    text-decoration: none;
+}
+

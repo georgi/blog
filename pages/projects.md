@@ -33,7 +33,7 @@ in-memory representation, which can be modified and finally committed.
 
 ## [Shinmun - a git-based blog engine](shinmun)
 
-Shinmun is a small git-based blog engine. Write posts in your favorite
+Shinmun is a small blog engine. Write posts in your favorite
 editor, git-push it and serve your blog straight from a repository.
 
 

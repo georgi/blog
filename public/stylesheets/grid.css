@@ -1,3 +1,43 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, code, del, dfn, img,
+q, fieldset, form, label, legend, table,
+caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0; 
+    padding: 0; 
+    border: 0; 
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%; 
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
+body {
+    line-height: 1.5;
+    background: #fff;
+    margin:0.5em 0;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+code {
+    font-family: monospace;
+ }
+
+pre {
+    margin: 1em 0;
+    padding: 0.8em 1em;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    font-family: monospace;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    color: #110000;
+    overflow: auto;
+}
+
 /* -------------------------------------------------------------- 
 
    == STRUCTURE: ========================
@@ -22,7 +62,7 @@
 
 /* Body margin for a sensile default look. */
 body {
-  margin:1.5em 0;	
+  margin:1.5em 0;       
 }
 
 
@@ -143,6 +183,8 @@ div.colborder {
   margin-bottom: 1.5em; 
 }
 
+
+
 /* Use this to create a horizontal ruler across a column. */
 hr {
   background: #ddd; 
@@ -160,23 +202,43 @@ hr.space {
 }
 
 
-/* Clearing floats without extra markup
-   Based on How To Clear Floats Without Structural Markup by PiE
-   [http://www.positioniseverything.net/easyclearing.html] */
-
-.clearfix:after, .container:after {
-    content: "."; 
-    display: block; 
-    height: 0; 
-    clear: both; 
-    visibility: hidden;
+body {
+    font-size: 80%;
+    color: #222;
+    font-family: Arial, sans-serif; 
 }
-.clearfix, .container {display: inline-block;}
-* html .clearfix,
-* html .container {height: 1%;}
-.clearfix, .container {display: block;}
 
-/* Regular clearing
-   apply to column that should drop below previous ones. */
+h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
+h1 a:visited, h2 a:visited, h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited { 
+    color: #369; 
+    font-family: Arial, sans-serif; 
+    font-weight: bold;
+}
 
-.clear { clear:both; }
+a {
+    color: #369;
+}
+
+a:visited {
+    color: #369;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    text-decoration: none;
+}
+
+h1 { font-size: 2em; line-height: 1; margin-top: 1em; margin-bottom: 1em; }
+h2 { font-size: 1.5em; margin-top: 0.75em; margin-bottom: 0.75em; }
+h3 { font-size: 1.3em; line-height: 1; margin-top: 1.7em; margin-bottom: 1em; }
+h4 { font-size: 1.2em; line-height: 1.25; margin-top: 1.25em; margin-bottom: 1.25em; }
+h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6 { font-size: 1em; font-weight: bold; }
+
+blockquote {
+    border-top: 3px double #69c;
+    border-bottom: 3px double #69c;
+    padding: 5px;
+    font-style: oblique;
+    margin-left: 5%;
+    margin-right: 5%;
+}
