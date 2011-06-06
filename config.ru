@@ -1,5 +1,4 @@
-$:.unshift '../kontrol/lib'
-$:.unshift '../shinmun/lib'
+$:.unshift 'lib'
 
 require 'shinmun'
 require 'hoptoad_notifier'
