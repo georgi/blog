@@ -1,30 +1,26 @@
----
-title: Shinmun - a git-based blog engine
----
+Shinmun - a file based blog engine
+=================================
 
-Shinmun is a small git-based blog engine. Write posts in your favorite
-editor, git-push it and serve your blog straight from a repository.
+Shinmun is a small file based blog engine. Write posts in your favorite
+editor, track them with git and deploy to Heroku. Small, fast and simple.
 
 ### Features
 
 * Posts are text files formatted with [Markdown][8], [Textile][9] or [HTML][10]
-* Runs on [Rack][6], [Kontrol][3] and [GitStore][7]
 * Deploy via [git-push][11]
+* Easy and fast deploying on Heroku
 * Index, category and archive listings
 * RSS feeds
-* Flickr and Delicious aggregations
 * Syntax highlighting provided by [CodeRay][4]
-* AJAX comment system with Markdown preview
 
 
 ### Quickstart
 
 Install the gems:
 
-    $ gem sources -a http://gems.github.com
-    $ gem install rack BlueCloth rubypants coderay mojombo-grit georgi-git_store georgi-kontrol georgi-shinmun
+    $ gem install shinmun
 
-Create a sample blog (this step requires the git executable):
+Create a sample blog:
 
     $ shinmun init myblog
 
@@ -49,16 +45,13 @@ folder:
     shinmun post 'The title of the post'
 
 Shinmun will then create a post file in the right place, for example
-in `posts/2008/9/the-title-of-the-post.md`. After creating you will
-probably open the file, set the category and tags and start writing
-your new article.
+in `posts/2008/9/the-title-of-the-post.md`.
 
 
 ### Post Format
 
 Each blog post is just a text file with a YAML header and a body. The
-YAML header is surrounded with 2 lines of 3 dashes. This format is
-compatible with [Jekyll][13] and [Github Pages][14].
+YAML header is surrounded with 2 lines of 3 dashes.
 
 The YAML header has following attributes:
 
@@ -90,37 +83,20 @@ RHTML, YAML, Delphi
 To activate CodeRay for a code block, you have to declare the language
 in lower case:
 
-        @@ruby
-        
-        def method_missing(id, *args, &block)
-          puts "#{id} was called with #{args.inspect}"
-        end             
+<pre>
+    @@ruby
+
+    def method_missing(id, *args, &block)
+      puts "#{id} was called with #{args.inspect}"
+    end             
+</pre>
 
 **Note that the declaration MUST be followed by a blank line!**
 
 
 ### Directory layout
 
-* `assets`: contains images, stylesheets and javascripts
-* `comments`: comments are stored as yaml files
-* `config`: configuration of blog, aggregations and assets
-* `posts`: post files sorted by year/month.
-* `pages`: contains static pages
-* `templates`: ERB templates for layout, posts and others
-
-An example tree:
-
     + config.ru
-    + map.rb
-    + helpers.rb
-    + assets
-      + images
-      + stylesheets
-      + javascripts      
-    + config
-      + aggregations.yml
-      + assets.yml
-      + blog.yml
     + pages
       + about.md
     + posts
@@ -128,39 +104,29 @@ An example tree:
       + 2008
         + 9
           + my-article.md
+    + public
+      + styles.css
     + templates
+      + 404.rhtml
+      + archive.rhtml
       + category.rhtml
-      + category.rxml
-      + _comments.rhtml
-      + _comment_form.rhtml
-      + feed.rxml
-      + helpers.rb
       + index.rhtml
       + index.rxml
       + layout.rhtml
-      + post.rhtml  
       + page.rhtml
-
+      + post.rhtml  
 
 ### Blog configuation
 
-Inside `config/blog.yml` you set the properties of your blog:
+In `config.ru` you can set the properties of your blog:
 
-* title: the title of your blog, used inside templates
-* description: used for RSS
-* language: used for RSS
-* author: used for RSS
-* url: used for RSS
-* categories: a list of categories
-
-
-### Assets
-
-Shinmun serves asset files from your assets directory. Files in the
-directories `assets/stylesheets` and `assets/javascripts` will be
-served as one file each under the URLs `assets/stylesheets.css` and
-`assets/javascripts.css`. You have to name them accordingly like
-`1-reset.css` and `2-typo.css` to define the order.
+    blog.config = {
+      :language => 'en',
+      :title => "Blog Title",
+      :author => "The Author",
+      :categories => ["Ruby", "Javascript"],
+      :description => "Blog description"
+    }
 
 
 ### Templates
@@ -181,85 +147,57 @@ Layout and templates are rendered by *ERB*.  The layout is defined in
       </body>
      </html>
 
-The attributes of a post are accessible as instance variables in a
-template:
+The attributes of a post are accessible via the @post variable:
 
     @@rhtml
 
-    <div class="article">    
+    <div class="article">
+     
+      <h1><%= @post.title %></h1>
+     
       <div class="date">
-        <%= date @date %>
+        <%= human_date @post.date %>
       </div>
-      <h2><%= @title %></h2>  
-      <%= @body %>
-      <h3>Comments</h3>
-      <!-- comment form -->
+     
+      <%= @post.body_html %>
+
+      ...      
+
     </div>
 
 
-### Commenting System
+### Deployment on Heroku
 
-Comments are stored as flat files and encoded as YAML objects. Each
-post has a corresponding comment file located at `comments/<path to
-post>`. So administration of comments is possible by editing the YAML
-file, which can be done on your local machine, as you can just pull
-the comments from your live server.
+Install the Heroku gem:
 
+    $ gem install heroku
 
-### Deployment
+Installing your public key:
 
-Shinmun can server the blog straight from the git repository. So on
-your webserver initialize a new git repo like:
+    $ heroku keys:add
 
-    $ cd /var/www
-    $ mkdir myblog
-    $ cd myblog
-    $ git init
+    Enter your Heroku credentials.
+    Email: joe@example.com
+    Password: 
+    Uploading ssh public key /Users/joe/.ssh/id_rsa.pub
 
-Now on your local machine, you add a new remote repository and push
-your blog to your server:
+Create an app on Heroku.
+
+    $ heroku create myblog
+    Created http://myblog.heroku.com/ | git@heroku.com:mybblog.git
+    Git remote heroku added
+
+Now on your local machine, you create a new remote repository and push
+your blog to Heroku:
 
     $ cd ~/myblog
-    $ git remote add live ssh://myserver.com/var/www/myblog
-    $ git push live
+    $ git init
+    $ git add .
+    $ git commit -m 'initial commit'
+    $ git push heroku
 
+That's it. Your blog is deployed.
 
-On your production server, you just need the rackup file `config.ru`
-to run the blog:
-
-    $ git checkout config.ru
-
-Now you can run just a pure ruby server or something like Phusion
-Passenger. Anytime you want to publish a post on your blog, you
-just write, commit and finally push a post by:
-
-    $ git commit -a -m 'new post'
-    $ git push live
-
-
-### Phusion Passenger
-
-Shinmun is compatible with [Phusion Passenger][5]. Install Phusion
-Passenger as described in my [blog post][2].
-
-Assuming that you are on a Debian or Ubuntu system, you can create a
-file named `/etc/apache2/sites-available/blog`:
-
-    @@xml
-
-    <VirtualHost *:80>
-        ServerName myblog.com
-        DocumentRoot /var/www/blog/public
-    </VirtualHost>
-
-Enable the new virtual host:
-
-    $ a2ensite myapp
-
-After restarting Apache your blog should run on Apache on your desired
-domain:
-
-    $ /etc/init.d/apache2 restart
 
 
 ### GitHub Project

@@ -14,7 +14,7 @@ caption, tbody, tfoot, thead, tr, th, td {
 
 body {
     line-height: 1.5;
-    background: #fff;
+    background: #333;
     margin:0.5em 0;
 }
 
@@ -30,11 +30,11 @@ pre {
     margin: 1em 0;
     padding: 0.8em 1em;
     background: #f9f9f9;
+    color: #000;
     border: 1px solid #ddd;
     font-family: monospace;
     font-size: 1.1em;
     line-height: 1.5em;
-    color: #110000;
     overflow: auto;
 }
 
@@ -187,8 +187,8 @@ div.colborder {
 
 /* Use this to create a horizontal ruler across a column. */
 hr {
-  background: #ddd; 
-  color: #ddd;
+  background: #ccc; 
+  color: #ccc;
   clear: both; 
   float: none; 
   width: 100%; 
@@ -196,31 +196,27 @@ hr {
   margin: 0 0 1.45em;
   border: none; 
 }
-hr.space {
-  background: #fff;
-  color: #fff;
-}
 
 
 body {
     font-size: 80%;
-    color: #222;
+    color: #ccc;
     font-family: Arial, sans-serif; 
 }
 
 h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
 h1 a:visited, h2 a:visited, h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited { 
-    color: #369; 
+    color: #ccc; 
     font-family: Arial, sans-serif; 
     font-weight: bold;
 }
 
 a {
-    color: #369;
+    color: #eee;
 }
 
 a:visited {
-    color: #369;
+    color: #eee;
 }
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {

@@ -7,17 +7,16 @@
 }
 
 #header #title a {
-    color: #069;
+    color: #eee;
     text-decoration: none;
 }
 
 #header #title a:hover {
-    color: #222;
+    color: #eee;
     text-decoration: none;
 }
 
 #header #description {
-    color: #69c;
     font-size: 16px;
     font-weight: bold;
     padding: 0 0 0 0;
@@ -25,7 +24,7 @@
 }
 
 #navi {
-    background: #69c;
+    background: #666;
 }
 
 #navi ul {
@@ -38,7 +37,7 @@
 #navi ul li {
     display:inline;
     float: left;
-    border-right: 1px solid #fff;
+    border-right: 1px solid #333;
     margin: 0;
     padding: 0;
 }
@@ -53,11 +52,11 @@
 
 #navi a.active { 
     font-weight: bold;
-    background: #369;
+    background: #000;
 }
 
 .sidebar ul {
-    color:#336699;
+    color:#ccc;
 }
 
 .sidebar ul li {
@@ -66,7 +65,7 @@
 }
 
 .sidebar h4 {
-    color: #369;
+    color: #ccc;
     margin-bottom: 1em;
 }
 
@@ -75,11 +74,11 @@
 }
 
 .article .date { 
-    color: #666;
+    color: #ccc;
 }
 
 .article .tags a {
-    color: #69c;
+    color: #ccc;
     text-decoration: none;
 }
 

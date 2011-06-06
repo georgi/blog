@@ -1,7 +1,7 @@
 --- 
 category: Emacs
 date: 2008-09-04
-tags: completion, hippie-expand, snippet
+tags: emacs, completion, hippie-expand, snippet
 title: Emacs Completions with Hippie-Expand and Snippets
 ---
 
@@ -10,7 +10,7 @@ of text inside a buffer. There a lots of packages for Emacs, which
 provide this feature in many different ways. I will show you, what I
 use to improve my life as coder.
 
-<div id="emacs-completion" class="swfobject"></div>
+<EMBED SRC="/shockwaves/emacs-completion.swf" WIDTH=400 HEIGHT=320 quality=low loop=false TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash">
 
 ### Multifunctional tab key
 
@@ -73,7 +73,7 @@ the completion behaviour of hippie-expand an bind the tab key to `indent-and-com
     (defun html-mode-on-init ()
       (set (make-local-variable 'hippie-expand-try-functions-list)
            '(try-expand-abbrev
-    	     try-expand-dabbrev))
+             try-expand-dabbrev))
       (define-key html-mode-map (kbd "<tab>") 'indent-and-complete))
     
     (add-hook 'html-mode-hook 'html-mode-on-init)    
@@ -130,7 +130,7 @@ define a abbrev-table with your desired snippets.
      ("scripts" . "<script src=\"$${src}\" type=\"text/javascript\">$.</script>")
      ("img"     . "<img src=\"$.\"/>")
      ("link"    . "<link href=\"$${href}\" media=\"screen\" rel=\"stylesheet\" type=\"text/css\"/>"))
-	
+        
 Great. If you put all the code in your .emacs file, you should be able
 to use your tab key for completions. In our case we defined snippets
 for the `html-mode` and activated `hippie-expand` to use abbrevs and

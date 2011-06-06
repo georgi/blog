@@ -9,7 +9,7 @@ blog = Shinmun::Blog.new(File.dirname(__FILE__))
 
 blog.config = {
   :author => 'Matthias Georgi',
-  :categories => ['Ruby', 'Javascript', 'Actionscript', 'Emacs'],
+  :categories => ['Ruby', 'Javascript', 'Emacs'],
   :description => 'a crystalline mind in a cloud of code',
   :language => 'en',
   :title => 'Matthias Georgi',
