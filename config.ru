@@ -1,7 +1,6 @@
 $:.unshift 'lib'
 
 require 'shinmun'
-require 'hoptoad_notifier'
 
 use Rack::Session::Cookie
 use Rack::Reloader unless ENV['RACK_ENV'] == 'production'
