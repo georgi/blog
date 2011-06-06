@@ -79,4 +79,4 @@ If you use speedbar or elscreen, you can set additional faces:
 
 
 
-[1]: /images/emacs-dark-theme.png
+[1]: http://www.matthias-georgi.de/images/emacs-dark-theme.png
