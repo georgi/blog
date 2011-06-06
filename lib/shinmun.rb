@@ -1,5 +1,3 @@
-$:.unshift '../../kontrol/lib'
-
 require 'rubygems'
 require 'fileutils'
 require 'bluecloth'
