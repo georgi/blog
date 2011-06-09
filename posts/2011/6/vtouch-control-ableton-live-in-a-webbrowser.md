@@ -41,6 +41,4 @@ apple mobile safari and android browsers. We created a small widget
 library named canvas.ui to take care of multitouch events, rendering
 and layout management.
 
-# http://www.matthias-georgi.de
-
-[1]: /images/vtouch.gif
+[1]: http://www.matthias-georgi.de/images/vtouch.gif
