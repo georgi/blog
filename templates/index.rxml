@@ -11,7 +11,7 @@
       <item>
         <title><%= post.title %></title>
         <category><%= post.category %></category>
-        <description><![CDATA[ <%= post.body_html %>]]></description>
+        <description><![CDATA[ <%= post.transform(post.body, :code_css => :style) %>]]></description>
         <author><%= @blog.author %></author>
         <link><%= @blog.url %><%= post_path post %></link>
         <pubDate><%= rfc822 post.date %></pubDate>

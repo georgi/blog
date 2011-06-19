@@ -1,4 +1,4 @@
-$:.unshift 'lib'
+$:.unshift '../shinmun/lib'
 
 require 'shinmun'
 

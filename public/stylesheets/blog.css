@@ -1,6 +1,6 @@
 
 #header #title {
-    font-size: 20px;
+    font-size: 1.5em;
     font-weight: bold;
     padding: 20px 20px 5px 0;
     display: inline;
@@ -17,7 +17,7 @@
 }
 
 #header #description {
-    font-size: 16px;
+    font-size: 1em;
     font-weight: bold;
     padding: 0 0 0 0;
     display: inline;
@@ -44,7 +44,7 @@
 
 #navi a { 
     color: #fff;
-    font-size: 12px;
+    font-size: 1em;
     font-weight: normal;
     padding: 4px 15px;
     text-decoration: none;    
