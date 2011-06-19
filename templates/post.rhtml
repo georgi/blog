@@ -10,7 +10,7 @@
 
   <hr/>
 
-  <div style="margin:1em 0em 1em 0em; color:#666">
+  <div style="margin:1em 0em 1em 0em">
     <% if @post.category %>
       Posted in category <%= link_to @post.category, "/categories/#{urlify @post.category}" %> by <%= @post.author || @blog.author %>.
     <% end %>
@@ -29,15 +29,5 @@
   <% end %>
 
   </ul>
-
-  <!-- <div style="padding:1em 0em 1em 0em"> -->
-  <!--   <script type="text/javascript"> -->
-  <!--     if (typeof window.Delicious == "undefined") window.Delicious = {}; -->
-  <!--     Delicious.BLOGBADGE_DEFAULT_CLASS = 'delicious-blogbadge-line'; -->
-  <!--   </script> -->
-  <!--   <script src="http://static.delicious.com/js/blogbadge.js"></script> -->
-  <!-- </div> -->
-
-  <hr/>  
 
 </div>

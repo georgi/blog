@@ -29,11 +29,9 @@ code {
 pre {
     margin: 1em 0;
     padding: 0.8em 1em;
-    background: #f9f9f9;
-    color: #000;
-    border: 1px solid #ddd;
+    border: 1px solid #666;
     font-family: monospace;
-    font-size: 1.1em;
+    font-size: 1em;
     line-height: 1.5em;
     overflow: auto;
 }
@@ -187,7 +185,7 @@ div.colborder {
 
 /* Use this to create a horizontal ruler across a column. */
 hr {
-  background: #ccc; 
+  background: #333; 
   color: #ccc;
   clear: both; 
   float: none; 
