@@ -57,12 +57,6 @@ to your `/etc/apache2/httpd.conf`:
     PassengerRoot /opt/ruby/lib/ruby/gems/1.8/gems/passenger-3.0.7
     PassengerRuby /opt/ruby/bin/ruby
 
-Additionally you probably want to enable *mod_rewrite*, which is
-needed for Rails:
-
-    $ a2enmod rewrite
-    $ apache2ctl restart
-
 If you browse to your url, you should see the standard apache "It works" page.
 
 
