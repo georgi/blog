@@ -15,7 +15,7 @@ this will take 30-60 minutes on a fresh Ubuntu install.
 First we need to install the compiler toolchain (make, gcc and libc)
 and necessary libraries.
 
-    $ apt-get install build-essential zlib1g-dev libssl-dev libreadline5-dev libmysqlcient-dev
+    $ apt-get install build-essential zlib1g-dev libssl-dev libreadline5-dev libmysqlclient-dev
 
 
 ### Ruby Enterprise Edition
