@@ -1,9 +1,5 @@
---- 
-category: Ruby
-date: 2007-04-18
-tags: helpers
-title: DRY Up Your Url Helpers
----
+DRY Up Your Url Helpers
+=======================
 
 This tutorial shows you how to simplify url generation in combination
 with _RESTful_ resources by extending the `url_for` helper. This approach
@@ -20,8 +16,7 @@ First we need a simple example. We have 2 models: `User` and
 `Article`. For our url generation to work we have to add following code
 to our models:
 
-    @@ruby
-
+```
     class User
       has_many :articles
      
@@ -37,7 +32,7 @@ to our models:
         {:user_id => user.permalink, :id => permalink}
       end
     end
-
+```
 
 This is necessary for nested routes to play nicely with our url
 generation code. We are now able to find the parameters for each
@@ -67,15 +62,11 @@ Editing an existing article would end up on this URL:
 
 For nested resources to get working you define in config/routes.rb:
 
-    @@ruby
-
     map.resources :users do |user|
       user.resources :articles
     end
 
 The traditional way to generate urls is to call the resource helpers:
-
-    @@ruby
 
     article_url(article.user, article)
 
@@ -88,8 +79,6 @@ Add following module into your lib folder and include the module in
 both your application controller and application helper. The most
 important bit is the url_for method. It will automatically generate
 the right url for your resource.
-
-    @@ruby
 
     module ResourceHelper
      
@@ -175,8 +164,6 @@ resources you have to pass additionally the record, the collection is
 belonging to.
 
 Some examples:
-
-    @@ruby
 
     new_path_for(:users)          # => '/users/new'
     path_for(user)                # => '/users/harald'

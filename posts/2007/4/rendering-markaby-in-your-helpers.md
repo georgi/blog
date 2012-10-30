@@ -1,17 +1,11 @@
---- 
-category: Ruby
-date: 2007-04-02
-tags: markaby
-title: Rendering markaby in your helpers
----
+Rendering markaby in your helpers
+=================================
 
 Generating markup in your rails helpers is a general practice in rails
 and is used throughout all rails helpers. Normally you use `content_tag`
 to generate markup. But often you will encounter situations, where
 nested tags force you to write ugly helper code like the following
 helper method from the rails library:
-
-    @@ruby
 
     def options_for_select(container, selected = nil)
      container = container.to_a if Hash === container
@@ -68,8 +62,6 @@ hash, which we pass to the option method. A tag method takes an
 optional block, which defines the content of a tag, in our case simply
 the text of the option.
 
-    @@ruby
-
     def options_for_select(container, selected = nil)
       container = container.to_a if Hash === container
      
@@ -106,8 +98,6 @@ the text of the option.
 Our defined markaby method is even more useful, we can accept a block
 for our helper method and use it inside the markaby code:
 
-    @@ruby
-
     def tasks(&block)
       markaby do
         div.tasks {
@@ -122,8 +112,6 @@ If we have a common pattern like a list of tasks for many templates,
 we can generate the common code with the tasks method and put the
 actual tasks in the block:
 
-    @@ruby
-
     tasks {
       task 'Back to articles'.t, articles_url
       task :edit, @article
@@ -131,8 +119,6 @@ actual tasks in the block:
     }
 
 So, you can see, there is also a task helper, which is defined as follows:
-
-    @@ruby
 
     def task(text, url_or_resource, html_options={})
       if text.is_a? Symbol

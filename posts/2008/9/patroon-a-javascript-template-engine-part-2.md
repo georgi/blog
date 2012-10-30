@@ -1,9 +1,5 @@
---- 
-category: Javascript
-date: 2008-09-16
-tags: template, json
-title: Patroon - a Javascript Template Engine (Part 2)
----
+Patroon - a Javascript Template Engine (Part 2)
+===============================================
 
 This post is an update to my [initial post][3]. Patroon has been
 improved and is now easier to use and uses a better algorithm
@@ -15,18 +11,10 @@ expand a data object according to simple rules. Additionally you may
 use traditional string interpolation inside attribute values and text
 nodes.
 
-<strong>
-Patroon has its own [project page](/patroon) now!
-Please look for current information there.
-</strong>
-
-
 ### The Data
 
 Comments in this blog are stored as a list of JSON objects, I wrote
 about it [here][1]. So think about a data object like this:
-
-    @@javascript
 
     var data = { 
       comment: [{
@@ -47,8 +35,6 @@ about it [here][1]. So think about a data object like this:
 
 This data will be expanded with help of following template:
 
-    @@html
-
     <div class="comments">  
       <div id="comments-template">
         <div class="comment">
@@ -68,8 +54,6 @@ This data will be expanded with help of following template:
 
 The javascript to actually execute this template looks like this:
 
-    @@javascript
-
     // The comments template will be removed from the DOM!
     var template = new Template('comments-template');
     
@@ -83,8 +67,6 @@ If you don't want to use jQuery, please look at the end of this article.
 ### Output
 
 The given example renders following output:
-
-    @@html
 
     <div class="comments">  
       <div id="comments-template">
@@ -133,8 +115,6 @@ There are 3 basic rules regarding the evaluation:
 Code snippets inside the template will be executed within the scope of
 a Helper object. If you want to extend it, just add your functions to
 `Template.Helper`. At the moment it defines only one function:
-
-    @@javascript
 
     Template.Helper = {
      

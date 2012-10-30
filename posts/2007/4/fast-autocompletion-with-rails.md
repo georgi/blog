@@ -1,9 +1,5 @@
---- 
-category: Ruby
-date: 2007-04-04
-tags: ruby, ajax, rails, scriptaculous, json
-title: Fast Auto-completion with Rails, Scriptaculous and JSON
----
+Fast Auto-completion with Rails, Scriptaculous and JSON
+=======================================================
 
 Inspired by the excellent [Rails Recipes][1] book , I created an
 improved Auto-completion helper, which uses _JSON_ and _AJAX_ instead
@@ -70,8 +66,6 @@ action. We will create a similar macro, which will generate an action,
 which in turn generates the _JSON_ response. Sounds complex, but the
 implementation is quite easy. Just add to your ApplicationController:
 
-    @@ruby
-
     def self.fast_auto_complete_for(object, method, options = {})
      define_method("auto_complete_for_#{object}_#{method}") do
        render :json => object.to_s.camelize.constantize.find(:all).map(&method).to_json
@@ -91,8 +85,6 @@ the array encoded as _JSON_. Furthermore we have to generate a div which
 will hold the popup list for our completion entries. Without going
 into detail, I'll just show you the code, which you add to your
 `ApplicationHelper`:
-
-    @@ruby
 
     def fast_auto_complete_field(field_id, options={})
       div_id = "#{field_id}_auto_complete"
@@ -115,8 +107,6 @@ entries. It is also required to pass the url of the json action, which
 is in our case `/sports/auto_complete_for_sport_name`. 
 
 ### Usage example
-
-    @@rhtml
 
     <form>
       <input type="text" name="name" id="sport_name"/>

@@ -1,9 +1,5 @@
---- 
-category: Ruby
-date: 2008-12-28
-tags: framework, kontrol
-title: Kontrol - a micro framework
----
+Kontrol - a micro framework
+===========================
 
 Kontrol is a small web framework written in Ruby, which runs directly
 on [Rack][5]. It provides a simple pattern matching algorithm for routing
@@ -21,8 +17,6 @@ Please look for current information there.
 ### Quick Start
 
 Create a file named `hello_world.ru`:
-
-    @@ruby
 
     require 'kontrol'
     
@@ -67,8 +61,6 @@ groups. Each group will be provided as argument to the block.
 
 Create a file named `routing.ru`:
 
-    @@ruby
-
     require 'kontrol'
     
     class Routing < Kontrol::Application
@@ -100,8 +92,6 @@ display `Archive for 2008/12`.
 Routes can be nested. This way you can avoid repeating patterns and
 define handlers for a set of HTTP verbs. Each handler will be called
 with the same arguments.
-
-    @@ruby
 
     require 'kontrol'
     
@@ -146,8 +136,6 @@ variables. Additionally you will need a layout template.
 
 Create a template named `templates/layout.rhtml`:
 
-    @@rhtml
-
     <html>
       <body>
         <%= @content %>
@@ -156,17 +144,11 @@ Create a template named `templates/layout.rhtml`:
 
 And now another template named `templates/page.rhtml`:
 
-    @@rhtml
-
     <h1><%= @title %></h1>
     <%= @body %>
 
 Create a templates.ru file:
 
-    @@ruby
-
-    require 'kontrol'
-    
     class Templates < Kontrol::Application
       map do
         get '/(.*)' do |name|
@@ -208,9 +190,6 @@ We create a Markdown file name `pages/index.md`:
 We have now a simple page, which should be rendered as response. We
 create a simple app in a file `git_app.ru`:
 
-    @@ruby
-
-    require 'kontrol'
     require 'bluecloth'
     
     class GitApp < Kontrol::Application

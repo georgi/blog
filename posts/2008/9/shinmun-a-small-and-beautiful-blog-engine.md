@@ -1,9 +1,5 @@
---- 
-category: Ruby
-date: 2008-09-05
-tags: shinmun
-title: Shinmun, a small and beautiful blog engine
----
+Shinmun, a small and beautiful blog engine
+==========================================
 
 Shinmun is a minimalist blog engine. You just write posts as text files,
 render them to static files and push your blog to your server.
@@ -14,12 +10,6 @@ VI and use a VCS like git.
 Your layout can be customized by a set of *ERB templates*. These
 templates have access to `Post` objects and *helper methods* so that
 anybody who knows *Rails* should feel comfortable with it.
-
-<strong>
-Shinmun has its own [project page](/shinmun) now!
-Please look for current information there.
-</strong>
-
 
 ### Shinmun Features
 
@@ -215,8 +205,6 @@ Layout and templates are rendered by *ERB*.  The layout is defined in
 `layout.rhtml`. The content will be provided in the variable
 `@content`. A minimal example:
 
-    @@html
-
     <html>
       <head>
         <title><%= @blog_title %></title>
@@ -254,8 +242,6 @@ module will be included into the `Shinmun::Template` class.
 ### Post Template
 
 The attributes of a post are accessible as instance variables in a template:
-
-    @@html
 
     <div class="article">    
 

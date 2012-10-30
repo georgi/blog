@@ -1,9 +1,5 @@
---- 
-category: Ruby
-date: 2008-12-29
-tags: ri, firefox, search
-title: Viewing RI in a web browser
----
+Viewing RI in a web browser
+===========================
 
 I'm a big fan of the Firefox keyword search. For example I have
 keywords for [LEO][1], [Wikipedia][2] and [Man pages][3]. Sometimes I
@@ -17,8 +13,6 @@ calls RI and outputs HTML.
 I've put the following code in file named
 `/usr/lib/cgi-bin/ri.b`. This is the default location for cgi scripts
 on my system for Apache.
-
-    @@ruby
 
     #!/usr/bin/env ruby
     

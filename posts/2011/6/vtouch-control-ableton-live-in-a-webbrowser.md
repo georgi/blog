@@ -1,9 +1,5 @@
---- 
-title: vTouch - Control Ableton Live in a Webbrowser
-date: 2011-06-09
-category: javascript
-tags: javascript, multitouch, ableton
----
+vTouch - Control Ableton Live in a Webbrowser
+=============================================
 
 VTouch is a multitouch browser frontend for Ableton Live. Inside your
 webbrowser you can control clip triggering, volume, send and return

@@ -1,9 +1,5 @@
---- 
-category: Javascript
-date: 2008-09-21
-tags: template, delicious
-title: Using Javascript Templates for a Delicious Sidebar
----
+Using Javascript Templates for a Delicious Sidebar
+==================================================
 
 Processing JSON data from an external source with Javascript templates
 is a natural fit. Create a template inside your *HTML Document* by
@@ -17,8 +13,6 @@ Template Engine called **[Patroon][1]**.
 In my sidebar you can see the result of my example. My latest
 bookmarks are shown as a list. Quite simple. The template looks like
 this:
-
-    @@html
 
     <div class="bookmarks">
       <ul id="bookmarks-template">
@@ -55,8 +49,6 @@ which gets called after the *JSON* script was loaded. We define
 The following code inserts the script tag to load the *Delicious*
 *JSON* feed of my bookmarks. This is done when the page is loaded:
 
-    @@javascript
- 
     $(function() {
         var head = document.getElementsByTagName("head")[0];
         var script = document.createElement('script');
@@ -82,8 +74,6 @@ Second we expand the template using the jQuery helper. The variable
 of the template, which has the class name `bookmark`, we must set the
 template variable `bookmark` to hold the bookmarks array.
 
-    @@javascript
-
     function renderBookmarks(data) {
       var template = new Template('bookmarks-template');
       $('.bookmarks').expand(template, { bookmark: data });
@@ -93,8 +83,6 @@ template variable `bookmark` to hold the bookmarks array.
 ### Result
 
 The resulting *HTML* of my bookmark sidebar looks like this:
-
-    @@html
 
     <div class="bookmarks">
       <ul id="bookmarks-template">            

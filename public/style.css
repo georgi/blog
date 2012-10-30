@@ -1,0 +1,51 @@
+body {
+    line-height: 1.5;
+    color: #ccc;
+    background: #333;
+    margin:0.5em 0;
+}
+
+a, a:visited {
+  color: #ccc;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+code {
+    font-family: monospace;
+ }
+
+pre {
+    background: #111;
+    margin: 1em 0;
+    padding: 0.8em 1em;
+    border: 1px solid #666;
+    font-family: monospace;
+    font-size: 1em;
+    line-height: 1.5em;
+    overflow: auto;
+}
+
+.container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+#header #title {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 20px 20px 5px 0;
+    display: inline;
+}
+
+#header #title a {
+    color: #eee;
+    text-decoration: none;
+}
+
+#header #title a:hover {
+    color: #eee;
+    text-decoration: none;
+}

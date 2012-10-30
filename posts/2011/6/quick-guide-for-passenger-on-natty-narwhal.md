@@ -1,9 +1,5 @@
---- 
-title: Quick Guide for Passenger on Natty Narwhal
-date: 2011-06-19
-category: Ruby
-tags: ruby, passenger, apache, rails, git, phusion, guides
----
+Quick Guide for Passenger on Natty Narwhal
+==========================================
 
 This is a short guide for installing [Phusion Passenger][1] and [Ruby
 Enterprise Editition][2] on Ubuntu Natty Narwhal. Depending on your machine

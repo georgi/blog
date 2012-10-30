@@ -1,9 +1,5 @@
---- 
-category: Emacs
-date: 2008-09-04
-tags: emacs, completion, hippie-expand, snippet
-title: Emacs Completions with Hippie-Expand and Snippets
----
+Emacs Completions with Hippie-Expand and Snippets
+=================================================
 
 One of the most important features of a text editor is the completing
 of text inside a buffer. There a lots of packages for Emacs, which
@@ -21,8 +17,6 @@ tries to figure out, what is the right thing to do in each situation.
 
 So I copied the indent-and-complete from the [emacs-rails package][1]:
 
-    @@scheme
-   
     (require 'hippie-exp)
     (require 'snippet)
     
@@ -59,8 +53,6 @@ list of functions, which should be called for completion.
 Let's have a look at my `html-mode` initialization function. It will configure
 the completion behaviour of hippie-expand an bind the tab key to `indent-and-complete`.
 
-    @@scheme
-
     ;; We need a simple wrapper for expand-abbrev
     (defun try-expand-abbrev (old)
       (expand-abbrev))
@@ -95,8 +87,6 @@ There a two functions, which will be asked to complete the current word:
 
 Now if you want to use snippets for your `html-mode`, you have to
 define a abbrev-table with your desired snippets. 
-
-    @@scheme
 
     (define-abbrev-table 'html-mode-abbrev-table ())
     

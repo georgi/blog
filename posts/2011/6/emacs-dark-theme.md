@@ -1,9 +1,5 @@
---- 
-title: Emacs Dark Theme
-date: 2011-06-06
-category: Emacs
-tags: emacs, theme
----
+Emacs Dark Theme
+================
 
 Recently I updated my Emacs setup and decided to go for a more minimal
 color theme. Especially on long coding nights you want a theme without

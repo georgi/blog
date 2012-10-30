@@ -1,9 +1,5 @@
---- 
-category: Javascript
-date: 2008-09-09
-tags: template, json
-title: Patroon - a Javascript Template Engine
----
+Patroon - a Javascript Template Engine
+======================================
 
 Patroon is a template engine written in Javascript in about 100 lines
 of code. It takes existing DOM nodes annotated with CSS classes and
@@ -20,8 +16,6 @@ Please look for current information there.
 ### Example
 
 Comments in this blog are stored as a list of JSON objects, I wrote about it [here][1]. So think about a data object like this:
-
-    @@javascript
 
     var data = { 
       comment: [{
@@ -40,8 +34,6 @@ Comments in this blog are stored as a list of JSON objects, I wrote about it [he
 
 This data will be expanded with help of following template:
 
-    @@html
-
     <div class="comments">  
       <div id="comments-template">
         <div class="comment">
@@ -56,8 +48,6 @@ This data will be expanded with help of following template:
 
 The javascript to actually execute this template looks like this:
 
-    @@javascript
-
     // The comments template will be removed from the DOM!
     var template = new Template('comments-template');
     
@@ -70,8 +60,6 @@ The javascript to actually execute this template looks like this:
 
 
 Using jQuery the code gets a bit cleaner:
-
-    @@javascript
 
     // The comments template will be removed from the DOM!
     var template = new Template('comments-template');

@@ -1,9 +1,5 @@
---- 
-category: Javascript
-date: 2008-09-07
-tags: database, json
-title: Commenting system with lightweight JSON store
----
+Commenting system with lightweight JSON store
+=============================================
 
 As I wrote this [blog engine][1], the need for a commenting system
 arose and I reflected about a small and simple commenting system with
@@ -16,8 +12,6 @@ First of all we need a form, which will post the data to the *PHP*
 script. The comment rendering is done by my own *Javascript*
 templating system, which I will explain in a seperate post. For now we
 focus on the task of posting a form and saving it to our *JSON* store.
-
-    @@html
 
     <div class="comment-form">
         <form>
@@ -42,8 +36,6 @@ focus on the task of posting a form and saving it to our *JSON* store.
 
 My blog engine generates a guid for each post, so this will be posted
 by the form as well. Ok, let's have a look at the Javascript code:
-
-    @@javascript
 
     $('.comment-form form').ajaxForm({
         url: Blog.root + 'controllers/comments.php',
@@ -75,8 +67,6 @@ saved in one JSON file like `comments/guid-of-the-post`. The 4 fields
 will be encoded as json array and appended to the file. This happens
 only, if the request was a *POST*. Finally we read the whole file and
 send it back as response.
-
-    @@php
 
     <?php
     
@@ -135,8 +125,6 @@ send it back as response.
 
 One important thing to note is, that the comment file is not one big
 JSON array. It looks like this:
-
-    @@json
 
     ["2008-09-07 12:28:33","Hans","","**strong text**\n*emphasized text*"]
     ["2008-09-07 12:29:33","Hans","","**strong text**\n\n\n*emphasized text*"]
