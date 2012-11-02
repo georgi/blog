@@ -7,6 +7,6 @@
     <language>en</language>
     <copyright>Matthias Georgi</copyright>
     <pubDate>$time$</pubDate>
-    $items$
+    $content$
   </channel> 
 </rss>
