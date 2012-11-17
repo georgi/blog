@@ -1,9 +1,8 @@
-import Text.Pandoc
 import Text.StringTemplate
+import Text.Sundown.Html.String
 import System.IO
 import System.Directory
 import System.Locale
-import Text.Blaze.Renderer.String
 import Data.List
 import Data.List.Split
 import Data.Time.Format
@@ -18,12 +17,9 @@ postDate post =
   let [year, month] = splitOn "/" (folder post)
       date = fromGregorian (read year) (read month) 1 in
     formatTime defaultTimeLocale "%d %b %y 00:00" date
-postHtml  post = markdownToHtml (text post)
+postHtml  post = renderHtml (text post) allExtensions noHtmlModes True Nothing
 postBody  post = drop 3 (lines (text post))
 postDesc  post = concat $ takeWhile (/= "") (postBody post)
-
-markdownToHtml :: String -> String
-markdownToHtml = renderHtml . (writeHtml defaultWriterOptions) . (readMarkdown defaultParserState)
 
 readPost :: String -> IO Post
 readPost path = do
@@ -78,13 +74,16 @@ findFiles :: FilePath -> IO [FilePath]
 findFiles path = do
   isFile <- doesFileExist path
   if isFile then
-    return [path]
-  else do
-    entries <- getEntries path
-    paths <- return $ map (\ entry -> path ++ "/" ++ entry) entries
-    files <- mapM findFiles paths
-    return $ concat files
+      return [path]
+    else do
+      entries <- getEntries path
+      paths <- return $ map (\ entry -> path ++ "/" ++ entry) entries
+      files <- mapM findFiles paths
+      return $ concat files
   where
     getEntries path = do
       contents <- getDirectoryContents path
       return $ filter ((/= '.') . head) contents
+
+main = writeBlog
+
