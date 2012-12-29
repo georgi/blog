@@ -1,19 +1,14 @@
-$:.unshift '../shinmun/lib'
+use Rack::Static, 
+  :urls => Dir.entries(File.dirname(__FILE__) + '/public').map {|f| '/' + f},
+  :root => "public"
 
-require 'shinmun'
-
-use Rack::Session::Cookie
-use Rack::Reloader unless ENV['RACK_ENV'] == 'production'
-
-blog = Shinmun::Blog.new(File.dirname(__FILE__))
-
-blog.config = {
-  :author => 'Matthias Georgi',
-  :categories => ['Ruby', 'Javascript', 'Emacs'],
-  :description => 'a crystalline mind in a cloud of code',
-  :language => 'en',
-  :title => 'Matthias Georgi',
-  :url => 'http://www.matthias-georgi.de'
+run lambda { |env|
+  [
+    200, 
+    {
+      'Content-Type'  => 'text/html', 
+      'Cache-Control' => 'public, max-age=86400' 
+    },
+    File.open('public/index.html', File::RDONLY)
+  ]
 }
-
-run blog
