@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Matthias Georgi</title>
+    <meta name="Keywords" content="Matthias Georgi, Blog" />
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../index.rss" />
+    <link rel="stylesheet" media="screen" type="text/css" href="../../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="header" class="column span-13 last">
+        <div id="title"><a href="../../index.html">Matthias Georgi</a></div>
+      </div>
+
+      <div class="content">
+        <h1>Emacs Dark Theme</h1>
+
+<p>Recently I updated my Emacs setup and decided to go for a more minimal
+color theme. Especially on long coding nights you want a theme without
+distracting colors.</p>
+
+<p><img src="http://www.matthias-georgi.de/images/emacs-dark-theme.png" alt="Emacs dark theme"></p>
+
+<h3>Configuration</h3>
+
+<p>Just paste this code into your emacs condiguration:</p>
+
+<pre><code> (set-face-attribute &#39;default nil
+                     :background &quot;grey20&quot;
+                     :foreground &quot;grey90&quot;)
+
+ (set-face-attribute &#39;modeline nil
+                     :background &quot;grey10&quot;
+                     :foreground &quot;grey90&quot;)
+
+ (set-face-attribute &#39;cursor nil
+                     :background &quot;white&quot;)
+
+ (set-face-attribute &#39;font-lock-builtin-face nil
+                     :foreground &quot;grey60&quot;)
+
+ (set-face-attribute &#39;font-lock-comment-face nil
+                     :foreground &quot;grey60&quot;)
+
+ (set-face-attribute &#39;font-lock-constant-face nil
+                     :foreground &quot;grey60&quot;)
+
+ (set-face-attribute &#39;font-lock-keyword-face nil
+                     :foreground &quot;white&quot;)
+
+ (set-face-attribute &#39;font-lock-string-face nil
+                     :foreground &quot;white&quot;)
+
+ (set-face-attribute &#39;font-lock-variable-name-face nil
+                     :foreground &quot;lightblue&quot;)
+
+ (set-face-attribute &#39;font-lock-function-name-face nil
+                     :foreground &quot;lightblue&quot;)
+
+ (set-face-attribute &#39;region nil
+                     :background &quot;#111&quot;)                    
+</code></pre>
+
+<h3>Additional faces</h3>
+
+<p>If you use speedbar or elscreen, you can set additional faces:</p>
+
+<pre><code>(set-face-attribute &#39;speedbar-file-face nil
+                    :foreground &quot;white&quot;)
+
+(set-face-attribute &#39;elscreen-tab-background-face nil
+                    :background &quot;grey10&quot;
+                    :foreground &quot;grey90&quot;)
+
+(set-face-attribute &#39;elscreen-tab-control-face nil
+                    :background &quot;grey20&quot;
+                    :foreground &quot;grey90&quot;)
+
+(set-face-attribute &#39;elscreen-tab-current-screen-face nil
+                    :background &quot;grey20&quot;
+                    :foreground &quot;grey90&quot;)
+
+(set-face-attribute &#39;elscreen-tab-other-screen-face nil
+                    :background &quot;grey30&quot;
+                    :foreground &quot;grey60&quot;)
+</code></pre>
+
+      </div>
+    </div>
+  </body>
+</html>

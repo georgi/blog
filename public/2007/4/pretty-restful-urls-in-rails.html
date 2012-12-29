@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Matthias Georgi</title>
+    <meta name="Keywords" content="Matthias Georgi, Blog" />
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../index.rss" />
+    <link rel="stylesheet" media="screen" type="text/css" href="../../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="header" class="column span-13 last">
+        <div id="title"><a href="../../index.html">Matthias Georgi</a></div>
+      </div>
+
+      <div class="content">
+        <h1>Pretty RESTful URLs in Rails</h1>
+
+<p>Since Release 1.2 Rails knows to generate <em>RESTful</em> routes. Each
+resource is identified by an <em>URI</em>, which looks like <code>/users/123</code> . It
+would be nice to have more readable URLs, which include the name of
+the user: <code>/users/matthias-georgi</code>. This is a short tutorial on making
+your urls pretty while retaining the REST approach.</p>
+
+<p>Assuming that you already have an user model, we add following line to
+our <code>config/routes.rb</code>:</p>
+
+<pre><code>map.resources :users
+</code></pre>
+
+<p>You may now run the <code>scaffold_resource</code> generator in case you don&#39;t have
+any <code>UsersController</code> yet. In order to remember the <em>permalink</em> for each
+user, we store it in a column named <code>permalink</code> in the users
+table. Before we save an user record, we have to infer a url-safe
+permalink for the user name. We do this by:</p>
+
+<pre><code>def before_save
+  self.permalink = name.downcase.gsub(/[^a-z0-9]+/i, &#39;-&#39;) if permalink.blank?
+end
+</code></pre>
+
+<p>Each character, which is not an <em>alphanumeric</em> will be replaced by a
+dash. This is only done, if the permalink is not set already. So we
+have a way for users to set their permalink manually. To avoid
+duplicate permalinks, we <em>validate</em> the uniqeness of the permalink:</p>
+
+<pre><code>validates_uniqeness_of :permalink
+</code></pre>
+
+<p>What happens now, if we browse to a user url like
+<code>/users/matthias-georgi</code> ? Rails raises an exception, telling us that it
+cannot find an record with the id <code>matthias-georgi</code>. We&#39;ll fix now our
+controller to look for the permalink and not the id of the user. Just
+replace each call to <code>User.find(params[:id])</code> with
+<code>User.find_by_permalink(params[:id])</code>. Also we have to ensure, that our
+user routes will be generated correctly. Therefore we overwrite the
+<code>to_param</code> method:</p>
+
+<pre><code>def to_param
+  permalink
+end
+</code></pre>
+
+<p>The effect of this little change is, that <code>user_url(a_user)</code> generates
+the right url. <em>Nested resources</em> and <em>pretty urls</em> can get tricky and for
+now I won&#39;t touch this topic. Remember that <em>changing</em> the permalink may
+be problematic as links to the old url will get invalid. Nevertheless
+have fun experimenting with pretty urls and the new wonderful world of
+REST.</p>
+
+      </div>
+    </div>
+  </body>
+</html>

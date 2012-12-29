@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Matthias Georgi</title>
+    <meta name="Keywords" content="Matthias Georgi, Blog" />
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../index.rss" />
+    <link rel="stylesheet" media="screen" type="text/css" href="../../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="header" class="column span-13 last">
+        <div id="title"><a href="../../index.html">Matthias Georgi</a></div>
+      </div>
+
+      <div class="content">
+        <h1>vTouch - Control Ableton Live in a Webbrowser</h1>
+
+<p>VTouch is a multitouch browser frontend for Ableton Live. Inside your
+webbrowser you can control clip triggering, volume, send and return
+levels, mute, solo, record states. This works also on the network, so
+you can connect your mobile phone, iPads or android tablets easily by
+just browsing to you local webserver.</p>
+
+<p><img src="http://www.matthias-georgi.de/images/vtouch.gif" alt="vTouch"></p>
+
+<h3>Screencast</h3>
+
+<iframe width="425" height="349" src="http://www.youtube.com/embed/qFmiIcgRIao" frameborder="0" allowfullscreen></iframe>
+
+<h3>About the Hack</h3>
+
+<p>Ableton Live is an digital audio workstation, which is well suited for
+live performances. Lots of parameters can be manipulated, midi or
+audio loops can be triggered. Unfortunately it is cumbersome to use
+this software with a touch device. A user interface specifically
+designed to be used on multitouch devices, which is also portable
+across platforms, offers many benefits and possibilities. Imagine a
+whole band jamming on iPads with ohne live setup over a wireless
+network.</p>
+
+<h3>Technology used</h3>
+
+<p>The frontend is rendered on HTML5 Canvas and communicates with a
+nodejs server via websockets. On the backend the webserver talks to a
+running ableton live instance and sends updates to all connected
+clients.</p>
+
+<p>The canvas frontend is supported on all modern browsers including
+apple mobile safari and android browsers. We created a small widget
+library named canvas.ui to take care of multitouch events, rendering
+and layout management.</p>
+
+      </div>
+    </div>
+  </body>
+</html>

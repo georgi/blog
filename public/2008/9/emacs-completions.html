@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Matthias Georgi</title>
+    <meta name="Keywords" content="Matthias Georgi, Blog" />
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../index.rss" />
+    <link rel="stylesheet" media="screen" type="text/css" href="../../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="header" class="column span-13 last">
+        <div id="title"><a href="../../index.html">Matthias Georgi</a></div>
+      </div>
+
+      <div class="content">
+        <h1>Emacs Completions with Hippie-Expand and Snippets</h1>
+
+<p>One of the most important features of a text editor is the completing
+of text inside a buffer. There a lots of packages for Emacs, which
+provide this feature in many different ways. I will show you, what I
+use to improve my life as coder.</p>
+
+<p><EMBED SRC="/shockwaves/emacs-completion.swf" WIDTH=400 HEIGHT=320 quality=low loop=false TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></p>
+
+<h3>Multifunctional tab key</h3>
+
+<p>Most of the time the tab key in Emacs is bound to the indentation
+command, which will indent the current line. So if you want to use the
+tab key for other things, you need some kind of multiplexer, which
+tries to figure out, what is the right thing to do in each situation.</p>
+
+<p>So I copied the indent-and-complete from the <a href="http://dima-exe.ru/rails-on-emacs" title="Emacs Rails package">emacs-rails package</a>:</p>
+
+<pre><code>(require &#39;hippie-exp)
+(require &#39;snippet)
+
+(defun indent-and-complete ()
+  &quot;Indent line and complete&quot;
+  (interactive)
+
+  (cond
+   ((and (boundp &#39;snippet) snippet)
+    (snippet-next-field))
+
+   ((looking-at &quot;\\\\_&gt;&quot;)
+    (hippie-expand nil))
+
+   ((indent-for-tab-command))))
+</code></pre>
+
+<p>The function <code>indent-and-complete</code> does one of the following actions:</p>
+
+<ul>
+<li>if a snippet is active, it jumps to the next field</li>
+<li>if we are at a word boundary, it tries to complete with <code>hippie-expand</code></li>
+<li>otherwise it indents the current line</li>
+</ul>
+
+<h3>HTML mode initialization</h3>
+
+<p>Well, this function alone will not change your editor behaviour. For
+activating our tab function, we need to bind the tab key.</p>
+
+<p>Additionally we want to setup <code>hippie-expand</code>, an expansion package,
+which will try to expand the word before the cursor in a configurable
+way. <code>hippie-expand-try-functions-list</code> is a variable, which defines a
+list of functions, which should be called for completion.</p>
+
+<p>Let&#39;s have a look at my <code>html-mode</code> initialization function. It will configure
+the completion behaviour of hippie-expand an bind the tab key to <code>indent-and-complete</code>.</p>
+
+<pre><code>;; We need a simple wrapper for expand-abbrev
+(defun try-expand-abbrev (old)
+  (expand-abbrev))
+
+;; ********************************************************************************
+;; HTML Mode
+;;
+(add-to-list &#39;auto-mode-alist &#39;(&quot;\\\\.html\\\\&#39;&quot; . html-mode))
+
+(defun html-mode-on-init ()
+  (set (make-local-variable &#39;hippie-expand-try-functions-list)
+       &#39;(try-expand-abbrev
+         try-expand-dabbrev))
+  (define-key html-mode-map (kbd &quot;&lt;tab&gt;&quot;) &#39;indent-and-complete))
+
+(add-hook &#39;html-mode-hook &#39;html-mode-on-init)    
+</code></pre>
+
+<p>There a two functions, which will be asked to complete the current word:</p>
+
+<ul>
+<li><p><code>try-expand-abbrev</code>: Expands the current word by looking into the
+list of defined abbreviations. So called abbrevs are just shortcuts
+in Emacs. So if you type <code>li</code> and hit the tab key it will be
+expanded to <code>&lt;li&gt;&lt;/li&gt;</code>.</p></li>
+<li><p><code>try-expand-dabbrev</code>: Dynamic abbreviation is a pragmatic method for
+completing words. Emacs will look for words with the same beginning
+and use them for completion. Hitting multiple times the tab key will
+give you different completions, as you may know from the unix shell.</p></li>
+</ul>
+
+<h3>Defining your snippets</h3>
+
+<p>Now if you want to use snippets for your <code>html-mode</code>, you have to
+define a abbrev-table with your desired snippets. </p>
+
+<pre><code>(define-abbrev-table &#39;html-mode-abbrev-table ())
+
+(snippet-with-abbrev-table &#39;html-mode-abbrev-table 
+ (&quot;h1&quot;      . &quot;&lt;h1&gt;$.&lt;/h1&gt;&quot;)
+ (&quot;h2&quot;      . &quot;&lt;h2&gt;$.&lt;/h2&gt;&quot;)
+ (&quot;h3&quot;      . &quot;&lt;h3&gt;$.&lt;/h3&gt;&quot;)
+ (&quot;h4&quot;      . &quot;&lt;h3&gt;$.&lt;/h4&gt;&quot;)
+ (&quot;h5&quot;      . &quot;&lt;h3&gt;$.&lt;/h5&gt;&quot;)
+ (&quot;h6&quot;      . &quot;&lt;h6&gt;$.&lt;/h6&gt;&quot;)
+ (&quot;div&quot;     . &quot;&lt;div&gt;$.&lt;/div&gt;&quot;)
+ (&quot;divc&quot;    . &quot;&lt;div class=\&quot;$${class}\&quot;&gt;$.&lt;/div&gt;&quot;)
+ (&quot;span&quot;    . &quot;&lt;span&gt;$.&lt;/span&gt;&quot;)
+ (&quot;spans&quot;   . &quot;&lt;span style=\&quot;$${style}\&quot;&gt;$.&lt;/span&gt;&quot;)
+ (&quot;form&quot;    . &quot;&lt;form action=\&quot;$${action}\&quot; method=\&quot;$${post}\&quot;&gt;$.&lt;/form&gt;&quot;)
+ (&quot;input&quot;   . &quot;&lt;input type=\&quot;$${text}\&quot; name=\&quot;$${name}\&quot; value=\&quot;$${value}\&quot;/&gt;&quot;)
+ (&quot;a&quot;       . &quot;&lt;a href=\&quot;$${href}\&quot;&gt;$.&lt;/a&gt;&quot;)
+ (&quot;br&quot;      . &quot;&lt;br/&gt;$.&quot;)
+ (&quot;ul&quot;      . &quot;&lt;ul&gt;$.&lt;/ul&gt;&quot;)
+ (&quot;ol&quot;      . &quot;&lt;ul&gt;$.&lt;/ul&gt;&quot;)
+ (&quot;li&quot;      . &quot;&lt;li&gt;$.&lt;/li&gt;&quot;)
+ (&quot;tab&quot;     . &quot;&lt;table&gt;$.&lt;/table&gt;&quot;)
+ (&quot;tr&quot;      . &quot;&lt;tr&gt;$.&lt;/tr&gt;&quot;)
+ (&quot;td&quot;      . &quot;&lt;td&gt;$.&lt;/td&gt;&quot;)
+ (&quot;th&quot;      . &quot;&lt;th&gt;$.&lt;/th&gt;&quot;)
+ (&quot;str&quot;     . &quot;&lt;strong&gt;$.&lt;/strong&gt;&quot;)
+ (&quot;em&quot;      . &quot;&lt;em&gt;$.&lt;/em&gt;&quot;)
+ (&quot;meta&quot;    . &quot;&lt;meta name=\&quot;$${name}\&quot; content=\&quot;$${content}\&quot;/&gt;&quot;)
+ (&quot;style&quot;   . &quot;&lt;style type=\&quot;text/css\&quot;&gt;$.&lt;/style&gt;&quot;)
+ (&quot;script&quot;  . &quot;&lt;script type=\&quot;text/javascript\&quot;&gt;$.&lt;/script&gt;&quot;)
+ (&quot;scripts&quot; . &quot;&lt;script src=\&quot;$${src}\&quot; type=\&quot;text/javascript\&quot;&gt;$.&lt;/script&gt;&quot;)
+ (&quot;img&quot;     . &quot;&lt;img src=\&quot;$.\&quot;/&gt;&quot;)
+ (&quot;link&quot;    . &quot;&lt;link href=\&quot;$${href}\&quot; media=\&quot;screen\&quot; rel=\&quot;stylesheet\&quot; type=\&quot;text/css\&quot;/&gt;&quot;))
+</code></pre>
+
+<p>Great. If you put all the code in your .emacs file, you should be able
+to use your tab key for completions. In our case we defined snippets
+for the <code>html-mode</code> and activated <code>hippie-expand</code> to use abbrevs and
+dynamic abbreviation. There is much more stuff I will show you next
+time, like customizations for other language modes like <em>Ruby</em> and
+<em>Javascript</em>.</p>
+
+      </div>
+    </div>
+  </body>
+</html>

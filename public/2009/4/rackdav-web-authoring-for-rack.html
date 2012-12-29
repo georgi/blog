@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Matthias Georgi</title>
+    <meta name="Keywords" content="Matthias Georgi, Blog" />
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../index.rss" />
+    <link rel="stylesheet" media="screen" type="text/css" href="../../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="header" class="column span-13 last">
+        <div id="title"><a href="../../index.html">Matthias Georgi</a></div>
+      </div>
+
+      <div class="content">
+        <h1>RackDAV - Web Authoring for Rack</h1>
+
+<p>RackDAV is Handler for <a href="http://github.com/chneukirchen/rack">Rack</a>, which allows content authoring over
+HTTP. RackDAV brings its own file backend, but other backends are
+possible by subclassing RackDAV::Resource.</p>
+
+<h2>Install</h2>
+
+<p>Just install the gem from github:</p>
+
+<pre><code>$ gem sources -a http://gems.github.com
+$ sudo gem install georgi-rack_dav
+</code></pre>
+
+<h2>Quickstart</h2>
+
+<p>If you just want to share a folder over WebDAV, you can just start a
+simple server with:</p>
+
+<pre><code>$ rack_dav
+</code></pre>
+
+<p>This will start a WEBrick server on port 3000, which you can connect
+to without authentication.</p>
+
+<h2>Rack Handler</h2>
+
+<p>Using RackDAV inside a rack application is quite easy. A simple rackup
+script looks like this:</p>
+
+<pre><code>require &#39;rubygems&#39;
+require &#39;rack_dav&#39;
+
+use Rack::CommonLogger
+
+run RackDAV::Handler.new(&#39;/path/to/docs&#39;)
+</code></pre>
+
+<h2>Implementing your own WebDAV resource</h2>
+
+<p>RackDAV::Resource is an abstract base class and defines an interface
+for accessing resources.</p>
+
+<p>Each resource will be initialized with a path, which should be used to
+find the real resource.</p>
+
+<p>RackDAV::Handler needs to be initialized with the actual resource class:</p>
+
+<pre><code>RackDAV::Handler.new(:resource_class =&gt; MyResource)
+</code></pre>
+
+<p>RackDAV needs some information about the resources, so you have to
+implement following methods:</p>
+
+<ul>
+<li><p><strong>children</strong>: If this is a collection, return the child resources.</p></li>
+<li><p><strong>collection?</strong>: Is this resource a collection?</p></li>
+<li><p><strong>exist?</strong>: Does this recource exist?</p></li>
+<li><p><strong>creation_date</strong>: Return the creation time.</p></li>
+<li><p><strong>last_modified</strong>: Return the time of last modification.</p></li>
+<li><p><strong>last_modified=(time)</strong>: Set the time of last modification.</p></li>
+<li><p><strong>etag</strong>: Return an Etag, an unique hash value for this resource.</p></li>
+<li><p><strong>content_type</strong>: Return the mime type of this resource.</p></li>
+<li><p><strong>content_length</strong>: Return the size in bytes for this resource.</p></li>
+</ul>
+
+<p>Most importantly you have to implement the actions, which are called
+to retrieve and change the resources:</p>
+
+<ul>
+<li><p><strong>get(request, response)</strong>: Write the content of the resource to the response.body.</p></li>
+<li><p><strong>put(request, response)</strong>: Save the content of the request.body.</p></li>
+<li><p><strong>post(request, response)</strong>: Usually forbidden.</p></li>
+<li><p><strong>delete</strong>: Delete this resource.</p></li>
+<li><p><strong>copy(dest)</strong>: Copy this resource to given destination resource.</p></li>
+<li><p><strong>move(dest)</strong>: Move this resource to given destination resource.</p></li>
+<li><p><strong>make_collection</strong>: Create this resource as collection.</p></li>
+</ul>
+
+<p>Note, that it is generally possible, that a resource object is
+instantiated for a not yet existing resource.</p>
+
+<p>For inspiration you should have a look at the FileResource
+implementation. Please let me now, if you are going to implement a new
+type of resource.</p>
+
+<h3>RackDAV on GitHub</h3>
+
+<p>Download or fork the project on its <a href="http://github.com/georgi/rack_dav">Github page</a></p>
+
+      </div>
+    </div>
+  </body>
+</html>

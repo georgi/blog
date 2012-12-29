@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Matthias Georgi</title>
+    <meta name="Keywords" content="Matthias Georgi, Blog" />
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../index.rss" />
+    <link rel="stylesheet" media="screen" type="text/css" href="../../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="header" class="column span-13 last">
+        <div id="title"><a href="../../index.html">Matthias Georgi</a></div>
+      </div>
+
+      <div class="content">
+        <h1>Using Javascript Templates for a Delicious Sidebar</h1>
+
+<p>Processing JSON data from an external source with Javascript templates
+is a natural fit. Create a template inside your <em>HTML Document</em> by
+adding class names and variables and write a few lines for fetching
+the <em>JSON</em>, that&#39;s all. This tutorial is an example for my Javascript
+Template Engine called <strong><a href="http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine-part-2.html">Patroon</a></strong>.</p>
+
+<h3>Writing the template</h3>
+
+<p>In my sidebar you can see the result of my example. My latest
+bookmarks are shown as a list. Quite simple. The template looks like
+this:</p>
+
+<pre><code>&lt;div class=&quot;bookmarks&quot;&gt;
+  &lt;ul id=&quot;bookmarks-template&quot;&gt;
+    &lt;li class=&quot;bookmark&quot;&gt;
+      &lt;a href=&quot;{u}&quot;&gt;{d}&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>There a two variables here <code>u</code> and <code>d</code>. I don&#39;t know if <em>Delicious</em>
+wants to save some bytes here, but descriptive names wouldn&#39;t hurt in
+this case. <code>u</code> is refering to the url of the bookmark and <code>d</code> is the
+title. We are expanding an array of bookmarks into the <code>li</code> element,
+which is marked by the class name <code>bookmark</code>.</p>
+
+<h3>Fetching the JSON Feed</h3>
+
+<p>The Feed resides on a different domain, so we have to use a <code>script</code>
+tag to fetch the data. This is because of security restrictions, which
+limits <em>AJAX</em> calls to the same domain of the current web page.</p>
+
+<p>The feed url for your bookmarks looks like this:</p>
+
+<pre><code>http://feeds.delicious.com/v2/json/{username}
+</code></pre>
+
+<p>If you want to fetch some of the other feeds, just look at the
+<a href="http://delicious.com/help/json/">documentation</a>, which describes 18 different feed types.</p>
+
+<p>A very useful option in our case is to provide a callback function,
+which gets called after the <em>JSON</em> script was loaded. We define
+<code>renderBookmarks</code> as our callback.</p>
+
+<p>The following code inserts the script tag to load the <em>Delicious</em>
+<em>JSON</em> feed of my bookmarks. This is done when the page is loaded:</p>
+
+<pre><code>$(function() {
+    var head = document.getElementsByTagName(&quot;head&quot;)[0];
+    var script = document.createElement(&#39;script&#39;);
+
+    script.setAttribute(&quot;src&quot;, &quot;http://feeds.delicious.com/v2/json/matthias_georgi?callback=renderBookmarks&quot;);
+    script.setAttribute(&quot;type&quot;, &quot;text/javascript&quot;);
+
+    head.appendChild(script);
+});
+</code></pre>
+
+<p>I&#39;m using jQuery here for the window load event. Other libraries would
+need some other api call.</p>
+
+<h3>Rendering the JSON data</h3>
+
+<p>The code for rendering consists of just two lines. First we are
+instantiating the Template. We have to provide the id of the template
+node (the template is part of your document).</p>
+
+<p>Second we expand the template using the jQuery helper. The variable
+<code>data</code> contains just the array of bookmarks. To match the <code>li</code> element
+of the template, which has the class name <code>bookmark</code>, we must set the
+template variable <code>bookmark</code> to hold the bookmarks array.</p>
+
+<pre><code>function renderBookmarks(data) {
+  var template = new Template(&#39;bookmarks-template&#39;);
+  $(&#39;.bookmarks&#39;).expand(template, { bookmark: data });
+}
+</code></pre>
+
+<h3>Result</h3>
+
+<p>The resulting <em>HTML</em> of my bookmark sidebar looks like this:</p>
+
+<pre><code>&lt;div class=&quot;bookmarks&quot;&gt;
+  &lt;ul id=&quot;bookmarks-template&quot;&gt;            
+    &lt;li class=&quot;bookmark&quot;&gt;
+      &lt;a href=&quot;http://delicious.com/help/json/&quot;&gt;
+        &lt;span&gt;delicious/help/feeds&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class=&quot;bookmark&quot;&gt;
+      &lt;a href=&quot;http://code.google.com/apis/youtube/reference.html&quot;&gt;
+        &lt;span&gt;Reference Guide: Data API Protocol - YouTube APIs and Tools - Google Code&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class=&quot;bookmark&quot;&gt;
+      &lt;a href=&quot;http://rewrite.rubyforge.org/&quot;&gt;
+      &lt;span&gt;rewrite&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class=&quot;bookmark&quot;&gt;
+      &lt;a href=&quot;http://www.infoq.com/interviews/Rewrite-Reginald-Braithwaite&quot;&gt;
+        &lt;span&gt;InfoQ: Reginald Braithwaite on Rewrite&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>You may wonder, why there are extra span elements around the variable
+expansions. Well this is necessary for inserting <em>HTML</em> from a
+variable. If I want to replace a text node with some <em>HTML</em>, I have to
+insert a <em>span</em> element and use the <code>innerHTML</code> property. If you know
+something better, please let me know.</p>
+
+<h3>Conclusion</h3>
+
+<p>Using <em>Javascript</em> templates with <em>JSON</em> feeds is simple and
+efficient. You write standards-compliant <em>HTML</em> sprinkled with some
+variables and expand this with some <em>JSON</em> data, that&#39;s all.</p>
+
+<h3>Related Work</h3>
+
+<p>There are some other libraries for javascript templating, which are
+related to <strong>Patroon</strong>:</p>
+
+<ul>
+<li><a href="http://beebole.com/pure/">PURE</a></li>
+<li><a href="http://jsrepeater.devprog.com/">jsRepeater</a></li>
+<li><a href="http://code.google.com/p/trimpath/wiki/JavaScriptTemplates">TrimPath</a></li>
+<li><a href="http://embeddedjs.com/">EmbeddedJS</a></li>
+</ul>
+
+<p>Patroon is probably the smallest templating solution around and
+consists only of 130 lines of code.</p>
+
+      </div>
+    </div>
+  </body>
+</html>

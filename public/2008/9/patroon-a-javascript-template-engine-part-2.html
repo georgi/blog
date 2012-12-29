@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Matthias Georgi</title>
+    <meta name="Keywords" content="Matthias Georgi, Blog" />
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../index.rss" />
+    <link rel="stylesheet" media="screen" type="text/css" href="../../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="header" class="column span-13 last">
+        <div id="title"><a href="../../index.html">Matthias Georgi</a></div>
+      </div>
+
+      <div class="content">
+        <h1>Patroon - a Javascript Template Engine (Part 2)</h1>
+
+<p>This post is an update to my <a href="http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html">initial post</a>. Patroon has been
+improved and is now easier to use and uses a better algorithm
+internally.</p>
+
+<p>Patroon is a template engine written in Javascript in about 130 lines
+of code. It takes existing DOM nodes annotated with class names and
+expand a data object according to simple rules. Additionally you may
+use traditional string interpolation inside attribute values and text
+nodes.</p>
+
+<h3>The Data</h3>
+
+<p>Comments in this blog are stored as a list of JSON objects, I wrote
+about it <a href="http://www.matthias-georgi.de/2008/9/commenting-system-with-lightweight-json-store.html">here</a>. So think about a data object like this:</p>
+
+<pre><code>var data = { 
+  comment: [{
+    time: &quot;2008-09-07 12:28:33&quot;, 
+    name: &quot;David Beckham&quot;,
+    website: &quot;beckham.com&quot;,
+    text: &quot;I watched the euro finals on tv...&quot; 
+  }, { 
+    time: &quot;2008-09-07 14:28:33&quot;, 
+    name: &quot;Tuncay&quot;,
+    website: &quot;&quot;,
+    text: &quot;Me too&quot;
+  }]
+};
+</code></pre>
+
+<h3>The Template</h3>
+
+<p>This data will be expanded with help of following template:</p>
+
+<pre><code>&lt;div class=&quot;comments&quot;&gt;  
+  &lt;div id=&quot;comments-template&quot;&gt;
+    &lt;div class=&quot;comment&quot;&gt;
+      &lt;div class=&quot;top&quot;&gt;
+        {website.length &gt; 0 ? linkTo(name, website) : name} said
+        &lt;a title=&quot;{time}&quot;&gt;&lt;/a&gt;:
+      &lt;/div&gt;
+      &lt;div class=&quot;text&quot;&gt;
+        {text}
+      &lt;/div&gt;
+    &lt;/div&gt;   
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3>Usage</h3>
+
+<p>The javascript to actually execute this template looks like this:</p>
+
+<pre><code>// The comments template will be removed from the DOM!
+var template = new Template(&#39;comments-template&#39;);
+
+// Expand the template into the comments section
+$(&#39;.comments&#39;).expand(template, data);
+</code></pre>
+
+<p>If you don&#39;t want to use jQuery, please look at the end of this article.</p>
+
+<h3>Output</h3>
+
+<p>The given example renders following output:</p>
+
+<pre><code>&lt;div class=&quot;comments&quot;&gt;  
+  &lt;div id=&quot;comments-template&quot;&gt;
+    &lt;div class=&quot;comment&quot;&gt;
+      &lt;div class=&quot;top&quot;&gt;
+        &lt;a href=&quot;http://backham.com&quot;&gt;David Beckham&lt;/a&gt; said
+        &lt;a title=&quot;2008-09-07 12:28:33&quot;&gt;2 hours ago&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;text&quot;&gt;
+        I watched the euro finals on tv...
+      &lt;/div&gt;
+    &lt;/div&gt;   
+    &lt;div class=&quot;comment&quot;&gt;
+      &lt;div class=&quot;top&quot;&gt;
+        Tuncay said
+        &lt;a title=&quot;2008-09-07 14:28:33&quot;&gt;1 minute ago&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;text&quot;&gt;
+        Me too
+      &lt;/div&gt;
+    &lt;/div&gt;   
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3>Basic Rules</h3>
+
+<p>There are 3 basic rules regarding the evaluation:</p>
+
+<ul>
+<li><p>Each found class name of a node will be looked up in the current
+data object. If found, the node will be processed in the new scope.
+Example: the class name <code>comment</code> instructs to lookup the name
+<code>comment</code> in the data object, which contains the comment array.</p></li>
+<li><p>Arrays repeat the current node and process its elements recursively.</p></li>
+<li><p>Code will be evaluated for text surrounded with braces (works also
+for attributes). The evaluation takes place in the scope of the
+current data object, which is in the example a comment object. So
+the snippet <code>&lt;a title=&quot;{time}&quot;&gt;</code> will lookup the time in the comment
+object and insert into the title attribute.</p></li>
+</ul>
+
+<h3>Helper</h3>
+
+<p>Code snippets inside the template will be executed within the scope of
+a Helper object. If you want to extend it, just add your functions to
+<code>Template.Helper</code>. At the moment it defines only one function:</p>
+
+<pre><code>Template.Helper = {
+
+    linkTo: function(text, url) {
+        if (url.indexOf(&#39;http://&#39;) == -1 &amp;&amp; url[0] != &#39;/&#39; &amp;&amp; url[0] != &#39;#&#39;) {
+            url = &#39;http://&#39; + url;
+        }
+        return &#39;&lt;a href=&quot;&#39; + url +&#39;&quot;&gt;&#39; + text + &#39;&lt;/a&gt;&#39;;
+    }
+
+};
+</code></pre>
+
+<h3>Examples</h3>
+
+<ul>
+<li><a href="http://www.matthias-georgi.de/2008/9/using-javascript-templates-for-a-delicious-sidebar.html">a Delicious Sidebar</a>, which renders a <em>JSON</em> feed with the help
+of Patroon.</li>
+</ul>
+
+<h3>Download</h3>
+
+<p>Download the script at my <a href="http://github.com/georgi/patroon/tree/master">github repository</a>.</p>
+
+<h3>Related Work</h3>
+
+<p>There are some other libraries for javascript templating, which are
+related to <strong>Patroon</strong>:</p>
+
+<ul>
+<li><a href="http://beebole.com/pure/">PURE</a></li>
+<li><a href="http://jsrepeater.devprog.com/">jsRepeater</a></li>
+<li><a href="http://code.google.com/p/trimpath/wiki/JavaScriptTemplates">TrimPath</a></li>
+<li><a href="http://embeddedjs.com/">EmbeddedJS</a></li>
+</ul>
+
+<p>Patroon is probably the smallest templating solution around and
+consists only of 130 lines of code.</p>
+
+<h3>Appendix</h3>
+
+<p>Without jQuery template expansion is a bit verbose:</p>
+
+<pre><code>@@javascript
+
+// The comments template will be removed from the DOM!
+var template = new Template(&#39;comments-template&#39;);
+
+// template will result in a new DOM node
+var result = template.expand(data);
+
+// insert the resulting node into the comments container
+var container = document.getElementsByClassName(&#39;comments&#39;)[0];
+container.appendChild(result);
+</code></pre>
+
+      </div>
+    </div>
+  </body>
+</html>

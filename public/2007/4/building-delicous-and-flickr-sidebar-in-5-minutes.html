@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Matthias Georgi</title>
+    <meta name="Keywords" content="Matthias Georgi, Blog" />
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../index.rss" />
+    <link rel="stylesheet" media="screen" type="text/css" href="../../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="header" class="column span-13 last">
+        <div id="title"><a href="../../index.html">Matthias Georgi</a></div>
+      </div>
+
+      <div class="content">
+        <h1>Building a del.ico.us and flickr sidebar in 5 minutes</h1>
+
+<p>You need a del.icio.us sidebar which shows recent bookmarks or one of
+these nice flickr badges? This is really is easy as the <a href="http://trac.typosphere.org/">Typo Weblog
+Engine</a> already includes an flickr and del.icio.us aggregator.</p>
+
+<p>Download the files <a href="http://trac.typosphere.org/browser/trunk/vendor/plugins/delicious_sidebar/lib/delicious.rb?format=raw">delicous.rb</a> and <a href="http://trac.typosphere.org/browser/trunk/vendor/plugins/flickr_sidebar/lib/flickr.rb?format=raw">flickr.rb</a> and drop them
+into your rails lib folder.</p>
+
+<p>Now add these two little helpers to your application_helper.rb:</p>
+
+<pre><code>    require &#39;delicious&#39;
+    require &#39;flickr&#39;
+
+    def delicious(tag)
+      Delicious.new(&quot;http://del.icio.us/rss/tag/#{tag}&quot;)
+    end
+
+    def flickr(tag)
+      url = &quot;http://api.flickr.com/services/feeds/photos_public.gne?&quot;
+      url &lt;&lt; &quot;tags=#{tag}&amp;format=rss_200&quot;
+      FlickrAggregation.new(url)
+    end
+</code></pre>
+
+<p>We are now able to fetch the feeds for our desired tags with a simple
+method call. Next step is to render a list of links for our
+sidebar. So for rendering the del.icio.us sidebar, you need something
+like this:</p>
+
+<pre><code>    &lt;ul&gt;
+      &lt;% for item in delicious(:ruby).items[0, 10] %&gt;
+        &lt;li&gt;
+          &lt;%= link_to item.title, item.link %&gt;
+        &lt;/li&gt;
+      &lt;% end %&gt;
+    &lt;/ul&gt;
+</code></pre>
+
+<p>This is pretty self-explanatory. We take the first ten items of the
+del.icio.us feed and for each item we output a list element containing
+a link to the item. The view for the flickr badge is similar:</p>
+
+<pre><code>    &lt;ul&gt;
+      &lt;% for item in flickr(:ruby).pics[0, 10] %&gt;
+       &lt;%= image_tag item.square, :size =&gt; &#39;48x48&#39; %&gt;
+      &lt;% end %&gt;
+    &lt;/ul&gt;
+</code></pre>
+
+<p>We take the first ten items of the flickr feed and for each item we
+render an image tag which shows a square thumbnail of the size
+48x48. Congratulations, you have just written a del.icio.us and flickr
+sidebar in 5 minutes using only 18 lines of code. Now you can spend
+the rest of the day pimping up your sidebar with all kinds of feeds
+using one of these plugins of the typo weblog.</p>
+
+      </div>
+    </div>
+  </body>
+</html>

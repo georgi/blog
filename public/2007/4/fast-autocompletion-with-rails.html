@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Matthias Georgi</title>
+    <meta name="Keywords" content="Matthias Georgi, Blog" />
+    <meta http-equiv="Content-Language" content="English" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../index.rss" />
+    <link rel="stylesheet" media="screen" type="text/css" href="../../style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="header" class="column span-13 last">
+        <div id="title"><a href="../../index.html">Matthias Georgi</a></div>
+      </div>
+
+      <div class="content">
+        <h1>Fast Auto-completion with Rails, Scriptaculous and JSON</h1>
+
+<p>Inspired by the excellent <a href="http://www.pragmaticprogrammer.com/titles/fr_rr/">Rails Recipes</a> book , I created an
+improved Auto-completion helper, which uses <em>JSON</em> and <em>AJAX</em> instead
+of a script tag for loading the completions. What we want to achieve
+is a search field, which pops up immediately, showing us a list of
+possible completions for our search word. Look at <a href="http://labs.google.com/suggest/">Google Suggest</a>
+to get an idea.</p>
+
+<h3>Rails Autocomplete</h3>
+
+<p>Rails already has an <code>auto_complete_field</code>, which sends an AJAX
+request for each keystroke. This approach is quite slow, but works in
+most cases, especially for large datasets <code>auto_complete_field</code> is the
+better choice. Our idea, stolen from the Rails Recipes book is to
+fetch the array of possible completions only once. Each keystroke will
+trigger only a local lookup and need no further server interaction.</p>
+
+<p>Scriptaculous already has the right tool for this job:
+<a href="http://wiki.script.aculo.us/scriptaculous/show/Autocompleter.Local">Autocompleter.Local</a>.  We will just pass a javascript array of
+possible completions to the constructor and we&#39;re done.</p>
+
+<h3>CSS</h3>
+
+<p>OK, let&#39;s start. First we need the CSS used by <code>Autocompleter.Local</code>,
+which styles the choices box:</p>
+
+<pre><code>@@css
+
+div.auto_complete {
+  width: 350px;
+  background: #fff;
+}
+
+div.auto_complete ul {
+  border:1px solid #888;
+  margin:0;
+  padding:0;
+  width:100%;
+  list-style-type:none;
+}
+
+div.auto_complete ul li {
+  margin:0;
+  padding:3px;
+}
+
+div.auto_complete ul li.selected {
+  background-color: #ffb;
+}
+
+div.auto_complete ul strong.highlight {
+  color: #800;
+  margin:0;
+  padding:0;
+}
+</code></pre>
+
+<h3>Controller</h3>
+
+<p>Rails already has an controller macro for generating a auto completion
+action. We will create a similar macro, which will generate an action,
+which in turn generates the <em>JSON</em> response. Sounds complex, but the
+implementation is quite easy. Just add to your ApplicationController:</p>
+
+<pre><code>def self.fast_auto_complete_for(object, method, options = {})
+ define_method(&quot;auto_complete_for_#{object}_#{method}&quot;) do
+   render :json =&gt; object.to_s.camelize.constantize.find(:all).map(&amp;method).to_json
+  end
+end
+</code></pre>
+
+<p>The response of the generated action will now contain a list of all
+values for the desired attribute. You can use it like in your
+controllers: <code>fast_auto_complete_for :sport, :name</code></p>
+
+<h3>Javascript Helper</h3>
+
+<p>Now let us get into the tricky part: the javascript macro helper. How
+will we get the completion list? <em>Prototype</em> includes the <code>Ajax.Request</code>
+class, which sends an Ajax Request to our generated action and fetches
+the array encoded as <em>JSON</em>. Furthermore we have to generate a div which
+will hold the popup list for our completion entries. Without going
+into detail, I&#39;ll just show you the code, which you add to your
+<code>ApplicationHelper</code>:</p>
+
+<pre><code>def fast_auto_complete_field(field_id, options={})
+  div_id = &quot;#{field_id}_auto_complete&quot;
+  url = options.delete(:url) or raise &quot;url required&quot;
+  options = options.merge(:tokens =&gt; &#39;,&#39;, :frequency =&gt; 0 )
+  script = javascript_tag &lt;&lt;-end
+    new Ajax.Request(&#39;#{url}&#39;, {
+      method: &#39;get&#39;,
+      onSuccess: function(transport) {
+        new Autocompleter.Local(&#39;#{field_id}&#39;, &#39;#{div_id}&#39;, eval(transport.responseText), #{options.to_json});
+      }
+    });
+  end
+  content_tag &#39;div&#39;, script, :class =&gt; &#39;auto_complete&#39;, :id =&gt; div_id
+end
+</code></pre>
+
+<p>Our helper needs the id for the text field we want to enhance. Based
+on this id the helper generates the div for presenting the completion
+entries. It is also required to pass the url of the json action, which
+is in our case <code>/sports/auto_complete_for_sport_name</code>. </p>
+
+<h3>Usage example</h3>
+
+<pre><code>&lt;form&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name&quot; id=&quot;sport_name&quot;/&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Search&quot;/&gt;
+&lt;/form&gt;
+
+&lt;%= fast_auto_complete_field :sport_name, :url =&gt; &#39;/sports/auto_complete_for_sport_name&#39; %&gt;
+</code></pre>
+
+<p>Well, that&#39;s it. Now you may enjoy snappy auto-completion and feel
+good about using bleeding edge technology like <code>AJAX</code> and <code>JSON</code>.</p>
+
+      </div>
+    </div>
+  </body>
+</html>
