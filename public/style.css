@@ -14,17 +14,15 @@ p {
 }
 
 code {
-    font-family: monospace;
- }
-
-pre {
     background: #111;
-    margin: 1em 0;
-    padding: 0.8em 1em;
     border: 1px solid #666;
+    padding: 2px 5px;
     font-family: monospace;
     font-size: 1em;
-    line-height: 1.5em;
+}
+
+pre {
+    margin: 10px 0;
     overflow: auto;
 }
 
@@ -34,7 +32,6 @@ pre {
 }
 
 #header #title {
-    font-size: 1.5em;
     font-weight: bold;
     padding: 20px 20px 5px 0;
     display: inline;
@@ -49,3 +46,7 @@ pre {
     color: #eee;
     text-decoration: none;
 }
+
+h1 { font-size: 1.5em; }
+h2 { font-size: 1.2em; }
+h3,h4 { font-size: 1em; }

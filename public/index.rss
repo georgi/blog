@@ -8,6 +8,11 @@
     <copyright>Matthias Georgi</copyright>
     <pubDate></pubDate>
     <item>
+  <title>How to write a blog engine in Haskell Part 1</title>
+  <description><![CDATA[ I really like to evaluate programming languages based on theirpractical value and one of the fun tasks is to write a small staticfile blog engine. The engine just converts a bunch of markdown fileswhich are sorted into folders by month and year to html files given aset of simple templates. ]]></description>
+  <link>http://www.matthias-georgi.de/2013/1/how-to-write-a-blog-engine-in-haskell-part-1.html</link>
+  <pubDate>01 Jan 13 00:00</pubDate>
+</item><item>
   <title>vTouch - Control Ableton Live in a Webbrowser</title>
   <description><![CDATA[ VTouch is a multitouch browser frontend for Ableton Live. Inside yourwebbrowser you can control clip triggering, volume, send and returnlevels, mute, solo, record states. This works also on the network, soyou can connect your mobile phone, iPads or android tablets easily byjust browsing to you local webserver. ]]></description>
   <link>http://www.matthias-georgi.de/2011/6/vtouch-control-ableton-live-in-a-webbrowser.html</link>
