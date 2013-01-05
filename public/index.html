@@ -1,179 +1,2870 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title>Matthias Georgi</title>
-    <meta name="Keywords" content="Matthias Georgi, Blog" />
-    <meta http-equiv="Content-Language" content="English" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="index.rss" />
-    <link rel="stylesheet" media="screen" type="text/css" href="style.css" />
-    <link rel="stylesheet" href="zenburn.css">
-    <script src="highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-  </head>
-  <body>
-    <div class="container">
-      <div id="header" class="column span-13 last">
-        <div id="title"><a href="index.html">Matthias Georgi</a></div>
-      </div>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
 
-      <div class="content">
-        <div class="article">
-  <h4>
-    <a href="2013/1/how-to-write-a-blog-engine-in-haskell-part-1.html">How to write a blog engine in Haskell Part 1</a>
-  </h4>
-  <p>
-    I really like to evaluate programming languages based on theirpractical value and one of the fun tasks is to write a small staticfile blog engine. The engine just converts a bunch of markdown fileswhich are sorted into folders by month and year to html files given aset of simple templates.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2011/6/vtouch-control-ableton-live-in-a-webbrowser.html">vTouch - Control Ableton Live in a Webbrowser</a>
-  </h4>
-  <p>
-    VTouch is a multitouch browser frontend for Ableton Live. Inside yourwebbrowser you can control clip triggering, volume, send and returnlevels, mute, solo, record states. This works also on the network, soyou can connect your mobile phone, iPads or android tablets easily byjust browsing to you local webserver.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2011/6/quick-guide-for-passenger-on-natty-narwhal.html">Quick Guide for Passenger on Natty Narwhal</a>
-  </h4>
-  <p>
-    This is a short guide for installing [Phusion Passenger][1] and [RubyEnterprise Editition][2] on Ubuntu Natty Narwhal. Depending on your machinethis will take 30-60 minutes on a fresh Ubuntu install.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2011/6/emacs-dark-theme.html">Emacs Dark Theme</a>
-  </h4>
-  <p>
-    Recently I updated my Emacs setup and decided to go for a more minimalcolor theme. Especially on long coding nights you want a theme withoutdistracting colors.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2009/4/rackdav-web-authoring-for-rack.html">RackDAV - Web Authoring for Rack</a>
-  </h4>
-  <p>
-    RackDAV is Handler for [Rack][1], which allows content authoring overHTTP. RackDAV brings its own file backend, but other backends arepossible by subclassing RackDAV::Resource.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2008/9/using-javascript-templates-for-a-delicious-sidebar.html">Using Javascript Templates for a Delicious Sidebar</a>
-  </h4>
-  <p>
-    Processing JSON data from an external source with Javascript templatesis a natural fit. Create a template inside your *HTML Document* byadding class names and variables and write a few lines for fetchingthe *JSON*, that's all. This tutorial is an example for my JavascriptTemplate Engine called **[Patroon][1]**.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2008/9/shinmun-a-small-and-beautiful-blog-engine.html">Shinmun, a small and beautiful blog engine</a>
-  </h4>
-  <p>
-    Shinmun is a minimalist blog engine. You just write posts as text files,render them to static files and push your blog to your server.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2008/9/relax-ng-schema-for-adobe-flex-3.html">Relax NG Schema for Adobe Flex 3</a>
-  </h4>
-  <p>
-    In the past Flex development on Emacs was not as it should be becauseof a missing Relax NG Schema, which is needed for nxml-mode to workproperly. To improve the situation I developed a MXML Schema generatorbased on the [XSD generator][1] of [Ali Mansuroglu][2]. Now Emacsknows your Schema and can help you typing and validating MXML files.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2008/9/quick-guide-for-passenger-on-ubuntu-hardy.html">Quick Guide for Passenger on Ubuntu Hardy</a>
-  </h4>
-  <p>
-    This is a short guide for installing [Phusion Passenger][1] on UbuntuHardy. This includes the installation of Ruby 1.8.6, Apache 2.2.8, MySQL 5.0.51a, Git 1.5.4 and Rails 2.1.1.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2008/9/patroon-a-javascript-template-engine.html">Patroon - a Javascript Template Engine</a>
-  </h4>
-  <p>
-    Patroon is a template engine written in Javascript in about 100 linesof code. It takes existing DOM nodes annotated with CSS classes andexpand a data object according to simple rules. Additionally you mayuse traditional string interpolation inside attribute values and textnodes.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2008/9/patroon-a-javascript-template-engine-part-2.html">Patroon - a Javascript Template Engine (Part 2)</a>
-  </h4>
-  <p>
-    This post is an update to my [initial post][3]. Patroon has beenimproved and is now easier to use and uses a better algorithminternally.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2008/9/emacs-completions.html">Emacs Completions with Hippie-Expand and Snippets</a>
-  </h4>
-  <p>
-    One of the most important features of a text editor is the completingof text inside a buffer. There a lots of packages for Emacs, whichprovide this feature in many different ways. I will show you, what Iuse to improve my life as coder.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2008/9/commenting-system-with-lightweight-json-store.html">Commenting system with lightweight JSON store</a>
-  </h4>
-  <p>
-    As I wrote this [blog engine][1], the need for a commenting systemarose and I reflected about a small and simple commenting system withjust a flat file JSON store. This is my solution, which can be used onany static page on a server with PHP support.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2008/12/viewing-ri-in-a-web-browser.html">Viewing RI in a web browser</a>
-  </h4>
-  <p>
-    I'm a big fan of the Firefox keyword search. For example I havekeywords for [LEO][1], [Wikipedia][2] and [Man pages][3]. Sometimes Iwant to look up API documentation in Ruby and typing `ri camelize`into the address bar and viewing the documentation as web page seemsto be quite natural for me. So I wrote a quick and dirty cgi, whichcalls RI and outputs HTML.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2008/12/kontrol-a-micro-framework.html">Kontrol - a micro framework</a>
-  </h4>
-  <p>
-    Kontrol is a small web framework written in Ruby, which runs directlyon [Rack][5]. It provides a simple pattern matching algorithm for routingand uses GitStore as data storage.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2008/12/git-store-using-git-as-versioned-data-store-in-ruby.html">Git Store - using Git as versioned data store in Ruby</a>
-  </h4>
-  <p>
-    GitStore is a small Ruby library, providing an easy interface to theversion control system [Git][1]. It aims to use Git as a versioneddata store much like the well known PStore. Basically GitStore checksout the repository into a in-memory representation, which can bemodified and finally committed. In this way your data is stored in afolder structure and can be checked out and examined, but theapplication may access the data in a convenient hash-like way. Thislibrary is based on [Grit][2], the main technology behind [GitHub][3].
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2007/5/google-like-search-results-helper.html">Google-like Search Results Helper</a>
-  </h4>
-  <p>
-    Representing your search results in a user-friendly way is a commontask among web developers. Google's approach is dead simple but reallyeffective. The matching text is highlighted and shown with itscontext. This can be implemented in less than 20 lines of code whichyou can include into you helper:
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2007/4/rendering-markaby-in-your-helpers.html">Rendering markaby in your helpers</a>
-  </h4>
-  <p>
-    Generating markup in your rails helpers is a general practice in railsand is used throughout all rails helpers. Normally you use `content_tag`to generate markup. But often you will encounter situations, wherenested tags force you to write ugly helper code like the followinghelper method from the rails library:
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2007/4/pretty-restful-urls-in-rails.html">Pretty RESTful URLs in Rails</a>
-  </h4>
-  <p>
-    Since Release 1.2 Rails knows to generate _RESTful_ routes. Eachresource is identified by an _URI_, which looks like `/users/123` . Itwould be nice to have more readable URLs, which include the name ofthe user: `/users/matthias-georgi`. This is a short tutorial on makingyour urls pretty while retaining the REST approach.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2007/4/fast-autocompletion-with-rails.html">Fast Auto-completion with Rails, Scriptaculous and JSON</a>
-  </h4>
-  <p>
-    Inspired by the excellent [Rails Recipes][1] book , I created animproved Auto-completion helper, which uses _JSON_ and _AJAX_ insteadof a script tag for loading the completions. What we want to achieveis a search field, which pops up immediately, showing us a list ofpossible completions for our search word. Look at [Google Suggest][2]to get an idea.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2007/4/dry-up-your-url-helpers.html">DRY Up Your Url Helpers</a>
-  </h4>
-  <p>
-    This tutorial shows you how to simplify url generation in combinationwith _RESTful_ resources by extending the `url_for` helper. This approachwill also work with nested routes and other helpers like `form_tag` and`link_to`.
-  </p>
-</div><div class="article">
-  <h4>
-    <a href="2007/4/building-delicous-and-flickr-sidebar-in-5-minutes.html">Building a del.ico.us and flickr sidebar in 5 minutes</a>
-  </h4>
-  <p>
-    You need a del.icio.us sidebar which shows recent bookmarks or one ofthese nice flickr badges? This is really is easy as the [Typo WeblogEngine][1] already includes an flickr and del.icio.us aggregator.
-  </p>
-</div>
-      </div>
-    </div>
-  </body>
+<html>
+    <head>
+        <title>
+            Matthias Georgi
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom 1.0">
+        <link rel="stylesheet" media="screen" type="text/css" href="/style.css">
+        <link rel="stylesheet" href="/zenburn.css">
+        <script src="/highlight.pack.js">
+            
+        </script>
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h2 id="header">
+                <a href="/">
+                    Matthias Georgi
+                </a>
+            </h2>
+            <div class="content">
+                <div class="article">
+                    <h1>
+                        <a href="/2013/1/how-to-write-a-blog-engine-in-haskell-part-1.html">
+                            How to write a blog engine in Haskell Part 1
+                        </a>
+                    </h1>
+                    <p>I really like to evaluate programming languages based on their
+practical value and one of the fun tasks is to write a small static
+file blog engine. The engine just converts a bunch of markdown files
+which are sorted into folders by month and year to html files given a
+set of simple templates.</p>
+
+<h2>Top level structure</h2>
+
+<p>Basically the rendering of blog posts can be done in three steps:</p>
+
+<ul>
+<li>Find all files that contain blog posts</li>
+<li>Read the markdown files into records</li>
+<li>Render each file to html and write to disk</li>
+</ul>
+
+<p>In Haskell these steps could be written as:</p>
+
+<pre><code>writeBlog :: IO ()
+writeBlog = do
+  files &lt;- findFiles &quot;posts&quot;
+  posts &lt;- mapM readPost files
+  mapM_ writePost posts
+</code></pre>
+
+<p>When working inside the IO monad, you will use <code>mapM</code> and <code>mapM_</code>
+quite often, similar to <code>map</code> they have following type signatures:</p>
+
+<pre><code>mapM :: Monad m =&gt; (a -&gt; m b) -&gt; [a] -&gt; m [b]
+mapM_ :: Monad m =&gt; (a -&gt; m b) -&gt; [a] -&gt; m ()
+</code></pre>
+
+<p>They apply a monadic operation <code>a -&gt; m b</code> to each element of a list
+and either you want to keep the result of each operation (mapM) or not
+(mapM_).</p>
+
+<p>Interestingly there is a more generalized version in <code>Data.Traversable</code>:</p>
+
+<pre><code>(Monad m, Traversable t) =&gt; (a -&gt; m b) -&gt; t a -&gt; m (t b)
+</code></pre>
+
+<p>This function applies the monadic operation to anything that is
+traversable. So you could build a tree data type and declare it as
+instance of <code>Data.Traversable</code> and use this function to apply the
+operation while maintaining the tree structure. For example a tree
+of files would be converted into a tree of blog posts.</p>
+
+<h2>Find files</h2>
+
+<p>So the first step in the blog rendering process would be to find all
+files containing a post. So I created a folder named <code>posts</code> which
+contains folders for each year, which in turn contain folders for each
+month, which finally contain all the blog posts.</p>
+
+<p>What we want now is the same as the UNIX command <code>find posts -type f</code>.</p>
+
+<p>This can be done by looking at the entries of a folder and entering
+each sub folder to examine its contents. When we find a file, we
+collect it into a result list, which will contain all files
+eventually.</p>
+
+<p>When dealing with tree structures like a file system, recursion is an
+elegant alternative to iteration. For each folder we find, the function
+should call itself recursively until it ends up at the bottom most
+level containing the files.</p>
+
+<pre><code>findFiles :: FilePath -&gt; IO [FilePath]
+findFiles path = do
+  isFile &lt;- doesFileExist path
+  if isFile then
+      return [path]
+    else do
+      entries &lt;- getEntries path
+      paths &lt;- return $ map (\ entry -&gt; path ++ &quot;/&quot; ++ entry) entries
+      files &lt;- mapM findFiles paths
+      return $ concat files
+  where
+    getEntries filepath = do
+      contents &lt;- getDirectoryContents filepath
+      return $ filter ((/= &#39;.&#39;) . head) contents
+</code></pre>
+
+<p><code>findFiles</code> takes a <code>FilePath</code> and returns all files found in this
+folder or its subfolders. When you pass a file it will just return a
+list with this one file.</p>
+
+<p><code>getEntries</code> is a small helper function which returns all entries of
+a folder without &#39;.&#39; and &#39;..&#39;.</p>
+
+<p>The else branch works like this: it reads all entries of the folder,
+prepends the current path, recurses for each entry, collects the
+return values and flattens them into one big list.</p>
+
+<h2>Reading posts into records</h2>
+
+<p>The data type representing a post is super simple. It just contains
+the <code>folder</code> (e.g. &ldquo;posts/2012/12&rdquo;), the <code>file</code> (e.g. <code>post-title.md</code>)
+and the <code>text</code> of the post.</p>
+
+<pre><code>data Post = Post { folder, file, text :: String };
+</code></pre>
+
+<p><code>readPost</code> therefore takes a <code>FilePath</code> and reads the file contents,
+decomposing the path name into <code>year</code>, <code>month</code> and <code>filename</code>, which we
+feed into the record constructor.</p>
+
+<pre><code>readPost :: FilePath -&gt; IO Post
+readPost path = do
+  s &lt;- readFile path
+  let [_, year, month, filename] = splitOn &quot;/&quot; path in
+    return Post { folder = year ++ &quot;/&quot; ++ month, file = filename, text = s }
+</code></pre>
+
+<p><code>splitOn</code> is taken from the <code>Data.List.Split</code> module in the <code>split</code> package
+and splits a string into a list of strings given a delimiter string.</p>
+
+<h2>To be continued</h2>
+
+<p>Next part in this series will take a look at the actual rendering of blog
+post using the <code>sundown</code> package.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2011/6/vtouch-control-ableton-live-in-a-webbrowser.html">
+                            vTouch - Control Ableton Live in a Webbrowser
+                        </a>
+                    </h1>
+                    <p>VTouch is a multitouch browser frontend for Ableton Live. Inside your
+webbrowser you can control clip triggering, volume, send and return
+levels, mute, solo, record states. This works also on the network, so
+you can connect your mobile phone, iPads or android tablets easily by
+just browsing to you local webserver.</p>
+
+<p><img src="http://www.matthias-georgi.de/images/vtouch.gif" alt="vTouch"></p>
+
+<h3>Screencast</h3>
+
+<iframe width="425" height="349" src="http://www.youtube.com/embed/qFmiIcgRIao" frameborder="0" allowfullscreen></iframe>
+
+<h3>About the Hack</h3>
+
+<p>Ableton Live is an digital audio workstation, which is well suited for
+live performances. Lots of parameters can be manipulated, midi or
+audio loops can be triggered. Unfortunately it is cumbersome to use
+this software with a touch device. A user interface specifically
+designed to be used on multitouch devices, which is also portable
+across platforms, offers many benefits and possibilities. Imagine a
+whole band jamming on iPads with ohne live setup over a wireless
+network.</p>
+
+<h3>Technology used</h3>
+
+<p>The frontend is rendered on HTML5 Canvas and communicates with a
+nodejs server via websockets. On the backend the webserver talks to a
+running ableton live instance and sends updates to all connected
+clients.</p>
+
+<p>The canvas frontend is supported on all modern browsers including
+apple mobile safari and android browsers. We created a small widget
+library named canvas.ui to take care of multitouch events, rendering
+and layout management.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2011/6/quick-guide-for-passenger-on-natty-narwhal.html">
+                            Quick Guide for Passenger on Natty Narwhal
+                        </a>
+                    </h1>
+                    <p>This is a short guide for installing <a href="http://www.modrails.com/">Phusion Passenger</a> and <a href="http://www.rubyenterpriseedition.com/">Ruby
+Enterprise Editition</a> on Ubuntu Natty Narwhal. Depending on your machine
+this will take 30-60 minutes on a fresh Ubuntu install.</p>
+
+<h3>Installing build tools and libraries</h3>
+
+<p>First we need to install the compiler toolchain (make, gcc and libc)
+and necessary libraries.</p>
+
+<pre><code>$ apt-get install build-essential zlib1g-dev libssl-dev libreadline5-dev libmysqlclient-dev
+</code></pre>
+
+<h3>Ruby Enterprise Edition</h3>
+
+<p>We are going to download and compile Ruby Enterprise Edition. The
+installer asks for the target directory.  I would recommend to install
+into /opt/ruby unless you want to host different versions on this machine.</p>
+
+<pre><code>$ wget http://rubyenterpriseedition.googlecode.com/files/ruby-enterprise-1.8.7-2011.03.tar.gz
+$ tar xzf ruby-enterprise-1.8.7-2011.03.tar.gz
+$ cd ruby-enterprise-1.8.7-2011.03
+$ ./installer
+</code></pre>
+
+<p>Now we include the path to the ruby binaries in /etc/environment. It should look like this:</p>
+
+<pre><code>PATH=&quot;/opt/ruby/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games&quot;
+</code></pre>
+
+<p>After relogin you should be able to type ruby -v and get a response like this:    </p>
+
+<pre><code>ruby 1.8.7 (2011-02-18 patchlevel 334) [x86_64-linux], MBARI 0x6770, Ruby Enterprise Edition 2011.03
+</code></pre>
+
+<h3>Apache and Passenger</h3>
+
+<p>We need to install Apache and necessary development libraries to compile Phusion Passenger. </p>
+
+<pre><code>$ apt-get install libcurl4-openssl-dev apache2-mpm-prefork apache2-prefork-dev libapr1-dev libaprutil1-dev
+$ passenger-install-apache2-module
+</code></pre>
+
+<h3>Apache configuration</h3>
+
+<p>The compilation of the Passenger Apache
+module finished with an instruction for your httpd.conf. Depending on
+you passenger version, you will get something like this, which you add
+to your <code>/etc/apache2/httpd.conf</code>:</p>
+
+<pre><code>LoadModule passenger_module /opt/ruby/lib/ruby/gems/1.8/gems/passenger-3.0.7/ext/apache2/mod_passenger.so
+PassengerRoot /opt/ruby/lib/ruby/gems/1.8/gems/passenger-3.0.7
+PassengerRuby /opt/ruby/bin/ruby
+</code></pre>
+
+<p>If you browse to your url, you should see the standard apache &ldquo;It works&rdquo; page.</p>
+
+<h3>MySQL</h3>
+
+<p>The Ruby Enterprise Installer already compiled Ruby&#39;s mysql client
+library, now we need the server and client.  </p>
+
+<pre><code>$ apt-get install mysql-server mysql-client
+</code></pre>
+
+<h3>Virtual host config</h3>
+
+<p>Adding a virtual host for your rails application is easy. Assuming
+that your application resides in /var/www/myapp create a file named
+<code>/etc/apache2/sites-available/myapp</code> and fill in :</p>
+
+<pre><code>&lt;VirtualHost *:80&gt;
+    ServerName myserver.com
+    DocumentRoot /var/www/myapp/public
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>Now we disable the default site and add our new virtual host:</p>
+
+<pre><code>$ a2dissite default
+$ a2ensite myapp
+</code></pre>
+
+<p>After restarting Apache your Rails application should run on Apache:</p>
+
+<pre><code>$ /etc/init.d/apache2 restart
+</code></pre>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2011/6/emacs-dark-theme.html">
+                            Emacs Dark Theme
+                        </a>
+                    </h1>
+                    <p>Recently I updated my Emacs setup and decided to go for a more minimal
+color theme. Especially on long coding nights you want a theme without
+distracting colors.</p>
+
+<p><img src="http://www.matthias-georgi.de/images/emacs-dark-theme.png" alt="Emacs dark theme"></p>
+
+<h3>Configuration</h3>
+
+<p>Just paste this code into your emacs condiguration:</p>
+
+<pre><code> (set-face-attribute &#39;default nil
+                     :background &quot;grey20&quot;
+                     :foreground &quot;grey90&quot;)
+
+ (set-face-attribute &#39;modeline nil
+                     :background &quot;grey10&quot;
+                     :foreground &quot;grey90&quot;)
+
+ (set-face-attribute &#39;cursor nil
+                     :background &quot;white&quot;)
+
+ (set-face-attribute &#39;font-lock-builtin-face nil
+                     :foreground &quot;grey60&quot;)
+
+ (set-face-attribute &#39;font-lock-comment-face nil
+                     :foreground &quot;grey60&quot;)
+
+ (set-face-attribute &#39;font-lock-constant-face nil
+                     :foreground &quot;grey60&quot;)
+
+ (set-face-attribute &#39;font-lock-keyword-face nil
+                     :foreground &quot;white&quot;)
+
+ (set-face-attribute &#39;font-lock-string-face nil
+                     :foreground &quot;white&quot;)
+
+ (set-face-attribute &#39;font-lock-variable-name-face nil
+                     :foreground &quot;lightblue&quot;)
+
+ (set-face-attribute &#39;font-lock-function-name-face nil
+                     :foreground &quot;lightblue&quot;)
+
+ (set-face-attribute &#39;region nil
+                     :background &quot;#111&quot;)                    
+</code></pre>
+
+<h3>Additional faces</h3>
+
+<p>If you use speedbar or elscreen, you can set additional faces:</p>
+
+<pre><code>(set-face-attribute &#39;speedbar-file-face nil
+                    :foreground &quot;white&quot;)
+
+(set-face-attribute &#39;elscreen-tab-background-face nil
+                    :background &quot;grey10&quot;
+                    :foreground &quot;grey90&quot;)
+
+(set-face-attribute &#39;elscreen-tab-control-face nil
+                    :background &quot;grey20&quot;
+                    :foreground &quot;grey90&quot;)
+
+(set-face-attribute &#39;elscreen-tab-current-screen-face nil
+                    :background &quot;grey20&quot;
+                    :foreground &quot;grey90&quot;)
+
+(set-face-attribute &#39;elscreen-tab-other-screen-face nil
+                    :background &quot;grey30&quot;
+                    :foreground &quot;grey60&quot;)
+</code></pre>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2009/4/rackdav-web-authoring-for-rack.html">
+                            RackDAV - Web Authoring for Rack
+                        </a>
+                    </h1>
+                    <p>RackDAV is Handler for <a href="http://github.com/chneukirchen/rack">Rack</a>, which allows content authoring over
+HTTP. RackDAV brings its own file backend, but other backends are
+possible by subclassing RackDAV::Resource.</p>
+
+<h2>Install</h2>
+
+<p>Just install the gem from github:</p>
+
+<pre><code>$ gem sources -a http://gems.github.com
+$ sudo gem install georgi-rack_dav
+</code></pre>
+
+<h2>Quickstart</h2>
+
+<p>If you just want to share a folder over WebDAV, you can just start a
+simple server with:</p>
+
+<pre><code>$ rack_dav
+</code></pre>
+
+<p>This will start a WEBrick server on port 3000, which you can connect
+to without authentication.</p>
+
+<h2>Rack Handler</h2>
+
+<p>Using RackDAV inside a rack application is quite easy. A simple rackup
+script looks like this:</p>
+
+<pre><code>require &#39;rubygems&#39;
+require &#39;rack_dav&#39;
+
+use Rack::CommonLogger
+
+run RackDAV::Handler.new(&#39;/path/to/docs&#39;)
+</code></pre>
+
+<h2>Implementing your own WebDAV resource</h2>
+
+<p>RackDAV::Resource is an abstract base class and defines an interface
+for accessing resources.</p>
+
+<p>Each resource will be initialized with a path, which should be used to
+find the real resource.</p>
+
+<p>RackDAV::Handler needs to be initialized with the actual resource class:</p>
+
+<pre><code>RackDAV::Handler.new(:resource_class =&gt; MyResource)
+</code></pre>
+
+<p>RackDAV needs some information about the resources, so you have to
+implement following methods:</p>
+
+<ul>
+<li><p><strong>children</strong>: If this is a collection, return the child resources.</p></li>
+<li><p><strong>collection?</strong>: Is this resource a collection?</p></li>
+<li><p><strong>exist?</strong>: Does this recource exist?</p></li>
+<li><p><strong>creation_date</strong>: Return the creation time.</p></li>
+<li><p><strong>last_modified</strong>: Return the time of last modification.</p></li>
+<li><p><strong>last_modified=(time)</strong>: Set the time of last modification.</p></li>
+<li><p><strong>etag</strong>: Return an Etag, an unique hash value for this resource.</p></li>
+<li><p><strong>content_type</strong>: Return the mime type of this resource.</p></li>
+<li><p><strong>content_length</strong>: Return the size in bytes for this resource.</p></li>
+</ul>
+
+<p>Most importantly you have to implement the actions, which are called
+to retrieve and change the resources:</p>
+
+<ul>
+<li><p><strong>get(request, response)</strong>: Write the content of the resource to the response.body.</p></li>
+<li><p><strong>put(request, response)</strong>: Save the content of the request.body.</p></li>
+<li><p><strong>post(request, response)</strong>: Usually forbidden.</p></li>
+<li><p><strong>delete</strong>: Delete this resource.</p></li>
+<li><p><strong>copy(dest)</strong>: Copy this resource to given destination resource.</p></li>
+<li><p><strong>move(dest)</strong>: Move this resource to given destination resource.</p></li>
+<li><p><strong>make_collection</strong>: Create this resource as collection.</p></li>
+</ul>
+
+<p>Note, that it is generally possible, that a resource object is
+instantiated for a not yet existing resource.</p>
+
+<p>For inspiration you should have a look at the FileResource
+implementation. Please let me now, if you are going to implement a new
+type of resource.</p>
+
+<h3>RackDAV on GitHub</h3>
+
+<p>Download or fork the project on its <a href="http://github.com/georgi/rack_dav">Github page</a></p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/9/using-javascript-templates-for-a-delicious-sidebar.html">
+                            Using Javascript Templates for a Delicious Sidebar
+                        </a>
+                    </h1>
+                    <p>Processing JSON data from an external source with Javascript templates
+is a natural fit. Create a template inside your <em>HTML Document</em> by
+adding class names and variables and write a few lines for fetching
+the <em>JSON</em>, that&#39;s all. This tutorial is an example for my Javascript
+Template Engine called <strong><a href="http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine-part-2.html">Patroon</a></strong>.</p>
+
+<h3>Writing the template</h3>
+
+<p>In my sidebar you can see the result of my example. My latest
+bookmarks are shown as a list. Quite simple. The template looks like
+this:</p>
+
+<pre><code>&lt;div class=&quot;bookmarks&quot;&gt;
+  &lt;ul id=&quot;bookmarks-template&quot;&gt;
+    &lt;li class=&quot;bookmark&quot;&gt;
+      &lt;a href=&quot;{u}&quot;&gt;{d}&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>There a two variables here <code>u</code> and <code>d</code>. I don&#39;t know if <em>Delicious</em>
+wants to save some bytes here, but descriptive names wouldn&#39;t hurt in
+this case. <code>u</code> is refering to the url of the bookmark and <code>d</code> is the
+title. We are expanding an array of bookmarks into the <code>li</code> element,
+which is marked by the class name <code>bookmark</code>.</p>
+
+<h3>Fetching the JSON Feed</h3>
+
+<p>The Feed resides on a different domain, so we have to use a <code>script</code>
+tag to fetch the data. This is because of security restrictions, which
+limits <em>AJAX</em> calls to the same domain of the current web page.</p>
+
+<p>The feed url for your bookmarks looks like this:</p>
+
+<pre><code>http://feeds.delicious.com/v2/json/{username}
+</code></pre>
+
+<p>If you want to fetch some of the other feeds, just look at the
+<a href="http://delicious.com/help/json/">documentation</a>, which describes 18 different feed types.</p>
+
+<p>A very useful option in our case is to provide a callback function,
+which gets called after the <em>JSON</em> script was loaded. We define
+<code>renderBookmarks</code> as our callback.</p>
+
+<p>The following code inserts the script tag to load the <em>Delicious</em>
+<em>JSON</em> feed of my bookmarks. This is done when the page is loaded:</p>
+
+<pre><code>$(function() {
+    var head = document.getElementsByTagName(&quot;head&quot;)[0];
+    var script = document.createElement(&#39;script&#39;);
+
+    script.setAttribute(&quot;src&quot;, &quot;http://feeds.delicious.com/v2/json/matthias_georgi?callback=renderBookmarks&quot;);
+    script.setAttribute(&quot;type&quot;, &quot;text/javascript&quot;);
+
+    head.appendChild(script);
+});
+</code></pre>
+
+<p>I&#39;m using jQuery here for the window load event. Other libraries would
+need some other api call.</p>
+
+<h3>Rendering the JSON data</h3>
+
+<p>The code for rendering consists of just two lines. First we are
+instantiating the Template. We have to provide the id of the template
+node (the template is part of your document).</p>
+
+<p>Second we expand the template using the jQuery helper. The variable
+<code>data</code> contains just the array of bookmarks. To match the <code>li</code> element
+of the template, which has the class name <code>bookmark</code>, we must set the
+template variable <code>bookmark</code> to hold the bookmarks array.</p>
+
+<pre><code>function renderBookmarks(data) {
+  var template = new Template(&#39;bookmarks-template&#39;);
+  $(&#39;.bookmarks&#39;).expand(template, { bookmark: data });
+}
+</code></pre>
+
+<h3>Result</h3>
+
+<p>The resulting <em>HTML</em> of my bookmark sidebar looks like this:</p>
+
+<pre><code>&lt;div class=&quot;bookmarks&quot;&gt;
+  &lt;ul id=&quot;bookmarks-template&quot;&gt;            
+    &lt;li class=&quot;bookmark&quot;&gt;
+      &lt;a href=&quot;http://delicious.com/help/json/&quot;&gt;
+        &lt;span&gt;delicious/help/feeds&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class=&quot;bookmark&quot;&gt;
+      &lt;a href=&quot;http://code.google.com/apis/youtube/reference.html&quot;&gt;
+        &lt;span&gt;Reference Guide: Data API Protocol - YouTube APIs and Tools - Google Code&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class=&quot;bookmark&quot;&gt;
+      &lt;a href=&quot;http://rewrite.rubyforge.org/&quot;&gt;
+      &lt;span&gt;rewrite&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class=&quot;bookmark&quot;&gt;
+      &lt;a href=&quot;http://www.infoq.com/interviews/Rewrite-Reginald-Braithwaite&quot;&gt;
+        &lt;span&gt;InfoQ: Reginald Braithwaite on Rewrite&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>You may wonder, why there are extra span elements around the variable
+expansions. Well this is necessary for inserting <em>HTML</em> from a
+variable. If I want to replace a text node with some <em>HTML</em>, I have to
+insert a <em>span</em> element and use the <code>innerHTML</code> property. If you know
+something better, please let me know.</p>
+
+<h3>Conclusion</h3>
+
+<p>Using <em>Javascript</em> templates with <em>JSON</em> feeds is simple and
+efficient. You write standards-compliant <em>HTML</em> sprinkled with some
+variables and expand this with some <em>JSON</em> data, that&#39;s all.</p>
+
+<h3>Related Work</h3>
+
+<p>There are some other libraries for javascript templating, which are
+related to <strong>Patroon</strong>:</p>
+
+<ul>
+<li><a href="http://beebole.com/pure/">PURE</a></li>
+<li><a href="http://jsrepeater.devprog.com/">jsRepeater</a></li>
+<li><a href="http://code.google.com/p/trimpath/wiki/JavaScriptTemplates">TrimPath</a></li>
+<li><a href="http://embeddedjs.com/">EmbeddedJS</a></li>
+</ul>
+
+<p>Patroon is probably the smallest templating solution around and
+consists only of 130 lines of code.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/9/shinmun-a-small-and-beautiful-blog-engine.html">
+                            Shinmun, a small and beautiful blog engine
+                        </a>
+                    </h1>
+                    <p>Shinmun is a minimalist blog engine. You just write posts as text files,
+render them to static files and push your blog to your server.</p>
+
+<p>This allows you to write posts in your favorite editor like Emacs or
+VI and use a VCS like git.</p>
+
+<p>Your layout can be customized by a set of <em>ERB templates</em>. These
+templates have access to <code>Post</code> objects and <em>helper methods</em> so that
+anybody who knows <em>Rails</em> should feel comfortable with it.</p>
+
+<h3>Shinmun Features</h3>
+
+<ul>
+<li>Index listing</li>
+<li>Category listing</li>
+<li>Archive listings for each month</li>
+<li>RSS feeds for index and category pages</li>
+<li>Builtin webserver for realtime rendering</li>
+<li>Compression of javascript files with PackR</li>
+<li>Included syntax highlighting through <code>highlight.js</code></li>
+<li>AJAX comment system with PHP JSON file storage</li>
+<li>Integration of WMD-Markdown Editor for commenting</li>
+</ul>
+
+<h3>Quickstart</h3>
+
+<p>Install the gem:</p>
+
+<pre><code>gem install shinmun
+</code></pre>
+
+<p>Download and extract the example blog from my <a href="http://github.com/georgi/shinmun-example/tree/master">github repository</a>.</p>
+
+<p>Issue the following commands and you will see the blog on
+<code>http://localhost:3000</code>:</p>
+
+<pre><code>cd shinmun-example
+shinmun server
+</code></pre>
+
+<h3>Writing Posts</h3>
+
+<p>Posts can be created by using the <code>shinmun</code> command inside your blog folder:</p>
+
+<pre><code>shinmun new &#39;The title of the post&#39;
+</code></pre>
+
+<p>Shinmun will then create a post file in the right place, for example
+in <code>posts/2008/9/the-title-of-the-post.md</code>. After creating you will
+probably open the file, set the category and start writing your new
+article.</p>
+
+<p>Now you want to look at your rendered post. Just run:</p>
+
+<pre><code>shinmun server
+</code></pre>
+
+<p>Go to <code>http://localhost:3000</code> and you will see your blog served in
+realtime. Just change and save any of your posts and you will see the
+new output in your browser.</p>
+
+<p>After finishing your post, you may run <code>shinmun render</code> and the output
+will be rendered to the <em>public</em> folder.</p>
+
+<p>By issuing the <code>shinmun push</code> command your blog will be pushed to your
+server using rsync. This works only, if you define the blog_repository
+variable inside blog.yml. It should contain something like
+<code>user@myhost.com:/var/www/my-site/</code>.</p>
+
+<h3>Post Format</h3>
+
+<p>Each blog post is just a text file with an optional header section and
+a markup body, which are separated by a newline. Normally you don&#39;t
+have to worry about the post format, if you create posts with the
+<code>shinmun new</code> command.</p>
+
+<p>The <strong>first line</strong> of the header should start with 3 dashes as usual
+for a YAML document.</p>
+
+<p>The title of your post will be parsed from your first heading
+according to the document type. Shinmun will try to figure out the
+title for Markdown, Textile and HTML files.</p>
+
+<p>The yaml header may have following attributes:</p>
+
+<ul>
+<li><code>date</code>: post will show up in blog page and archive pages</li>
+<li><code>category</code>: post will show up in the defined category page</li>
+<li><code>guid</code>: will be set automatically by Shinmun</li>
+</ul>
+
+<p>Posts without a date are by definition static pages.</p>
+
+<p>Example post:</p>
+
+<pre><code>--- 
+category: Ruby
+date: 2008-09-05
+guid: 7ad04f10-5dd6-012b-b53c-001a92975b89
+
+BlueCloth, a Markdown library
+=============================
+
+This is the summary, which is by definition the first paragraph of the
+article. The summary shows up in category listings or the index listing.
+</code></pre>
+
+<p>The guid should never change, as it will be you used for identifying
+posts for comments.</p>
+
+<h3>Directory layout</h3>
+
+<ul>
+<li><p>Your <strong>assets</strong> are in the <code>assets</code> folder, which gets copied to the
+public folder in the render step.</p></li>
+<li><p>The <strong>settings of your blog</strong> are defined in <code>config/blog.yml</code></p></li>
+<li><p>Your <strong>posts</strong> reside in the <code>posts</code> folder sorted by year/month.</p></li>
+<li><p>Your <strong>pages</strong> are located in the <code>pages</code> folder.</p></li>
+<li><p><strong>Template</strong> files are in the <code>templates</code> folder.</p></li>
+<li><p>The <strong>index page</strong> of your blog is defined in <code>pages/index.rhtml</code> and
+may be customized.</p></li>
+<li><p><strong>Archive pages</strong> will be rendered to files like <code>public/2008/9/index.html</code>.</p></li>
+<li><p><strong>Category pages</strong> will be rendered to files like <code>public/categories/ruby.html</code>.</p></li>
+</ul>
+
+<p>An example tree:</p>
+
+<pre><code>+ assets
+  + images
+  + stylesheets
+  + javascripts      
++ config
+  + blog.yml
++ pages
+  + about.md
+  + index.rhtml
++ posts
+  + 2007
+  + 2008
+    + 9
+      + my-article.md
++ templates
+  + feed.rxml
+  + layout.rhtml
+  + page.rhtml  
+  + post.rhtml  
+  + posts.rhtml
+</code></pre>
+
+<p>The output will look like this:</p>
+
+<pre><code>+ public
+  + index.html
+  + about.html
+  + categories
+    + emacs.html
+    + ruby.html
+  + 2007   
+  + 2008
+    + 9
+      + my-article.html
+  + images
+  + stylesheets
+  + javascripts
+</code></pre>
+
+<h3>Config file</h3>
+
+<p>The configuration of the blog system consists of some variables
+encoded as yaml file:</p>
+
+<ul>
+<li><p>blog_title: the title of your blog, used for rss</p></li>
+<li><p>blog_description: used for rss</p></li>
+<li><p>blog_language: used for rss</p></li>
+<li><p>blog_author: used for rss, acts also as fallback for the blog.author variable</p></li>
+<li><p>blog_url: used for rss</p></li>
+<li><p>blog_repository: path for rsync, used for <code>shinmun push</code> command</p></li>
+<li><p>base_path: if your blog should not be rendered to your site
+root, you can define a sub path here (like <code>blog</code>)</p></li>
+<li><p>images_path: used for templates helper, defaults to <code>images</code></p></li>
+<li><p>javascripts_path: used for templates helper, defaults to <code>javascripts</code></p></li>
+<li><p>stylesheets_path: used for templates helper, defaults to <code>stylesheets</code></p></li>
+<li><p>pack_javascripts: a list of scripts to be compressed</p></li>
+<li><p>pack_stylesheets: a list of stylesheets to be concatenated</p></li>
+</ul>
+
+<h3>Layout</h3>
+
+<p>Layout and templates are rendered by <em>ERB</em>.  The layout is defined in
+<code>layout.rhtml</code>. The content will be provided in the variable
+<code>@content</code>. A minimal example:</p>
+
+<pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;&lt;%= @blog_title %&gt;&lt;/title&gt;
+    &lt;%= stylesheet_link_tag &#39;style&#39; %&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+     &lt;%= @content %&gt;
+  &lt;/body&gt;
+ &lt;/html&gt;
+</code></pre>
+
+<h3>Helpers</h3>
+
+<p>There are also helper methods, which work the same way like the <em>Rails</em>
+helpers. The most important ones are these:</p>
+
+<ul>
+<li><p><code>stylesheet_link_tag(*names)</code> links a stylesheet with a timestamp</p></li>
+<li><p><code>javascript_tag(*names)</code> includes a javascript with a timestamp</p></li>
+<li><p><code>image_tag(src, options = {})</code> renders an image tag</p></li>
+<li><p><code>link_to(text, path, options = {})</code> renders a link</p></li>
+</ul>
+
+<p>Stylesheets, javascripts and images should be included by using theses
+helpers. The helper methods will include a timestamp of the
+modification time as <code>querystring</code>, so that the browser will fetch the
+new resource if it has been changed.</p>
+
+<p>If you want to define your own helpers, just define a file named
+<code>templates/helpers.rb</code> with a module named <code>Shinmun::Helpers</code>. This
+module will be included into the <code>Shinmun::Template</code> class.</p>
+
+<h3>Post Template</h3>
+
+<p>The attributes of a post are accessible as instance variables in a template:</p>
+
+<pre><code>&lt;div class=&quot;article&quot;&gt;    
+
+  &lt;div class=&quot;date&quot;&gt;
+    &lt;%= date @date %&gt;
+  &lt;/div&gt;
+
+  &lt;h2&gt;&lt;%= @title %&gt;&lt;/h2&gt;  
+
+  &lt;%= @body %&gt;
+
+  &lt;h3&gt;Comments&lt;/h3&gt;
+
+  &lt;!-- Here you may put my commenting system --&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3>RSS Feeds</h3>
+
+<p>Feeds will be rendered by the <em>ERB template</em>
+<code>templates/feed.rxml</code>. Some of the variables have been read from the
+<code>blog.yml</code>, like <code>@blog_title</code>, other variables have been determined
+by the engine like <code>@posts</code> or <code>@category</code>.</p>
+
+<h3>Packr Support</h3>
+
+<p>If you set the variables <code>pack_javascripts</code> or <code>pack_stylesheets</code>,
+Shinmun will create the files <code>all.js</code> or <code>all.css</code> automatically
+on rendering (even on each request of the webserver).</p>
+
+<p>The Javascript will be compressed with Packr and for performance
+reasons, minified versions for each of your javascripts will be
+created automatically in <code>assets/javascripts</code>.</p>
+
+<p>The stylesheets will be just concatenated to one file named <code>all.css</code>.</p>
+
+<p>Note that you define a yaml array of filenames without file
+extensions, so it should like <code>[jquery, jquery-form]</code>.</p>
+
+<h3>Commenting System</h3>
+
+<p>As I am not willing to build up a whole Rails stack for a single blog,
+I was looking for a simple storage for comments. I really like the
+JSON format. It works seamlessly with Javascript libraries and can be
+serialized and deserialized from almost any language.</p>
+
+<p>Read about my <a href="http://www.matthias-georgi.de/commenting-system-with-lightweight-json-store.html">lightweight commenting system</a>.</p>
+
+<h3>Download</h3>
+
+<p>Simply install the gem:</p>
+
+<pre><code>gem install shinmun
+</code></pre>
+
+<p>Download or fork the package at my <a href="http://github.com/georgi/shinmun/tree/master">github repository</a></p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/9/relax-ng-schema-for-adobe-flex-3.html">
+                            Relax NG Schema for Adobe Flex 3
+                        </a>
+                    </h1>
+                    <p>In the past Flex development on Emacs was not as it should be because
+of a missing Relax NG Schema, which is needed for nxml-mode to work
+properly. To improve the situation I developed a MXML Schema generator
+based on the <a href="http://code.google.com/p/xsd4mxml/">XSD generator</a> of <a href="http://flexiglas.blogspot.com/">Ali Mansuroglu</a>. Now Emacs
+knows your Schema and can help you typing and validating MXML files.</p>
+
+<h3>Emacs NXML completion</h3>
+
+<p>Editing MXML files is now a breeze with the superb completion features
+of nxml-mode on Emacs:</p>
+
+<ul>
+<li><p>completion of tag names</p></li>
+<li><p>completion of attribute keys</p></li>
+<li><p>completion of attribute values (e.g. enumerations)</p></li>
+</ul>
+
+<h3>How does it work?</h3>
+
+<p>The schema generator reads a manifest file with all classes to be
+exported.  Now for each class the generator asks the runtime to
+provide the needed information about attributes, events and
+styles (the flash runtime has a nice function called <code>describeType</code>,
+which returns a XML representation of a type).</p>
+
+<p>The tricky part is to convince the <em>MXML</em> compiler to include all
+classes and metadata into the <em>SWF</em> file. Thanks to Ali, I needn&#39;t to
+figure this out, as he provides an Ant file which already has the
+needed compiler flags.</p>
+
+<h3>How does the schema look like?</h3>
+
+<p>The schema just lists all class names as elements and lists their
+properties, events and styles as attributes. Furthermore as much type
+information is preserved as possible using xsd types. So for example
+the <code>dropdownWith</code> of a <code>ComboBox</code> must be a float. XML Editors like
+nxml-mode in Emacs can validate this as yout type.</p>
+
+<p>This is just a snippet from the schema file:</p>
+
+<pre><code>grammar {
+  ComboBox = element ComboBox {
+    attribute implements { text }?,
+    attribute labelFunction { text }?,
+    attribute labelField { xsd:string }?,
+    attribute dropdownWidth { xsd:float }?
+    ....
+  }      
+}
+</code></pre>
+
+<p>I&#39;m using named patterns here, because I need a pattern which matches
+a choice of all possible components:</p>
+
+<pre><code>any = Accordion
+| AddChild
+| AddChildAction
+| AddItemAction
+| AnimateProperty ....
+</code></pre>
+
+<p>Why do I need this pattern? Well, all container components may have
+child components and to enable this in the schema, the conteiner
+elements have this pattern inside:</p>
+
+<pre><code>Application = element Application {
+  any?,
+  ...
+}
+</code></pre>
+
+<h3>Problems</h3>
+
+<p>There are some known issues, which are not resolved yet. For example
+the <code>Script</code> tag may have a <code>CDATA</code> element inside. Another ugly issue
+is the color syntax. Inside the Flex framework a color is just an
+integer, but we want to specify colors as hex values. Unfortunately
+xsd:integer does not allow hex values, so I have to find a solution
+for this some day.</p>
+
+<h3>Download</h3>
+
+<p>Download the <a href="http://www.matthias-georgi.de/assets/download/flex3.rnc">Relax NG Compact Schema for Adoble Flex 3</a></p>
+
+<h3>Github</h3>
+
+<p>Watch or fork the <a href="http://github.com/georgi/mxml-rnc">Project on Github</a></p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/9/quick-guide-for-passenger-on-ubuntu-hardy.html">
+                            Quick Guide for Passenger on Ubuntu Hardy
+                        </a>
+                    </h1>
+                    <p>This is a short guide for installing <a href="http://www.modrails.com/">Phusion Passenger</a> on Ubuntu
+Hardy. This includes the installation of Ruby 1.8.6, Apache 2.2.8, 
+MySQL 5.0.51a, Git 1.5.4 and Rails 2.1.1.</p>
+
+<h3>Essential Build Tools</h3>
+
+<p>First we need to install the compiler toolchain (make, gcc and libc).</p>
+
+<pre><code>$ apt-get install build-essential
+</code></pre>
+
+<h3>Git</h3>
+
+<p>This guide is based on Git, so we install the git package:</p>
+
+<pre><code>$ apt-get install git-core
+</code></pre>
+
+<p>If you want to host a git repository on this machine, initialize a new
+repository:</p>
+
+<pre><code>$ mkdir /var/git
+$ mkdir /var/git/myapp
+$ cd /var/git/myapp
+$ git --bare init
+</code></pre>
+
+<p>Now you can push your application code from your local machine to your
+repository:</p>
+
+<pre><code>$ cd ~/myapp
+$ git remote add origin ssh://myserver.com/var/git/myapp
+$ git push origin master
+</code></pre>
+
+<h3>Ruby</h3>
+
+<p>We are going to install Ruby and all the essential ruby libraries.</p>
+
+<pre><code>$ apt-get install ruby ruby1.8-dev rubygems irb ri rdoc rake libruby libruby-extras
+</code></pre>
+
+<h3>Gem Executable Path</h3>
+
+<p>Strangely the <em>rubygems</em> package does not setup the path for
+executables, so we add the following line to <code>/etc/profile</code>.</p>
+
+<pre><code>export PATH=/var/lib/gems/1.8/bin:$PATH
+</code></pre>
+
+<p>To immediately use the new executable path, we source the profile file:</p>
+
+<pre><code>$ . /etc/profile
+</code></pre>
+
+<h3>Apache</h3>
+
+<p>This is just a basic Apache install. We need the devlopment files for compiling passenger:</p>
+
+<pre><code>$ apt-get install apache2 apache2-prefork-dev
+</code></pre>
+
+<h3>MySQL</h3>
+
+<p>I use MySQL, so I needed to install the server and client packages and
+the Ruby gem, which compiles a native extension:</p>
+
+<pre><code>$ apt-get install mysql-server mysql-client
+$ gem install mysql
+</code></pre>
+
+<h3>Phusion Passenger</h3>
+
+<p>This is now the actual Passenger install, which consists of installing
+a gem and compiling the Apache module:</p>
+
+<pre><code>$ gem install passenger
+$ passenger-install-apache2-module
+</code></pre>
+
+<h3>Apache configuration</h3>
+
+<p>The compilation of the Passenger Apache
+module finished with an instruction for your httpd.conf. Depending on
+you passenger version, you will get something like this, which you add
+to your <code>/etc/apache2/httpd.conf</code>:</p>
+
+<pre><code>LoadModule passenger_module /var/lib/gems/1.8/gems/passenger-2.0.3/ext/apache2/mod_passenger.so
+PassengerRoot /var/lib/gems/1.8/gems/passenger-2.0.3
+PassengerRuby /usr/bin/ruby1.8
+</code></pre>
+
+<p>Additionally you probably want to enable <em>mod_rewrite</em>, which is
+needed for Rails:</p>
+
+<pre><code>$ a2enmod rewrite
+</code></pre>
+
+<h3>Installing your Rails app</h3>
+
+<p>We create a app folder in <code>/var/www</code> and checkout the source from our
+git repository:</p>
+
+<pre><code>$ cd /var/www
+$ mkdir myapp
+$ cd myapp
+$ git init
+$ git remote add origin /var/git/myapp
+$ git pull origin master
+</code></pre>
+
+<h4>Installing Rails</h4>
+
+<p>We don&#39;t install Rails as Gem, because your application should be
+pinned to a specific Rails version. Git submodules allow you to embed
+a foreign repository in your source tree. </p>
+
+<p>We are now going to link the Rails repository to <code>vendor/rails</code> and
+checking out Version 2.1.1, finally we commit the submodule link to
+our repository:</p>
+
+<pre><code>$ cd /var/www/myapp/
+$ git submodule add git://github.com/rails/rails.git vendor/rails
+$ cd vendor/rails
+$ git checkout v2.1.1
+$ cd ../..
+$ git commit -m &#39;linked rails as submodule&#39;
+</code></pre>
+
+<p>Probably you need to setup your database:</p>
+
+<pre><code>$ mysaladmin create myapp_production
+$ mysaladmin create myapp_development
+$ mysaladmin create myapp_test
+$ rake db:migrate
+</code></pre>
+
+<p>Now your Rails app should be able to run as a Webrick Server:</p>
+
+<pre><code>$ ./script/server
+</code></pre>
+
+<h3>Virtual host</h3>
+
+<p>Adding a virtual host for your rails application is now super easy
+thanks to Passenger. Create a file named
+<code>/etc/apache2/sites-available/myapp</code>:</p>
+
+<pre><code>&lt;VirtualHost *:80&gt;
+    ServerName myserver.com
+    DocumentRoot /var/www/myapp/public
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>Now we disable the default site and add our new virtual host:</p>
+
+<pre><code>$ a2dissite default
+$ a2ensite myapp
+</code></pre>
+
+<p>After restarting Apache your Rails application should run on Apache:</p>
+
+<pre><code>$ /etc/init.d/apache2 restart
+</code></pre>
+
+<h3>User authentication</h3>
+
+<p>In case your Rails app is not meant to be seen on public, I recommend
+protecting it with HTTP Authentication.</p>
+
+<p>Create a password file:</p>
+
+<pre><code>htpasswd2 /var/www/myapp/config/auth myusername
+</code></pre>
+
+<p>And add this to your virtual host configuration (Inside the
+VirtualHost section):</p>
+
+<pre><code>&lt;Location /&gt;
+    AuthType Basic
+    AuthName &quot;My App&quot;
+    AuthUserFile /var/www/myapp/config/auth
+    Require valid-user
+&lt;/Location&gt;
+</code></pre>
+
+<h3>Conclusion</h3>
+
+<p>Phusion Passenger simplifies the Installation of Rails applications
+significantly. I don&#39;t have to worry about <code>mod_proxy</code>,
+<code>mod_proxy_balancer</code>, <code>mongrel</code> and <code>mongrel_cluster</code> or even
+FastCGI. This is <strong>definitely simpler</strong>.</p>
+
+<p>I have to mention, that Rails is just one option for your Ruby
+application. Setting up any other Ruby framework should be possible
+through the support of the <a href="http://rack.rubyforge.org/">Rack</a> interface. </p>
+
+<p>I really hope, that the specification of using one <em>rackup file</em> and
+one <em>public folder</em> will settle down as a standard for Ruby web
+applications, so that hosting companies will focus on supporting this
+standard and ruby developers don&#39;t need to worry about finding support
+for their favorite web frameworks.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/9/patroon-a-javascript-template-engine.html">
+                            Patroon - a Javascript Template Engine
+                        </a>
+                    </h1>
+                    <p>Patroon is a template engine written in Javascript in about 100 lines
+of code. It takes existing DOM nodes annotated with CSS classes and
+expand a data object according to simple rules. Additionally you may
+use traditional string interpolation inside attribute values and text
+nodes.</p>
+
+<p><strong>
+Patroon has its own <a href="/patroon">project page</a> now!
+Please look for current information there.
+</strong></p>
+
+<h3>Example</h3>
+
+<p>Comments in this blog are stored as a list of JSON objects, I wrote about it <a href="http://www.matthias-georgi.de/commenting-system-with-lightweight-json-store.html">here</a>. So think about a data object like this:</p>
+
+<pre><code>var data = { 
+  comment: [{
+    date: &quot;2008-09-07 12:28:33&quot;, 
+    name: &quot;David Beckham&quot;,
+    website: &quot;beckham.com&quot;,
+    text: &quot;I watched the euro finals on tv...&quot; 
+  }, { 
+    date: &quot;2008-09-07 14:28:33&quot;, 
+    name: &quot;Tuncay&quot;,
+    website: &quot;&quot;,
+    text: &quot;Me too&quot;
+  }]
+};
+</code></pre>
+
+<p>This data will be expanded with help of following template:</p>
+
+<pre><code>&lt;div class=&quot;comments&quot;&gt;  
+  &lt;div id=&quot;comments-template&quot;&gt;
+    &lt;div class=&quot;comment&quot;&gt;
+      &lt;div class=&quot;_ top&quot;&gt;
+        &lt;a class=&quot;_&quot; href=&quot;{website}&quot;&gt;{name}&lt;/a&gt; said
+        &lt;a class=&quot;_&quot; title=&quot;{time}&quot;&gt;&lt;/a&gt;:
+      &lt;/div&gt;
+      &lt;div class=&quot;text&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;   
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>The javascript to actually execute this template looks like this:</p>
+
+<pre><code>// The comments template will be removed from the DOM!
+var template = new Template(&#39;comments-template&#39;);
+
+// template will result in a new DOM node
+var result = template.expand(data);
+
+// insert the resulting node into the comments container
+var container = document.getElementsByClassName(&#39;comments&#39;)[0];
+container.appendChild(result);
+</code></pre>
+
+<p>Using jQuery the code gets a bit cleaner:</p>
+
+<pre><code>// The comments template will be removed from the DOM!
+var template = new Template(&#39;comments-template&#39;);
+
+// Expand the template into the comments section
+$(&#39;.comments&#39;).expand(template, data);
+</code></pre>
+
+<h3>Basic Rules</h3>
+
+<p>There are 5 basic rules:</p>
+
+<ul>
+<li><p>Strings and Numbers are inserted by innerHTML to the current node.</p></li>
+<li><p>Arrays repeat the current node and process its elements recursively in same scope.</p></li>
+<li><p>Objects trigger a class name lookup by property name. The value of each property is expanded recursively in new scope.</p></li>
+<li><p>Code will be evaluated for text surounded with braces (Works also for attributes).</p></li>
+<li><p>Processing child nodes will be triggered for nodes with a class attribute starting with <code>_</code>.</p></li>
+</ul>
+
+<p>I admit the last point is a bit quirky, but processing all child nodes per default is too expensive and too unpredictable. Maybe I will find a better way, but I don’t mind inserting these extra <code>_</code> class names.</p>
+
+<h3>Evaluation</h3>
+
+<p>So speaking of the example data, this would mean following algorithm:</p>
+
+<ul>
+<li><p>Find the first node with a class name of comment.</p></li>
+<li><p>Repeat this node two times and recursively process the first and second comment.</p></li>
+<li><p>Descend into the node with class <code>top</code>.</p></li>
+<li><p>Descend into the first link node.</p></li>
+<li><p>Evaluate the code found in the <em>href</em> attribute and in the text.</p></li>
+<li><p>Descend into the second link node.</p></li>
+<li><p>Evaluate the code found in the <em>title</em> attribute.</p></li>
+<li><p>Find the first node with the class <code>text</code>.</p></li>
+<li><p>Insert the the text of the comment into the found node.</p></li>
+</ul>
+
+<p>Note that we are dealing with two scopes here: the global scope and the comment scope. The global scope just contains a name <em>comment</em> and the comment scope contains the names <code>date</code>, <code>name</code>, <code>website</code> and <code>text</code>.</p>
+
+<h3>Download</h3>
+
+<p>Download the script at my <a href="http://github.com/georgi/patroon/tree/master">github repository</a>.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/9/patroon-a-javascript-template-engine-part-2.html">
+                            Patroon - a Javascript Template Engine (Part 2)
+                        </a>
+                    </h1>
+                    <p>This post is an update to my <a href="http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html">initial post</a>. Patroon has been
+improved and is now easier to use and uses a better algorithm
+internally.</p>
+
+<p>Patroon is a template engine written in Javascript in about 130 lines
+of code. It takes existing DOM nodes annotated with class names and
+expand a data object according to simple rules. Additionally you may
+use traditional string interpolation inside attribute values and text
+nodes.</p>
+
+<h3>The Data</h3>
+
+<p>Comments in this blog are stored as a list of JSON objects, I wrote
+about it <a href="http://www.matthias-georgi.de/2008/9/commenting-system-with-lightweight-json-store.html">here</a>. So think about a data object like this:</p>
+
+<pre><code>var data = { 
+  comment: [{
+    time: &quot;2008-09-07 12:28:33&quot;, 
+    name: &quot;David Beckham&quot;,
+    website: &quot;beckham.com&quot;,
+    text: &quot;I watched the euro finals on tv...&quot; 
+  }, { 
+    time: &quot;2008-09-07 14:28:33&quot;, 
+    name: &quot;Tuncay&quot;,
+    website: &quot;&quot;,
+    text: &quot;Me too&quot;
+  }]
+};
+</code></pre>
+
+<h3>The Template</h3>
+
+<p>This data will be expanded with help of following template:</p>
+
+<pre><code>&lt;div class=&quot;comments&quot;&gt;  
+  &lt;div id=&quot;comments-template&quot;&gt;
+    &lt;div class=&quot;comment&quot;&gt;
+      &lt;div class=&quot;top&quot;&gt;
+        {website.length &gt; 0 ? linkTo(name, website) : name} said
+        &lt;a title=&quot;{time}&quot;&gt;&lt;/a&gt;:
+      &lt;/div&gt;
+      &lt;div class=&quot;text&quot;&gt;
+        {text}
+      &lt;/div&gt;
+    &lt;/div&gt;   
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3>Usage</h3>
+
+<p>The javascript to actually execute this template looks like this:</p>
+
+<pre><code>// The comments template will be removed from the DOM!
+var template = new Template(&#39;comments-template&#39;);
+
+// Expand the template into the comments section
+$(&#39;.comments&#39;).expand(template, data);
+</code></pre>
+
+<p>If you don&#39;t want to use jQuery, please look at the end of this article.</p>
+
+<h3>Output</h3>
+
+<p>The given example renders following output:</p>
+
+<pre><code>&lt;div class=&quot;comments&quot;&gt;  
+  &lt;div id=&quot;comments-template&quot;&gt;
+    &lt;div class=&quot;comment&quot;&gt;
+      &lt;div class=&quot;top&quot;&gt;
+        &lt;a href=&quot;http://backham.com&quot;&gt;David Beckham&lt;/a&gt; said
+        &lt;a title=&quot;2008-09-07 12:28:33&quot;&gt;2 hours ago&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;text&quot;&gt;
+        I watched the euro finals on tv...
+      &lt;/div&gt;
+    &lt;/div&gt;   
+    &lt;div class=&quot;comment&quot;&gt;
+      &lt;div class=&quot;top&quot;&gt;
+        Tuncay said
+        &lt;a title=&quot;2008-09-07 14:28:33&quot;&gt;1 minute ago&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;text&quot;&gt;
+        Me too
+      &lt;/div&gt;
+    &lt;/div&gt;   
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3>Basic Rules</h3>
+
+<p>There are 3 basic rules regarding the evaluation:</p>
+
+<ul>
+<li><p>Each found class name of a node will be looked up in the current
+data object. If found, the node will be processed in the new scope.
+Example: the class name <code>comment</code> instructs to lookup the name
+<code>comment</code> in the data object, which contains the comment array.</p></li>
+<li><p>Arrays repeat the current node and process its elements recursively.</p></li>
+<li><p>Code will be evaluated for text surrounded with braces (works also
+for attributes). The evaluation takes place in the scope of the
+current data object, which is in the example a comment object. So
+the snippet <code>&lt;a title=&quot;{time}&quot;&gt;</code> will lookup the time in the comment
+object and insert into the title attribute.</p></li>
+</ul>
+
+<h3>Helper</h3>
+
+<p>Code snippets inside the template will be executed within the scope of
+a Helper object. If you want to extend it, just add your functions to
+<code>Template.Helper</code>. At the moment it defines only one function:</p>
+
+<pre><code>Template.Helper = {
+
+    linkTo: function(text, url) {
+        if (url.indexOf(&#39;http://&#39;) == -1 &amp;&amp; url[0] != &#39;/&#39; &amp;&amp; url[0] != &#39;#&#39;) {
+            url = &#39;http://&#39; + url;
+        }
+        return &#39;&lt;a href=&quot;&#39; + url +&#39;&quot;&gt;&#39; + text + &#39;&lt;/a&gt;&#39;;
+    }
+
+};
+</code></pre>
+
+<h3>Examples</h3>
+
+<ul>
+<li><a href="http://www.matthias-georgi.de/2008/9/using-javascript-templates-for-a-delicious-sidebar.html">a Delicious Sidebar</a>, which renders a <em>JSON</em> feed with the help
+of Patroon.</li>
+</ul>
+
+<h3>Download</h3>
+
+<p>Download the script at my <a href="http://github.com/georgi/patroon/tree/master">github repository</a>.</p>
+
+<h3>Related Work</h3>
+
+<p>There are some other libraries for javascript templating, which are
+related to <strong>Patroon</strong>:</p>
+
+<ul>
+<li><a href="http://beebole.com/pure/">PURE</a></li>
+<li><a href="http://jsrepeater.devprog.com/">jsRepeater</a></li>
+<li><a href="http://code.google.com/p/trimpath/wiki/JavaScriptTemplates">TrimPath</a></li>
+<li><a href="http://embeddedjs.com/">EmbeddedJS</a></li>
+</ul>
+
+<p>Patroon is probably the smallest templating solution around and
+consists only of 130 lines of code.</p>
+
+<h3>Appendix</h3>
+
+<p>Without jQuery template expansion is a bit verbose:</p>
+
+<pre><code>@@javascript
+
+// The comments template will be removed from the DOM!
+var template = new Template(&#39;comments-template&#39;);
+
+// template will result in a new DOM node
+var result = template.expand(data);
+
+// insert the resulting node into the comments container
+var container = document.getElementsByClassName(&#39;comments&#39;)[0];
+container.appendChild(result);
+</code></pre>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/9/emacs-completions.html">
+                            Emacs Completions with Hippie-Expand and Snippets
+                        </a>
+                    </h1>
+                    <p>One of the most important features of a text editor is the completing
+of text inside a buffer. There a lots of packages for Emacs, which
+provide this feature in many different ways. I will show you, what I
+use to improve my life as coder.</p>
+
+<p><EMBED SRC="/shockwaves/emacs-completion.swf" WIDTH=400 HEIGHT=320 quality=low loop=false TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></p>
+
+<h3>Multifunctional tab key</h3>
+
+<p>Most of the time the tab key in Emacs is bound to the indentation
+command, which will indent the current line. So if you want to use the
+tab key for other things, you need some kind of multiplexer, which
+tries to figure out, what is the right thing to do in each situation.</p>
+
+<p>So I copied the indent-and-complete from the <a href="http://dima-exe.ru/rails-on-emacs" title="Emacs Rails package">emacs-rails package</a>:</p>
+
+<pre><code>(require &#39;hippie-exp)
+(require &#39;snippet)
+
+(defun indent-and-complete ()
+  &quot;Indent line and complete&quot;
+  (interactive)
+
+  (cond
+   ((and (boundp &#39;snippet) snippet)
+    (snippet-next-field))
+
+   ((looking-at &quot;\\\\_&gt;&quot;)
+    (hippie-expand nil))
+
+   ((indent-for-tab-command))))
+</code></pre>
+
+<p>The function <code>indent-and-complete</code> does one of the following actions:</p>
+
+<ul>
+<li>if a snippet is active, it jumps to the next field</li>
+<li>if we are at a word boundary, it tries to complete with <code>hippie-expand</code></li>
+<li>otherwise it indents the current line</li>
+</ul>
+
+<h3>HTML mode initialization</h3>
+
+<p>Well, this function alone will not change your editor behaviour. For
+activating our tab function, we need to bind the tab key.</p>
+
+<p>Additionally we want to setup <code>hippie-expand</code>, an expansion package,
+which will try to expand the word before the cursor in a configurable
+way. <code>hippie-expand-try-functions-list</code> is a variable, which defines a
+list of functions, which should be called for completion.</p>
+
+<p>Let&#39;s have a look at my <code>html-mode</code> initialization function. It will configure
+the completion behaviour of hippie-expand an bind the tab key to <code>indent-and-complete</code>.</p>
+
+<pre><code>;; We need a simple wrapper for expand-abbrev
+(defun try-expand-abbrev (old)
+  (expand-abbrev))
+
+;; ********************************************************************************
+;; HTML Mode
+;;
+(add-to-list &#39;auto-mode-alist &#39;(&quot;\\\\.html\\\\&#39;&quot; . html-mode))
+
+(defun html-mode-on-init ()
+  (set (make-local-variable &#39;hippie-expand-try-functions-list)
+       &#39;(try-expand-abbrev
+         try-expand-dabbrev))
+  (define-key html-mode-map (kbd &quot;&lt;tab&gt;&quot;) &#39;indent-and-complete))
+
+(add-hook &#39;html-mode-hook &#39;html-mode-on-init)    
+</code></pre>
+
+<p>There a two functions, which will be asked to complete the current word:</p>
+
+<ul>
+<li><p><code>try-expand-abbrev</code>: Expands the current word by looking into the
+list of defined abbreviations. So called abbrevs are just shortcuts
+in Emacs. So if you type <code>li</code> and hit the tab key it will be
+expanded to <code>&lt;li&gt;&lt;/li&gt;</code>.</p></li>
+<li><p><code>try-expand-dabbrev</code>: Dynamic abbreviation is a pragmatic method for
+completing words. Emacs will look for words with the same beginning
+and use them for completion. Hitting multiple times the tab key will
+give you different completions, as you may know from the unix shell.</p></li>
+</ul>
+
+<h3>Defining your snippets</h3>
+
+<p>Now if you want to use snippets for your <code>html-mode</code>, you have to
+define a abbrev-table with your desired snippets. </p>
+
+<pre><code>(define-abbrev-table &#39;html-mode-abbrev-table ())
+
+(snippet-with-abbrev-table &#39;html-mode-abbrev-table 
+ (&quot;h1&quot;      . &quot;&lt;h1&gt;$.&lt;/h1&gt;&quot;)
+ (&quot;h2&quot;      . &quot;&lt;h2&gt;$.&lt;/h2&gt;&quot;)
+ (&quot;h3&quot;      . &quot;&lt;h3&gt;$.&lt;/h3&gt;&quot;)
+ (&quot;h4&quot;      . &quot;&lt;h3&gt;$.&lt;/h4&gt;&quot;)
+ (&quot;h5&quot;      . &quot;&lt;h3&gt;$.&lt;/h5&gt;&quot;)
+ (&quot;h6&quot;      . &quot;&lt;h6&gt;$.&lt;/h6&gt;&quot;)
+ (&quot;div&quot;     . &quot;&lt;div&gt;$.&lt;/div&gt;&quot;)
+ (&quot;divc&quot;    . &quot;&lt;div class=\&quot;$${class}\&quot;&gt;$.&lt;/div&gt;&quot;)
+ (&quot;span&quot;    . &quot;&lt;span&gt;$.&lt;/span&gt;&quot;)
+ (&quot;spans&quot;   . &quot;&lt;span style=\&quot;$${style}\&quot;&gt;$.&lt;/span&gt;&quot;)
+ (&quot;form&quot;    . &quot;&lt;form action=\&quot;$${action}\&quot; method=\&quot;$${post}\&quot;&gt;$.&lt;/form&gt;&quot;)
+ (&quot;input&quot;   . &quot;&lt;input type=\&quot;$${text}\&quot; name=\&quot;$${name}\&quot; value=\&quot;$${value}\&quot;/&gt;&quot;)
+ (&quot;a&quot;       . &quot;&lt;a href=\&quot;$${href}\&quot;&gt;$.&lt;/a&gt;&quot;)
+ (&quot;br&quot;      . &quot;&lt;br/&gt;$.&quot;)
+ (&quot;ul&quot;      . &quot;&lt;ul&gt;$.&lt;/ul&gt;&quot;)
+ (&quot;ol&quot;      . &quot;&lt;ul&gt;$.&lt;/ul&gt;&quot;)
+ (&quot;li&quot;      . &quot;&lt;li&gt;$.&lt;/li&gt;&quot;)
+ (&quot;tab&quot;     . &quot;&lt;table&gt;$.&lt;/table&gt;&quot;)
+ (&quot;tr&quot;      . &quot;&lt;tr&gt;$.&lt;/tr&gt;&quot;)
+ (&quot;td&quot;      . &quot;&lt;td&gt;$.&lt;/td&gt;&quot;)
+ (&quot;th&quot;      . &quot;&lt;th&gt;$.&lt;/th&gt;&quot;)
+ (&quot;str&quot;     . &quot;&lt;strong&gt;$.&lt;/strong&gt;&quot;)
+ (&quot;em&quot;      . &quot;&lt;em&gt;$.&lt;/em&gt;&quot;)
+ (&quot;meta&quot;    . &quot;&lt;meta name=\&quot;$${name}\&quot; content=\&quot;$${content}\&quot;/&gt;&quot;)
+ (&quot;style&quot;   . &quot;&lt;style type=\&quot;text/css\&quot;&gt;$.&lt;/style&gt;&quot;)
+ (&quot;script&quot;  . &quot;&lt;script type=\&quot;text/javascript\&quot;&gt;$.&lt;/script&gt;&quot;)
+ (&quot;scripts&quot; . &quot;&lt;script src=\&quot;$${src}\&quot; type=\&quot;text/javascript\&quot;&gt;$.&lt;/script&gt;&quot;)
+ (&quot;img&quot;     . &quot;&lt;img src=\&quot;$.\&quot;/&gt;&quot;)
+ (&quot;link&quot;    . &quot;&lt;link href=\&quot;$${href}\&quot; media=\&quot;screen\&quot; rel=\&quot;stylesheet\&quot; type=\&quot;text/css\&quot;/&gt;&quot;))
+</code></pre>
+
+<p>Great. If you put all the code in your .emacs file, you should be able
+to use your tab key for completions. In our case we defined snippets
+for the <code>html-mode</code> and activated <code>hippie-expand</code> to use abbrevs and
+dynamic abbreviation. There is much more stuff I will show you next
+time, like customizations for other language modes like <em>Ruby</em> and
+<em>Javascript</em>.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/9/commenting-system-with-lightweight-json-store.html">
+                            Commenting system with lightweight JSON store
+                        </a>
+                    </h1>
+                    <p>As I wrote this <a href="http://www.matthias-georgi.de/shinmun.html">blog engine</a>, the need for a commenting system
+arose and I reflected about a small and simple commenting system with
+just a flat file JSON store. This is my solution, which can be used on
+any static page on a server with PHP support.</p>
+
+<h3>JQuery Frontend</h3>
+
+<p>First of all we need a form, which will post the data to the <em>PHP</em>
+script. The comment rendering is done by my own <em>Javascript</em>
+templating system, which I will explain in a seperate post. For now we
+focus on the task of posting a form and saving it to our <em>JSON</em> store.</p>
+
+<pre><code>&lt;div class=&quot;comment-form&quot;&gt;
+    &lt;form&gt;
+      &lt;input type=&quot;hidden&quot; name=&quot;guid&quot; value=&quot;7ad04f10-5dd6-012b-b53c-001a92975b89&quot;/&gt;
+      &lt;p&gt;
+        &lt;label&gt;Name&lt;/label&gt;&lt;br/&gt;
+        &lt;input type=&quot;text&quot; name=&quot;name&quot; size=&quot;40&quot;/&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        &lt;label&gt;Website&lt;/label&gt;&lt;br/&gt;
+        &lt;input type=&quot;text&quot; name=&quot;website&quot;  size=&quot;40&quot;/&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        &lt;label&gt;Comment&lt;/label&gt;&lt;br/&gt;
+        &lt;textarea name=&quot;text&quot; cols=&quot;60&quot; rows=&quot;10&quot;&gt;&lt;/textarea&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Post comment&quot;/&gt;
+      &lt;/p&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>My blog engine generates a guid for each post, so this will be posted
+by the form as well. Ok, let&#39;s have a look at the Javascript code:</p>
+
+<pre><code>$(&#39;.comment-form form&#39;).ajaxForm({
+    url: Blog.root + &#39;controllers/comments.php&#39;,
+    type: &#39;POST&#39;,
+    resetForm: true,
+    beforeSubmit: function(values) {
+        if (values[1].value &amp;&amp; values[3].value) {
+            return true;
+        }
+        else {
+            alert(&#39;Please enter name and text!&#39;);
+            return false;
+        }
+    },
+    success: function(data) {
+        renderComments(data);
+    }
+});
+</code></pre>
+
+<p>This uses the <a href="http://malsup.com/jquery/form/">jquery-form plugin</a> to submit the form via <em>AJAX</em>,
+nothing special here, the input will be validated to have at least a
+name and comment text. After a successful comment post, the comments
+should be rendered, but this is another story.</p>
+
+<h3>PHP Backend</h3>
+
+<p>The backend is extremely <a href="http://en.wikipedia.org/wiki/You_Ain%27t_Gonna_Need_It">YAGNI</a>. Comments for one post, will be
+saved in one JSON file like <code>comments/guid-of-the-post</code>. The 4 fields
+will be encoded as json array and appended to the file. This happens
+only, if the request was a <em>POST</em>. Finally we read the whole file and
+send it back as response.</p>
+
+<pre><code>&lt;?php
+
+$guid_pattern = &quot;/^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$/&quot;;
+$req = $_REQUEST;
+$guid = $req[&#39;guid&#39;];
+
+preg_match($guid_pattern, $guid) or die(&quot;invalid guid&quot;);
+
+$file = &#39;comments/&#39; . $guid;
+
+if ($_SERVER[&#39;REQUEST_METHOD&#39;] == &#39;POST&#39;) {   
+  // create a comment record
+  $record = array(date(&#39;Y-m-d H:i:s&#39;), 
+                  strip_tags(stripslashes($req[&#39;name&#39;])),
+                  strip_tags(stripslashes($req[&#39;website&#39;])),
+                  strip_tags(stripslashes($req[&#39;text&#39;])));
+
+  // encode as json string
+  $json = json_encode($record) . &quot;\n&quot;;
+
+  // open the comment file for appending
+  $fp = fopen($file, &quot;a&quot;);
+
+  // acquire a write lock
+  flock($fp, LOCK_EX);
+
+  // append the json line
+  fwrite($fp, $json);
+
+  // release lock
+  flock($fp, LOCK_UN);
+
+  // close file
+  fclose($fp);
+}
+
+if (file_exists($file)) {    
+  // open the comment file for reading
+  $fp = fopen($file, &quot;r&quot;);
+
+  // acquire a read lock
+  flock($fp, LOCK_SH);
+
+  // read whole file and print it out
+  echo fread($fp, filesize($file));
+
+  // release lock
+  flock($fp, LOCK_UN);
+
+  // close file
+  fclose($fp);
+}
+
+?&gt;
+</code></pre>
+
+<p>One important thing to note is, that the comment file is not one big
+JSON array. It looks like this:</p>
+
+<pre><code>[&quot;2008-09-07 12:28:33&quot;,&quot;Hans&quot;,&quot;&quot;,&quot;**strong text**\n*emphasized text*&quot;]
+[&quot;2008-09-07 12:29:33&quot;,&quot;Hans&quot;,&quot;&quot;,&quot;**strong text**\n\n\n*emphasized text*&quot;]
+[&quot;2008-09-07 12:29:56&quot;,&quot;Hans&quot;,&quot;&quot;,&quot;**strong text**\n\n\n*emphasized text*&quot;]
+</code></pre>
+
+<p>For each line, we have one JSON array. This way, the <em>PHP</em> script
+doesn&#39;t need to read the whole JSON thing into memory. It just appends
+on every <em>POST</em> one line.</p>
+
+<h3>Escaping</h3>
+
+<p>Some blog comments showed strange escaping behviour, so I investigated
+further. PHP has a foolproof feature called <a href="http://de.php.net/manual/en/security.magicquotes.php">Magic Quotes</a>. It
+automatically escapes all dangerous characters from request parameters
+to protect dumb users from <a href="http://en.wikipedia.org/wiki/SQL_injection">SQL Injection</a>. This feature is
+deprecated and in version 6.0.0 it will be removed. Nevertheless it is 
+activated in a default PHP installation.</p>
+
+<p>To revert the escaping behaviour I have to call <code>stripslashes</code>. Also I
+have to care about stripping HTML tags from input. So to protect from
+malicious HTML, I filter all input through <code>strip_tags</code>.</p>
+
+<h3>Concurrency</h3>
+
+<p>As a commenter pointed out, concurrent access can be a headache. I
+hoped, that <code>file_put_contents</code> is an atomic function, but it is
+not. However, I use a simple file locking scheme, which is good
+enough. One caveat remains: in a multithreading environment this will
+not work reliably. But I think, most PHP installations run as CGI, so
+this will be ok.</p>
+
+<h3>Security</h3>
+
+<p>Seems that I had a serious security flaw in my first version. I didn&#39;t
+check the guid parameter, so that you could pass a path like 
+<code>../../../../../../etc/group</code>. Now the guid is matched against a regular
+expression, so the script is now safe.</p>
+
+<h3>Conclusion</h3>
+
+<p>With a few lines you can hook up a simple commenting system for static
+pages powered by <em>AJAX</em> and <em>PHP</em>. Note, that rendering of comments is
+not discussed here and happens on <em>Javascript</em> side. </p>
+
+<p>Read about my <a href="http://www.matthias-georgi.de/patroon.html">Javascript template engine</a> which is used to render
+the comments.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/12/viewing-ri-in-a-web-browser.html">
+                            Viewing RI in a web browser
+                        </a>
+                    </h1>
+                    <p>I&#39;m a big fan of the Firefox keyword search. For example I have
+keywords for <a href="http://dict.leo.org">LEO</a>, <a href="http://en.wikipedia.org">Wikipedia</a> and <a href="http://www.nongnu.org/man2html">Man pages</a>. Sometimes I
+want to look up API documentation in Ruby and typing <code>ri camelize</code>
+into the address bar and viewing the documentation as web page seems
+to be quite natural for me. So I wrote a quick and dirty cgi, which
+calls RI and outputs HTML.</p>
+
+<h3>CGI script</h3>
+
+<p>I&#39;ve put the following code in file named
+<code>/usr/lib/cgi-bin/ri.b</code>. This is the default location for cgi scripts
+on my system for Apache.</p>
+
+<pre><code>#!/usr/bin/env ruby
+
+require &#39;rdoc/ri/ri_driver&#39;
+require &#39;rubygems&#39;
+
+print &quot;Content-type: text/html\r\n\r\n&quot;
+
+ARGV &lt;&lt; &#39;-f&#39; &lt;&lt; &#39;html&#39;
+
+ri = RiDriver.new
+
+print &#39;&lt;html&gt;&lt;body style=&quot;width:600px; margin:auto; padding:20px&quot;&gt;&#39;
+ri.process_args
+print &#39;&lt;/body&gt;&lt;/html&gt;&#39;
+</code></pre>
+
+<p>This script does the same thing as if you typed <code>ri somequery -f
+html</code>. I put some HTML around it to give it some style, but that&#39;s it.</p>
+
+<h3>The Keyword Search</h3>
+
+<p>So I want to type <code>ri String.capitalize</code> and the browser should send a
+request to <code>http://localhost/cgi-bin/ri.rb?String.capitalize</code>.</p>
+
+<p>Just add a new bookmark and give it the keyword <code>ri</code> and use as url
+this one:</p>
+
+<pre><code> http://localhost/cgi-bin/ri.rb?%s
+</code></pre>
+
+<p>Now we&#39;re done. One thing I would like to improve is to add hyperlinks
+to the output. For example viewing the documentation of a class brings
+up all documented methods. Each of them should be a link to the actual
+documentation. Probably some monkey patching on the <a href="http://rdoc.rubyforge.org/classes/RDoc/RI/HtmlFormatter.html">HtmlFormatter</a>
+class would do the job.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/12/kontrol-a-micro-framework.html">
+                            Kontrol - a micro framework
+                        </a>
+                    </h1>
+                    <p>Kontrol is a small web framework written in Ruby, which runs directly
+on <a href="http://github.com/chneukirchen/rack">Rack</a>. It provides a simple pattern matching algorithm for routing
+and uses GitStore as data storage.</p>
+
+<p>All examples can be found in the <a href="http://github.com/georgi/kontrol/tree/master/examples">examples folder</a> of the kontrol
+project, which is hosted on <a href="http://github.com/georgi/kontrol">this github page</a>.</p>
+
+<p><strong>
+Kontrol has its own <a href="/kontrol">project page</a> now!
+Please look for current information there.
+</strong></p>
+
+<h3>Quick Start</h3>
+
+<p>Create a file named <code>hello_world.ru</code>:</p>
+
+<pre><code>require &#39;kontrol&#39;
+
+class HelloWorld &lt; Kontrol::Application
+  map do
+    get &#39;/&#39; do
+      &quot;Hello World!&quot; 
+    end
+  end
+end
+
+run HelloWorld.new
+</code></pre>
+
+<p>Now run:</p>
+
+<pre><code>rackup hello_world.ru
+</code></pre>
+
+<p>Browse to <code>http://localhost:9292</code> and you will see &ldquo;Hello World&rdquo;.</p>
+
+<h3>Features</h3>
+
+<p>Kontrol is just a thin layer on top of Rack. It provides a routing
+algorithm, a simple template mechanism and some convenience stuff to
+work with <a href="http://github.com/georgi/git_store">GitStore</a>.</p>
+
+<p>A Kontrol application is a class, which provides some context to the
+defined actions. You will probably use these methods:</p>
+
+<ul>
+<li>request: the Rack request object</li>
+<li>response: the Rack response object</li>
+<li>params: union of GET and POST parameters</li>
+<li>cookies: shortcut to request.cookies</li>
+<li>session: shortcut to <code>request.env[&#39;rack.session&#39;]</code></li>
+<li>redirect(path): renders a redirect response to specified path</li>
+</ul>
+
+<h3>Routing</h3>
+
+<p>Routing is just as simple as using regular expressions with
+groups. Each group will be provided as argument to the block.</p>
+
+<p>Create a file named <code>routing.ru</code>:</p>
+
+<pre><code>require &#39;kontrol&#39;
+
+class Routing &lt; Kontrol::Application
+  map do
+    get &#39;/pages/(.*)&#39; do |name|
+      &quot;This is the page #{name}!&quot;
+    end
+
+    get &#39;/(\d*)/(\d*)&#39; do |year, month|
+      &quot;Archive for #{year}/#{month}&quot;
+    end
+  end
+end
+
+run Routing.new
+</code></pre>
+
+<p>Now run this application:</p>
+
+<pre><code>rackup routing.ru
+</code></pre>
+
+<p>You will now see, how regex groups and parameters are related. For
+example if you browse to <code>localhost:9292/2008/12</code>, the app will
+display <code>Archive for 2008/12</code>.</p>
+
+<h3>Nested Routes</h3>
+
+<p>Routes can be nested. This way you can avoid repeating patterns and
+define handlers for a set of HTTP verbs. Each handler will be called
+with the same arguments.</p>
+
+<pre><code>require &#39;kontrol&#39;
+
+class Nested &lt; Kontrol::Application
+  map do
+    map &#39;/blog&#39; do
+      get &#39;/archives&#39; do
+        &quot;The archives!&quot;
+      end
+    end
+
+    map &#39;/(.*)&#39; do
+      get do |path|
+        &quot;&lt;form method=&#39;post&#39;&gt;&lt;input type=&#39;submit&#39;/&gt;&lt;/form&gt;&quot;
+      end
+
+      post do |path|
+        &quot;You posted to #{path}&quot;
+      end
+    end
+  end
+end
+
+run Nested.new
+</code></pre>
+
+<p>Now run this app like:</p>
+
+<pre><code>rackup nested.ru
+</code></pre>
+
+<p>The second route catches all paths except the <code>/blog</code> route. Inside
+the second route there are two different handlers for <code>GET</code> and <code>POST</code>
+actions.</p>
+
+<p>So if you browse to <code>/something</code>, you will see a submit button. After
+submitting you will see the result of the second handler.</p>
+
+<h3>Templates</h3>
+
+<p>Rendering templates is as simple as calling a template file with some
+parameters, which are accessible inside the template as instance
+variables. Additionally you will need a layout template.</p>
+
+<p>Create a template named <code>templates/layout.rhtml</code>:</p>
+
+<pre><code>&lt;html&gt;
+  &lt;body&gt;
+    &lt;%= @content %&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>And now another template named <code>templates/page.rhtml</code>:</p>
+
+<pre><code>&lt;h1&gt;&lt;%= @title %&gt;&lt;/h1&gt;
+&lt;%= @body %&gt;
+</code></pre>
+
+<p>Create a templates.ru file:</p>
+
+<pre><code>class Templates &lt; Kontrol::Application
+  map do
+    get &#39;/(.*)&#39; do |name|
+      render &quot;page.rhtml&quot;, :title =&gt; name.capitalize, :body =&gt; &quot;This is the body!&quot;
+    end
+  end
+end
+
+run Templates.new
+</code></pre>
+
+<p>Now run this example:</p>
+
+<pre><code>rackup templates.ru
+</code></pre>
+
+<p>If you browse to any path on <code>localhost:9292</code>, you will see the
+rendered template. Note that the title and body parameters have been
+passed to the <code>render</code> call.</p>
+
+<h3>Using GitStore</h3>
+
+<p><a href="http://github.com/georgi/git_store">GitStore</a> is another library, which allows you to store code and
+data in a convenient way in a git repository. The repository is
+checked out into memory and any data may be saved back into the
+repository.</p>
+
+<p>Install <a href="http://github.com/georgi/git_store">GitStore</a> and <a href="http://github.com/mojombo/grit">Grit</a> by:</p>
+
+<pre><code>$ gem sources -a http://gems.github.com (you only have to do this once)
+$ sudo gem install mojombo-grit georgi-git_store
+</code></pre>
+
+<p>We create a Markdown file name <code>pages/index.md</code>:</p>
+
+<pre><code>Hello World
+===========
+
+This is the **Index** page!
+</code></pre>
+
+<p>We have now a simple page, which should be rendered as response. We
+create a simple app in a file <code>git_app.ru</code>:</p>
+
+<pre><code>require &#39;bluecloth&#39;
+
+class GitApp &lt; Kontrol::Application
+  map do
+    get &#39;/(.*)&#39; do |name|
+      BlueCloth.new(store[&#39;pages&#39;, name + &#39;.md&#39;]).to_html
+    end
+  end
+end
+
+run GitApp.new
+</code></pre>
+
+<p>Add all these files to your repo:</p>
+
+<pre><code>git init
+git add pages/index.md
+git commit -m &#39;init&#39;
+</code></pre>
+
+<p>Run the app:</p>
+
+<pre><code>rackup git_app.ru
+</code></pre>
+
+<p>Browse to <code>http://localhost:9292/index</code> and you will see the rendered
+page generated from the markdown file.</p>
+
+<p>This application runs straight from the git repository. You can delete
+all files except the rackup file and the app will still serve the page
+from your repo.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/12/git-store-using-git-as-versioned-data-store-in-ruby.html">
+                            Git Store - using Git as versioned data store in Ruby
+                        </a>
+                    </h1>
+                    <p>GitStore is a small Ruby library, providing an easy interface to the
+version control system <a href="http://git.or.cz/">Git</a>. It aims to use Git as a versioned
+data store much like the well known PStore. Basically GitStore checks
+out the repository into a in-memory representation, which can be
+modified and finally committed. In this way your data is stored in a
+folder structure and can be checked out and examined, but the
+application may access the data in a convenient hash-like way. This
+library is based on <a href="http://github.com/mojombo/grit">Grit</a>, the main technology behind <a href="http://github.com/">GitHub</a>.</p>
+
+<p><strong>
+GitStore has its own <a href="/gitstore">project page</a> now!
+Please look for current information there.
+</strong></p>
+
+<h3>Installation</h3>
+
+<p>GitStore can be installed as gem easily, if you have RubyGems 1.2.0:</p>
+
+<pre><code>$ gem sources -a http://gems.github.com (you only have to do this once)
+$ sudo gem install mojombo-grit georgi-git_store
+</code></pre>
+
+<p>If you don&#39;t have RubyGems 1.2.0, you may download the package on the
+<a href="http://www.newartisans.com/blog_files/git.versioned.data.store.php">github page</a> and build the gem yourself:</p>
+
+<pre><code>$ gem build git_store.gemspec
+$ sudo gem install git_store
+</code></pre>
+
+<h3>Usage Example</h3>
+
+<p>First thing you should do, is to initialize a new git repository.</p>
+
+<pre><code>$ mkdir test
+$ cd test
+$ git init
+</code></pre>
+
+<p>Now you can instantiate a GitStore instance and store some data. The
+data will be serialized depending on the file extension. So for YAML
+storage you can use the &#39;yml&#39; extension:</p>
+
+<pre><code>class WikiPage &lt; Struct.new(:author, :title, :body); end
+class User &lt; Struct.new(:name); end
+
+store = GitStore.new(&#39;.&#39;)
+
+store[&#39;users/matthias.yml&#39;] = User.new(&#39;Matthias&#39;)
+store[&#39;pages/home.yml&#39;] = WikiPage.new(&#39;matthias&#39;, &#39;Home&#39;, &#39;This is the home page...&#39;)
+
+store.commit &#39;Added user and page&#39;
+</code></pre>
+
+<p>Note that directories will be created automatically.</p>
+
+<p>Another way to access a path is:</p>
+
+<pre><code>store[&#39;config&#39;, &#39;wiki.yml&#39;] = { &#39;name&#39; =&gt; &#39;My Personal Wiki&#39; }
+</code></pre>
+
+<p>Finally you can access the git store as a Hash of Hashes, but in this
+case you have to create the Tree objects manually:</p>
+
+<pre><code>store[&#39;users&#39;] = GitStore::Tree.new
+store[&#39;users&#39;][&#39;matthias.yml&#39;] = User.new(&#39;Matthias&#39;)
+</code></pre>
+
+<h3>Where is my data?</h3>
+
+<p>When you call the <code>commit</code> method, your data is written back straight
+into the git repository. No intermediate file representation. So if
+you want to look into your data, you can use some git browser like
+<a href="http://www.kernel.org/pub/software/scm/git/docs/git-gui.html">git-gui</a> or just checkout the files:</p>
+
+<pre><code>$ git checkout
+</code></pre>
+
+<h3>Iteration</h3>
+
+<p>Iterating over the data objects is quite easy. Furthermore you can
+iterate over trees and subtrees, so you can partition your data in a
+meaningful way. For example you may separate the config files and the
+pages of a wiki:</p>
+
+<pre><code>store[&#39;pages/home.yml&#39;] = WikiPage.new(&#39;matthias&#39;, &#39;Home&#39;, &#39;This is the home page...&#39;)
+store[&#39;pages/about.yml&#39;] = WikiPage.new(&#39;matthias&#39;, &#39;About&#39;, &#39;About this site...&#39;)
+store[&#39;pages/links.yml&#39;] = WikiPage.new(&#39;matthias&#39;, &#39;Links&#39;, &#39;Some useful links...&#39;)
+store[&#39;config/wiki.yml&#39;] = { &#39;name&#39; =&gt; &#39;My Personal Wiki&#39; }
+
+store.each { |obj| ... } # yields all pages and the config hash
+store[&#39;pages&#39;].each { |page| ... } # yields only the pages
+</code></pre>
+
+<h3>Serialization</h3>
+
+<p>Serialization is dependent on the filename extension. You can add more
+handlers if you like, the interface is like this:</p>
+
+<pre><code>class YAMLHandler
+  def read(id, name, data)
+    YAML.load(data)
+  end
+
+  def write(data)
+    data.to_yaml
+  end    
+end
+
+GitStore::Handler[&#39;yml&#39;] = YAMLHandler.new
+</code></pre>
+
+<p>Shinmun uses its own handler for files with <code>md</code> extension:</p>
+
+<pre><code>class PostHandler
+  def read(name, data)
+    Post.new(:filename =&gt; name, :src =&gt; data)
+  end
+
+  def write(post)
+    post.dump
+  end    
+end
+
+GitStore::Handler[&#39;md&#39;] = PostHandler.new
+</code></pre>
+
+<h3>Related Work</h3>
+
+<p>John Wiegley already has done <a href="http://www.newartisans.com/blog_files/git.versioned.data.store.php">something similar for Python</a>. His
+implementation has its own git interface, GitStore uses the wonderful
+<a href="http://github.com/mojombo/grit">Grit</a> library.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2007/5/google-like-search-results-helper.html">
+                            Google-like Search Results Helper
+                        </a>
+                    </h1>
+                    <p>Representing your search results in a user-friendly way is a common
+task among web developers. Google&#39;s approach is dead simple but really
+effective. The matching text is highlighted and shown with its
+context. This can be implemented in less than 20 lines of code which
+you can include into you helper:</p>
+
+<pre><code>def highlight_text(text, words)
+  tokens = strip_tags(text).split
+  sections = []
+  words.each do |word|
+    word = word.downcase
+    tokens.each_with_index do |token, i|
+      if token.downcase.include? word
+        section = tokens[i-10, 20].join(&#39; &#39;)
+        words.each do |word|
+          section = highlight section, word
+        end
+        sections &lt;&lt; section + &#39; ... &#39;
+        break if sections.size &gt; 3          
+      end
+    end
+  end
+  sections.join
+end
+</code></pre>
+
+<p>First we remove the html tags of the text and split the text into
+tokens. Then we iterate over the search words and for each matching
+token we generate a section, which contains the highlighted word. This
+is done until we hav at least 4 sections, which are finally joined and
+ready to be included into the search result template.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2007/4/rendering-markaby-in-your-helpers.html">
+                            Rendering markaby in your helpers
+                        </a>
+                    </h1>
+                    <p>Generating markup in your rails helpers is a general practice in rails
+and is used throughout all rails helpers. Normally you use <code>content_tag</code>
+to generate markup. But often you will encounter situations, where
+nested tags force you to write ugly helper code like the following
+helper method from the rails library:</p>
+
+<pre><code>def options_for_select(container, selected = nil)
+ container = container.to_a if Hash === container
+
+ options_for_select = container.inject([]) do |options, element|
+    if !element.is_a?(String) and element.respond_to?(:first) and element.respond_to?(:last)
+     is_selected = ( (selected.respond_to?(:include?) &amp;&amp; !selected.is_a?(String) ? selected.include?(element.last) : element.last == selected) )
+      if is_selected
+       options &lt;&lt; &quot;&lt;option value=\&quot;#{html_escape(element.last.to_s)}\&quot; selected=\&quot;selected\&quot;&gt;#{html_escape(element.first.to_s)}&lt;/option&gt;&quot;
+     else
+       options &lt;&lt; &quot;&lt;option value=\&quot;#{html_escape(element.last.to_s)}\&quot;&gt;#{html_escape(element.first.to_s)}&lt;/option&gt;&quot;
+     end
+   else
+     is_selected = ( (selected.respond_to?(:include?) &amp;&amp; !selected.is_a?(String) ? selected.include?(element) : element == selected) )
+     options &lt;&lt; ((is_selected) ? &quot;&lt;option value=\&quot;#{html_escape(element.to_s)}\&quot; selected=\&quot;selected\&quot;&gt;#{html_escape(element.to_s)}&lt;/option&gt;&quot; : &quot;&lt;option value=\&quot;#{html_escape(element.to_s)}\&quot;&gt;#{html_escape(element.to_s)}&lt;/option&gt;&quot;)
+   end
+  end
+
+ options_for_select.join(&quot;\n&quot;)
+end
+</code></pre>
+
+<h3>Markaby Helper</h3>
+
+<p>We will now rewrite this code with inline markaby. We need therefore the following helper method:</p>
+
+<pre><code>@@ruby
+
+def markaby(&amp;proc)
+  assigns = {}
+  instance_variables.each do |name|
+    assigns[ name[1..-1] ] =  instance_variable_get(name)
+  end
+  Markaby::Builder.new(assigns, self).capture(&amp;proc)
+end
+</code></pre>
+
+<p>We need to collect the instance variables of the current template and
+pass a hash of instance variable names along with their values to the
+markaby builder. As second parameter we pass the current template, so
+that the builder can access other helper methods. </p>
+
+<h3>Usage</h3>
+
+<p>Ok, let&#39;s rewrite the <code>options_for_select</code> helper. The method takes an
+array of values which should be displayed as options. Alternatively
+you may pass an list of pairs like <code>[[&#39;first&#39;,1],[&#39;second&#39;,2]</code> or an
+<em>Hash</em>, which maps from option labels to their values. One thing I did
+was to refactor the <code>is_selected test</code> into a lambda. It is cleaner to
+separate the test and probably more efficient. Inside the loop we are
+testing, if we have pairs or simple values and generate markup by
+sending the option method to the builder, which causes the markaby
+builder to generate an option tag. Tag attributes are defined with a
+hash, which we pass to the option method. A tag method takes an
+optional block, which defines the content of a tag, in our case simply
+the text of the option.</p>
+
+<pre><code>def options_for_select(container, selected = nil)
+  container = container.to_a if Hash === container
+
+  if selected.respond_to?(:include?) and !selected.is_a?(String)
+    is_selected = lambda { |e| selected.include? e }
+  else
+    is_selected = lambda { |e| selected == e }
+  end
+
+  is_pair = lambda {|e| !e.is_a?(String) and e.respond_to?(:first) and e.respond_to?(:last) }
+
+  markaby do
+    container.each do |element|
+      if is_pair[element]
+        if is_selected[element.last]
+          option(:value =&gt; element.last, :selected =&gt; &#39;selected&#39;) { h element.first }
+        else
+           option(:value =&gt; element.last) { h element.first }
+        end
+      else
+        if is_selected[element]
+          option(:value =&gt; element, :selected =&gt; &#39;selected&#39;) { h element }
+        else
+          option(:value =&gt; element) { h element }
+        end
+      end
+    end
+  end
+end
+</code></pre>
+
+<h3>Reusable helpers</h3>
+
+<p>Our defined markaby method is even more useful, we can accept a block
+for our helper method and use it inside the markaby code:</p>
+
+<pre><code>def tasks(&amp;block)
+  markaby do
+    div.tasks {
+      ul {
+        markaby(&amp;amp;block)
+      }
+    }
+  end
+end
+</code></pre>
+
+<p>If we have a common pattern like a list of tasks for many templates,
+we can generate the common code with the tasks method and put the
+actual tasks in the block:</p>
+
+<pre><code>tasks {
+  task &#39;Back to articles&#39;.t, articles_url
+  task :edit, @article
+  task :versions, @article
+}
+</code></pre>
+
+<p>So, you can see, there is also a task helper, which is defined as follows:</p>
+
+<pre><code>def task(text, url_or_resource, html_options={})
+  if text.is_a? Symbol
+    task &quot;#{text.to_s.humanize}&quot;.t, {:action =&gt; text, :id =&gt; url_or_resource}, html_options
+  else
+    markaby { li { link_to text, url_or_resource, html_options } }
+  end
+end
+</code></pre>
+
+<p>If the link text is a symbol, we are going to infer the url from the
+action name which is the first parameter and the recource, which is
+the second parameter in this case. Otherwise we generate a list
+element and delegate the arguments to the <code>link_to helper</code>. </p>
+
+<p>By using this simple abstraction, we have hidden the details of task
+links. Instead of repeating the same pattern over and over again, we
+have a common place to decide, how the tasks should look like. Markaby
+makes it really easy to generate nested structures, as it takes
+advantage of ruby&#39;s block syntax.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2007/4/pretty-restful-urls-in-rails.html">
+                            Pretty RESTful URLs in Rails
+                        </a>
+                    </h1>
+                    <p>Since Release 1.2 Rails knows to generate <em>RESTful</em> routes. Each
+resource is identified by an <em>URI</em>, which looks like <code>/users/123</code> . It
+would be nice to have more readable URLs, which include the name of
+the user: <code>/users/matthias-georgi</code>. This is a short tutorial on making
+your urls pretty while retaining the REST approach.</p>
+
+<p>Assuming that you already have an user model, we add following line to
+our <code>config/routes.rb</code>:</p>
+
+<pre><code>map.resources :users
+</code></pre>
+
+<p>You may now run the <code>scaffold_resource</code> generator in case you don&#39;t have
+any <code>UsersController</code> yet. In order to remember the <em>permalink</em> for each
+user, we store it in a column named <code>permalink</code> in the users
+table. Before we save an user record, we have to infer a url-safe
+permalink for the user name. We do this by:</p>
+
+<pre><code>def before_save
+  self.permalink = name.downcase.gsub(/[^a-z0-9]+/i, &#39;-&#39;) if permalink.blank?
+end
+</code></pre>
+
+<p>Each character, which is not an <em>alphanumeric</em> will be replaced by a
+dash. This is only done, if the permalink is not set already. So we
+have a way for users to set their permalink manually. To avoid
+duplicate permalinks, we <em>validate</em> the uniqeness of the permalink:</p>
+
+<pre><code>validates_uniqeness_of :permalink
+</code></pre>
+
+<p>What happens now, if we browse to a user url like
+<code>/users/matthias-georgi</code> ? Rails raises an exception, telling us that it
+cannot find an record with the id <code>matthias-georgi</code>. We&#39;ll fix now our
+controller to look for the permalink and not the id of the user. Just
+replace each call to <code>User.find(params[:id])</code> with
+<code>User.find_by_permalink(params[:id])</code>. Also we have to ensure, that our
+user routes will be generated correctly. Therefore we overwrite the
+<code>to_param</code> method:</p>
+
+<pre><code>def to_param
+  permalink
+end
+</code></pre>
+
+<p>The effect of this little change is, that <code>user_url(a_user)</code> generates
+the right url. <em>Nested resources</em> and <em>pretty urls</em> can get tricky and for
+now I won&#39;t touch this topic. Remember that <em>changing</em> the permalink may
+be problematic as links to the old url will get invalid. Nevertheless
+have fun experimenting with pretty urls and the new wonderful world of
+REST.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2007/4/fast-autocompletion-with-rails.html">
+                            Fast Auto-completion with Rails, Scriptaculous and JSON
+                        </a>
+                    </h1>
+                    <p>Inspired by the excellent <a href="http://www.pragmaticprogrammer.com/titles/fr_rr/">Rails Recipes</a> book , I created an
+improved Auto-completion helper, which uses <em>JSON</em> and <em>AJAX</em> instead
+of a script tag for loading the completions. What we want to achieve
+is a search field, which pops up immediately, showing us a list of
+possible completions for our search word. Look at <a href="http://labs.google.com/suggest/">Google Suggest</a>
+to get an idea.</p>
+
+<h3>Rails Autocomplete</h3>
+
+<p>Rails already has an <code>auto_complete_field</code>, which sends an AJAX
+request for each keystroke. This approach is quite slow, but works in
+most cases, especially for large datasets <code>auto_complete_field</code> is the
+better choice. Our idea, stolen from the Rails Recipes book is to
+fetch the array of possible completions only once. Each keystroke will
+trigger only a local lookup and need no further server interaction.</p>
+
+<p>Scriptaculous already has the right tool for this job:
+<a href="http://wiki.script.aculo.us/scriptaculous/show/Autocompleter.Local">Autocompleter.Local</a>.  We will just pass a javascript array of
+possible completions to the constructor and we&#39;re done.</p>
+
+<h3>CSS</h3>
+
+<p>OK, let&#39;s start. First we need the CSS used by <code>Autocompleter.Local</code>,
+which styles the choices box:</p>
+
+<pre><code>@@css
+
+div.auto_complete {
+  width: 350px;
+  background: #fff;
+}
+
+div.auto_complete ul {
+  border:1px solid #888;
+  margin:0;
+  padding:0;
+  width:100%;
+  list-style-type:none;
+}
+
+div.auto_complete ul li {
+  margin:0;
+  padding:3px;
+}
+
+div.auto_complete ul li.selected {
+  background-color: #ffb;
+}
+
+div.auto_complete ul strong.highlight {
+  color: #800;
+  margin:0;
+  padding:0;
+}
+</code></pre>
+
+<h3>Controller</h3>
+
+<p>Rails already has an controller macro for generating a auto completion
+action. We will create a similar macro, which will generate an action,
+which in turn generates the <em>JSON</em> response. Sounds complex, but the
+implementation is quite easy. Just add to your ApplicationController:</p>
+
+<pre><code>def self.fast_auto_complete_for(object, method, options = {})
+ define_method(&quot;auto_complete_for_#{object}_#{method}&quot;) do
+   render :json =&gt; object.to_s.camelize.constantize.find(:all).map(&amp;method).to_json
+  end
+end
+</code></pre>
+
+<p>The response of the generated action will now contain a list of all
+values for the desired attribute. You can use it like in your
+controllers: <code>fast_auto_complete_for :sport, :name</code></p>
+
+<h3>Javascript Helper</h3>
+
+<p>Now let us get into the tricky part: the javascript macro helper. How
+will we get the completion list? <em>Prototype</em> includes the <code>Ajax.Request</code>
+class, which sends an Ajax Request to our generated action and fetches
+the array encoded as <em>JSON</em>. Furthermore we have to generate a div which
+will hold the popup list for our completion entries. Without going
+into detail, I&#39;ll just show you the code, which you add to your
+<code>ApplicationHelper</code>:</p>
+
+<pre><code>def fast_auto_complete_field(field_id, options={})
+  div_id = &quot;#{field_id}_auto_complete&quot;
+  url = options.delete(:url) or raise &quot;url required&quot;
+  options = options.merge(:tokens =&gt; &#39;,&#39;, :frequency =&gt; 0 )
+  script = javascript_tag &lt;&lt;-end
+    new Ajax.Request(&#39;#{url}&#39;, {
+      method: &#39;get&#39;,
+      onSuccess: function(transport) {
+        new Autocompleter.Local(&#39;#{field_id}&#39;, &#39;#{div_id}&#39;, eval(transport.responseText), #{options.to_json});
+      }
+    });
+  end
+  content_tag &#39;div&#39;, script, :class =&gt; &#39;auto_complete&#39;, :id =&gt; div_id
+end
+</code></pre>
+
+<p>Our helper needs the id for the text field we want to enhance. Based
+on this id the helper generates the div for presenting the completion
+entries. It is also required to pass the url of the json action, which
+is in our case <code>/sports/auto_complete_for_sport_name</code>. </p>
+
+<h3>Usage example</h3>
+
+<pre><code>&lt;form&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name&quot; id=&quot;sport_name&quot;/&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Search&quot;/&gt;
+&lt;/form&gt;
+
+&lt;%= fast_auto_complete_field :sport_name, :url =&gt; &#39;/sports/auto_complete_for_sport_name&#39; %&gt;
+</code></pre>
+
+<p>Well, that&#39;s it. Now you may enjoy snappy auto-completion and feel
+good about using bleeding edge technology like <code>AJAX</code> and <code>JSON</code>.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2007/4/dry-up-your-url-helpers.html">
+                            DRY Up Your Url Helpers
+                        </a>
+                    </h1>
+                    <p>This tutorial shows you how to simplify url generation in combination
+with <em>RESTful</em> resources by extending the <code>url_for</code> helper. This approach
+will also work with nested routes and other helpers like <code>form_tag</code> and
+<code>link_to</code>.</p>
+
+<p>One of the concepts of <em>REST</em> is: each resource has its own unique
+<em>URI</em>. We will enhance the <code>url_for</code> helper to generate this unique URI
+for an arbitrary record.</p>
+
+<h3>Example Models</h3>
+
+<p>First we need a simple example. We have 2 models: <code>User</code> and
+<code>Article</code>. For our url generation to work we have to add following code
+to our models:</p>
+
+<pre><code>    class User
+      has_many :articles
+
+      def to_params
+        {:id =&gt; permalink}
+      end
+    end
+
+    class Article
+      belongs_to :user
+
+      def to_params
+        {:user_id =&gt; user.permalink, :id =&gt; permalink}
+      end
+    end
+</code></pre>
+
+<p>This is necessary for nested routes to play nicely with our url
+generation code. We are now able to find the parameters for each
+record to generate an unique URL.</p>
+
+<h3>Pretty URLs</h3>
+
+<p>In a previous post I demonstrated the use of meaningful urls. We are
+going now the same way.</p>
+
+<p>Users are identified by an URL like:</p>
+
+<pre><code>/users/matthias-georgi
+</code></pre>
+
+<p>Each user may write articles, which are located at:</p>
+
+<pre><code>/users/matthias-georgi/articles
+</code></pre>
+
+<p>If I want to write a new article, I will use this URL:</p>
+
+<pre><code>/users/matthias-georgi/articles/new
+</code></pre>
+
+<p>Editing an existing article would end up on this URL:</p>
+
+<pre><code>/users/matthias-georgi/articles/my-first-post;edit
+</code></pre>
+
+<p>For nested resources to get working you define in config/routes.rb:</p>
+
+<pre><code>map.resources :users do |user|
+  user.resources :articles
+end
+</code></pre>
+
+<p>The traditional way to generate urls is to call the resource helpers:</p>
+
+<pre><code>article_url(article.user, article)
+</code></pre>
+
+<p>This is redundant, as the article already knows its user.</p>
+
+<h3>The Resource Helper</h3>
+
+<p>Add following module into your lib folder and include the module in
+both your application controller and application helper. The most
+important bit is the url_for method. It will automatically generate
+the right url for your resource.</p>
+
+<pre><code>module ResourceHelper
+
+  def plural_class_name(record)
+    singular_class_name(record).pluralize
+  end
+
+  def singular_class_name(record)
+    record.class.name.underscore.tr(&#39;/&#39;, &#39;_&#39;)
+  end
+
+  def params_for(record)
+    if record.respond_to?(:to_params)
+      record.to_params
+    else
+      {:id =&gt; record.to_param}
+    end
+  end
+
+  def collection_url(collection, record, options)
+    if record
+      params = params_for(record)
+      params[&quot;#{singular_class_name(record)}_id&quot;.to_sym] = params.delete(:id)
+      url_for options.merge(params).merge(:controller =&gt; collection)
+    else
+      url_for options.merge(:controller =&gt; collection)
+    end
+  end
+
+  def member_url(record, options)
+    url_for options.merge(params_for(record)).merge(:controller =&gt; plural_class_name(record))
+  end
+
+  def url_for(*args)
+    if [String, Hash].any? {|type| args.first.is_a? type }
+      super(*args)
+    else
+      if args[0].is_a?(Symbol)
+        collection_url(args[0], args[1], :action =&gt; &#39;index&#39;)
+      else
+        member_url(args.first, :action =&gt; &#39;show&#39;)
+      end
+    end
+  end
+
+  def new_url_for(collection, record=nil)
+    collection_url(collection, record, :action =&gt; &#39;new&#39;)
+  end
+
+  def edit_url_for(record)
+    member_url(record, :action =&gt; &#39;edit&#39;)
+  end
+
+  def path_for(*args)
+    if args[0].is_a?(Symbol)
+      collection_url(args[0], args[1], :action =&gt; &#39;index&#39;, :only_path =&gt; true)
+    else
+      member_url(args.first, :action =&gt; &#39;show&#39;, :only_path =&gt; true)
+    end
+  end
+
+  def new_path_for(collection, record=nil)
+    collection_url(collection, record, :action =&gt; &#39;new&#39;, :only_path =&gt; true)
+  end
+
+  def edit_path_for(record)
+    member_url(record, :action =&gt; &#39;edit&#39;, :only_path =&gt; true)
+  end
+
+end
+</code></pre>
+
+<h3>Usage</h3>
+
+<p>So how can you use this stuff actually?</p>
+
+<p>It is pretty easy: just pass the record instead of the url hash and
+the unique url will be generated automatically.</p>
+
+<p>The url of a collection is treated differently. You have to pass the
+name of the collection, which is the controller name. For nested
+resources you have to pass additionally the record, the collection is
+belonging to.</p>
+
+<p>Some examples:</p>
+
+<pre><code>new_path_for(:users)          # =&gt; &#39;/users/new&#39;
+path_for(user)                # =&gt; &#39;/users/harald&#39;
+edit_path_for(user)           # =&gt; &#39;/users/harald;edit&#39;
+path_for(:articles, user)     # =&gt; &#39;/users/harald/articles&#39;
+new_path_for(:articles, user) # =&gt; &#39;/users/harald/articles/new&#39;
+path_for(article)             # =&gt; &#39;/users/harald/articles/article-1&#39;
+edit_path_for(article)        # =&gt; &#39;/users/harald/articles/article-1;edit&#39;
+
+# This works for helpers like url_for, form_tag or link_to. 
+
+link_to article.title, article
+form_tag :articles
+form_tag article, :method =&gt; &#39;put&#39;
+</code></pre>
+
+<p>If anybody is interested I will release this stuff as plugin. I think
+other helpers could benefit as well as you can pass your records
+around and each helper may generate the appropriate url.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2007/4/building-delicous-and-flickr-sidebar-in-5-minutes.html">
+                            Building a del.ico.us and flickr sidebar in 5 minutes
+                        </a>
+                    </h1>
+                    <p>You need a del.icio.us sidebar which shows recent bookmarks or one of
+these nice flickr badges? This is really is easy as the <a href="http://trac.typosphere.org/">Typo Weblog
+Engine</a> already includes an flickr and del.icio.us aggregator.</p>
+
+<p>Download the files <a href="http://trac.typosphere.org/browser/trunk/vendor/plugins/delicious_sidebar/lib/delicious.rb?format=raw">delicous.rb</a> and <a href="http://trac.typosphere.org/browser/trunk/vendor/plugins/flickr_sidebar/lib/flickr.rb?format=raw">flickr.rb</a> and drop them
+into your rails lib folder.</p>
+
+<p>Now add these two little helpers to your application_helper.rb:</p>
+
+<pre><code>    require &#39;delicious&#39;
+    require &#39;flickr&#39;
+
+    def delicious(tag)
+      Delicious.new(&quot;http://del.icio.us/rss/tag/#{tag}&quot;)
+    end
+
+    def flickr(tag)
+      url = &quot;http://api.flickr.com/services/feeds/photos_public.gne?&quot;
+      url &lt;&lt; &quot;tags=#{tag}&amp;format=rss_200&quot;
+      FlickrAggregation.new(url)
+    end
+</code></pre>
+
+<p>We are now able to fetch the feeds for our desired tags with a simple
+method call. Next step is to render a list of links for our
+sidebar. So for rendering the del.icio.us sidebar, you need something
+like this:</p>
+
+<pre><code>    &lt;ul&gt;
+      &lt;% for item in delicious(:ruby).items[0, 10] %&gt;
+        &lt;li&gt;
+          &lt;%= link_to item.title, item.link %&gt;
+        &lt;/li&gt;
+      &lt;% end %&gt;
+    &lt;/ul&gt;
+</code></pre>
+
+<p>This is pretty self-explanatory. We take the first ten items of the
+del.icio.us feed and for each item we output a list element containing
+a link to the item. The view for the flickr badge is similar:</p>
+
+<pre><code>    &lt;ul&gt;
+      &lt;% for item in flickr(:ruby).pics[0, 10] %&gt;
+       &lt;%= image_tag item.square, :size =&gt; &#39;48x48&#39; %&gt;
+      &lt;% end %&gt;
+    &lt;/ul&gt;
+</code></pre>
+
+<p>We take the first ten items of the flickr feed and for each item we
+render an image tag which shows a square thumbnail of the size
+48x48. Congratulations, you have just written a del.icio.us and flickr
+sidebar in 5 minutes using only 18 lines of code. Now you can spend
+the rest of the day pimping up your sidebar with all kinds of feeds
+using one of these plugins of the typo weblog.</p>
+
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

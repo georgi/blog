@@ -1,26 +1,37 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title>Matthias Georgi</title>
-    <meta name="Keywords" content="Matthias Georgi, Blog" />
-    <meta http-equiv="Content-Language" content="English" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="../../index.rss" />
-    <link rel="stylesheet" media="screen" type="text/css" href="../../style.css" />
-    <link rel="stylesheet" href="../../zenburn.css">
-    <script src="../../highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-  </head>
-  <body>
-    <div class="container">
-      <div id="header" class="column span-13 last">
-        <div id="title"><a href="../../index.html">Matthias Georgi</a></div>
-      </div>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
 
-      <div class="content">
-        <h1>How to write a blog engine in Haskell Part 1</h1>
-
-<p>I really like to evaluate programming languages based on their
+<html>
+    <head>
+        <title>
+            How to write a blog engine in Haskell Part 1
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom 1.0">
+        <link rel="stylesheet" media="screen" type="text/css" href="/style.css">
+        <link rel="stylesheet" href="/zenburn.css">
+        <script src="/highlight.pack.js">
+            
+        </script>
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h2 id="header">
+                <a href="/">
+                    Matthias Georgi
+                </a>
+            </h2>
+            <div class="content">
+                <div class="article">
+                    <h1>
+                        <a href="/2013/1/how-to-write-a-blog-engine-in-haskell-part-1.html">
+                            How to write a blog engine in Haskell Part 1
+                        </a>
+                    </h1>
+                    <p>I really like to evaluate programming languages based on their
 practical value and one of the fun tasks is to write a small static
 file blog engine. The engine just converts a bunch of markdown files
 which are sorted into folders by month and year to html files given a
@@ -110,7 +121,7 @@ list with this one file.</p>
 a folder without &#39;.&#39; and &#39;..&#39;.</p>
 
 <p>The else branch works like this: it reads all entries of the folder,
-prepends the current path, recurses for each entry, collect the
+prepends the current path, recurses for each entry, collects the
 return values and flattens them into one big list.</p>
 
 <h2>Reading posts into records</h2>
@@ -141,7 +152,8 @@ and splits a string into a list of strings given a delimiter string.</p>
 <p>Next part in this series will take a look at the actual rendering of blog
 post using the <code>sundown</code> package.</p>
 
-      </div>
-    </div>
-  </body>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

@@ -27,22 +27,20 @@ pre {
 }
 
 .container {
-  width: 600px;
-  margin: 0 auto;
+    width: 600px;
+    margin: 0 auto;
 }
 
-#header #title {
-    font-weight: bold;
+#header {
     padding: 20px 20px 5px 0;
-    display: inline;
 }
 
-#header #title a {
+#header a {
     color: #eee;
     text-decoration: none;
 }
 
-#header #title a:hover {
+#header a:hover {
     color: #eee;
     text-decoration: none;
 }

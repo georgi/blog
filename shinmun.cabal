@@ -1,8 +1,0 @@
-name: shinmun
-version: 1.0
-author: Matthias Georgi
-maintainer: matti.georgi@gmail.com
-build-type: Simple
-Executable shinmun
-  Main-is: shinmun.hs
-  Build-Depends: base, HStringTemplate, time, split, old-locale, directory, sundown
