@@ -317,6 +317,314 @@ serialized and deserialized from almost any language.</p>
 <p>Download or fork the package at my <a href="http://github.com/georgi/shinmun/tree/master">github repository</a></p>
 
                 </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/9/relax-ng-schema-for-adobe-flex-3.html">
+                            Relax NG Schema for Adobe Flex 3
+                        </a>
+                    </h1>
+                    <p>In the past Flex development on Emacs was not as it should be because
+of a missing Relax NG Schema, which is needed for nxml-mode to work
+properly. To improve the situation I developed a MXML Schema generator
+based on the <a href="http://code.google.com/p/xsd4mxml/">XSD generator</a> of <a href="http://flexiglas.blogspot.com/">Ali Mansuroglu</a>. Now Emacs
+knows your Schema and can help you typing and validating MXML files.</p>
+
+<h3>Emacs NXML completion</h3>
+
+<p>Editing MXML files is now a breeze with the superb completion features
+of nxml-mode on Emacs:</p>
+
+<ul>
+<li><p>completion of tag names</p></li>
+<li><p>completion of attribute keys</p></li>
+<li><p>completion of attribute values (e.g. enumerations)</p></li>
+</ul>
+
+<h3>How does it work?</h3>
+
+<p>The schema generator reads a manifest file with all classes to be
+exported.  Now for each class the generator asks the runtime to
+provide the needed information about attributes, events and
+styles (the flash runtime has a nice function called <code>describeType</code>,
+which returns a XML representation of a type).</p>
+
+<p>The tricky part is to convince the <em>MXML</em> compiler to include all
+classes and metadata into the <em>SWF</em> file. Thanks to Ali, I needn&#39;t to
+figure this out, as he provides an Ant file which already has the
+needed compiler flags.</p>
+
+<h3>How does the schema look like?</h3>
+
+<p>The schema just lists all class names as elements and lists their
+properties, events and styles as attributes. Furthermore as much type
+information is preserved as possible using xsd types. So for example
+the <code>dropdownWith</code> of a <code>ComboBox</code> must be a float. XML Editors like
+nxml-mode in Emacs can validate this as yout type.</p>
+
+<p>This is just a snippet from the schema file:</p>
+
+<pre><code>grammar {
+  ComboBox = element ComboBox {
+    attribute implements { text }?,
+    attribute labelFunction { text }?,
+    attribute labelField { xsd:string }?,
+    attribute dropdownWidth { xsd:float }?
+    ....
+  }      
+}
+</code></pre>
+
+<p>I&#39;m using named patterns here, because I need a pattern which matches
+a choice of all possible components:</p>
+
+<pre><code>any = Accordion
+| AddChild
+| AddChildAction
+| AddItemAction
+| AnimateProperty ....
+</code></pre>
+
+<p>Why do I need this pattern? Well, all container components may have
+child components and to enable this in the schema, the conteiner
+elements have this pattern inside:</p>
+
+<pre><code>Application = element Application {
+  any?,
+  ...
+}
+</code></pre>
+
+<h3>Problems</h3>
+
+<p>There are some known issues, which are not resolved yet. For example
+the <code>Script</code> tag may have a <code>CDATA</code> element inside. Another ugly issue
+is the color syntax. Inside the Flex framework a color is just an
+integer, but we want to specify colors as hex values. Unfortunately
+xsd:integer does not allow hex values, so I have to find a solution
+for this some day.</p>
+
+<h3>Download</h3>
+
+<p>Download the <a href="http://www.matthias-georgi.de/assets/download/flex3.rnc">Relax NG Compact Schema for Adoble Flex 3</a></p>
+
+<h3>Github</h3>
+
+<p>Watch or fork the <a href="http://github.com/georgi/mxml-rnc">Project on Github</a></p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/9/quick-guide-for-passenger-on-ubuntu-hardy.html">
+                            Quick Guide for Passenger on Ubuntu Hardy
+                        </a>
+                    </h1>
+                    <p>This is a short guide for installing <a href="http://www.modrails.com/">Phusion Passenger</a> on Ubuntu
+Hardy. This includes the installation of Ruby 1.8.6, Apache 2.2.8, 
+MySQL 5.0.51a, Git 1.5.4 and Rails 2.1.1.</p>
+
+<h3>Essential Build Tools</h3>
+
+<p>First we need to install the compiler toolchain (make, gcc and libc).</p>
+
+<pre><code>$ apt-get install build-essential
+</code></pre>
+
+<h3>Git</h3>
+
+<p>This guide is based on Git, so we install the git package:</p>
+
+<pre><code>$ apt-get install git-core
+</code></pre>
+
+<p>If you want to host a git repository on this machine, initialize a new
+repository:</p>
+
+<pre><code>$ mkdir /var/git
+$ mkdir /var/git/myapp
+$ cd /var/git/myapp
+$ git --bare init
+</code></pre>
+
+<p>Now you can push your application code from your local machine to your
+repository:</p>
+
+<pre><code>$ cd ~/myapp
+$ git remote add origin ssh://myserver.com/var/git/myapp
+$ git push origin master
+</code></pre>
+
+<h3>Ruby</h3>
+
+<p>We are going to install Ruby and all the essential ruby libraries.</p>
+
+<pre><code>$ apt-get install ruby ruby1.8-dev rubygems irb ri rdoc rake libruby libruby-extras
+</code></pre>
+
+<h3>Gem Executable Path</h3>
+
+<p>Strangely the <em>rubygems</em> package does not setup the path for
+executables, so we add the following line to <code>/etc/profile</code>.</p>
+
+<pre><code>export PATH=/var/lib/gems/1.8/bin:$PATH
+</code></pre>
+
+<p>To immediately use the new executable path, we source the profile file:</p>
+
+<pre><code>$ . /etc/profile
+</code></pre>
+
+<h3>Apache</h3>
+
+<p>This is just a basic Apache install. We need the devlopment files for compiling passenger:</p>
+
+<pre><code>$ apt-get install apache2 apache2-prefork-dev
+</code></pre>
+
+<h3>MySQL</h3>
+
+<p>I use MySQL, so I needed to install the server and client packages and
+the Ruby gem, which compiles a native extension:</p>
+
+<pre><code>$ apt-get install mysql-server mysql-client
+$ gem install mysql
+</code></pre>
+
+<h3>Phusion Passenger</h3>
+
+<p>This is now the actual Passenger install, which consists of installing
+a gem and compiling the Apache module:</p>
+
+<pre><code>$ gem install passenger
+$ passenger-install-apache2-module
+</code></pre>
+
+<h3>Apache configuration</h3>
+
+<p>The compilation of the Passenger Apache
+module finished with an instruction for your httpd.conf. Depending on
+you passenger version, you will get something like this, which you add
+to your <code>/etc/apache2/httpd.conf</code>:</p>
+
+<pre><code>LoadModule passenger_module /var/lib/gems/1.8/gems/passenger-2.0.3/ext/apache2/mod_passenger.so
+PassengerRoot /var/lib/gems/1.8/gems/passenger-2.0.3
+PassengerRuby /usr/bin/ruby1.8
+</code></pre>
+
+<p>Additionally you probably want to enable <em>mod_rewrite</em>, which is
+needed for Rails:</p>
+
+<pre><code>$ a2enmod rewrite
+</code></pre>
+
+<h3>Installing your Rails app</h3>
+
+<p>We create a app folder in <code>/var/www</code> and checkout the source from our
+git repository:</p>
+
+<pre><code>$ cd /var/www
+$ mkdir myapp
+$ cd myapp
+$ git init
+$ git remote add origin /var/git/myapp
+$ git pull origin master
+</code></pre>
+
+<h4>Installing Rails</h4>
+
+<p>We don&#39;t install Rails as Gem, because your application should be
+pinned to a specific Rails version. Git submodules allow you to embed
+a foreign repository in your source tree. </p>
+
+<p>We are now going to link the Rails repository to <code>vendor/rails</code> and
+checking out Version 2.1.1, finally we commit the submodule link to
+our repository:</p>
+
+<pre><code>$ cd /var/www/myapp/
+$ git submodule add git://github.com/rails/rails.git vendor/rails
+$ cd vendor/rails
+$ git checkout v2.1.1
+$ cd ../..
+$ git commit -m &#39;linked rails as submodule&#39;
+</code></pre>
+
+<p>Probably you need to setup your database:</p>
+
+<pre><code>$ mysaladmin create myapp_production
+$ mysaladmin create myapp_development
+$ mysaladmin create myapp_test
+$ rake db:migrate
+</code></pre>
+
+<p>Now your Rails app should be able to run as a Webrick Server:</p>
+
+<pre><code>$ ./script/server
+</code></pre>
+
+<h3>Virtual host</h3>
+
+<p>Adding a virtual host for your rails application is now super easy
+thanks to Passenger. Create a file named
+<code>/etc/apache2/sites-available/myapp</code>:</p>
+
+<pre><code>&lt;VirtualHost *:80&gt;
+    ServerName myserver.com
+    DocumentRoot /var/www/myapp/public
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>Now we disable the default site and add our new virtual host:</p>
+
+<pre><code>$ a2dissite default
+$ a2ensite myapp
+</code></pre>
+
+<p>After restarting Apache your Rails application should run on Apache:</p>
+
+<pre><code>$ /etc/init.d/apache2 restart
+</code></pre>
+
+<h3>User authentication</h3>
+
+<p>In case your Rails app is not meant to be seen on public, I recommend
+protecting it with HTTP Authentication.</p>
+
+<p>Create a password file:</p>
+
+<pre><code>htpasswd2 /var/www/myapp/config/auth myusername
+</code></pre>
+
+<p>And add this to your virtual host configuration (Inside the
+VirtualHost section):</p>
+
+<pre><code>&lt;Location /&gt;
+    AuthType Basic
+    AuthName &quot;My App&quot;
+    AuthUserFile /var/www/myapp/config/auth
+    Require valid-user
+&lt;/Location&gt;
+</code></pre>
+
+<h3>Conclusion</h3>
+
+<p>Phusion Passenger simplifies the Installation of Rails applications
+significantly. I don&#39;t have to worry about <code>mod_proxy</code>,
+<code>mod_proxy_balancer</code>, <code>mongrel</code> and <code>mongrel_cluster</code> or even
+FastCGI. This is <strong>definitely simpler</strong>.</p>
+
+<p>I have to mention, that Rails is just one option for your Ruby
+application. Setting up any other Ruby framework should be possible
+through the support of the <a href="http://rack.rubyforge.org/">Rack</a> interface. </p>
+
+<p>I really hope, that the specification of using one <em>rackup file</em> and
+one <em>public folder</em> will settle down as a standard for Ruby web
+applications, so that hosting companies will focus on supporting this
+standard and ruby developers don&#39;t need to worry about finding support
+for their favorite web frameworks.</p>
+
+                </div>
+                <a rel="next" href="page-4.html">
+                    Next entries
+                </a>
             </div>
         </div>
     </body>

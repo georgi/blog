@@ -27,7 +27,7 @@ pre {
 }
 
 .container {
-    width: 600px;
+    width: 800px;
     margin: 0 auto;
 }
 
@@ -45,6 +45,10 @@ pre {
     text-decoration: none;
 }
 
-h1 { font-size: 1.5em; }
+h1 {
+    margin-top: 1em;
+    font-size: 1.5em;
+}
+
 h2 { font-size: 1.2em; }
 h3,h4 { font-size: 1em; }

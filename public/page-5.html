@@ -1,0 +1,508 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+    <head>
+        <title>
+            Matthias Georgi
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom 1.0">
+        <link rel="stylesheet" media="screen" type="text/css" href="/style.css">
+        <link rel="stylesheet" href="/zenburn.css">
+        <script src="/highlight.pack.js">
+            
+        </script>
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h2 id="header">
+                <a href="/">
+                    Matthias Georgi
+                </a>
+            </h2>
+            <div class="content">
+                <div class="article">
+                    <h1>
+                        <a href="/2008/9/commenting-system-with-lightweight-json-store.html">
+                            Commenting system with lightweight JSON store
+                        </a>
+                    </h1>
+                    <p>As I wrote this <a href="http://www.matthias-georgi.de/shinmun.html">blog engine</a>, the need for a commenting system
+arose and I reflected about a small and simple commenting system with
+just a flat file JSON store. This is my solution, which can be used on
+any static page on a server with PHP support.</p>
+
+<h3>JQuery Frontend</h3>
+
+<p>First of all we need a form, which will post the data to the <em>PHP</em>
+script. The comment rendering is done by my own <em>Javascript</em>
+templating system, which I will explain in a seperate post. For now we
+focus on the task of posting a form and saving it to our <em>JSON</em> store.</p>
+
+<pre><code>&lt;div class=&quot;comment-form&quot;&gt;
+    &lt;form&gt;
+      &lt;input type=&quot;hidden&quot; name=&quot;guid&quot; value=&quot;7ad04f10-5dd6-012b-b53c-001a92975b89&quot;/&gt;
+      &lt;p&gt;
+        &lt;label&gt;Name&lt;/label&gt;&lt;br/&gt;
+        &lt;input type=&quot;text&quot; name=&quot;name&quot; size=&quot;40&quot;/&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        &lt;label&gt;Website&lt;/label&gt;&lt;br/&gt;
+        &lt;input type=&quot;text&quot; name=&quot;website&quot;  size=&quot;40&quot;/&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        &lt;label&gt;Comment&lt;/label&gt;&lt;br/&gt;
+        &lt;textarea name=&quot;text&quot; cols=&quot;60&quot; rows=&quot;10&quot;&gt;&lt;/textarea&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Post comment&quot;/&gt;
+      &lt;/p&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>My blog engine generates a guid for each post, so this will be posted
+by the form as well. Ok, let&#39;s have a look at the Javascript code:</p>
+
+<pre><code>$(&#39;.comment-form form&#39;).ajaxForm({
+    url: Blog.root + &#39;controllers/comments.php&#39;,
+    type: &#39;POST&#39;,
+    resetForm: true,
+    beforeSubmit: function(values) {
+        if (values[1].value &amp;&amp; values[3].value) {
+            return true;
+        }
+        else {
+            alert(&#39;Please enter name and text!&#39;);
+            return false;
+        }
+    },
+    success: function(data) {
+        renderComments(data);
+    }
+});
+</code></pre>
+
+<p>This uses the <a href="http://malsup.com/jquery/form/">jquery-form plugin</a> to submit the form via <em>AJAX</em>,
+nothing special here, the input will be validated to have at least a
+name and comment text. After a successful comment post, the comments
+should be rendered, but this is another story.</p>
+
+<h3>PHP Backend</h3>
+
+<p>The backend is extremely <a href="http://en.wikipedia.org/wiki/You_Ain%27t_Gonna_Need_It">YAGNI</a>. Comments for one post, will be
+saved in one JSON file like <code>comments/guid-of-the-post</code>. The 4 fields
+will be encoded as json array and appended to the file. This happens
+only, if the request was a <em>POST</em>. Finally we read the whole file and
+send it back as response.</p>
+
+<pre><code>&lt;?php
+
+$guid_pattern = &quot;/^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$/&quot;;
+$req = $_REQUEST;
+$guid = $req[&#39;guid&#39;];
+
+preg_match($guid_pattern, $guid) or die(&quot;invalid guid&quot;);
+
+$file = &#39;comments/&#39; . $guid;
+
+if ($_SERVER[&#39;REQUEST_METHOD&#39;] == &#39;POST&#39;) {   
+  // create a comment record
+  $record = array(date(&#39;Y-m-d H:i:s&#39;), 
+                  strip_tags(stripslashes($req[&#39;name&#39;])),
+                  strip_tags(stripslashes($req[&#39;website&#39;])),
+                  strip_tags(stripslashes($req[&#39;text&#39;])));
+
+  // encode as json string
+  $json = json_encode($record) . &quot;\n&quot;;
+
+  // open the comment file for appending
+  $fp = fopen($file, &quot;a&quot;);
+
+  // acquire a write lock
+  flock($fp, LOCK_EX);
+
+  // append the json line
+  fwrite($fp, $json);
+
+  // release lock
+  flock($fp, LOCK_UN);
+
+  // close file
+  fclose($fp);
+}
+
+if (file_exists($file)) {    
+  // open the comment file for reading
+  $fp = fopen($file, &quot;r&quot;);
+
+  // acquire a read lock
+  flock($fp, LOCK_SH);
+
+  // read whole file and print it out
+  echo fread($fp, filesize($file));
+
+  // release lock
+  flock($fp, LOCK_UN);
+
+  // close file
+  fclose($fp);
+}
+
+?&gt;
+</code></pre>
+
+<p>One important thing to note is, that the comment file is not one big
+JSON array. It looks like this:</p>
+
+<pre><code>[&quot;2008-09-07 12:28:33&quot;,&quot;Hans&quot;,&quot;&quot;,&quot;**strong text**\n*emphasized text*&quot;]
+[&quot;2008-09-07 12:29:33&quot;,&quot;Hans&quot;,&quot;&quot;,&quot;**strong text**\n\n\n*emphasized text*&quot;]
+[&quot;2008-09-07 12:29:56&quot;,&quot;Hans&quot;,&quot;&quot;,&quot;**strong text**\n\n\n*emphasized text*&quot;]
+</code></pre>
+
+<p>For each line, we have one JSON array. This way, the <em>PHP</em> script
+doesn&#39;t need to read the whole JSON thing into memory. It just appends
+on every <em>POST</em> one line.</p>
+
+<h3>Escaping</h3>
+
+<p>Some blog comments showed strange escaping behviour, so I investigated
+further. PHP has a foolproof feature called <a href="http://de.php.net/manual/en/security.magicquotes.php">Magic Quotes</a>. It
+automatically escapes all dangerous characters from request parameters
+to protect dumb users from <a href="http://en.wikipedia.org/wiki/SQL_injection">SQL Injection</a>. This feature is
+deprecated and in version 6.0.0 it will be removed. Nevertheless it is 
+activated in a default PHP installation.</p>
+
+<p>To revert the escaping behaviour I have to call <code>stripslashes</code>. Also I
+have to care about stripping HTML tags from input. So to protect from
+malicious HTML, I filter all input through <code>strip_tags</code>.</p>
+
+<h3>Concurrency</h3>
+
+<p>As a commenter pointed out, concurrent access can be a headache. I
+hoped, that <code>file_put_contents</code> is an atomic function, but it is
+not. However, I use a simple file locking scheme, which is good
+enough. One caveat remains: in a multithreading environment this will
+not work reliably. But I think, most PHP installations run as CGI, so
+this will be ok.</p>
+
+<h3>Security</h3>
+
+<p>Seems that I had a serious security flaw in my first version. I didn&#39;t
+check the guid parameter, so that you could pass a path like 
+<code>../../../../../../etc/group</code>. Now the guid is matched against a regular
+expression, so the script is now safe.</p>
+
+<h3>Conclusion</h3>
+
+<p>With a few lines you can hook up a simple commenting system for static
+pages powered by <em>AJAX</em> and <em>PHP</em>. Note, that rendering of comments is
+not discussed here and happens on <em>Javascript</em> side. </p>
+
+<p>Read about my <a href="http://www.matthias-georgi.de/patroon.html">Javascript template engine</a> which is used to render
+the comments.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/12/viewing-ri-in-a-web-browser.html">
+                            Viewing RI in a web browser
+                        </a>
+                    </h1>
+                    <p>I&#39;m a big fan of the Firefox keyword search. For example I have
+keywords for <a href="http://dict.leo.org">LEO</a>, <a href="http://en.wikipedia.org">Wikipedia</a> and <a href="http://www.nongnu.org/man2html">Man pages</a>. Sometimes I
+want to look up API documentation in Ruby and typing <code>ri camelize</code>
+into the address bar and viewing the documentation as web page seems
+to be quite natural for me. So I wrote a quick and dirty cgi, which
+calls RI and outputs HTML.</p>
+
+<h3>CGI script</h3>
+
+<p>I&#39;ve put the following code in file named
+<code>/usr/lib/cgi-bin/ri.b</code>. This is the default location for cgi scripts
+on my system for Apache.</p>
+
+<pre><code>#!/usr/bin/env ruby
+
+require &#39;rdoc/ri/ri_driver&#39;
+require &#39;rubygems&#39;
+
+print &quot;Content-type: text/html\r\n\r\n&quot;
+
+ARGV &lt;&lt; &#39;-f&#39; &lt;&lt; &#39;html&#39;
+
+ri = RiDriver.new
+
+print &#39;&lt;html&gt;&lt;body style=&quot;width:600px; margin:auto; padding:20px&quot;&gt;&#39;
+ri.process_args
+print &#39;&lt;/body&gt;&lt;/html&gt;&#39;
+</code></pre>
+
+<p>This script does the same thing as if you typed <code>ri somequery -f
+html</code>. I put some HTML around it to give it some style, but that&#39;s it.</p>
+
+<h3>The Keyword Search</h3>
+
+<p>So I want to type <code>ri String.capitalize</code> and the browser should send a
+request to <code>http://localhost/cgi-bin/ri.rb?String.capitalize</code>.</p>
+
+<p>Just add a new bookmark and give it the keyword <code>ri</code> and use as url
+this one:</p>
+
+<pre><code> http://localhost/cgi-bin/ri.rb?%s
+</code></pre>
+
+<p>Now we&#39;re done. One thing I would like to improve is to add hyperlinks
+to the output. For example viewing the documentation of a class brings
+up all documented methods. Each of them should be a link to the actual
+documentation. Probably some monkey patching on the <a href="http://rdoc.rubyforge.org/classes/RDoc/RI/HtmlFormatter.html">HtmlFormatter</a>
+class would do the job.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2008/12/kontrol-a-micro-framework.html">
+                            Kontrol - a micro framework
+                        </a>
+                    </h1>
+                    <p>Kontrol is a small web framework written in Ruby, which runs directly
+on <a href="http://github.com/chneukirchen/rack">Rack</a>. It provides a simple pattern matching algorithm for routing
+and uses GitStore as data storage.</p>
+
+<p>All examples can be found in the <a href="http://github.com/georgi/kontrol/tree/master/examples">examples folder</a> of the kontrol
+project, which is hosted on <a href="http://github.com/georgi/kontrol">this github page</a>.</p>
+
+<p><strong>
+Kontrol has its own <a href="/kontrol">project page</a> now!
+Please look for current information there.
+</strong></p>
+
+<h3>Quick Start</h3>
+
+<p>Create a file named <code>hello_world.ru</code>:</p>
+
+<pre><code>require &#39;kontrol&#39;
+
+class HelloWorld &lt; Kontrol::Application
+  map do
+    get &#39;/&#39; do
+      &quot;Hello World!&quot; 
+    end
+  end
+end
+
+run HelloWorld.new
+</code></pre>
+
+<p>Now run:</p>
+
+<pre><code>rackup hello_world.ru
+</code></pre>
+
+<p>Browse to <code>http://localhost:9292</code> and you will see &ldquo;Hello World&rdquo;.</p>
+
+<h3>Features</h3>
+
+<p>Kontrol is just a thin layer on top of Rack. It provides a routing
+algorithm, a simple template mechanism and some convenience stuff to
+work with <a href="http://github.com/georgi/git_store">GitStore</a>.</p>
+
+<p>A Kontrol application is a class, which provides some context to the
+defined actions. You will probably use these methods:</p>
+
+<ul>
+<li>request: the Rack request object</li>
+<li>response: the Rack response object</li>
+<li>params: union of GET and POST parameters</li>
+<li>cookies: shortcut to request.cookies</li>
+<li>session: shortcut to <code>request.env[&#39;rack.session&#39;]</code></li>
+<li>redirect(path): renders a redirect response to specified path</li>
+</ul>
+
+<h3>Routing</h3>
+
+<p>Routing is just as simple as using regular expressions with
+groups. Each group will be provided as argument to the block.</p>
+
+<p>Create a file named <code>routing.ru</code>:</p>
+
+<pre><code>require &#39;kontrol&#39;
+
+class Routing &lt; Kontrol::Application
+  map do
+    get &#39;/pages/(.*)&#39; do |name|
+      &quot;This is the page #{name}!&quot;
+    end
+
+    get &#39;/(\d*)/(\d*)&#39; do |year, month|
+      &quot;Archive for #{year}/#{month}&quot;
+    end
+  end
+end
+
+run Routing.new
+</code></pre>
+
+<p>Now run this application:</p>
+
+<pre><code>rackup routing.ru
+</code></pre>
+
+<p>You will now see, how regex groups and parameters are related. For
+example if you browse to <code>localhost:9292/2008/12</code>, the app will
+display <code>Archive for 2008/12</code>.</p>
+
+<h3>Nested Routes</h3>
+
+<p>Routes can be nested. This way you can avoid repeating patterns and
+define handlers for a set of HTTP verbs. Each handler will be called
+with the same arguments.</p>
+
+<pre><code>require &#39;kontrol&#39;
+
+class Nested &lt; Kontrol::Application
+  map do
+    map &#39;/blog&#39; do
+      get &#39;/archives&#39; do
+        &quot;The archives!&quot;
+      end
+    end
+
+    map &#39;/(.*)&#39; do
+      get do |path|
+        &quot;&lt;form method=&#39;post&#39;&gt;&lt;input type=&#39;submit&#39;/&gt;&lt;/form&gt;&quot;
+      end
+
+      post do |path|
+        &quot;You posted to #{path}&quot;
+      end
+    end
+  end
+end
+
+run Nested.new
+</code></pre>
+
+<p>Now run this app like:</p>
+
+<pre><code>rackup nested.ru
+</code></pre>
+
+<p>The second route catches all paths except the <code>/blog</code> route. Inside
+the second route there are two different handlers for <code>GET</code> and <code>POST</code>
+actions.</p>
+
+<p>So if you browse to <code>/something</code>, you will see a submit button. After
+submitting you will see the result of the second handler.</p>
+
+<h3>Templates</h3>
+
+<p>Rendering templates is as simple as calling a template file with some
+parameters, which are accessible inside the template as instance
+variables. Additionally you will need a layout template.</p>
+
+<p>Create a template named <code>templates/layout.rhtml</code>:</p>
+
+<pre><code>&lt;html&gt;
+  &lt;body&gt;
+    &lt;%= @content %&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>And now another template named <code>templates/page.rhtml</code>:</p>
+
+<pre><code>&lt;h1&gt;&lt;%= @title %&gt;&lt;/h1&gt;
+&lt;%= @body %&gt;
+</code></pre>
+
+<p>Create a templates.ru file:</p>
+
+<pre><code>class Templates &lt; Kontrol::Application
+  map do
+    get &#39;/(.*)&#39; do |name|
+      render &quot;page.rhtml&quot;, :title =&gt; name.capitalize, :body =&gt; &quot;This is the body!&quot;
+    end
+  end
+end
+
+run Templates.new
+</code></pre>
+
+<p>Now run this example:</p>
+
+<pre><code>rackup templates.ru
+</code></pre>
+
+<p>If you browse to any path on <code>localhost:9292</code>, you will see the
+rendered template. Note that the title and body parameters have been
+passed to the <code>render</code> call.</p>
+
+<h3>Using GitStore</h3>
+
+<p><a href="http://github.com/georgi/git_store">GitStore</a> is another library, which allows you to store code and
+data in a convenient way in a git repository. The repository is
+checked out into memory and any data may be saved back into the
+repository.</p>
+
+<p>Install <a href="http://github.com/georgi/git_store">GitStore</a> and <a href="http://github.com/mojombo/grit">Grit</a> by:</p>
+
+<pre><code>$ gem sources -a http://gems.github.com (you only have to do this once)
+$ sudo gem install mojombo-grit georgi-git_store
+</code></pre>
+
+<p>We create a Markdown file name <code>pages/index.md</code>:</p>
+
+<pre><code>Hello World
+===========
+
+This is the **Index** page!
+</code></pre>
+
+<p>We have now a simple page, which should be rendered as response. We
+create a simple app in a file <code>git_app.ru</code>:</p>
+
+<pre><code>require &#39;bluecloth&#39;
+
+class GitApp &lt; Kontrol::Application
+  map do
+    get &#39;/(.*)&#39; do |name|
+      BlueCloth.new(store[&#39;pages&#39;, name + &#39;.md&#39;]).to_html
+    end
+  end
+end
+
+run GitApp.new
+</code></pre>
+
+<p>Add all these files to your repo:</p>
+
+<pre><code>git init
+git add pages/index.md
+git commit -m &#39;init&#39;
+</code></pre>
+
+<p>Run the app:</p>
+
+<pre><code>rackup git_app.ru
+</code></pre>
+
+<p>Browse to <code>http://localhost:9292/index</code> and you will see the rendered
+page generated from the markdown file.</p>
+
+<p>This application runs straight from the git repository. You can delete
+all files except the rackup file and the app will still serve the page
+from your repo.</p>
+
+                </div>
+                <a rel="next" href="page-6.html">
+                    Next entries
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

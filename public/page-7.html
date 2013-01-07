@@ -1,0 +1,411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+    <head>
+        <title>
+            Matthias Georgi
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom 1.0">
+        <link rel="stylesheet" media="screen" type="text/css" href="/style.css">
+        <link rel="stylesheet" href="/zenburn.css">
+        <script src="/highlight.pack.js">
+            
+        </script>
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h2 id="header">
+                <a href="/">
+                    Matthias Georgi
+                </a>
+            </h2>
+            <div class="content">
+                <div class="article">
+                    <h1>
+                        <a href="/2007/4/pretty-restful-urls-in-rails.html">
+                            Pretty RESTful URLs in Rails
+                        </a>
+                    </h1>
+                    <p>Since Release 1.2 Rails knows to generate <em>RESTful</em> routes. Each
+resource is identified by an <em>URI</em>, which looks like <code>/users/123</code> . It
+would be nice to have more readable URLs, which include the name of
+the user: <code>/users/matthias-georgi</code>. This is a short tutorial on making
+your urls pretty while retaining the REST approach.</p>
+
+<p>Assuming that you already have an user model, we add following line to
+our <code>config/routes.rb</code>:</p>
+
+<pre><code>map.resources :users
+</code></pre>
+
+<p>You may now run the <code>scaffold_resource</code> generator in case you don&#39;t have
+any <code>UsersController</code> yet. In order to remember the <em>permalink</em> for each
+user, we store it in a column named <code>permalink</code> in the users
+table. Before we save an user record, we have to infer a url-safe
+permalink for the user name. We do this by:</p>
+
+<pre><code>def before_save
+  self.permalink = name.downcase.gsub(/[^a-z0-9]+/i, &#39;-&#39;) if permalink.blank?
+end
+</code></pre>
+
+<p>Each character, which is not an <em>alphanumeric</em> will be replaced by a
+dash. This is only done, if the permalink is not set already. So we
+have a way for users to set their permalink manually. To avoid
+duplicate permalinks, we <em>validate</em> the uniqeness of the permalink:</p>
+
+<pre><code>validates_uniqeness_of :permalink
+</code></pre>
+
+<p>What happens now, if we browse to a user url like
+<code>/users/matthias-georgi</code> ? Rails raises an exception, telling us that it
+cannot find an record with the id <code>matthias-georgi</code>. We&#39;ll fix now our
+controller to look for the permalink and not the id of the user. Just
+replace each call to <code>User.find(params[:id])</code> with
+<code>User.find_by_permalink(params[:id])</code>. Also we have to ensure, that our
+user routes will be generated correctly. Therefore we overwrite the
+<code>to_param</code> method:</p>
+
+<pre><code>def to_param
+  permalink
+end
+</code></pre>
+
+<p>The effect of this little change is, that <code>user_url(a_user)</code> generates
+the right url. <em>Nested resources</em> and <em>pretty urls</em> can get tricky and for
+now I won&#39;t touch this topic. Remember that <em>changing</em> the permalink may
+be problematic as links to the old url will get invalid. Nevertheless
+have fun experimenting with pretty urls and the new wonderful world of
+REST.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2007/4/fast-autocompletion-with-rails.html">
+                            Fast Auto-completion with Rails, Scriptaculous and JSON
+                        </a>
+                    </h1>
+                    <p>Inspired by the excellent <a href="http://www.pragmaticprogrammer.com/titles/fr_rr/">Rails Recipes</a> book , I created an
+improved Auto-completion helper, which uses <em>JSON</em> and <em>AJAX</em> instead
+of a script tag for loading the completions. What we want to achieve
+is a search field, which pops up immediately, showing us a list of
+possible completions for our search word. Look at <a href="http://labs.google.com/suggest/">Google Suggest</a>
+to get an idea.</p>
+
+<h3>Rails Autocomplete</h3>
+
+<p>Rails already has an <code>auto_complete_field</code>, which sends an AJAX
+request for each keystroke. This approach is quite slow, but works in
+most cases, especially for large datasets <code>auto_complete_field</code> is the
+better choice. Our idea, stolen from the Rails Recipes book is to
+fetch the array of possible completions only once. Each keystroke will
+trigger only a local lookup and need no further server interaction.</p>
+
+<p>Scriptaculous already has the right tool for this job:
+<a href="http://wiki.script.aculo.us/scriptaculous/show/Autocompleter.Local">Autocompleter.Local</a>.  We will just pass a javascript array of
+possible completions to the constructor and we&#39;re done.</p>
+
+<h3>CSS</h3>
+
+<p>OK, let&#39;s start. First we need the CSS used by <code>Autocompleter.Local</code>,
+which styles the choices box:</p>
+
+<pre><code>@@css
+
+div.auto_complete {
+  width: 350px;
+  background: #fff;
+}
+
+div.auto_complete ul {
+  border:1px solid #888;
+  margin:0;
+  padding:0;
+  width:100%;
+  list-style-type:none;
+}
+
+div.auto_complete ul li {
+  margin:0;
+  padding:3px;
+}
+
+div.auto_complete ul li.selected {
+  background-color: #ffb;
+}
+
+div.auto_complete ul strong.highlight {
+  color: #800;
+  margin:0;
+  padding:0;
+}
+</code></pre>
+
+<h3>Controller</h3>
+
+<p>Rails already has an controller macro for generating a auto completion
+action. We will create a similar macro, which will generate an action,
+which in turn generates the <em>JSON</em> response. Sounds complex, but the
+implementation is quite easy. Just add to your ApplicationController:</p>
+
+<pre><code>def self.fast_auto_complete_for(object, method, options = {})
+ define_method(&quot;auto_complete_for_#{object}_#{method}&quot;) do
+   render :json =&gt; object.to_s.camelize.constantize.find(:all).map(&amp;method).to_json
+  end
+end
+</code></pre>
+
+<p>The response of the generated action will now contain a list of all
+values for the desired attribute. You can use it like in your
+controllers: <code>fast_auto_complete_for :sport, :name</code></p>
+
+<h3>Javascript Helper</h3>
+
+<p>Now let us get into the tricky part: the javascript macro helper. How
+will we get the completion list? <em>Prototype</em> includes the <code>Ajax.Request</code>
+class, which sends an Ajax Request to our generated action and fetches
+the array encoded as <em>JSON</em>. Furthermore we have to generate a div which
+will hold the popup list for our completion entries. Without going
+into detail, I&#39;ll just show you the code, which you add to your
+<code>ApplicationHelper</code>:</p>
+
+<pre><code>def fast_auto_complete_field(field_id, options={})
+  div_id = &quot;#{field_id}_auto_complete&quot;
+  url = options.delete(:url) or raise &quot;url required&quot;
+  options = options.merge(:tokens =&gt; &#39;,&#39;, :frequency =&gt; 0 )
+  script = javascript_tag &lt;&lt;-end
+    new Ajax.Request(&#39;#{url}&#39;, {
+      method: &#39;get&#39;,
+      onSuccess: function(transport) {
+        new Autocompleter.Local(&#39;#{field_id}&#39;, &#39;#{div_id}&#39;, eval(transport.responseText), #{options.to_json});
+      }
+    });
+  end
+  content_tag &#39;div&#39;, script, :class =&gt; &#39;auto_complete&#39;, :id =&gt; div_id
+end
+</code></pre>
+
+<p>Our helper needs the id for the text field we want to enhance. Based
+on this id the helper generates the div for presenting the completion
+entries. It is also required to pass the url of the json action, which
+is in our case <code>/sports/auto_complete_for_sport_name</code>. </p>
+
+<h3>Usage example</h3>
+
+<pre><code>&lt;form&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name&quot; id=&quot;sport_name&quot;/&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Search&quot;/&gt;
+&lt;/form&gt;
+
+&lt;%= fast_auto_complete_field :sport_name, :url =&gt; &#39;/sports/auto_complete_for_sport_name&#39; %&gt;
+</code></pre>
+
+<p>Well, that&#39;s it. Now you may enjoy snappy auto-completion and feel
+good about using bleeding edge technology like <code>AJAX</code> and <code>JSON</code>.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
+                        <a href="/2007/4/dry-up-your-url-helpers.html">
+                            DRY Up Your Url Helpers
+                        </a>
+                    </h1>
+                    <p>This tutorial shows you how to simplify url generation in combination
+with <em>RESTful</em> resources by extending the <code>url_for</code> helper. This approach
+will also work with nested routes and other helpers like <code>form_tag</code> and
+<code>link_to</code>.</p>
+
+<p>One of the concepts of <em>REST</em> is: each resource has its own unique
+<em>URI</em>. We will enhance the <code>url_for</code> helper to generate this unique URI
+for an arbitrary record.</p>
+
+<h3>Example Models</h3>
+
+<p>First we need a simple example. We have 2 models: <code>User</code> and
+<code>Article</code>. For our url generation to work we have to add following code
+to our models:</p>
+
+<pre><code>    class User
+      has_many :articles
+
+      def to_params
+        {:id =&gt; permalink}
+      end
+    end
+
+    class Article
+      belongs_to :user
+
+      def to_params
+        {:user_id =&gt; user.permalink, :id =&gt; permalink}
+      end
+    end
+</code></pre>
+
+<p>This is necessary for nested routes to play nicely with our url
+generation code. We are now able to find the parameters for each
+record to generate an unique URL.</p>
+
+<h3>Pretty URLs</h3>
+
+<p>In a previous post I demonstrated the use of meaningful urls. We are
+going now the same way.</p>
+
+<p>Users are identified by an URL like:</p>
+
+<pre><code>/users/matthias-georgi
+</code></pre>
+
+<p>Each user may write articles, which are located at:</p>
+
+<pre><code>/users/matthias-georgi/articles
+</code></pre>
+
+<p>If I want to write a new article, I will use this URL:</p>
+
+<pre><code>/users/matthias-georgi/articles/new
+</code></pre>
+
+<p>Editing an existing article would end up on this URL:</p>
+
+<pre><code>/users/matthias-georgi/articles/my-first-post;edit
+</code></pre>
+
+<p>For nested resources to get working you define in config/routes.rb:</p>
+
+<pre><code>map.resources :users do |user|
+  user.resources :articles
+end
+</code></pre>
+
+<p>The traditional way to generate urls is to call the resource helpers:</p>
+
+<pre><code>article_url(article.user, article)
+</code></pre>
+
+<p>This is redundant, as the article already knows its user.</p>
+
+<h3>The Resource Helper</h3>
+
+<p>Add following module into your lib folder and include the module in
+both your application controller and application helper. The most
+important bit is the url_for method. It will automatically generate
+the right url for your resource.</p>
+
+<pre><code>module ResourceHelper
+
+  def plural_class_name(record)
+    singular_class_name(record).pluralize
+  end
+
+  def singular_class_name(record)
+    record.class.name.underscore.tr(&#39;/&#39;, &#39;_&#39;)
+  end
+
+  def params_for(record)
+    if record.respond_to?(:to_params)
+      record.to_params
+    else
+      {:id =&gt; record.to_param}
+    end
+  end
+
+  def collection_url(collection, record, options)
+    if record
+      params = params_for(record)
+      params[&quot;#{singular_class_name(record)}_id&quot;.to_sym] = params.delete(:id)
+      url_for options.merge(params).merge(:controller =&gt; collection)
+    else
+      url_for options.merge(:controller =&gt; collection)
+    end
+  end
+
+  def member_url(record, options)
+    url_for options.merge(params_for(record)).merge(:controller =&gt; plural_class_name(record))
+  end
+
+  def url_for(*args)
+    if [String, Hash].any? {|type| args.first.is_a? type }
+      super(*args)
+    else
+      if args[0].is_a?(Symbol)
+        collection_url(args[0], args[1], :action =&gt; &#39;index&#39;)
+      else
+        member_url(args.first, :action =&gt; &#39;show&#39;)
+      end
+    end
+  end
+
+  def new_url_for(collection, record=nil)
+    collection_url(collection, record, :action =&gt; &#39;new&#39;)
+  end
+
+  def edit_url_for(record)
+    member_url(record, :action =&gt; &#39;edit&#39;)
+  end
+
+  def path_for(*args)
+    if args[0].is_a?(Symbol)
+      collection_url(args[0], args[1], :action =&gt; &#39;index&#39;, :only_path =&gt; true)
+    else
+      member_url(args.first, :action =&gt; &#39;show&#39;, :only_path =&gt; true)
+    end
+  end
+
+  def new_path_for(collection, record=nil)
+    collection_url(collection, record, :action =&gt; &#39;new&#39;, :only_path =&gt; true)
+  end
+
+  def edit_path_for(record)
+    member_url(record, :action =&gt; &#39;edit&#39;, :only_path =&gt; true)
+  end
+
+end
+</code></pre>
+
+<h3>Usage</h3>
+
+<p>So how can you use this stuff actually?</p>
+
+<p>It is pretty easy: just pass the record instead of the url hash and
+the unique url will be generated automatically.</p>
+
+<p>The url of a collection is treated differently. You have to pass the
+name of the collection, which is the controller name. For nested
+resources you have to pass additionally the record, the collection is
+belonging to.</p>
+
+<p>Some examples:</p>
+
+<pre><code>new_path_for(:users)          # =&gt; &#39;/users/new&#39;
+path_for(user)                # =&gt; &#39;/users/harald&#39;
+edit_path_for(user)           # =&gt; &#39;/users/harald;edit&#39;
+path_for(:articles, user)     # =&gt; &#39;/users/harald/articles&#39;
+new_path_for(:articles, user) # =&gt; &#39;/users/harald/articles/new&#39;
+path_for(article)             # =&gt; &#39;/users/harald/articles/article-1&#39;
+edit_path_for(article)        # =&gt; &#39;/users/harald/articles/article-1;edit&#39;
+
+# This works for helpers like url_for, form_tag or link_to. 
+
+link_to article.title, article
+form_tag :articles
+form_tag article, :method =&gt; &#39;put&#39;
+</code></pre>
+
+<p>If anybody is interested I will release this stuff as plugin. I think
+other helpers could benefit as well as you can pass your records
+around and each helper may generate the appropriate url.</p>
+
+                </div>
+                <a rel="next" href="page-8.html">
+                    Next entries
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
