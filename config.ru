@@ -1,3 +1,5 @@
+# TODO switch to haskell
+
 use Rack::Static, 
   :urls => Dir.entries(File.dirname(__FILE__) + '/public').map {|f| '/' + f},
   :root => "public"
