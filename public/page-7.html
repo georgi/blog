@@ -27,6 +27,155 @@
             <div class="content">
                 <div class="article">
                     <h1>
+                        <a href="/2007/4/rendering-markaby-in-your-helpers.html">
+                            Rendering markaby in your helpers
+                        </a>
+                    </h1>
+                    <p>Generating markup in your rails helpers is a general practice in rails
+and is used throughout all rails helpers. Normally you use <code>content_tag</code>
+to generate markup. But often you will encounter situations, where
+nested tags force you to write ugly helper code like the following
+helper method from the rails library:</p>
+
+<pre><code>def options_for_select(container, selected = nil)
+ container = container.to_a if Hash === container
+
+ options_for_select = container.inject([]) do |options, element|
+    if !element.is_a?(String) and element.respond_to?(:first) and element.respond_to?(:last)
+     is_selected = ( (selected.respond_to?(:include?) &amp;&amp; !selected.is_a?(String) ? selected.include?(element.last) : element.last == selected) )
+      if is_selected
+       options &lt;&lt; &quot;&lt;option value=\&quot;#{html_escape(element.last.to_s)}\&quot; selected=\&quot;selected\&quot;&gt;#{html_escape(element.first.to_s)}&lt;/option&gt;&quot;
+     else
+       options &lt;&lt; &quot;&lt;option value=\&quot;#{html_escape(element.last.to_s)}\&quot;&gt;#{html_escape(element.first.to_s)}&lt;/option&gt;&quot;
+     end
+   else
+     is_selected = ( (selected.respond_to?(:include?) &amp;&amp; !selected.is_a?(String) ? selected.include?(element) : element == selected) )
+     options &lt;&lt; ((is_selected) ? &quot;&lt;option value=\&quot;#{html_escape(element.to_s)}\&quot; selected=\&quot;selected\&quot;&gt;#{html_escape(element.to_s)}&lt;/option&gt;&quot; : &quot;&lt;option value=\&quot;#{html_escape(element.to_s)}\&quot;&gt;#{html_escape(element.to_s)}&lt;/option&gt;&quot;)
+   end
+  end
+
+ options_for_select.join(&quot;\n&quot;)
+end
+</code></pre>
+
+<h3>Markaby Helper</h3>
+
+<p>We will now rewrite this code with inline markaby. We need therefore the following helper method:</p>
+
+<pre><code>@@ruby
+
+def markaby(&amp;proc)
+  assigns = {}
+  instance_variables.each do |name|
+    assigns[ name[1..-1] ] =  instance_variable_get(name)
+  end
+  Markaby::Builder.new(assigns, self).capture(&amp;proc)
+end
+</code></pre>
+
+<p>We need to collect the instance variables of the current template and
+pass a hash of instance variable names along with their values to the
+markaby builder. As second parameter we pass the current template, so
+that the builder can access other helper methods. </p>
+
+<h3>Usage</h3>
+
+<p>Ok, let&#39;s rewrite the <code>options_for_select</code> helper. The method takes an
+array of values which should be displayed as options. Alternatively
+you may pass an list of pairs like <code>[[&#39;first&#39;,1],[&#39;second&#39;,2]</code> or an
+<em>Hash</em>, which maps from option labels to their values. One thing I did
+was to refactor the <code>is_selected test</code> into a lambda. It is cleaner to
+separate the test and probably more efficient. Inside the loop we are
+testing, if we have pairs or simple values and generate markup by
+sending the option method to the builder, which causes the markaby
+builder to generate an option tag. Tag attributes are defined with a
+hash, which we pass to the option method. A tag method takes an
+optional block, which defines the content of a tag, in our case simply
+the text of the option.</p>
+
+<pre><code>def options_for_select(container, selected = nil)
+  container = container.to_a if Hash === container
+
+  if selected.respond_to?(:include?) and !selected.is_a?(String)
+    is_selected = lambda { |e| selected.include? e }
+  else
+    is_selected = lambda { |e| selected == e }
+  end
+
+  is_pair = lambda {|e| !e.is_a?(String) and e.respond_to?(:first) and e.respond_to?(:last) }
+
+  markaby do
+    container.each do |element|
+      if is_pair[element]
+        if is_selected[element.last]
+          option(:value =&gt; element.last, :selected =&gt; &#39;selected&#39;) { h element.first }
+        else
+           option(:value =&gt; element.last) { h element.first }
+        end
+      else
+        if is_selected[element]
+          option(:value =&gt; element, :selected =&gt; &#39;selected&#39;) { h element }
+        else
+          option(:value =&gt; element) { h element }
+        end
+      end
+    end
+  end
+end
+</code></pre>
+
+<h3>Reusable helpers</h3>
+
+<p>Our defined markaby method is even more useful, we can accept a block
+for our helper method and use it inside the markaby code:</p>
+
+<pre><code>def tasks(&amp;block)
+  markaby do
+    div.tasks {
+      ul {
+        markaby(&amp;amp;block)
+      }
+    }
+  end
+end
+</code></pre>
+
+<p>If we have a common pattern like a list of tasks for many templates,
+we can generate the common code with the tasks method and put the
+actual tasks in the block:</p>
+
+<pre><code>tasks {
+  task &#39;Back to articles&#39;.t, articles_url
+  task :edit, @article
+  task :versions, @article
+}
+</code></pre>
+
+<p>So, you can see, there is also a task helper, which is defined as follows:</p>
+
+<pre><code>def task(text, url_or_resource, html_options={})
+  if text.is_a? Symbol
+    task &quot;#{text.to_s.humanize}&quot;.t, {:action =&gt; text, :id =&gt; url_or_resource}, html_options
+  else
+    markaby { li { link_to text, url_or_resource, html_options } }
+  end
+end
+</code></pre>
+
+<p>If the link text is a symbol, we are going to infer the url from the
+action name which is the first parameter and the recource, which is
+the second parameter in this case. Otherwise we generate a list
+element and delegate the arguments to the <code>link_to helper</code>. </p>
+
+<p>By using this simple abstraction, we have hidden the details of task
+links. Instead of repeating the same pattern over and over again, we
+have a common place to decide, how the tasks should look like. Markaby
+makes it really easy to generate nested structures, as it takes
+advantage of ruby&#39;s block syntax.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
                         <a href="/2007/4/pretty-restful-urls-in-rails.html">
                             Pretty RESTful URLs in Rails
                         </a>
@@ -207,199 +356,6 @@ is in our case <code>/sports/auto_complete_for_sport_name</code>. </p>
 
 <p>Well, that&#39;s it. Now you may enjoy snappy auto-completion and feel
 good about using bleeding edge technology like <code>AJAX</code> and <code>JSON</code>.</p>
-
-                </div>
-                <div class="article">
-                    <h1>
-                        <a href="/2007/4/dry-up-your-url-helpers.html">
-                            DRY Up Your Url Helpers
-                        </a>
-                    </h1>
-                    <p>This tutorial shows you how to simplify url generation in combination
-with <em>RESTful</em> resources by extending the <code>url_for</code> helper. This approach
-will also work with nested routes and other helpers like <code>form_tag</code> and
-<code>link_to</code>.</p>
-
-<p>One of the concepts of <em>REST</em> is: each resource has its own unique
-<em>URI</em>. We will enhance the <code>url_for</code> helper to generate this unique URI
-for an arbitrary record.</p>
-
-<h3>Example Models</h3>
-
-<p>First we need a simple example. We have 2 models: <code>User</code> and
-<code>Article</code>. For our url generation to work we have to add following code
-to our models:</p>
-
-<pre><code>    class User
-      has_many :articles
-
-      def to_params
-        {:id =&gt; permalink}
-      end
-    end
-
-    class Article
-      belongs_to :user
-
-      def to_params
-        {:user_id =&gt; user.permalink, :id =&gt; permalink}
-      end
-    end
-</code></pre>
-
-<p>This is necessary for nested routes to play nicely with our url
-generation code. We are now able to find the parameters for each
-record to generate an unique URL.</p>
-
-<h3>Pretty URLs</h3>
-
-<p>In a previous post I demonstrated the use of meaningful urls. We are
-going now the same way.</p>
-
-<p>Users are identified by an URL like:</p>
-
-<pre><code>/users/matthias-georgi
-</code></pre>
-
-<p>Each user may write articles, which are located at:</p>
-
-<pre><code>/users/matthias-georgi/articles
-</code></pre>
-
-<p>If I want to write a new article, I will use this URL:</p>
-
-<pre><code>/users/matthias-georgi/articles/new
-</code></pre>
-
-<p>Editing an existing article would end up on this URL:</p>
-
-<pre><code>/users/matthias-georgi/articles/my-first-post;edit
-</code></pre>
-
-<p>For nested resources to get working you define in config/routes.rb:</p>
-
-<pre><code>map.resources :users do |user|
-  user.resources :articles
-end
-</code></pre>
-
-<p>The traditional way to generate urls is to call the resource helpers:</p>
-
-<pre><code>article_url(article.user, article)
-</code></pre>
-
-<p>This is redundant, as the article already knows its user.</p>
-
-<h3>The Resource Helper</h3>
-
-<p>Add following module into your lib folder and include the module in
-both your application controller and application helper. The most
-important bit is the url_for method. It will automatically generate
-the right url for your resource.</p>
-
-<pre><code>module ResourceHelper
-
-  def plural_class_name(record)
-    singular_class_name(record).pluralize
-  end
-
-  def singular_class_name(record)
-    record.class.name.underscore.tr(&#39;/&#39;, &#39;_&#39;)
-  end
-
-  def params_for(record)
-    if record.respond_to?(:to_params)
-      record.to_params
-    else
-      {:id =&gt; record.to_param}
-    end
-  end
-
-  def collection_url(collection, record, options)
-    if record
-      params = params_for(record)
-      params[&quot;#{singular_class_name(record)}_id&quot;.to_sym] = params.delete(:id)
-      url_for options.merge(params).merge(:controller =&gt; collection)
-    else
-      url_for options.merge(:controller =&gt; collection)
-    end
-  end
-
-  def member_url(record, options)
-    url_for options.merge(params_for(record)).merge(:controller =&gt; plural_class_name(record))
-  end
-
-  def url_for(*args)
-    if [String, Hash].any? {|type| args.first.is_a? type }
-      super(*args)
-    else
-      if args[0].is_a?(Symbol)
-        collection_url(args[0], args[1], :action =&gt; &#39;index&#39;)
-      else
-        member_url(args.first, :action =&gt; &#39;show&#39;)
-      end
-    end
-  end
-
-  def new_url_for(collection, record=nil)
-    collection_url(collection, record, :action =&gt; &#39;new&#39;)
-  end
-
-  def edit_url_for(record)
-    member_url(record, :action =&gt; &#39;edit&#39;)
-  end
-
-  def path_for(*args)
-    if args[0].is_a?(Symbol)
-      collection_url(args[0], args[1], :action =&gt; &#39;index&#39;, :only_path =&gt; true)
-    else
-      member_url(args.first, :action =&gt; &#39;show&#39;, :only_path =&gt; true)
-    end
-  end
-
-  def new_path_for(collection, record=nil)
-    collection_url(collection, record, :action =&gt; &#39;new&#39;, :only_path =&gt; true)
-  end
-
-  def edit_path_for(record)
-    member_url(record, :action =&gt; &#39;edit&#39;, :only_path =&gt; true)
-  end
-
-end
-</code></pre>
-
-<h3>Usage</h3>
-
-<p>So how can you use this stuff actually?</p>
-
-<p>It is pretty easy: just pass the record instead of the url hash and
-the unique url will be generated automatically.</p>
-
-<p>The url of a collection is treated differently. You have to pass the
-name of the collection, which is the controller name. For nested
-resources you have to pass additionally the record, the collection is
-belonging to.</p>
-
-<p>Some examples:</p>
-
-<pre><code>new_path_for(:users)          # =&gt; &#39;/users/new&#39;
-path_for(user)                # =&gt; &#39;/users/harald&#39;
-edit_path_for(user)           # =&gt; &#39;/users/harald;edit&#39;
-path_for(:articles, user)     # =&gt; &#39;/users/harald/articles&#39;
-new_path_for(:articles, user) # =&gt; &#39;/users/harald/articles/new&#39;
-path_for(article)             # =&gt; &#39;/users/harald/articles/article-1&#39;
-edit_path_for(article)        # =&gt; &#39;/users/harald/articles/article-1;edit&#39;
-
-# This works for helpers like url_for, form_tag or link_to. 
-
-link_to article.title, article
-form_tag :articles
-form_tag article, :method =&gt; &#39;put&#39;
-</code></pre>
-
-<p>If anybody is interested I will release this stuff as plugin. I think
-other helpers could benefit as well as you can pass your records
-around and each helper may generate the appropriate url.</p>
 
                 </div>
                 <a rel="next" href="page-8.html">

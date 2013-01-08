@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+    <head>
+        <title>
+            Matthias Georgi
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom 1.0">
+        <link rel="stylesheet" media="screen" type="text/css" href="/style.css">
+        <link rel="stylesheet" href="/zenburn.css">
+        <script src="/highlight.pack.js">
+            
+        </script>
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h2 id="header">
+                <a href="/">
+                    Matthias Georgi
+                </a>
+            </h2>
+            <div class="content">
+                <div class="article">
+                    <h1>
+                        <a href="/2013/1/how-to-write-a-blog-engine-in-haskell-part-2.html">
+                            How to write a blog engine in Haskell Part 2
+                        </a>
+                    </h1>
+                    <p>In <a href="how-to-write-a-blog-engine-in-haskell-part-1.html">my last post</a> layed out the top level structure of the blog
+engine, how to find the right files from the posts folder and how to
+represent posts as data types.</p>
+
+<p>This time I&#39;d like to introduce a type-safe way to render HTML
+directly in Haskell without sacrificing readability or ease of use.</p>
+
+<p>There are probably a million ways to render HTML but in practice there
+are only a handful of possibilities you might consider for putting
+data into HTML code.</p>
+
+<h2>Template Languages</h2>
+
+<p>The most popular way of rendering HTML are good old PHP-style
+templates, which let you interleave HTML code with executable bits of
+a dumb language to fill in dynamic values. This is a straight-forward
+approach which gets the job done but certainly has some
+disadvantages:</p>
+
+<ul>
+<li><p>You might want to validate your HTML during development.  As the
+template language itself is not a subset of HTML you can&#39;t vaidate the
+template itself so easily.</p></li>
+<li><p>Reusable code lives as helper function which just returns dumb strings
+instead of data structures leading to error-prone code.</p></li>
+<li><p>In general no type checking which makes it hard to build
+abstractions on top of some rendering logic.</p></li>
+</ul>
+
+<h2>Blaze Html</h2>
+
+<p>Let me introduce the <a href="http://jaspervdj.be/blaze/">BlazeHtml</a> HTML combinator library for
+Haskell. It&#39;s incredible simple to use, always generates valid HTML,
+offers type-safety and is blazingly fast as the name already states.</p>
+
+<p>Have a look at the type signature of a typical HTML combinator:</p>
+
+<pre><code>a :: Html -&gt; Html
+</code></pre>
+
+<p>This function takes an <code>Html</code> element as content for a tag and returns
+another <code>Html</code> element, which represents a link in this case.</p>
+
+<p>A more complete example:</p>
+
+<pre><code>import Text.Blaze.Html5
+import Text.Blaze.Html5.Attributes
+
+renderPage = docTypeHtml $ do
+  body $ do
+    ul $ forM_ [1 .. 10] (li . toHtml)
+</code></pre>
+
+<p><code>renderPage</code> generates HTML for a list with numbers from 1 to 10.
+Note that you don&#39;t have any impedance mismatch between HTML and
+the host language. Code and data is easily mixed without losing
+type-safety. This is a big deal for me. Just imagine all the time
+you lost while reloading a web page after some minor editing just
+to see you have to switch back to your editor again.</p>
+
+<h2>Rendering Posts with Sundown</h2>
+
+<p>Rendering of posts should be simple and straighforward as possible.
+A blog post is just a regular markdown file with a title as first
+line. So to convert a blog post into html we basically just convert
+the file via <a href="http://hackage.haskell.org/package/sundown">Sundown</a>, the markdown library from Github, and
+insert the resulting HTML into a layout template.</p>
+
+<pre><code>{-# LANGUAGE OverloadedStrings #-}
+import Text.Blaze.Html4.Strict hiding (head, map, title, contents)
+import Text.Blaze.Html4.Strict.Attributes hiding (content, title)
+import qualified Text.Blaze.Html4.Strict as H
+import qualified Text.Blaze.Html4.Strict.Attributes as A
+import Text.Sundown.Html.String as S
+import Data.List.Split
+
+data Blog = Blog {
+  blogUri,
+  blogTitle :: String
+};
+
+data Post = Post {
+  postFolder,
+  postFile,
+  postText:: String
+};
+
+-- Take the first line of a post file as post title.
+postTitle :: Post -&gt; String
+postTitle post = head $ lines $ postText post
+
+-- Return the filename of the post without extension.
+postName :: Post -&gt; String
+postName post = head $ splitOn &quot;.&quot; $ postFile post
+
+-- Returns the path to the post on the website.
+postLink :: Post -&gt; String
+postLink post = &quot;/&quot; ++ (postFolder post) ++ &quot;/&quot; ++ (postName post) ++ &quot;.html&quot;
+
+-- Returns just the rendered body of a post without title.
+postBody :: Post -&gt; String
+postBody post = S.renderHtml s allExtensions noHtmlModes True Nothing
+  where s = concat $ intersperse &quot;\n&quot; $ drop 3 $ lines $ postText post
+
+-- Render the html layout, insert the blog title, post title and post content.
+renderLayout :: Blog -&gt; Html -&gt; Html
+renderLayout blog content = do
+  docType
+  html $ do
+    H.head $ do
+      H.title $ toHtml $ blogTitle blog
+    body $ do
+      h2 ! id &quot;header&quot; $ do
+        a ! href &quot;/&quot; $ toHtml $ blogTitle blog
+      div ! class_ &quot;content&quot; $ do
+        preEscapedToHtml content
+
+-- Render a single post.
+renderPost :: Post -&gt; Html
+renderPost post =
+  div ! class_ &quot;article&quot; $ do
+    h1 $ do
+      a ! href (toValue (postLink post)) $ toHtml $ postTitle post
+    preEscapedToHtml $ postBody post
+
+-- Render a complete page containing one post.
+renderPostPage :: Blog -&gt; Post -&gt; String
+renderPostPage blog post = H.renderHtml $ renderLayout blog $ renderPost post
+</code></pre>
+
+<p>BlazeHtml escapes any value by default to prevent XSS. So any value
+you want to insert has to be of type <code>Html</code> or <code>AttributeValue</code>. Look
+at the code for the post title inside <code>renderPost</code>. The href for the link
+needs to be converted and the text of the link as well.</p>
+
+<p><code>preEscapedToHtml</code> is an explicit way to insert raw strings into the HTML
+document. In our case it is used to insert the page content into the 
+layout and to insert the rendered markdown into the post template.</p>
+
+<h2>Atom and RSS feeds</h2>
+
+<p>Next post we will have a look at rendering feeds with the <a href="http://hackage.haskell.org/package/feed-0.3.8">feed</a>
+package. </p>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

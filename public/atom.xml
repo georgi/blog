@@ -1,7 +1,158 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Matthias Georgi</title>
   <id>http://www.matthias-georgi.de</id>
-  <updated>07 Jan 13 00:00</updated>
+  <updated>08 Jan 13 00:00</updated>
+  <entry>
+    <id>http://www.matthias-georgi.de/2013/1/how-to-write-a-blog-engine-in-haskell-part-2.html</id>
+    <title type="text">How to write a blog engine in Haskell Part 2</title>
+    <updated>01 Jan 13 00:00</updated>
+    <content type="html">&lt;p&gt;In &lt;a href=&quot;how-to-write-a-blog-engine-in-haskell-part-1.html&quot;&gt;my last post&lt;/a&gt; layed out the top level structure of the blog
+engine, how to find the right files from the posts folder and how to
+represent posts as data types.&lt;/p&gt;
+
+&lt;p&gt;This time I&amp;#39;d like to introduce a type-safe way to render HTML
+directly in Haskell without sacrificing readability or ease of use.&lt;/p&gt;
+
+&lt;p&gt;There are probably a million ways to render HTML but in practice there
+are only a handful of possibilities you might consider for putting
+data into HTML code.&lt;/p&gt;
+
+&lt;h2&gt;Template Languages&lt;/h2&gt;
+
+&lt;p&gt;The most popular way of rendering HTML are good old PHP-style
+templates, which let you interleave HTML code with executable bits of
+a dumb language to fill in dynamic values. This is a straight-forward
+approach which gets the job done but certainly has some
+disadvantages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;You might want to validate your HTML during development.  As the
+template language itself is not a subset of HTML you can&amp;#39;t vaidate the
+template itself so easily.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Reusable code lives as helper function which just returns dumb strings
+instead of data structures leading to error-prone code.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;In general no type checking which makes it hard to build
+abstractions on top of some rendering logic.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Blaze Html&lt;/h2&gt;
+
+&lt;p&gt;Let me introduce the &lt;a href=&quot;http://jaspervdj.be/blaze/&quot;&gt;BlazeHtml&lt;/a&gt; HTML combinator library for
+Haskell. It&amp;#39;s incredible simple to use, always generates valid HTML,
+offers type-safety and is blazingly fast as the name already states.&lt;/p&gt;
+
+&lt;p&gt;Have a look at the type signature of a typical HTML combinator:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a :: Html -&amp;gt; Html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This function takes an &lt;code&gt;Html&lt;/code&gt; element as content for a tag and returns
+another &lt;code&gt;Html&lt;/code&gt; element, which represents a link in this case.&lt;/p&gt;
+
+&lt;p&gt;A more complete example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import Text.Blaze.Html5
+import Text.Blaze.Html5.Attributes
+
+renderPage = docTypeHtml $ do
+  body $ do
+    ul $ forM_ [1 .. 10] (li . toHtml)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;renderPage&lt;/code&gt; generates HTML for a list with numbers from 1 to 10.
+Note that you don&amp;#39;t have any impedance mismatch between HTML and
+the host language. Code and data is easily mixed without losing
+type-safety. This is a big deal for me. Just imagine all the time
+you lost while reloading a web page after some minor editing just
+to see you have to switch back to your editor again.&lt;/p&gt;
+
+&lt;h2&gt;Rendering Posts with Sundown&lt;/h2&gt;
+
+&lt;p&gt;Rendering of posts should be simple and straighforward as possible.
+A blog post is just a regular markdown file with a title as first
+line. So to convert a blog post into html we basically just convert
+the file via &lt;a href=&quot;http://hackage.haskell.org/package/sundown&quot;&gt;Sundown&lt;/a&gt;, the markdown library from Github, and
+insert the resulting HTML into a layout template.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{-# LANGUAGE OverloadedStrings #-}
+import Text.Blaze.Html4.Strict hiding (head, map, title, contents)
+import Text.Blaze.Html4.Strict.Attributes hiding (content, title)
+import qualified Text.Blaze.Html4.Strict as H
+import qualified Text.Blaze.Html4.Strict.Attributes as A
+import Text.Sundown.Html.String as S
+import Data.List.Split
+
+data Blog = Blog {
+  blogUri,
+  blogTitle :: String
+};
+
+data Post = Post {
+  postFolder,
+  postFile,
+  postText:: String
+};
+
+-- Take the first line of a post file as post title.
+postTitle :: Post -&amp;gt; String
+postTitle post = head $ lines $ postText post
+
+-- Return the filename of the post without extension.
+postName :: Post -&amp;gt; String
+postName post = head $ splitOn &amp;quot;.&amp;quot; $ postFile post
+
+-- Returns the path to the post on the website.
+postLink :: Post -&amp;gt; String
+postLink post = &amp;quot;/&amp;quot; ++ (postFolder post) ++ &amp;quot;/&amp;quot; ++ (postName post) ++ &amp;quot;.html&amp;quot;
+
+-- Returns just the rendered body of a post without title.
+postBody :: Post -&amp;gt; String
+postBody post = S.renderHtml s allExtensions noHtmlModes True Nothing
+  where s = concat $ intersperse &amp;quot;\n&amp;quot; $ drop 3 $ lines $ postText post
+
+-- Render the html layout, insert the blog title, post title and post content.
+renderLayout :: Blog -&amp;gt; Html -&amp;gt; Html
+renderLayout blog content = do
+  docType
+  html $ do
+    H.head $ do
+      H.title $ toHtml $ blogTitle blog
+    body $ do
+      h2 ! id &amp;quot;header&amp;quot; $ do
+        a ! href &amp;quot;/&amp;quot; $ toHtml $ blogTitle blog
+      div ! class_ &amp;quot;content&amp;quot; $ do
+        preEscapedToHtml content
+
+-- Render a single post.
+renderPost :: Post -&amp;gt; Html
+renderPost post =
+  div ! class_ &amp;quot;article&amp;quot; $ do
+    h1 $ do
+      a ! href (toValue (postLink post)) $ toHtml $ postTitle post
+    preEscapedToHtml $ postBody post
+
+-- Render a complete page containing one post.
+renderPostPage :: Blog -&amp;gt; Post -&amp;gt; String
+renderPostPage blog post = H.renderHtml $ renderLayout blog $ renderPost post
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;BlazeHtml escapes any value by default to prevent XSS. So any value
+you want to insert has to be of type &lt;code&gt;Html&lt;/code&gt; or &lt;code&gt;AttributeValue&lt;/code&gt;. Look
+at the code for the post title inside &lt;code&gt;renderPost&lt;/code&gt;. The href for the link
+needs to be converted and the text of the link as well.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;preEscapedToHtml&lt;/code&gt; is an explicit way to insert raw strings into the HTML
+document. In our case it is used to insert the page content into the 
+layout and to insert the rendered markdown into the post template.&lt;/p&gt;
+
+&lt;h2&gt;Atom and RSS feeds&lt;/h2&gt;
+
+&lt;p&gt;Next post we will have a look at rendering feeds with the &lt;a href=&quot;http://hackage.haskell.org/package/feed-0.3.8&quot;&gt;feed&lt;/a&gt;
+package. &lt;/p&gt;
+</content>
+    <link href="http://www.matthias-georgi.de/2013/1/how-to-write-a-blog-engine-in-haskell-part-2.html" type="text/html" />
+    <published>01 Jan 13 00:00</published>
+  </entry>
   <entry>
     <id>http://www.matthias-georgi.de/2013/1/how-to-write-a-blog-engine-in-haskell-part-1.html</id>
     <title type="text">How to write a blog engine in Haskell Part 1</title>
@@ -1176,116 +1327,6 @@ standard and ruby developers don&amp;#39;t need to worry about finding support
 for their favorite web frameworks.&lt;/p&gt;
 </content>
     <link href="http://www.matthias-georgi.de/2008/9/quick-guide-for-passenger-on-ubuntu-hardy.html" type="text/html" />
-    <published>01 Sep 08 00:00</published>
-  </entry>
-  <entry>
-    <id>http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html</id>
-    <title type="text">Patroon - a Javascript Template Engine</title>
-    <updated>01 Sep 08 00:00</updated>
-    <content type="html">&lt;p&gt;Patroon is a template engine written in Javascript in about 100 lines
-of code. It takes existing DOM nodes annotated with CSS classes and
-expand a data object according to simple rules. Additionally you may
-use traditional string interpolation inside attribute values and text
-nodes.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;
-Patroon has its own &lt;a href=&quot;/patroon&quot;&gt;project page&lt;/a&gt; now!
-Please look for current information there.
-&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3&gt;Example&lt;/h3&gt;
-
-&lt;p&gt;Comments in this blog are stored as a list of JSON objects, I wrote about it &lt;a href=&quot;http://www.matthias-georgi.de/commenting-system-with-lightweight-json-store.html&quot;&gt;here&lt;/a&gt;. So think about a data object like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var data = { 
-  comment: [{
-    date: &amp;quot;2008-09-07 12:28:33&amp;quot;, 
-    name: &amp;quot;David Beckham&amp;quot;,
-    website: &amp;quot;beckham.com&amp;quot;,
-    text: &amp;quot;I watched the euro finals on tv...&amp;quot; 
-  }, { 
-    date: &amp;quot;2008-09-07 14:28:33&amp;quot;, 
-    name: &amp;quot;Tuncay&amp;quot;,
-    website: &amp;quot;&amp;quot;,
-    text: &amp;quot;Me too&amp;quot;
-  }]
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This data will be expanded with help of following template:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;comments&amp;quot;&amp;gt;  
-  &amp;lt;div id=&amp;quot;comments-template&amp;quot;&amp;gt;
-    &amp;lt;div class=&amp;quot;comment&amp;quot;&amp;gt;
-      &amp;lt;div class=&amp;quot;_ top&amp;quot;&amp;gt;
-        &amp;lt;a class=&amp;quot;_&amp;quot; href=&amp;quot;{website}&amp;quot;&amp;gt;{name}&amp;lt;/a&amp;gt; said
-        &amp;lt;a class=&amp;quot;_&amp;quot; title=&amp;quot;{time}&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;:
-      &amp;lt;/div&amp;gt;
-      &amp;lt;div class=&amp;quot;text&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;/div&amp;gt;   
-  &amp;lt;/div&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The javascript to actually execute this template looks like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// The comments template will be removed from the DOM!
-var template = new Template(&amp;#39;comments-template&amp;#39;);
-
-// template will result in a new DOM node
-var result = template.expand(data);
-
-// insert the resulting node into the comments container
-var container = document.getElementsByClassName(&amp;#39;comments&amp;#39;)[0];
-container.appendChild(result);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Using jQuery the code gets a bit cleaner:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// The comments template will be removed from the DOM!
-var template = new Template(&amp;#39;comments-template&amp;#39;);
-
-// Expand the template into the comments section
-$(&amp;#39;.comments&amp;#39;).expand(template, data);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3&gt;Basic Rules&lt;/h3&gt;
-
-&lt;p&gt;There are 5 basic rules:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Strings and Numbers are inserted by innerHTML to the current node.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Arrays repeat the current node and process its elements recursively in same scope.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Objects trigger a class name lookup by property name. The value of each property is expanded recursively in new scope.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Code will be evaluated for text surounded with braces (Works also for attributes).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Processing child nodes will be triggered for nodes with a class attribute starting with &lt;code&gt;_&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I admit the last point is a bit quirky, but processing all child nodes per default is too expensive and too unpredictable. Maybe I will find a better way, but I don’t mind inserting these extra &lt;code&gt;_&lt;/code&gt; class names.&lt;/p&gt;
-
-&lt;h3&gt;Evaluation&lt;/h3&gt;
-
-&lt;p&gt;So speaking of the example data, this would mean following algorithm:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Find the first node with a class name of comment.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Repeat this node two times and recursively process the first and second comment.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Descend into the node with class &lt;code&gt;top&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Descend into the first link node.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Evaluate the code found in the &lt;em&gt;href&lt;/em&gt; attribute and in the text.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Descend into the second link node.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Evaluate the code found in the &lt;em&gt;title&lt;/em&gt; attribute.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Find the first node with the class &lt;code&gt;text&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Insert the the text of the comment into the found node.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Note that we are dealing with two scopes here: the global scope and the comment scope. The global scope just contains a name &lt;em&gt;comment&lt;/em&gt; and the comment scope contains the names &lt;code&gt;date&lt;/code&gt;, &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;website&lt;/code&gt; and &lt;code&gt;text&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3&gt;Download&lt;/h3&gt;
-
-&lt;p&gt;Download the script at my &lt;a href=&quot;http://github.com/georgi/patroon/tree/master&quot;&gt;github repository&lt;/a&gt;.&lt;/p&gt;
-</content>
-    <link href="http://www.matthias-georgi.de/2008/9/patroon-a-javascript-template-engine.html" type="text/html" />
     <published>01 Sep 08 00:00</published>
   </entry>
 </feed>

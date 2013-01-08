@@ -29,6 +29,9 @@ data Post = Post {
   postText:: String
 };
 
+pubDate :: Day -> String
+pubDate date = formatTime defaultTimeLocale "%d %b %y 00:00" date
+
 postTitle :: Post -> String
 postTitle post = head $ lines $ postText post
 
@@ -37,6 +40,15 @@ postName post = head $ splitOn "." $ postFile post
 
 postLink :: Post -> String
 postLink post = "/" ++ (postFolder post) ++ "/" ++ (postName post) ++ ".html"
+
+postDate :: Post -> String
+postDate post = pubDate date where
+  [year, month] = splitOn "/" (postFolder post)
+  date = fromGregorian (read year) (read month) 1
+
+postBody :: Post -> String
+postBody post = S.renderHtml s allExtensions noHtmlModes True Nothing
+  where s = concat $ intersperse "\n" $ drop 3 $ lines $ postText post
 
 atomLink :: Blog -> Post -> Link
 atomLink blog post = Link {
@@ -49,18 +61,6 @@ atomLink blog post = Link {
   linkAttrs = [],
   linkOther = []
 };
-
-pubDate :: Day -> String
-pubDate date = formatTime defaultTimeLocale "%d %b %y 00:00" date
-
-postDate :: Post -> String
-postDate post = pubDate date where
-  [year, month] = splitOn "/" (postFolder post)
-  date = fromGregorian (read year) (read month) 1
-
-postBody :: Post -> String
-postBody post = S.renderHtml s allExtensions noHtmlModes True Nothing
-  where s = concat $ intersperse "\n" $ drop 3 $ lines $ postText post
 
 postEntry :: Blog -> Post -> Entry
 postEntry blog post = Entry {

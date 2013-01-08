@@ -27,6 +27,157 @@
             <div class="content">
                 <div class="article">
                     <h1>
+                        <a href="/2013/1/how-to-write-a-blog-engine-in-haskell-part-2.html">
+                            How to write a blog engine in Haskell Part 2
+                        </a>
+                    </h1>
+                    <p>In <a href="how-to-write-a-blog-engine-in-haskell-part-1.html">my last post</a> layed out the top level structure of the blog
+engine, how to find the right files from the posts folder and how to
+represent posts as data types.</p>
+
+<p>This time I&#39;d like to introduce a type-safe way to render HTML
+directly in Haskell without sacrificing readability or ease of use.</p>
+
+<p>There are probably a million ways to render HTML but in practice there
+are only a handful of possibilities you might consider for putting
+data into HTML code.</p>
+
+<h2>Template Languages</h2>
+
+<p>The most popular way of rendering HTML are good old PHP-style
+templates, which let you interleave HTML code with executable bits of
+a dumb language to fill in dynamic values. This is a straight-forward
+approach which gets the job done but certainly has some
+disadvantages:</p>
+
+<ul>
+<li><p>You might want to validate your HTML during development.  As the
+template language itself is not a subset of HTML you can&#39;t vaidate the
+template itself so easily.</p></li>
+<li><p>Reusable code lives as helper function which just returns dumb strings
+instead of data structures leading to error-prone code.</p></li>
+<li><p>In general no type checking which makes it hard to build
+abstractions on top of some rendering logic.</p></li>
+</ul>
+
+<h2>Blaze Html</h2>
+
+<p>Let me introduce the <a href="http://jaspervdj.be/blaze/">BlazeHtml</a> HTML combinator library for
+Haskell. It&#39;s incredible simple to use, always generates valid HTML,
+offers type-safety and is blazingly fast as the name already states.</p>
+
+<p>Have a look at the type signature of a typical HTML combinator:</p>
+
+<pre><code>a :: Html -&gt; Html
+</code></pre>
+
+<p>This function takes an <code>Html</code> element as content for a tag and returns
+another <code>Html</code> element, which represents a link in this case.</p>
+
+<p>A more complete example:</p>
+
+<pre><code>import Text.Blaze.Html5
+import Text.Blaze.Html5.Attributes
+
+renderPage = docTypeHtml $ do
+  body $ do
+    ul $ forM_ [1 .. 10] (li . toHtml)
+</code></pre>
+
+<p><code>renderPage</code> generates HTML for a list with numbers from 1 to 10.
+Note that you don&#39;t have any impedance mismatch between HTML and
+the host language. Code and data is easily mixed without losing
+type-safety. This is a big deal for me. Just imagine all the time
+you lost while reloading a web page after some minor editing just
+to see you have to switch back to your editor again.</p>
+
+<h2>Rendering Posts with Sundown</h2>
+
+<p>Rendering of posts should be simple and straighforward as possible.
+A blog post is just a regular markdown file with a title as first
+line. So to convert a blog post into html we basically just convert
+the file via <a href="http://hackage.haskell.org/package/sundown">Sundown</a>, the markdown library from Github, and
+insert the resulting HTML into a layout template.</p>
+
+<pre><code>{-# LANGUAGE OverloadedStrings #-}
+import Text.Blaze.Html4.Strict hiding (head, map, title, contents)
+import Text.Blaze.Html4.Strict.Attributes hiding (content, title)
+import qualified Text.Blaze.Html4.Strict as H
+import qualified Text.Blaze.Html4.Strict.Attributes as A
+import Text.Sundown.Html.String as S
+import Data.List.Split
+
+data Blog = Blog {
+  blogUri,
+  blogTitle :: String
+};
+
+data Post = Post {
+  postFolder,
+  postFile,
+  postText:: String
+};
+
+-- Take the first line of a post file as post title.
+postTitle :: Post -&gt; String
+postTitle post = head $ lines $ postText post
+
+-- Return the filename of the post without extension.
+postName :: Post -&gt; String
+postName post = head $ splitOn &quot;.&quot; $ postFile post
+
+-- Returns the path to the post on the website.
+postLink :: Post -&gt; String
+postLink post = &quot;/&quot; ++ (postFolder post) ++ &quot;/&quot; ++ (postName post) ++ &quot;.html&quot;
+
+-- Returns just the rendered body of a post without title.
+postBody :: Post -&gt; String
+postBody post = S.renderHtml s allExtensions noHtmlModes True Nothing
+  where s = concat $ intersperse &quot;\n&quot; $ drop 3 $ lines $ postText post
+
+-- Render the html layout, insert the blog title, post title and post content.
+renderLayout :: Blog -&gt; Html -&gt; Html
+renderLayout blog content = do
+  docType
+  html $ do
+    H.head $ do
+      H.title $ toHtml $ blogTitle blog
+    body $ do
+      h2 ! id &quot;header&quot; $ do
+        a ! href &quot;/&quot; $ toHtml $ blogTitle blog
+      div ! class_ &quot;content&quot; $ do
+        preEscapedToHtml content
+
+-- Render a single post.
+renderPost :: Post -&gt; Html
+renderPost post =
+  div ! class_ &quot;article&quot; $ do
+    h1 $ do
+      a ! href (toValue (postLink post)) $ toHtml $ postTitle post
+    preEscapedToHtml $ postBody post
+
+-- Render a complete page containing one post.
+renderPostPage :: Blog -&gt; Post -&gt; String
+renderPostPage blog post = H.renderHtml $ renderLayout blog $ renderPost post
+</code></pre>
+
+<p>BlazeHtml escapes any value by default to prevent XSS. So any value
+you want to insert has to be of type <code>Html</code> or <code>AttributeValue</code>. Look
+at the code for the post title inside <code>renderPost</code>. The href for the link
+needs to be converted and the text of the link as well.</p>
+
+<p><code>preEscapedToHtml</code> is an explicit way to insert raw strings into the HTML
+document. In our case it is used to insert the page content into the 
+layout and to insert the rendered markdown into the post template.</p>
+
+<h2>Atom and RSS feeds</h2>
+
+<p>Next post we will have a look at rendering feeds with the <a href="http://hackage.haskell.org/package/feed-0.3.8">feed</a>
+package. </p>
+
+                </div>
+                <div class="article">
+                    <h1>
                         <a href="/2013/1/how-to-write-a-blog-engine-in-haskell-part-1.html">
                             How to write a blog engine in Haskell Part 1
                         </a>
@@ -193,100 +344,6 @@ clients.</p>
 apple mobile safari and android browsers. We created a small widget
 library named canvas.ui to take care of multitouch events, rendering
 and layout management.</p>
-
-                </div>
-                <div class="article">
-                    <h1>
-                        <a href="/2011/6/quick-guide-for-passenger-on-natty-narwhal.html">
-                            Quick Guide for Passenger on Natty Narwhal
-                        </a>
-                    </h1>
-                    <p>This is a short guide for installing <a href="http://www.modrails.com/">Phusion Passenger</a> and <a href="http://www.rubyenterpriseedition.com/">Ruby
-Enterprise Editition</a> on Ubuntu Natty Narwhal. Depending on your machine
-this will take 30-60 minutes on a fresh Ubuntu install.</p>
-
-<h3>Installing build tools and libraries</h3>
-
-<p>First we need to install the compiler toolchain (make, gcc and libc)
-and necessary libraries.</p>
-
-<pre><code>$ apt-get install build-essential zlib1g-dev libssl-dev libreadline5-dev libmysqlclient-dev
-</code></pre>
-
-<h3>Ruby Enterprise Edition</h3>
-
-<p>We are going to download and compile Ruby Enterprise Edition. The
-installer asks for the target directory.  I would recommend to install
-into /opt/ruby unless you want to host different versions on this machine.</p>
-
-<pre><code>$ wget http://rubyenterpriseedition.googlecode.com/files/ruby-enterprise-1.8.7-2011.03.tar.gz
-$ tar xzf ruby-enterprise-1.8.7-2011.03.tar.gz
-$ cd ruby-enterprise-1.8.7-2011.03
-$ ./installer
-</code></pre>
-
-<p>Now we include the path to the ruby binaries in /etc/environment. It should look like this:</p>
-
-<pre><code>PATH=&quot;/opt/ruby/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games&quot;
-</code></pre>
-
-<p>After relogin you should be able to type ruby -v and get a response like this:    </p>
-
-<pre><code>ruby 1.8.7 (2011-02-18 patchlevel 334) [x86_64-linux], MBARI 0x6770, Ruby Enterprise Edition 2011.03
-</code></pre>
-
-<h3>Apache and Passenger</h3>
-
-<p>We need to install Apache and necessary development libraries to compile Phusion Passenger. </p>
-
-<pre><code>$ apt-get install libcurl4-openssl-dev apache2-mpm-prefork apache2-prefork-dev libapr1-dev libaprutil1-dev
-$ passenger-install-apache2-module
-</code></pre>
-
-<h3>Apache configuration</h3>
-
-<p>The compilation of the Passenger Apache
-module finished with an instruction for your httpd.conf. Depending on
-you passenger version, you will get something like this, which you add
-to your <code>/etc/apache2/httpd.conf</code>:</p>
-
-<pre><code>LoadModule passenger_module /opt/ruby/lib/ruby/gems/1.8/gems/passenger-3.0.7/ext/apache2/mod_passenger.so
-PassengerRoot /opt/ruby/lib/ruby/gems/1.8/gems/passenger-3.0.7
-PassengerRuby /opt/ruby/bin/ruby
-</code></pre>
-
-<p>If you browse to your url, you should see the standard apache &ldquo;It works&rdquo; page.</p>
-
-<h3>MySQL</h3>
-
-<p>The Ruby Enterprise Installer already compiled Ruby&#39;s mysql client
-library, now we need the server and client.  </p>
-
-<pre><code>$ apt-get install mysql-server mysql-client
-</code></pre>
-
-<h3>Virtual host config</h3>
-
-<p>Adding a virtual host for your rails application is easy. Assuming
-that your application resides in /var/www/myapp create a file named
-<code>/etc/apache2/sites-available/myapp</code> and fill in :</p>
-
-<pre><code>&lt;VirtualHost *:80&gt;
-    ServerName myserver.com
-    DocumentRoot /var/www/myapp/public
-&lt;/VirtualHost&gt;
-</code></pre>
-
-<p>Now we disable the default site and add our new virtual host:</p>
-
-<pre><code>$ a2dissite default
-$ a2ensite myapp
-</code></pre>
-
-<p>After restarting Apache your Rails application should run on Apache:</p>
-
-<pre><code>$ /etc/init.d/apache2 restart
-</code></pre>
 
                 </div>
                 <a rel="next" href="page-2.html">

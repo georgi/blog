@@ -27,6 +27,144 @@
             <div class="content">
                 <div class="article">
                     <h1>
+                        <a href="/2008/9/emacs-completions.html">
+                            Emacs Completions with Hippie-Expand and Snippets
+                        </a>
+                    </h1>
+                    <p>One of the most important features of a text editor is the completing
+of text inside a buffer. There a lots of packages for Emacs, which
+provide this feature in many different ways. I will show you, what I
+use to improve my life as coder.</p>
+
+<p><EMBED SRC="/shockwaves/emacs-completion.swf" WIDTH=400 HEIGHT=320 quality=low loop=false TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></p>
+
+<h3>Multifunctional tab key</h3>
+
+<p>Most of the time the tab key in Emacs is bound to the indentation
+command, which will indent the current line. So if you want to use the
+tab key for other things, you need some kind of multiplexer, which
+tries to figure out, what is the right thing to do in each situation.</p>
+
+<p>So I copied the indent-and-complete from the <a href="http://dima-exe.ru/rails-on-emacs" title="Emacs Rails package">emacs-rails package</a>:</p>
+
+<pre><code>(require &#39;hippie-exp)
+(require &#39;snippet)
+
+(defun indent-and-complete ()
+  &quot;Indent line and complete&quot;
+  (interactive)
+
+  (cond
+   ((and (boundp &#39;snippet) snippet)
+    (snippet-next-field))
+
+   ((looking-at &quot;\\\\_&gt;&quot;)
+    (hippie-expand nil))
+
+   ((indent-for-tab-command))))
+</code></pre>
+
+<p>The function <code>indent-and-complete</code> does one of the following actions:</p>
+
+<ul>
+<li>if a snippet is active, it jumps to the next field</li>
+<li>if we are at a word boundary, it tries to complete with <code>hippie-expand</code></li>
+<li>otherwise it indents the current line</li>
+</ul>
+
+<h3>HTML mode initialization</h3>
+
+<p>Well, this function alone will not change your editor behaviour. For
+activating our tab function, we need to bind the tab key.</p>
+
+<p>Additionally we want to setup <code>hippie-expand</code>, an expansion package,
+which will try to expand the word before the cursor in a configurable
+way. <code>hippie-expand-try-functions-list</code> is a variable, which defines a
+list of functions, which should be called for completion.</p>
+
+<p>Let&#39;s have a look at my <code>html-mode</code> initialization function. It will configure
+the completion behaviour of hippie-expand an bind the tab key to <code>indent-and-complete</code>.</p>
+
+<pre><code>;; We need a simple wrapper for expand-abbrev
+(defun try-expand-abbrev (old)
+  (expand-abbrev))
+
+;; ********************************************************************************
+;; HTML Mode
+;;
+(add-to-list &#39;auto-mode-alist &#39;(&quot;\\\\.html\\\\&#39;&quot; . html-mode))
+
+(defun html-mode-on-init ()
+  (set (make-local-variable &#39;hippie-expand-try-functions-list)
+       &#39;(try-expand-abbrev
+         try-expand-dabbrev))
+  (define-key html-mode-map (kbd &quot;&lt;tab&gt;&quot;) &#39;indent-and-complete))
+
+(add-hook &#39;html-mode-hook &#39;html-mode-on-init)    
+</code></pre>
+
+<p>There a two functions, which will be asked to complete the current word:</p>
+
+<ul>
+<li><p><code>try-expand-abbrev</code>: Expands the current word by looking into the
+list of defined abbreviations. So called abbrevs are just shortcuts
+in Emacs. So if you type <code>li</code> and hit the tab key it will be
+expanded to <code>&lt;li&gt;&lt;/li&gt;</code>.</p></li>
+<li><p><code>try-expand-dabbrev</code>: Dynamic abbreviation is a pragmatic method for
+completing words. Emacs will look for words with the same beginning
+and use them for completion. Hitting multiple times the tab key will
+give you different completions, as you may know from the unix shell.</p></li>
+</ul>
+
+<h3>Defining your snippets</h3>
+
+<p>Now if you want to use snippets for your <code>html-mode</code>, you have to
+define a abbrev-table with your desired snippets. </p>
+
+<pre><code>(define-abbrev-table &#39;html-mode-abbrev-table ())
+
+(snippet-with-abbrev-table &#39;html-mode-abbrev-table 
+ (&quot;h1&quot;      . &quot;&lt;h1&gt;$.&lt;/h1&gt;&quot;)
+ (&quot;h2&quot;      . &quot;&lt;h2&gt;$.&lt;/h2&gt;&quot;)
+ (&quot;h3&quot;      . &quot;&lt;h3&gt;$.&lt;/h3&gt;&quot;)
+ (&quot;h4&quot;      . &quot;&lt;h3&gt;$.&lt;/h4&gt;&quot;)
+ (&quot;h5&quot;      . &quot;&lt;h3&gt;$.&lt;/h5&gt;&quot;)
+ (&quot;h6&quot;      . &quot;&lt;h6&gt;$.&lt;/h6&gt;&quot;)
+ (&quot;div&quot;     . &quot;&lt;div&gt;$.&lt;/div&gt;&quot;)
+ (&quot;divc&quot;    . &quot;&lt;div class=\&quot;$${class}\&quot;&gt;$.&lt;/div&gt;&quot;)
+ (&quot;span&quot;    . &quot;&lt;span&gt;$.&lt;/span&gt;&quot;)
+ (&quot;spans&quot;   . &quot;&lt;span style=\&quot;$${style}\&quot;&gt;$.&lt;/span&gt;&quot;)
+ (&quot;form&quot;    . &quot;&lt;form action=\&quot;$${action}\&quot; method=\&quot;$${post}\&quot;&gt;$.&lt;/form&gt;&quot;)
+ (&quot;input&quot;   . &quot;&lt;input type=\&quot;$${text}\&quot; name=\&quot;$${name}\&quot; value=\&quot;$${value}\&quot;/&gt;&quot;)
+ (&quot;a&quot;       . &quot;&lt;a href=\&quot;$${href}\&quot;&gt;$.&lt;/a&gt;&quot;)
+ (&quot;br&quot;      . &quot;&lt;br/&gt;$.&quot;)
+ (&quot;ul&quot;      . &quot;&lt;ul&gt;$.&lt;/ul&gt;&quot;)
+ (&quot;ol&quot;      . &quot;&lt;ul&gt;$.&lt;/ul&gt;&quot;)
+ (&quot;li&quot;      . &quot;&lt;li&gt;$.&lt;/li&gt;&quot;)
+ (&quot;tab&quot;     . &quot;&lt;table&gt;$.&lt;/table&gt;&quot;)
+ (&quot;tr&quot;      . &quot;&lt;tr&gt;$.&lt;/tr&gt;&quot;)
+ (&quot;td&quot;      . &quot;&lt;td&gt;$.&lt;/td&gt;&quot;)
+ (&quot;th&quot;      . &quot;&lt;th&gt;$.&lt;/th&gt;&quot;)
+ (&quot;str&quot;     . &quot;&lt;strong&gt;$.&lt;/strong&gt;&quot;)
+ (&quot;em&quot;      . &quot;&lt;em&gt;$.&lt;/em&gt;&quot;)
+ (&quot;meta&quot;    . &quot;&lt;meta name=\&quot;$${name}\&quot; content=\&quot;$${content}\&quot;/&gt;&quot;)
+ (&quot;style&quot;   . &quot;&lt;style type=\&quot;text/css\&quot;&gt;$.&lt;/style&gt;&quot;)
+ (&quot;script&quot;  . &quot;&lt;script type=\&quot;text/javascript\&quot;&gt;$.&lt;/script&gt;&quot;)
+ (&quot;scripts&quot; . &quot;&lt;script src=\&quot;$${src}\&quot; type=\&quot;text/javascript\&quot;&gt;$.&lt;/script&gt;&quot;)
+ (&quot;img&quot;     . &quot;&lt;img src=\&quot;$.\&quot;/&gt;&quot;)
+ (&quot;link&quot;    . &quot;&lt;link href=\&quot;$${href}\&quot; media=\&quot;screen\&quot; rel=\&quot;stylesheet\&quot; type=\&quot;text/css\&quot;/&gt;&quot;))
+</code></pre>
+
+<p>Great. If you put all the code in your .emacs file, you should be able
+to use your tab key for completions. In our case we defined snippets
+for the <code>html-mode</code> and activated <code>hippie-expand</code> to use abbrevs and
+dynamic abbreviation. There is much more stuff I will show you next
+time, like customizations for other language modes like <em>Ruby</em> and
+<em>Javascript</em>.</p>
+
+                </div>
+                <div class="article">
+                    <h1>
                         <a href="/2008/9/commenting-system-with-lightweight-json-store.html">
                             Commenting system with lightweight JSON store
                         </a>
@@ -261,242 +399,6 @@ to the output. For example viewing the documentation of a class brings
 up all documented methods. Each of them should be a link to the actual
 documentation. Probably some monkey patching on the <a href="http://rdoc.rubyforge.org/classes/RDoc/RI/HtmlFormatter.html">HtmlFormatter</a>
 class would do the job.</p>
-
-                </div>
-                <div class="article">
-                    <h1>
-                        <a href="/2008/12/kontrol-a-micro-framework.html">
-                            Kontrol - a micro framework
-                        </a>
-                    </h1>
-                    <p>Kontrol is a small web framework written in Ruby, which runs directly
-on <a href="http://github.com/chneukirchen/rack">Rack</a>. It provides a simple pattern matching algorithm for routing
-and uses GitStore as data storage.</p>
-
-<p>All examples can be found in the <a href="http://github.com/georgi/kontrol/tree/master/examples">examples folder</a> of the kontrol
-project, which is hosted on <a href="http://github.com/georgi/kontrol">this github page</a>.</p>
-
-<p><strong>
-Kontrol has its own <a href="/kontrol">project page</a> now!
-Please look for current information there.
-</strong></p>
-
-<h3>Quick Start</h3>
-
-<p>Create a file named <code>hello_world.ru</code>:</p>
-
-<pre><code>require &#39;kontrol&#39;
-
-class HelloWorld &lt; Kontrol::Application
-  map do
-    get &#39;/&#39; do
-      &quot;Hello World!&quot; 
-    end
-  end
-end
-
-run HelloWorld.new
-</code></pre>
-
-<p>Now run:</p>
-
-<pre><code>rackup hello_world.ru
-</code></pre>
-
-<p>Browse to <code>http://localhost:9292</code> and you will see &ldquo;Hello World&rdquo;.</p>
-
-<h3>Features</h3>
-
-<p>Kontrol is just a thin layer on top of Rack. It provides a routing
-algorithm, a simple template mechanism and some convenience stuff to
-work with <a href="http://github.com/georgi/git_store">GitStore</a>.</p>
-
-<p>A Kontrol application is a class, which provides some context to the
-defined actions. You will probably use these methods:</p>
-
-<ul>
-<li>request: the Rack request object</li>
-<li>response: the Rack response object</li>
-<li>params: union of GET and POST parameters</li>
-<li>cookies: shortcut to request.cookies</li>
-<li>session: shortcut to <code>request.env[&#39;rack.session&#39;]</code></li>
-<li>redirect(path): renders a redirect response to specified path</li>
-</ul>
-
-<h3>Routing</h3>
-
-<p>Routing is just as simple as using regular expressions with
-groups. Each group will be provided as argument to the block.</p>
-
-<p>Create a file named <code>routing.ru</code>:</p>
-
-<pre><code>require &#39;kontrol&#39;
-
-class Routing &lt; Kontrol::Application
-  map do
-    get &#39;/pages/(.*)&#39; do |name|
-      &quot;This is the page #{name}!&quot;
-    end
-
-    get &#39;/(\d*)/(\d*)&#39; do |year, month|
-      &quot;Archive for #{year}/#{month}&quot;
-    end
-  end
-end
-
-run Routing.new
-</code></pre>
-
-<p>Now run this application:</p>
-
-<pre><code>rackup routing.ru
-</code></pre>
-
-<p>You will now see, how regex groups and parameters are related. For
-example if you browse to <code>localhost:9292/2008/12</code>, the app will
-display <code>Archive for 2008/12</code>.</p>
-
-<h3>Nested Routes</h3>
-
-<p>Routes can be nested. This way you can avoid repeating patterns and
-define handlers for a set of HTTP verbs. Each handler will be called
-with the same arguments.</p>
-
-<pre><code>require &#39;kontrol&#39;
-
-class Nested &lt; Kontrol::Application
-  map do
-    map &#39;/blog&#39; do
-      get &#39;/archives&#39; do
-        &quot;The archives!&quot;
-      end
-    end
-
-    map &#39;/(.*)&#39; do
-      get do |path|
-        &quot;&lt;form method=&#39;post&#39;&gt;&lt;input type=&#39;submit&#39;/&gt;&lt;/form&gt;&quot;
-      end
-
-      post do |path|
-        &quot;You posted to #{path}&quot;
-      end
-    end
-  end
-end
-
-run Nested.new
-</code></pre>
-
-<p>Now run this app like:</p>
-
-<pre><code>rackup nested.ru
-</code></pre>
-
-<p>The second route catches all paths except the <code>/blog</code> route. Inside
-the second route there are two different handlers for <code>GET</code> and <code>POST</code>
-actions.</p>
-
-<p>So if you browse to <code>/something</code>, you will see a submit button. After
-submitting you will see the result of the second handler.</p>
-
-<h3>Templates</h3>
-
-<p>Rendering templates is as simple as calling a template file with some
-parameters, which are accessible inside the template as instance
-variables. Additionally you will need a layout template.</p>
-
-<p>Create a template named <code>templates/layout.rhtml</code>:</p>
-
-<pre><code>&lt;html&gt;
-  &lt;body&gt;
-    &lt;%= @content %&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p>And now another template named <code>templates/page.rhtml</code>:</p>
-
-<pre><code>&lt;h1&gt;&lt;%= @title %&gt;&lt;/h1&gt;
-&lt;%= @body %&gt;
-</code></pre>
-
-<p>Create a templates.ru file:</p>
-
-<pre><code>class Templates &lt; Kontrol::Application
-  map do
-    get &#39;/(.*)&#39; do |name|
-      render &quot;page.rhtml&quot;, :title =&gt; name.capitalize, :body =&gt; &quot;This is the body!&quot;
-    end
-  end
-end
-
-run Templates.new
-</code></pre>
-
-<p>Now run this example:</p>
-
-<pre><code>rackup templates.ru
-</code></pre>
-
-<p>If you browse to any path on <code>localhost:9292</code>, you will see the
-rendered template. Note that the title and body parameters have been
-passed to the <code>render</code> call.</p>
-
-<h3>Using GitStore</h3>
-
-<p><a href="http://github.com/georgi/git_store">GitStore</a> is another library, which allows you to store code and
-data in a convenient way in a git repository. The repository is
-checked out into memory and any data may be saved back into the
-repository.</p>
-
-<p>Install <a href="http://github.com/georgi/git_store">GitStore</a> and <a href="http://github.com/mojombo/grit">Grit</a> by:</p>
-
-<pre><code>$ gem sources -a http://gems.github.com (you only have to do this once)
-$ sudo gem install mojombo-grit georgi-git_store
-</code></pre>
-
-<p>We create a Markdown file name <code>pages/index.md</code>:</p>
-
-<pre><code>Hello World
-===========
-
-This is the **Index** page!
-</code></pre>
-
-<p>We have now a simple page, which should be rendered as response. We
-create a simple app in a file <code>git_app.ru</code>:</p>
-
-<pre><code>require &#39;bluecloth&#39;
-
-class GitApp &lt; Kontrol::Application
-  map do
-    get &#39;/(.*)&#39; do |name|
-      BlueCloth.new(store[&#39;pages&#39;, name + &#39;.md&#39;]).to_html
-    end
-  end
-end
-
-run GitApp.new
-</code></pre>
-
-<p>Add all these files to your repo:</p>
-
-<pre><code>git init
-git add pages/index.md
-git commit -m &#39;init&#39;
-</code></pre>
-
-<p>Run the app:</p>
-
-<pre><code>rackup git_app.ru
-</code></pre>
-
-<p>Browse to <code>http://localhost:9292/index</code> and you will see the rendered
-page generated from the markdown file.</p>
-
-<p>This application runs straight from the git repository. You can delete
-all files except the rackup file and the app will still serve the page
-from your repo.</p>
 
                 </div>
                 <a rel="next" href="page-6.html">
