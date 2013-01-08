@@ -118,7 +118,7 @@ renderLayout blog content = do
     H.head $ do
       H.title $ toHtml $ blogTitle blog
       meta ! httpEquiv "Content-Type" ! A.content "text/html; charset=UTF-8"
-      link ! rel "alternate" ! type_ "application/atom+xml" ! href "/atom.xml" ! A.title "Atom 1.0"
+      link ! rel "alternate" ! type_ "application/atom+xml" ! href "http://feeds.feedburner.com/matthias-georgi" ! A.title "Atom 1.0"
       link ! rel "stylesheet" ! media "screen" ! type_ "text/css" ! href "/style.css"
       link ! rel "stylesheet" ! href "/zenburn.css"
       script ! src "/highlight.pack.js" $ ""
