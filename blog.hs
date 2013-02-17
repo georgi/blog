@@ -41,18 +41,6 @@ findFiles path = do
       contents <- getDirectoryContents filepath
       return $ filter ((/= '.') . head) contents
 
--- writeBlog :: IO ()
--- writeBlog = do
---   files <- findFiles "posts"
---   posts <- mapM readPost files
---   mapM_ (writePost blog) posts
---   writeIndex blog 1 3 $ reverse posts
---   writeFeed blog $ take 10 $ reverse posts
---   where blog = Blog {
---     blogUri = "http://www.matthias-georgi.de",
---     blogTitle = "Matthias Georgi"
---   }
-
 contentTypeFor :: String -> String
 contentTypeFor file = case last $ splitOn "." file of
   ('j':'s':[]) -> "text/javascript"
@@ -110,6 +98,7 @@ writeBlog aws blog = do
   posts <- findFiles "posts" >>= mapM readPost
   parMapIO_ (writePost aws blog) posts
   writeIndex aws blog (1,3) $ reverse posts
+  writeFeed aws blog $ take 10 $ reverse posts
 
 getBlog :: IO Blog
 getBlog = do
