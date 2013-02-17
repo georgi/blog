@@ -1,105 +1,20 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-import Prelude hiding (div, id)
-import Text.Atom.Feed
-import Text.Atom.Feed.Export
-import Text.Blaze.Html4.Strict hiding (head, map, title, contents)
-import Text.Blaze.Html4.Strict.Attributes hiding (content, title)
-import qualified Text.Blaze.Html4.Strict as H
-import qualified Text.Blaze.Html4.Strict.Attributes as A
-import Text.Blaze.Html.Renderer.Pretty as H
-import Text.Sundown.Html.String as S
-import Text.XML.Light.Output
 import System.Directory
-import System.Locale
+import System.Environment
+import Control.Monad
+import Control.Concurrent
+import Control.Concurrent.Spawn
+import Data.Time.Clock
 import Data.List
 import Data.List.Split
-import Data.Time.Clock
-import Data.Time.Format
-import Data.Time.Calendar
+import qualified Data.ByteString.Lazy as BS
+import Data.ByteString.Lazy.Char8 (pack)
+import Network.AWS.AWSConnection
+import Network.AWS.S3Object
 
-data Blog = Blog {
-  blogUri,
-  blogTitle :: String
-};
-
-data Post = Post {
-  postFolder,
-  postFile,
-  postText:: String
-};
-
-pubDate :: Day -> String
-pubDate date = formatTime defaultTimeLocale "%d %b %y 00:00" date
-
-postTitle :: Post -> String
-postTitle post = head $ lines $ postText post
-
-postName :: Post -> String
-postName post = head $ splitOn "." $ postFile post
-
-postLink :: Post -> String
-postLink post = "/" ++ (postFolder post) ++ "/" ++ (postName post) ++ ".html"
-
-postDate :: Post -> String
-postDate post = pubDate date where
-  [year, month] = splitOn "/" (postFolder post)
-  date = fromGregorian (read year) (read month) 1
-
-postBody :: Post -> String
-postBody post = S.renderHtml s allExtensions noHtmlModes True Nothing
-  where s = concat $ intersperse "\n" $ drop 3 $ lines $ postText post
-
-atomLink :: Blog -> Post -> Link
-atomLink blog post = Link {
-  linkHref = blogUri blog ++ postLink post,
-  linkHrefLang = Nothing,
-  linkRel = Nothing,
-  linkType = Just "text/html",
-  linkTitle = Nothing,
-  linkLength = Nothing,
-  linkAttrs = [],
-  linkOther = []
-};
-
-postEntry :: Blog -> Post -> Entry
-postEntry blog post = Entry {
-  entryId = (blogUri blog) ++ (postLink post),
-  entryTitle = TextString (postTitle post),
-  entryUpdated = postDate post,
-  entryAuthors = [],
-  entryCategories = [],
-  entryContent = Just $ HTMLContent $ postBody post,
-  entryPublished = Just $ postDate post,
-  entryContributor = [],
-  entryLinks = [atomLink blog post],
-  entryRights = Nothing,
-  entrySource = Nothing,
-  entrySummary = Nothing,
-  entryInReplyTo = Nothing,
-  entryInReplyTotal = Nothing,
-  entryAttrs = [],
-  entryOther = []
-  }
-
-blogFeed :: Blog -> [Post] -> UTCTime -> Feed
-blogFeed blog posts time = Feed {
-  feedId = blogUri blog,
-  feedTitle = TextString $ blogTitle blog,
-  feedUpdated = pubDate $ utctDay time,
-  feedAuthors = [],
-  feedCategories = [],
-  feedContributors = [],
-  feedGenerator = Nothing,
-  feedLinks = [],
-  feedIcon = Nothing,
-  feedRights = Nothing,
-  feedLogo = Nothing,
-  feedSubtitle = Nothing,
-  feedEntries = map (postEntry blog) posts,
-  feedAttrs = [],
-  feedOther = []
-  }
+import Types
+import Renderer
 
 readPost :: FilePath -> IO Post
 readPost path = do
@@ -110,77 +25,6 @@ readPost path = do
       postFile = filename,
       postText = s
     }
-
-renderLayout :: Blog -> Html -> Html
-renderLayout blog content = do
-  docType
-  html $ do
-    H.head $ do
-      H.title $ toHtml $ blogTitle blog
-      meta ! httpEquiv "Content-Type" ! A.content "text/html; charset=UTF-8"
-      link ! rel "alternate" ! type_ "application/atom+xml" ! href "http://feeds.feedburner.com/matthias-georgi" ! A.title "Atom 1.0"
-      link ! rel "stylesheet" ! media "screen" ! type_ "text/css" ! href "/style.css"
-      link ! rel "stylesheet" ! href "/zenburn.css"
-      script ! src "/highlight.pack.js" $ ""
-      script $ "hljs.initHighlightingOnLoad();"
-    body $ do
-      div ! class_ "container" $ do
-        h2 ! id "header" $ do
-          a ! href "/" $ toHtml $ blogTitle blog
-        div ! class_ "content" $ do
-          preEscapedToHtml content
-
-renderPost :: Post -> Html
-renderPost post =
-  div ! class_ "article" $ do
-    h1 $ do
-      a ! href (toValue (postLink post)) $ toHtml $ postTitle post
-    preEscapedToHtml $ postBody post
-
-renderPostPage :: Blog -> Post -> String
-renderPostPage blog post = H.renderHtml $ renderLayout blog $ renderPost post
-
-renderPostList :: Blog -> [Post] -> String -> String
-renderPostList blog posts next = H.renderHtml $ do
-  renderLayout blog $ do
-    sequence_ $ map renderPost posts
-    a ! rel "next" ! href (toValue next) $ "Next entries"
-
-writePost :: Blog -> Post -> IO ()
-writePost blog post = do
-  createDirectoryIfMissing True ("public/" ++ (postFolder post))
-  writeFile ("public/" ++ (postLink post)) $ renderPostPage blog post
-
-fileForPage :: Int -> String
-fileForPage 0 = ""
-fileForPage 1 = "index.html"
-fileForPage page = "page-" ++ show page ++ ".html"
-
-writeIndex :: Blog -> Int -> Int -> [Post] -> IO ()
-writeIndex _ _ _ [] = return ()
-writeIndex blog page perPage posts = do
-  writeFile file $ renderPostList blog posts' nextPage
-  writeIndex blog (page + 1) perPage $ drop perPage posts
-  where file = ("public/" ++ (fileForPage page))
-        posts' = take perPage posts
-        nextPage = fileForPage $ page + 1
-
-writeFeed :: Blog -> [Post] -> IO ()
-writeFeed blog posts = do
-  time <- getCurrentTime
-  writeFile "public/atom.xml" $ ppElement $ xmlFeed $ blogFeed blog posts time
-
-writeBlog :: IO ()
-writeBlog = do
-  files <- findFiles "posts"
-  posts <- mapM readPost files
-  mapM_ (writePost blog) posts
-  writeIndex blog 1 3 $ reverse posts
-  writeFeed blog $ take 10 $ reverse posts
-  where blog = Blog {
-    blogUri = "http://www.matthias-georgi.de",
-    blogTitle = "Matthias Georgi"
-  }
 
 findFiles :: FilePath -> IO [FilePath]
 findFiles path = do
@@ -197,5 +41,98 @@ findFiles path = do
       contents <- getDirectoryContents filepath
       return $ filter ((/= '.') . head) contents
 
+-- writeBlog :: IO ()
+-- writeBlog = do
+--   files <- findFiles "posts"
+--   posts <- mapM readPost files
+--   mapM_ (writePost blog) posts
+--   writeIndex blog 1 3 $ reverse posts
+--   writeFeed blog $ take 10 $ reverse posts
+--   where blog = Blog {
+--     blogUri = "http://www.matthias-georgi.de",
+--     blogTitle = "Matthias Georgi"
+--   }
+
+contentTypeFor :: String -> String
+contentTypeFor file = case last $ splitOn "." file of
+  ('j':'s':[]) -> "text/javascript"
+  ('c':'s':'s':[]) -> "text/css"
+  ('x':'m':'l':[]) -> "text/xml"
+  ('h':'t':'m':[]) -> "text/html"
+  ('h':'t':'m':'l':[]) -> "text/html"
+  _ -> "application/binary"
+
+write :: AWS -> FilePath -> BS.ByteString -> IO ()
+write (conn,bucket) path fileBody = do
+  res <- sendObject conn obj
+  case res of
+    Left err -> do
+      error $ show err
+    Right _ -> do
+      putStrLn path
+  where obj = S3Object {
+          obj_bucket = bucket,
+          obj_name = path,
+          obj_headers = [],
+          content_type = contentTypeFor path,
+          obj_data = fileBody }
+
+writeFeed :: AWS -> Blog -> [Post] -> IO ()
+writeFeed aws blog posts = do
+  time <- getCurrentTime
+  write aws "atom.xml" $ pack $ atomFeed blog posts time
+
+writeIndex :: AWS -> Blog -> Page -> [Post] -> IO ()
+writeIndex _ _ _ [] = return ()
+writeIndex aws blog (page,pageSize) posts = do
+  write aws (fileForPage page) $ pack $ renderPostList blog posts' nextPage
+  writeIndex aws blog ((page + 1), pageSize) $ drop pageSize posts
+  where posts' = take pageSize posts
+        nextPage = fileForPage $ page + 1
+        fileForPage 0 = ""
+        fileForPage 1 = "index.html"
+        fileForPage p = "page-" ++ show p ++ ".html"
+
+writePost :: AWS -> Blog -> Post -> IO ()
+writePost aws blog post = do
+  write aws (postLink post) $ pack $ renderPostPage blog post
+
+writePublicFile :: AWS -> FilePath -> IO ()
+writePublicFile aws file = do
+  BS.readFile file >>= write aws path
+  where path = concat $ intersperse "/" $ drop 1 $ splitOn "/" file
+
+writePublic :: AWS -> IO ()
+writePublic aws = findFiles "public" >>= parMapIO_ (writePublicFile aws)
+
+writeBlog :: AWS -> Blog -> IO ()
+writeBlog aws blog = do
+  posts <- findFiles "posts" >>= mapM readPost
+  parMapIO_ (writePost aws blog) posts
+  writeIndex aws blog (1,3) $ reverse posts
+
+getBlog :: IO Blog
+getBlog = do
+  uri <- getEnv "BLOG_URI"
+  title <- getEnv "BLOG_TITLE"
+  return Blog {
+    blogUri = uri,
+    blogTitle = title
+  }
+
+getAWS :: IO AWS
+getAWS = do
+  c  <- amazonS3ConnectionFromEnv
+  case c of
+    Just connection -> do
+      bucket <- getEnv "AWS_BUCKET"
+      return (connection, bucket)
+    Nothing -> do
+      error "Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY"
+
 main :: IO ()
-main = writeBlog
+main = do
+  aws <- getAWS
+  blog <- getBlog
+  writePublic aws
+  writeBlog aws blog
