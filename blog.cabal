@@ -1,7 +1,0 @@
-name: blog
-version: 1.0
-cabal-version: >= 1.2
-build-type: Simple
-Executable blog
-  Main-is: blog.hs
-  Build-Depends: base, time, split, old-locale, directory, sundown, blaze-html, xml, feed, hS3, bytestring, spawn
