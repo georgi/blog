@@ -6,7 +6,7 @@ of text inside a buffer. There a lots of packages for Emacs, which
 provide this feature in many different ways. I will show you, what I
 use to improve my life as coder.
 
-<EMBED SRC="/shockwaves/emacs-completion.swf" WIDTH=400 HEIGHT=320 quality=low loop=false TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash">
+<EMBED SRC="shockwaves/emacs-completion.swf" WIDTH=400 HEIGHT=320 quality=low loop=false TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash">
 
 ### Multifunctional tab key
 
